@@ -7,92 +7,104 @@
   <style>
     body {
       font-family: sans-serif;
+      background-color: #111;
+      color: white;
       text-align: center;
-      background: #111;
-      color: #fff;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
     h1 {
-      margin-top: 20px;
-      font-size: 2.5em;
       color: #f9f9f9;
+    }
+    #tvPlayer {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+      background: black;
     }
     .channel-list {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 20px;
+      justify-content: center;
+      gap: 15px;
       margin-top: 20px;
-      padding: 0 10px;
     }
-    .channel-logo {
-      width: 120px;
+    .channel-button {
+      background-color: #222;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid #444;
       cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 10px;
-      transition: transform 0.2s ease;
+      font-size: 1rem;
+      transition: 0.3s;
     }
-    .channel-logo:hover {
-      border-color: yellow;
-      transform: scale(1.1);
+    .channel-button:hover {
+      background-color: #f90;
+      color: #000;
     }
-    video {
-      width: 100%;
-      height: auto;
-      margin-top: 30px;
-      border-radius: 10px;
-      max-width: 800px;
-      background-color: #000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-    }
-    @media (max-width: 768px) {
-      .channel-logo {
-        width: 90px;
-      }
-      h1 {
-        font-size: 2em;
-      }
-    }
-    @media (max-width: 480px) {
-      .channel-logo {
-        width: 70px;
-      }
-      h1 {
-        font-size: 1.5em;
+    @media (max-width: 500px) {
+      .channel-button {
+        padding: 8px 12px;
+        font-size: 0.9rem;
       }
     }
   </style>
 </head>
 <body>
-  <h1>เว็บดูทีวีออนไลน์</h1>
-  <video id="tvPlayer" controls autoplay preload="auto">
-    ผู้ใช้ของคุณไม่รองรับการแสดงผลวิดีโอ
-  </video>
+  <h1>ดูทีวีออนไลน์</h1>
+  <video id="tvPlayer" poster="https://dummyimage.com/800x450/000/fff&text=Test+Image" controls></video>
   <div class="channel-list">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Thai_PBS_Logo.svg/512px-Thai_PBS_Logo.svg.png" alt="Thai PBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Thai_PBS_Logo.svg/512px-Thai_PBS_Logo.svg.png" alt="Thai PBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Thai_PBS_Logo.svg/512px-Thai_PBS_Logo.svg.png" alt="Thai PBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Thai_PBS_Logo.svg/512px-Thai_PBS_Logo.svg.png" alt="Thai PBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Thai_PBS_Logo.svg/512px-Thai_PBS_Logo.svg.png" alt="Thai PBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
-    <!-- เพิ่มโลโก้ช่องอื่น ๆ ที่นี่ -->
+    <button class="channel-button" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">Thai PBS</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel3.m3u8')">ช่อง 3 HD</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel5.m3u8')">ช่อง 5</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel7.m3u8')">ช่อง 7 HD</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel8.m3u8')">ช่อง 8</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel9.m3u8')">MCOT HD</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel10.m3u8')">TPTV</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel11.m3u8')">ALTV</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel12.m3u8')">ไทยรัฐทีวี</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel13.m3u8')">3 Family</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel14.m3u8')">MCOT Family</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel15.m3u8')">LOCA</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel16.m3u8')">TNN 16</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel17.m3u8')">NEW18</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel18.m3u8')">GMM 25</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel19.m3u8')">MONO 29</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel20.m3u8')">Workpoint TV</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel21.m3u8')">True4U</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel22.m3u8')">Nation TV</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel23.m3u8')">PPTV HD</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel24.m3u8')">Amarin TV</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel25.m3u8')">ONE 31</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel26.m3u8')">DLTV 1</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel27.m3u8')">DLTV 2</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel28.m3u8')">DLTV 3</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel29.m3u8')">DLTV 4</button>
+    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel30.m3u8')">ETV</button>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     function playChannel(url) {
-      const player = document.getElementById('tvPlayer');
+      const video = document.getElementById('tvPlayer');
       if (Hls.isSupported()) {
+        if (window.hls) window.hls.destroy();
         const hls = new Hls();
+        window.hls = hls;
         hls.loadSource(url);
-        hls.attachMedia(player);
+        hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
-          player.play();
+          video.play();
         });
-      } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-        player.src = url;
-        player.play();
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+        video.play();
       } else {
-        alert('เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอนี้');
+        alert('เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอแบบ HLS');
       }
     }
   </script>
