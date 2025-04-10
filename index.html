@@ -7,83 +7,107 @@
   <style>
     body {
       font-family: sans-serif;
-      background-color: #111;
-      color: white;
       text-align: center;
+      background: #111;
+      color: #fff;
       margin: 0;
-      padding: 20px;
+      padding: 0;
     }
     h1 {
+      margin-top: 20px;
+      font-size: 2.5em;
       color: #f9f9f9;
-    }
-    #tvPlayer {
-      width: 100%;
-      max-width: 800px;
-      margin: 20px auto;
-      display: block;
-      border-radius: 10px;
-      background: black;
     }
     .channel-list {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      flex-wrap: wrap;
+      gap: 20px;
       margin-top: 20px;
+      padding: 0 10px;
     }
-    .channel-button {
-      background-color: #222;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: 1px solid #444;
+    .channel-logo {
+      width: 120px;
       cursor: pointer;
-      font-size: 1rem;
-      transition: 0.3s;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
     }
-    .channel-button:hover {
-      background-color: #f90;
-      color: #000;
+    .channel-logo:hover {
+      border-color: yellow;
+      transform: scale(1.1);
     }
-    @media (max-width: 500px) {
-      .channel-button {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+
+    video {
+      width: 100%;
+      height: auto;
+      margin-top: 30px;
+      border-radius: 10px;
+      max-width: 800px;
+      background-color: #000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    @media (max-width: 768px) {
+      .channel-logo {
+        width: 90px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .channel-logo {
+        width: 70px;
+      }
+      h1 {
+        font-size: 1.5em;
       }
     }
   </style>
 </head>
 <body>
-  <h1>ดูทีวีออนไลน์</h1>
-  <!-- แทนที่ด้วยรูปภาพทดสอบ -->
-  <img id="tvPlayer" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/SMPTE_Color_Bars.svg/800px-SMPTE_Color_Bars.svg.png" alt="ภาพทดสอบ" />
-  
+  <h1>เว็บดูทีวีออนไลน์</h1>
+
+  <!-- ตัวเล่นวิดีโอ -->
+  <video id="tvPlayer" controls autoplay preload="auto">
+    <source src="" type="application/x-mpegURL">
+    <!-- fallback content for unsupported browsers -->
+    ผู้ใช้ของคุณไม่รองรับการแสดงผลวิดีโอ
+  </video>
+
+  <!-- โลโก้ช่อง -->
   <div class="channel-list">
-    <!-- ใส่ชื่อช่องและลิงก์ m3u8 -->
-    <button class="channel-button" onclick="playChannel('https://example.com/channel1.m3u8')">ช่อง 1</button>
-    <button class="channel-button" onclick="playChannel('https://example.com/channel2.m3u8')">ช่อง 2</button>
-    <button class="channel-button" onclick="playChannel('https://example.com/channel3.m3u8')">ช่อง 3</button>
-    <!-- เพิ่มช่องที่เหลือลงที่นี่ -->
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/132_y_4dCbQViIft2z6KSY9mproWPnRExaDgJG.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://live-cdn-hwc.ch7.com/livech7hd/HD.m3u8')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8')">
+    <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8')">
+    <img src="https://www.img05.xyz/assets/img/ch_logo/JKN.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8')">
+    <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8')">
+    <img src="https://i.postimg.cc/YSzGXztp/TR.jpg" alt="THAIRATH" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8')">
+    <!-- Add other channels as necessary -->
   </div>
 
+  <!-- โหลด HLS.js สำหรับเบราว์เซอร์ที่ไม่รองรับ HLS -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     function playChannel(url) {
-      const video = document.getElementById('tvPlayer');
+      const player = document.getElementById('tvPlayer');
       if (Hls.isSupported()) {
-        if (window.hls) window.hls.destroy(); // ล้าง hls เดิมก่อน
         const hls = new Hls();
-        window.hls = hls;
         hls.loadSource(url);
-        hls.attachMedia(video);
+        hls.attachMedia(player);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
-          video.play();
+          player.play();
         });
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-        video.play();
-      } else {
-        alert('เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอแบบ HLS');
+      } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+        player.src = url; // สำหรับเบราว์เซอร์ที่รองรับ natively
+        player.play();
       }
     }
   </script>
