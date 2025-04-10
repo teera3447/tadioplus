@@ -19,7 +19,6 @@
     #tvPlayer {
       width: 100%;
       max-width: 800px;
-      height: 450px;
       margin: 20px auto;
       display: block;
       border-radius: 10px;
@@ -56,35 +55,16 @@
 </head>
 <body>
   <h1>ดูทีวีออนไลน์</h1>
-  <video id="tvPlayer" poster="https://dummyimage.com/800x450/000/fff&text=Test+Image" controls></video>
+  <video id="tvPlayer" controls autoplay>
+    <source src="https://example.com/sample-video.mp4" type="video/mp4">
+    ขอโทษ, เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
+  </video>
   <div class="channel-list">
-    <button class="channel-button" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">Thai PBS</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel3.m3u8')">ช่อง 3 HD</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel5.m3u8')">ช่อง 5</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel7.m3u8')">ช่อง 7 HD</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel8.m3u8')">ช่อง 8</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel9.m3u8')">MCOT HD</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel10.m3u8')">TPTV</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel11.m3u8')">ALTV</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel12.m3u8')">ไทยรัฐทีวี</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel13.m3u8')">3 Family</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel14.m3u8')">MCOT Family</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel15.m3u8')">LOCA</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel16.m3u8')">TNN 16</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel17.m3u8')">NEW18</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel18.m3u8')">GMM 25</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel19.m3u8')">MONO 29</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel20.m3u8')">Workpoint TV</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel21.m3u8')">True4U</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel22.m3u8')">Nation TV</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel23.m3u8')">PPTV HD</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel24.m3u8')">Amarin TV</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel25.m3u8')">ONE 31</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel26.m3u8')">DLTV 1</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel27.m3u8')">DLTV 2</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel28.m3u8')">DLTV 3</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel29.m3u8')">DLTV 4</button>
-    <button class="channel-button" onclick="playChannel('https://streaming-example.com/channel30.m3u8')">ETV</button>
+    <!-- ใส่ชื่อช่องและลิงก์ m3u8 -->
+    <button class="channel-button" onclick="playChannel('https://example.com/channel1.m3u8')">ช่อง 1</button>
+    <button class="channel-button" onclick="playChannel('https://example.com/channel2.m3u8')">ช่อง 2</button>
+    <button class="channel-button" onclick="playChannel('https://example.com/channel3.m3u8')">ช่อง 3</button>
+    <!-- เพิ่มช่องที่เหลือลงที่นี่ -->
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -92,7 +72,7 @@
     function playChannel(url) {
       const video = document.getElementById('tvPlayer');
       if (Hls.isSupported()) {
-        if (window.hls) window.hls.destroy();
+        if (window.hls) window.hls.destroy(); // ล้าง hls เดิมก่อน
         const hls = new Hls();
         window.hls = hls;
         hls.loadSource(url);
