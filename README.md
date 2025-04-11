@@ -1,4 +1,4 @@
-Thai TV Online
+Tadio+ TV Online
 
 เว็บสำหรับดูทีวีออนไลน์ผ่าน GitHub Pages โดยใช้ลิงก์ .m3u8
 
