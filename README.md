@@ -10,16 +10,7 @@ Thai TV Online
 
 ใช้งานฟรี ไม่มีโฆษณา
 
-
-ตัวอย่างช่อง
-
-Thai PBS
-
-ลิงก์: https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8
-
-
-
-วิธีใช้งาน
+-วิธีใช้งาน-
 
 1. เปิดหน้าเว็บผ่าน GitHub Pages
    https://teera3447.github.io/tvonline-/
