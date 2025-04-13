@@ -15,10 +15,10 @@ Tadio+ TV & Radio Online
 -วิธีใช้งาน-
 
 1. เปิดหน้าเว็บผ่าน GitHub Pages
-   https://teera3447.github.io/tvonline-/
+   https://teera3447.github.io/tadioplus/
 
 
-3. คลิกเลือกช่องที่ต้องการรับชม
+3. คลิกเลือกเมนูทีวีหรือวิทยุที่ต้องการรับชม
 
 
 4. รับชมได้ทันทีผ่านเบราว์เซอร์
