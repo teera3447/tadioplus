@@ -4,21 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เมนูออนไลน์</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .menu-button {
+            display: block;
+            width: 200px;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>เลือกรับชม/รับฟัง</h1>
-        <div class="menu">
-            <a href="tvonline.html" class="menu-item">
-                <img src="tv_icon.png" alt="ทีวีออนไลน์">
-                <span>ทีวีออนไลน์</span>
-            </a>
-            <a href="radio.html" class="menu-item">
-                <img src="radio_icon.png" alt="วิทยุออนไลน์">
-                <span>วิทยุออนไลน์</span>
-            </a>
-        </div>
+        <a href="tvonline.html" class="menu-button">ทีวีออนไลน์</a>
+        <a href="radio.html" class="menu-button">วิทยุออนไลน์</a>
     </div>
 </body>
 </html>
