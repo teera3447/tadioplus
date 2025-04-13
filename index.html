@@ -5,49 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หน้าหลัก - Tadio+ ดูทีวีและวิทยุออนไลน์</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
+
         body {
-            font-family: sans-serif;
+            font-family: 'Kanit', sans-serif; /* ใช้ฟอนต์ Kanit */
             margin: 0;
             background-color: #f4f4f4;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: #333; /* เปลี่ยนสีข้อความเป็นสีดำเพื่อให้เข้ากับสไตล์มินิมอล */
         }
-
         .container {
             background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 40px; /* เพิ่ม padding เพื่อให้ดูโปร่งขึ้น */
+            border-radius: 10px; /* เพิ่มความโค้งมนเล็กน้อย */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* ลดความเข้มของเงา */
             text-align: center;
         }
-
-        h1 {
-            margin-bottom: 20px;
-            color: #333;
+        .logo-container {
+            margin-bottom: 30px; /* เพิ่มระยะห่างจากโลโก้มากขึ้น */
         }
-
+        .logo {
+            max-width: 150px; /* ลดขนาดโลโก้ให้ดูมินิมอล */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-bottom: 25px;
+            font-size: 2em; /* ปรับขนาดหัวข้อ */
+            font-weight: 400; /* กำหนดความหนาของฟอนต์ */
+        }
         .menu-button {
             display: block;
-            width: 200px;
-            padding: 15px;
-            margin: 10px auto;
+            width: 180px; /* ลดขนาดปุ่ม */
+            padding: 12px; /* ลด padding ปุ่ม */
+            margin: 8px auto; /* ปรับ margin ปุ่ม */
             text-align: center;
             text-decoration: none;
-            color: #fff;
-            background-color: #007bff;
-            border-radius: 6px;
+            color: #333; /* เปลี่ยนสีข้อความปุ่มเป็นสีดำ */
+            background-color: #eee; /* เปลี่ยนสีพื้นหลังปุ่มเป็นสีเทาอ่อน */
+            border-radius: 8px; /* เพิ่มความโค้งมนให้ปุ่ม */
             transition: background-color 0.3s ease;
+            border: 1px solid #ddd; /* เพิ่มเส้นขอบบางๆ */
         }
-
         .menu-button:hover {
-            background-color: #0056b3;
+            background-color: #ddd; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="logo-container">
+            <img src="https://img2.pic.in.th/pic/1000021059.png" alt="โลโก้ Tadio+" class="logo">
+        </div>
         <h1>เลือกรับชม/รับฟัง</h1>
         <a href="tvonline.html" class="menu-button">ทีวีออนไลน์</a>
         <a href="radio.html" class="menu-button">วิทยุออนไลน์</a>
