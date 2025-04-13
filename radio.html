@@ -1,1 +1,194 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟังวิทยุออนไลน์</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        #audio-player {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #radio-stream {
+            width: 100%;
+        }
+        #current-station {
+            color: #777;
+            margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #current-station img {
+            width: 100%; /* ทำให้ภาพกว้างเท่ากับ container */
+            height: auto; /* ปรับความสูงตามสัดส่วน */
+            border-radius: 8px; /* ทำให้ขอบมนเหมือน player */
+            object-fit: cover; /* ครอบภาพให้เต็มพื้นที่ */
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        .station-list {
+            list-style: none;
+            padding: 0;
+            width: 80%;
+            max-width: 400px;
+        }
+        .station-list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            cursor: pointer;
+            color: #333;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .station-list li:hover {
+            background-color: #eee;
+        }
+        .station-list li img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ฟังวิทยุออนไลน์</h1>
+
+    <div id="audio-player">
+        <p id="current-station">
+            <img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ">
+            เลือกสถานีเพื่อฟัง
+        </p>
+        <audio id="radio-stream" controls></audio>
+    </div>
+
+    <ul class="station-list">
+        <li data-stream-url="http://111.223.37.194/CatRadio/CatRadio-High/playlist.m3u8" data-station-name="Cat Radio" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9Ntol-oF52JbPge2rYjZN1oxlKgD4bMPS-F-Lju4op_tyyxMZBQygua0&s=10">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9Ntol-oF52JbPge2rYjZN1oxlKgD4bMPS-F-Lju4op_tyyxMZBQygua0&s=10" alt="Cat Radio">
+            <span>Cat Radio</span>
+        </li>
+        <li data-stream-url="https://atimeonline3.smartclick.co.th/green" data-station-name="GreenWave" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" alt="GreenWave">
+            <span>GreenWave</span>
+        </li>
+        <li data-stream-url="https://atimeonline3.smartclick.co.th/efm" data-station-name="EFM" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" alt="สถานีวิทยุ C">
+            <span>EFM</span>
+        </li>
+        <li data-stream-url="https://22243.live.streamtheworld.com/GOODTIME_RADIOAAC.aac" data-station-name="Goodtime Radio" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10" alt="Goodtime Radio">
+            <span>Goodtime Radio</span>
+        </li>
+        <li data-stream-url="URL_สถานี_วิทยุ_05" data-station-name="สถานี 05" data-image="https://via.placeholder.com/400/008000/FFFFFF?Text=05">
+            <img src="https://via.placeholder.com/400/008000/FFFFFF?Text=05" alt="สถานี 05">
+            <span>สถานี 05</span>
+        </li>
+        <li data-stream-url="URL_สถานี_วิทยุ_06" data-station-name="สถานี 06" data-image="https://via.placeholder.com/400/A0522D/FFFFFF?Text=06">
+            <img src="https://via.placeholder.com/400/A0522D/FFFFFF?Text=06" alt="สถานี 06">
+            <span>สถานี 06</span>
+        </li>
+        <li data-stream-url="URL_สถานี_วิทยุ_07" data-station-name="สถานี 07" data-image="https://via.placeholder.com/400/D2691E/FFFFFF?Text=07">
+            <img src="https://via.placeholder.com/400/D2691E/FFFFFF?Text=07" alt="สถานี 07">
+            <span>สถานี 07</span>
+        </li>
+        <li data-stream-url="URL_สถานี_วิทยุ_08" data-station-name="สถานี 08" data-image="https://via.placeholder.com/400/CD5C5C/FFFFFF?Text=08">
+            <img src="https://via.placeholder.com/400/CD5C5C/FFFFFF?Text=08" alt="สถานี 08">
+            <span>สถานี 08</span>
+        </li>
+        <li data-stream-url="URL_สถานี_วิทยุ_09" data-station-name="สถานี 09" data-image="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09">
+            <img src="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09" alt="สถานี 09">
+            <span>สถานี 09</span>
+        </li>
+        <li data-stream-url="URL_สถานี_วิทยุ_10" data-station-name="สถานี 10" data-image="https://via.placeholder.com/400/4682B4/FFFFFF?Text=10">
+            <img src="https://via.placeholder.com/400/4682B4/FFFFFF?Text=10" alt="สถานี 10">
+            <span>สถานี 10</span>
+        </li>
+    </ul>
+
+    <script>
+        const stationList = document.querySelector('.station-list');
+        const audioElement = document.getElementById('radio-stream');
+        const currentStationDisplay = document.getElementById('current-station');
+        const currentStationImageDisplay = document.getElementById('current-station-image');
+        const audioPlayer = document.getElementById('audio-player');
+
+        stationList.addEventListener('click', (event) => {
+            if (event.target.tagName === 'LI') {
+                const streamUrl = event.target.dataset.streamUrl;
+                const stationName = event.target.dataset.stationName;
+                const imageUrl = event.target.dataset.image;
+
+                if (streamUrl) {
+                    audioElement.src = streamUrl;
+                    audioElement.play();
+                    currentStationImageDisplay.src = imageUrl || 'https://via.placeholder.com/400/cccccc?Text=Radio';
+                    currentStationImageDisplay.alt = stationName;
+                    currentStationDisplay.innerHTML = `<img id="current-station-image" src="${imageUrl || 'https://via.placeholder.com/400/cccccc?Text=Radio'}" alt="${stationName}"> กำลังเล่น: ${stationName}`;
+                } else {
+                    alert('ไม่พบ URL สตรีมสำหรับสถานีนี้');
+                }
+            }
+        });
+
+        // Optional: Reset image when no station is selected
+        audioElement.addEventListener('pause', () => {
+            currentStationImageDisplay.src = 'https://via.placeholder.com/400/cccccc?Text=Radio';
+            currentStationImageDisplay.alt = 'สถานีวิทยุ';
+            currentStationDisplay.innerHTML = `<img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ"> เลือกสถานีเพื่อฟัง`;
+        });
+
+        audioElement.addEventListener('ended', () => {
+            currentStationImageDisplay.src = 'https://via.placeholder.com/400/cccccc?Text=Radio';
+            currentStationImageDisplay.alt = 'สถานีวิทยุ';
+            currentStationDisplay.innerHTML = `<img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ"> เลือกสถานีเพื่อฟัง`;
+        });
+
+        audioElement.addEventListener('error', () => {
+            currentStationImageDisplay.src = 'https://via.placeholder.com/400/cccccc?Text=Radio';
+            currentStationImageDisplay.alt = 'สถานีวิทยุ';
+            currentStationDisplay.innerHTML = `<img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ"> เกิดข้อผิดพลาดในการเล่น`;
+        });
+    </script>
+
+</body>
+</html>
 
