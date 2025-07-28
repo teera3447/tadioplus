@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tadio+ ดูทีวีออนไลน์</title>
+  <title>ดูทีวีออนไลน์</title>
+
+  <!-- video.js CSS -->
   <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet" />
+
   <style>
     body {
       font-family: sans-serif;
@@ -13,12 +16,12 @@
       margin: 0;
       padding: 20px;
       text-align: center;
-      transition: background-color 0.3s, color 0.3s;
     }
     .light-theme {
       background-color: #ffffff;
       color: #000000;
     }
+
     .theme-toggle {
       position: fixed;
       top: 10px;
@@ -30,12 +33,13 @@
       border-radius: 8px;
       cursor: pointer;
       z-index: 1000;
-      transition: background 0.3s, color 0.3s;
     }
+
     .light-theme .theme-toggle {
       background: #ccc;
       color: black;
     }
+
     #home-link {
       position: fixed;
       top: 10px;
@@ -47,54 +51,59 @@
       text-decoration: none;
       color: #000;
       z-index: 1000;
-      transition: background 0.3s, color 0.3s;
     }
     .light-theme #home-link {
-      background: #444;
-      color: white;
+      background: #eee;
+      color: #000;
     }
+
     .channel-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-top: 70px;
+      margin-top: 20px;
     }
+
     .channel-logo {
       width: 60px;
       height: auto;
       cursor: pointer;
       transition: transform 0.2s;
-      border-radius: 8px;
+      border-radius: 6px;
       border: 2px solid transparent;
     }
+
     .channel-logo:hover {
       transform: scale(1.1);
-      border-color: yellow;
+      border-color: #f0c419;
     }
+
     #current-channel {
       margin-top: 15px;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: bold;
     }
+
+    /* Player size approx YouTube normal size */
     .video-js {
       width: 100%;
-      max-width: 100%;
+      max-width: 640px;
       aspect-ratio: 16 / 9;
+      height: auto;
       margin: 20px auto;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
-    @media (min-width: 1024px) {
+    @media (max-width: 640px) {
       .video-js {
-        width: 50vw;
-        aspect-ratio: 16 / 9;
-        height: auto;
+        max-width: 100%;
       }
     }
   </style>
 </head>
 <body>
+
   <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
   <button class="theme-toggle" onclick="toggleTheme()">🌗 เปลี่ยนธีม</button>
 
@@ -104,8 +113,10 @@
     controls
     preload="auto"
     playsinline
-    crossorigin="anonymous"
-  ></video>
+    controlsList="nodownload"
+  >
+    <source src="" type="application/x-mpegURL" />
+  </video>
 
   <div id="current-channel">กรุณาเลือกช่องที่ต้องการรับชม</div>
 
@@ -115,7 +126,7 @@
     <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', '7 HD')" />
     <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8', 'MCOT')" />
     <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8', 'NBT')" />
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://thaipbs-mcx0wm.cdn.byteark.com/live/playlist.m3u8', 'TPBS')" />
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://thaipbs-live.cdn.byteark.com/live/playlist_480p/index.m3u8', 'TPBS')" />
     <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8', 'TNN16')" />
     <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8', 'JKN18')" />
     <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8', 'NATION')" />
@@ -127,30 +138,32 @@
     <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8', 'CH8')" />
   </div>
 
+  <!-- Video.js -->
   <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
-  <script src="https://unpkg.com/videojs-http-streaming/dist/videojs-http-streaming.min.js"></script>
+
+  <!-- videojs-http-source-selector plugin for quality selector -->
+  <script src="https://unpkg.com/videojs-http-source-selector/dist/videojs-http-source-selector.min.js"></script>
+
   <script>
-    // สร้าง player และตั้งค่าให้ใช้ VHS (videojs-http-streaming)
     const player = videojs('tvPlayer', {
-      html5: {
-        vhs: {
-          overrideNative: true, // บังคับใช้ VHS แทน native HLS เพื่อความเข้ากันได้สูงสุด
-        }
-      },
       controls: true,
       fluid: true,
       controlBar: {
         volumePanel: { inline: false },
-        pictureInPictureToggle: true,
-        fullscreenToggle: true,
+      },
+      playbackRates: [0.5, 1, 1.5, 2],
+      html5: {
+        vhs: {
+          overrideNative: true
+        }
       }
     });
 
+    // Initialize the quality selector plugin
+    player.httpSourceSelector();
+
     function playChannel(url, name) {
-      player.src({
-        src: url,
-        type: 'application/x-mpegURL'
-      });
+      player.src({ src: url, type: 'application/x-mpegURL' });
       player.play();
       document.getElementById('current-channel').textContent = 'ขณะนี้รับชมช่อง: ' + name;
     }
