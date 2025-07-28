@@ -14,25 +14,48 @@
       background-color: #121212;
       color: white;
       margin: 0;
-      padding: 20px;
-      text-align: center;
+      padding: 0;
     }
+
     .light-theme {
       background-color: #ffffff;
       color: #000000;
     }
 
+    #app-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    #home-link {
+      font-size: 14px;
+      background: #ddd;
+      padding: 6px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .light-theme #home-link {
+      background: #eee;
+      color: #000;
+    }
+
     .theme-toggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
       background: #444;
       color: white;
       border: none;
       padding: 8px 12px;
       border-radius: 8px;
       cursor: pointer;
-      z-index: 1000;
     }
 
     .light-theme .theme-toggle {
@@ -40,37 +63,52 @@
       color: black;
     }
 
-    #home-link {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      font-size: 14px;
-      background: #ddd;
-      padding: 6px 12px;
-      border-radius: 5px;
-      text-decoration: none;
-      color: #000;
-      z-index: 1000;
-    }
-    .light-theme #home-link {
-      background: #eee;
-      color: #000;
-    }
-
     #container {
       display: flex;
-      flex-direction: column; /* มือถือแนวตั้ง */
+      flex: 1;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 20px;
+      box-sizing: border-box;
+      flex-wrap: wrap;
+    }
+
+    .player-wrapper {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      margin-top: 50px;
-      gap: 20px;
+      gap: 10px;
+    }
+
+    .video-js {
+      width: 640px;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    #current-channel {
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      color: inherit;
+    }
+
+    .channel-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .channel-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(3, 70px);
       gap: 10px;
-      max-width: 360px;
+      justify-content: center;
     }
 
     .channel-logo {
@@ -87,111 +125,74 @@
       border-color: #f0c419;
     }
 
-    #current-channel {
-      margin-top: 15px;
-      font-size: 1rem;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    /* Player size */
-    .video-js {
-      width: 360px;
-      max-width: 100%;
-      aspect-ratio: 16 / 9;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-    }
-
-    /* Desktop layout */
-    @media (min-width: 1024px) {
+    @media (max-width: 768px) {
       #container {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 40px;
-      }
-      .channel-container {
-        flex-wrap: nowrap;
         flex-direction: column;
-        max-width: 120px;
-        height: auto;
-        overflow-y: auto;
-        max-height: 480px;
-        justify-content: flex-start;
         align-items: center;
       }
-      #current-channel {
-        text-align: left;
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-    }
 
-    /* Mobile */
-    @media (max-width: 640px) {
+      .channel-container {
+        grid-template-columns: repeat(4, 60px);
+      }
+
       .video-js {
         width: 100%;
-      }
-      .channel-container {
-        max-width: 100%;
-        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
+  <div id="app-wrapper">
+    <div id="top-bar">
+      <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
+      <button class="theme-toggle" onclick="toggleTheme()">🌗 เปลี่ยนธีม</button>
+    </div>
 
-  <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
-  <button class="theme-toggle" onclick="toggleTheme()">🌗 เปลี่ยนธีม</button>
+    <div id="container">
+      <div class="player-wrapper">
+        <video
+          id="tvPlayer"
+          class="video-js vjs-default-skin"
+          controls
+          preload="auto"
+          playsinline
+          controlsList="nodownload"
+        >
+          <source src="" type="application/x-mpegURL" />
+        </video>
+        <div id="current-channel">กรุณาเลือกช่องที่ต้องการรับชม</div>
+      </div>
 
-  <div id="container">
-    <!-- player มาไว้ด้านซ้าย -->
-    <video
-      id="tvPlayer"
-      class="video-js vjs-default-skin"
-      controls
-      preload="auto"
-      playsinline
-      controlsList="nodownload"
-    >
-      <source src="" type="application/x-mpegURL" />
-    </video>
-
-    <!-- ช่องต่างๆ มาไว้ด้านขวา -->
-    <div>
-      <div id="current-channel">กรุณาเลือกช่องที่ต้องการรับชม</div>
-      <div class="channel-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', '3 HD')" />
-        <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8', '5 HD')" />
-        <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', '7 HD')" />
-        <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8', 'MCOT')" />
-        <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8', 'NBT')" />
-        <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://thaipbs-live.cdn.byteark.com/live/playlist_480p/index.m3u8', 'TPBS')" />
-        <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8', 'TNN16')" />
-        <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8', 'JKN18')" />
-        <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8', 'NATION')" />
-        <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8', 'PPTV')" />
-        <img src="https://yt3.googleusercontent.com/EtQawLYDyDC8YniGWza4zl3QvpRgapW3B6nFWRz8SEwYI7zPbDZkGmeQScNCyc3CUVNN9psG7g=s900-c-k-c0x00ffffff-no-rj" alt="THAIRATH" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8', 'THAIRATH')" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org', 'TPTV')" />
-        <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbc/mono29/mono29.m3u8', 'MONO29')" />
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffc/altv/altv.m3u8', 'ALTV4')" />
-        <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8', 'CH8')" />
+      <div class="channel-wrapper">
+        <div class="channel-container">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', '3 HD')" />
+          <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8', '5 HD')" />
+          <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', '7 HD')" />
+          <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8', 'MCOT')" />
+          <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8', 'NBT')" />
+          <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://thaipbs-live.cdn.byteark.com/live/playlist_480p/index.m3u8', 'TPBS')" />
+          <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8', 'TNN16')" />
+          <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8', 'JKN18')" />
+          <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8', 'NATION')" />
+          <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8', 'PPTV')" />
+          <img src="https://yt3.googleusercontent.com/EtQawLYDyDC8YniGWza4zl3QvpRgapW3B6nFWRz8SEwYI7zPbDZkGmeQScNCyc3CUVNN9psG7g=s900-c-k-c0x00ffffff-no-rj" alt="THAIRATH" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8', 'THAIRATH')" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org', 'TPTV')" />
+          <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbc/mono29/mono29.m3u8', 'MONO29')" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffc/altv/altv.m3u8', 'ALTV4')" />
+          <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8', 'CH8')" />
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Video.js -->
   <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
-
-  <!-- videojs-http-source-selector plugin for quality selector -->
   <script src="https://unpkg.com/videojs-http-source-selector/dist/videojs-http-source-selector.min.js"></script>
 
   <script>
     const player = videojs('tvPlayer', {
       controls: true,
-      fluid: false, // ปิด fluid เพื่อกำหนดขนาดเอง
+      fluid: false,
       controlBar: {
         volumePanel: { inline: false },
       },
@@ -203,7 +204,6 @@
       }
     });
 
-    // Initialize the quality selector plugin
     player.httpSourceSelector();
 
     function playChannel(url, name) {
