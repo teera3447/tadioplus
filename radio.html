@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400&display=swap" rel="stylesheet" />
   <style>
-    /* Reset เบื้องต้น */
     * {
       box-sizing: border-box;
     }
@@ -48,7 +47,7 @@
     }
 
     #now-playing {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       max-width: 400px;
       background: #f0f0f0;
       padding: 10px;
@@ -75,6 +74,14 @@
       word-break: break-word;
     }
 
+    #radio-player {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto 30px auto;
+      display: none;
+      outline: none;
+    }
+
     ul.station-list {
       list-style: none;
       padding: 0;
@@ -87,7 +94,7 @@
       transition: color 0.3s ease;
     }
     .station-list li {
-      flex: 1 1 140px; /* ขยายและหดได้ตามพื้นที่, แต่ขั้นต่ำ 140px */
+      flex: 1 1 140px;
       max-width: 180px;
       display: flex;
       flex-direction: column;
@@ -193,6 +200,10 @@
       #search-input {
         width: 95%;
       }
+      #radio-player {
+        width: 95%;
+        max-width: none;
+      }
     }
 
     @media (min-width: 1200px) {
@@ -220,6 +231,8 @@
     <img id="now-playing-image" src="" alt="สถานีที่เล่น" />
     <span id="now-playing-text"></span>
   </div>
+
+  <audio id="radio-player" controls preload="none"></audio>
 
   <ul class="station-list">
     <li data-stream-url="URL_สถานี_วิทยุ_09" data-station-name="สถานี 09" data-image="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09">
@@ -263,8 +276,6 @@
       <span>สถานี 10</span>
     </li>
   </ul>
-
-  <audio id="radio-player" controls preload="none" style="width: 90%; max-width: 400px; margin: 20px auto 0 auto; display: block;"></audio>
 
   <script>
     // ฟังก์ชันคำนวณ Levenshtein Distance (Fuzzy Search)
@@ -317,6 +328,7 @@
         const imageUrl = li.dataset.image;
 
         player.src = streamUrl;
+        player.style.display = 'block';
         player.play().catch(e => {
           console.warn('Autoplay blocked:', e);
         });
@@ -325,15 +337,11 @@
         nowPlayingImage.alt = stationName;
         nowPlayingText.textContent = `กำลังเล่น: ${stationName}`;
         nowPlaying.style.display = 'flex';
-
-        // เลื่อนขึ้นบนสุดหน้าจอ (ถ้าต้องการ)
-        // window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
 
     // ปุ่มสลับโหมดมืด/สว่าง
     const themeToggle = document.getElementById('theme-toggle');
-    // โหลดธีมจาก localStorage
     if (localStorage.getItem('theme') === 'dark') {
       document.body.classList.add('dark-mode');
       themeToggle.textContent = 'โหมดสว่าง';
