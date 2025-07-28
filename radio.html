@@ -1,199 +1,172 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tadio+ ฟังวิทยุออนไลน์</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Kanit', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        h1 {
-            color: #555;
-            margin-bottom: 20px;
-        }
-        #audio-player {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            padding: 15px;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #radio-stream {
-            width: 100%;
-        }
-        #current-station {
-            color: #777;
-            margin-top: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        #current-station img {
-            width: 100%; /* ทำให้ภาพกว้างเท่ากับ container */
-            height: auto; /* ปรับความสูงตามสัดส่วน */
-            border-radius: 8px; /* ทำให้ขอบมนเหมือน player */
-            object-fit: cover; /* ครอบภาพให้เต็มพื้นที่ */
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-        }
-        .station-list {
-            list-style: none;
-            padding: 0;
-            width: 80%;
-            max-width: 400px;
-        }
-        .station-list li {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 10px;
-            cursor: pointer;
-            color: #333;
-            text-align: center;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-        .station-list li:hover {
-            background-color: #eee;
-        }
-        .station-list li img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ฟังวิทยุออนไลน์</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f0f0;
+    }
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    #searchInput {
+      width: 80%;
+      max-width: 400px;
+      margin: 1rem auto;
+      display: block;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 1rem;
+    }
+    li {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.2s;
+    }
+    li:hover {
+      transform: scale(1.05);
+    }
+    li img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    li span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+    #current-station {
+      text-align: center;
+      margin: 1rem;
+    }
+    #current-station img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem;
+    }
+    .controls button {
+      background: #4a90e2;
+      color: white;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    iframe {
+      width: 100%;
+      max-width: 640px;
+      height: 360px;
+      display: none;
+      margin: 1rem auto;
+      border: none;
+    }
+  </style>
 </head>
 <body>
+  <header>📻 ฟังวิทยุออนไลน์</header>
+  <input type="text" id="searchInput" placeholder="🔍 ค้นหาสถานี..." />
+  <div id="current-station"></div>
+  <audio id="audio" controls style="display: block; margin: auto;"></audio>
+  <div class="controls">
+    <button id="prevBtn"><i class="fas fa-backward"></i></button>
+    <button id="nextBtn"><i class="fas fa-forward"></i></button>
+  </div>
+  <iframe id="webcamFrame" allowfullscreen></iframe>
+  <ul id="stationList">
+    <!-- สถานีวิทยุจะถูกเพิ่มที่นี่ -->
+  </ul>
 
-    <a href="https://teera3447.github.io/tadioplus/" style="color:black;">กลับสู่หน้าหลัก</a>
-    <h1>Tadio+ ฟังวิทยุออนไลน์</h1>
+  <script>
+    const stations = `
+      <li data-stream-url="https://coolism-web.cdn.byteark.com/;stream/1" data-station-name="Cool Fahrenheit" data-image="https://img2.pic.in.th/pic/1000024190.jpg"></li>
+      <li data-stream-url="https://atimehd.smartclick.co.th/greenwave/hls/greenwave.m3u8" data-station-name="GreenWave" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10"></li>
+      <li data-stream-url="https://atimeonline3.smartclick.co.th/efm" data-station-name="EFM" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10"></li>
+      <li data-stream-url="https://22243.live.streamtheworld.com/GOODTIME_RADIOAAC.aac" data-station-name="Goodtime Radio" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10"></li>
+      <li data-stream-url="https://radio11.plathong.net/7138/;stream.mp3" data-station-name="วิทยุครอบครัวข่าว 106" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10"></li>
+      <li data-stream-url="https://radio11.plathong.net/7590/;stream.mp3" data-station-name="Chula Radio Plus" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10"></li>
+      <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8510" data-station-name="จส.100" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10"></li>
+      <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8425" data-station-name="วิทยุแห่งประเทศไทย 92.5" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10"></li>
+    `;
 
-    <div id="audio-player">
-        <p id="current-station">
-            <img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ">
-            เลือกสถานีเพื่อฟัง
-        </p>
-        <audio id="radio-stream" controls></audio>
-    </div>
+    const stationList = document.getElementById("stationList");
+    stationList.innerHTML = stations;
 
-    <ul class="station-list">
-        <li data-stream-url="URL_สถานี_วิทยุ_09" data-station-name="สถานี 09" data-image="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09">
-            <img src="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09" alt="สถานี 09">
-            <span>Reset</span>
-        </li>
-        <li data-stream-url="https://coolism-web.cdn.byteark.com/;stream/1" data-station-name="Cool Fahrenheit" data-image="https://img2.pic.in.th/pic/1000024190.jpg">
-            <img src="https://img2.pic.in.th/pic/1000024190.jpg" alt="Cool Fahrenheit">
-            <span>Cool Fahrenheit</span>
-        </li>
-        <li data-stream-url="https://atimeonline3.smartclick.co.th/green" data-station-name="GreenWave" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" alt="GreenWave">
-            <span>GreenWave</span>
-        </li>
-        <li data-stream-url="https://atimeonline3.smartclick.co.th/efm" data-station-name="EFM" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" alt="สถานีวิทยุ C">
-            <span>EFM</span>
-        </li>
-        <li data-stream-url="https://22243.live.streamtheworld.com/GOODTIME_RADIOAAC.aac" data-station-name="Goodtime Radio" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10" alt="Goodtime Radio">
-            <span>Goodtime Radio</span>
-        </li>
-        <li data-stream-url="https://radio11.plathong.net/7138/;stream.mp3" data-station-name="วิทยุครอบครัวข่าว 106" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10" alt="วิทยุครอบครัวข่าว 106">
-            <span>วิทยุครอบครัวข่าว 106</span>
-        </li>
-        <li data-stream-url="https://radio11.plathong.net/7590/;stream.mp3" data-station-name="Chula Radio Plus" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10" alt="Chula Radio Plus">
-            <span>Chula Radio Plus</span>
-        </li>
-        <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8510" data-station-name="จส.100" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10" alt="จส.100">
-            <span>จส.100</span>
-        </li>
-        <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8425" data-station-name="วิทยุแห่งประเทศไทย 92.5" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10" alt="วิทยุแห่งประเทศไทย 92.5">
-            <span>วิทยุแห่งประเทศไทย 92.5</span>
-        </li>
-        <li data-stream-url="URL_สถานี_วิทยุ_09" data-station-name="สถานี 09" data-image="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09">
-            <img src="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09" alt="สถานี 09">
-            <span>Reset</span>
-        </li>
-        <li data-stream-url="URL_สถานี_วิทยุ_10" data-station-name="สถานี 10" data-image="https://via.placeholder.com/400/4682B4/FFFFFF?Text=10">
-            <img src="https://via.placeholder.com/400/4682B4/FFFFFF?Text=10" alt="สถานี 10">
-            <span>สถานี 10</span>
-        </li>
-    </ul>
+    const audio = document.getElementById("audio");
+    const currentStation = document.getElementById("current-station");
+    const webcamFrame = document.getElementById("webcamFrame");
+    let hls;
 
-    <script>
-        const stationList = document.querySelector('.station-list');
-        const audioElement = document.getElementById('radio-stream');
-        const currentStationDisplay = document.getElementById('current-station');
-        const currentStationImageDisplay = document.getElementById('current-station-image');
-        const audioPlayer = document.getElementById('audio-player');
+    document.querySelectorAll("#stationList li").forEach(li => {
+      const img = document.createElement("img");
+      img.src = li.dataset.image;
+      const span = document.createElement("span");
+      span.textContent = li.dataset.stationName;
+      li.appendChild(img);
+      li.appendChild(span);
+      li.addEventListener("click", () => playStation(li));
+    });
 
-        stationList.addEventListener('click', (event) => {
-            if (event.target.tagName === 'LI') {
-                const streamUrl = event.target.dataset.streamUrl;
-                const stationName = event.target.dataset.stationName;
-                const imageUrl = event.target.dataset.image;
+    function playStation(li) {
+      const url = li.dataset.streamUrl;
+      const name = li.dataset.stationName;
+      const image = li.dataset.image;
 
-                if (streamUrl) {
-                    audioElement.src = streamUrl;
-                    audioElement.play();
-                    currentStationImageDisplay.src = imageUrl || 'https://via.placeholder.com/400/cccccc?Text=Radio';
-                    currentStationImageDisplay.alt = stationName;
-                    currentStationDisplay.innerHTML = `<img id="current-station-image" src="${imageUrl || 'https://via.placeholder.com/400/cccccc?Text=Radio'}" alt="${stationName}"> กำลังเล่น: ${stationName}`;
-                } else {
-                    alert('ไม่พบ URL สตรีมสำหรับสถานีนี้');
-                }
-            }
-        });
+      if (hls) {
+        hls.destroy();
+        hls = null;
+      }
 
-        // Optional: Reset image when no station is selected
-        audioElement.addEventListener('pause', () => {
-            currentStationImageDisplay.src = 'https://via.placeholder.com/400/cccccc?Text=Radio';
-            currentStationImageDisplay.alt = 'สถานีวิทยุ';
-            currentStationDisplay.innerHTML = `<img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ"> เลือกสถานีเพื่อฟัง`;
-        });
+      if (Hls.isSupported()) {
+        hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(audio);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play());
+      } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+        audio.src = url;
+        audio.play();
+      } else {
+        alert("เบราว์เซอร์ของคุณไม่รองรับ HLS");
+      }
 
-        audioElement.addEventListener('ended', () => {
-            currentStationImageDisplay.src = 'https://via.placeholder.com/400/cccccc?Text=Radio';
-            currentStationImageDisplay.alt = 'สถานีวิทยุ';
-            currentStationDisplay.innerHTML = `<img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ"> เลือกสถานีเพื่อฟัง`;
-        });
+      currentStation.innerHTML = `<img src="${image}" alt=""> <div>กำลังเล่น: ${name}</div>`;
+    }
 
-        audioElement.addEventListener('error', () => {
-            currentStationImageDisplay.src = 'https://via.placeholder.com/400/cccccc?Text=Radio';
-            currentStationImageDisplay.alt = 'สถานีวิทยุ';
-            currentStationDisplay.innerHTML = `<img id="current-station-image" src="https://via.placeholder.com/400/cccccc?Text=Radio" alt="สถานีวิทยุ"> เกิดข้อผิดพลาดในการเล่น`;
-        });
-    </script>
-
+    document.getElementById("searchInput").addEventListener("input", e => {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll("#stationList li").forEach(li => {
+        const name = li.dataset.stationName.toLowerCase();
+        li.style.display = name.includes(term) ? "block" : "none";
+      });
+    });
+  </script>
 </body>
 </html>
-
