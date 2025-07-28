@@ -3,53 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <title>ฟังวิทยุออนไลน์</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      margin: 20px;
+    /* Reset เบื้องต้น */
+    * {
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Kanit', sans-serif, sans-serif;
+      text-align: center;
+      margin: 20px 10px;
+      color: #333;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    a#home-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #2a7ae2;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
+    a#home-link:hover {
+      color: #145dbf;
+      text-decoration: underline;
+    }
+
     #search-input {
       padding: 10px;
       font-size: 16px;
-      width: 80%;
+      width: 90%;
       max-width: 400px;
       margin-bottom: 20px;
       border-radius: 6px;
       border: 1px solid #ccc;
+      font-family: 'Kanit', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
-    ul.station-list {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .station-list li {
-      width: 180px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      transition: background-color 0.3s ease;
-    }
-    .station-list li:hover {
-      background-color: #eee;
-    }
-    .station-list img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .station-list span {
-      margin-top: 8px;
-      font-weight: bold;
-    }
+
     #now-playing {
-      margin: 20px auto;
+      margin-bottom: 20px;
       max-width: 400px;
       background: #f0f0f0;
       padding: 10px;
@@ -57,22 +56,170 @@
       display: flex;
       align-items: center;
       gap: 15px;
+      justify-content: center;
+      display: none;
+      color: #222;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-left: auto;
+      margin-right: auto;
     }
     #now-playing img {
       width: 80px;
+      min-width: 80px;
       border-radius: 8px;
+      height: auto;
     }
     #now-playing span {
       font-size: 1.1em;
       font-weight: bold;
+      word-break: break-word;
+    }
+
+    ul.station-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 900px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      transition: color 0.3s ease;
+    }
+    .station-list li {
+      flex: 1 1 140px; /* ขยายและหดได้ตามพื้นที่, แต่ขั้นต่ำ 140px */
+      max-width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      font-family: 'Kanit', sans-serif;
+      color: #333;
+      background-color: #fff;
+      box-sizing: border-box;
+    }
+    .station-list li:hover {
+      background-color: #eee;
+    }
+    .station-list img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .station-list span {
+      margin-top: 8px;
+      font-weight: bold;
+      font-size: 1em;
+      word-break: break-word;
+    }
+
+    /* ปุ่มโหมดมืด-สว่าง */
+    #theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Kanit', sans-serif;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      z-index: 9999;
+    }
+    #theme-toggle:hover {
+      background-color: #555;
+    }
+
+    /* ธีมมืด */
+    body.dark-mode {
+      background-color: #121212;
+      color: #eee;
+    }
+    body.dark-mode a#home-link {
+      color: #87bfff;
+    }
+    body.dark-mode a#home-link:hover {
+      color: #add8ff;
+    }
+    body.dark-mode #search-input {
+      background-color: #222;
+      color: #eee;
+      border-color: #444;
+    }
+    body.dark-mode #now-playing {
+      background-color: #222;
+      color: #eee;
+    }
+    body.dark-mode ul.station-list li {
+      background-color: #1e1e1e;
+      border-color: #444;
+      color: #eee;
+    }
+    body.dark-mode ul.station-list li:hover {
+      background-color: #333;
+    }
+    body.dark-mode #theme-toggle {
+      background-color: #eee;
+      color: #121212;
+    }
+    body.dark-mode #theme-toggle:hover {
+      background-color: #ccc;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #now-playing {
+        flex-direction: column;
+        gap: 10px;
+      }
+      #now-playing img {
+        width: 60px;
+        min-width: 60px;
+      }
+      ul.station-list li {
+        max-width: 45vw;
+        flex: 1 1 45vw;
+        padding: 8px;
+      }
+      #search-input {
+        width: 95%;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      ul.station-list {
+        max-width: 1100px;
+        gap: 20px;
+      }
+      .station-list li {
+        max-width: 180px;
+        flex: 1 1 160px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <a id="home-link" href="https://teera3447.github.io/tadioplus/">← กลับสู่หน้าหลัก</a>
+  <button id="theme-toggle">โหมดมืด</button>
+
   <h1>ฟังวิทยุออนไลน์</h1>
 
   <input type="text" id="search-input" placeholder="ค้นหาสถานี..." />
+
+  <div id="now-playing">
+    <img id="now-playing-image" src="" alt="สถานีที่เล่น" />
+    <span id="now-playing-text"></span>
+  </div>
 
   <ul class="station-list">
     <li data-stream-url="URL_สถานี_วิทยุ_09" data-station-name="สถานี 09" data-image="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09">
@@ -117,12 +264,7 @@
     </li>
   </ul>
 
-  <div id="now-playing" style="display:none;">
-    <img id="now-playing-image" src="" alt="สถานีที่เล่น" />
-    <span id="now-playing-text"></span>
-  </div>
-
-  <audio id="radio-player" controls preload="none" style="width:80%; max-width:400px; margin-top: 20px;"></audio>
+  <audio id="radio-player" controls preload="none" style="width: 90%; max-width: 400px; margin: 20px auto 0 auto; display: block;"></audio>
 
   <script>
     // ฟังก์ชันคำนวณ Levenshtein Distance (Fuzzy Search)
@@ -183,7 +325,24 @@
         nowPlayingImage.alt = stationName;
         nowPlayingText.textContent = `กำลังเล่น: ${stationName}`;
         nowPlaying.style.display = 'flex';
+
+        // เลื่อนขึ้นบนสุดหน้าจอ (ถ้าต้องการ)
+        // window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+    });
+
+    // ปุ่มสลับโหมดมืด/สว่าง
+    const themeToggle = document.getElementById('theme-toggle');
+    // โหลดธีมจาก localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeToggle.textContent = 'โหมดสว่าง';
+    }
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      themeToggle.textContent = isDark ? 'โหมดสว่าง' : 'โหมดมืด';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
 
