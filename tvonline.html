@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tadio+ ดูทีวีออนไลน์ พร้อมปรับความชัด</title>
+  <title>Tadio+ ดูทีวีออนไลน์</title>
 
-  <!-- Video.js CSS -->
   <link href="https://unpkg.com/video.js@8.5.2/dist/video-js.min.css" rel="stylesheet" />
-  <!-- Video.js core -->
   <script src="https://unpkg.com/video.js@8.5.2/dist/video.min.js"></script>
-  <!-- HTTP Source Selector Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/videojs-http-source-selector@1.1.6/dist/videojs-http-source-selector.min.js"></script>
 
   <style>
@@ -25,9 +22,7 @@
       background-color: #f2f2f2;
       color: #111;
     }
-    h1 {
-      margin: 20px 0 10px;
-    }
+
     .theme-toggle {
       position: fixed;
       top: 10px;
@@ -44,15 +39,19 @@
       background: #ddd;
       color: #000;
     }
-    a.home-link {
-      color: yellow;
-      text-decoration: none;
+
+    #home-link {
+      display: inline-block;
+      margin: 10px auto 20px;
       font-weight: bold;
-      transition: color 0.3s ease;
+      text-decoration: none;
+      color: yellow;
+      font-size: 1.1em;
     }
-    body.light a.home-link {
+    body.light #home-link {
       color: #b8860b;
     }
+
     .channel-list {
       display: flex;
       flex-wrap: wrap;
@@ -60,8 +59,9 @@
       gap: 12px;
       margin: 20px auto;
       padding: 0 10px;
-      max-width: 900px;
+      max-width: 1000px;
     }
+
     .channel-logo {
       width: 90px;
       border-radius: 10px;
@@ -69,33 +69,36 @@
       transition: transform 0.2s ease, border 0.2s ease;
       border: 2px solid transparent;
     }
+
     .channel-logo:hover {
       transform: scale(1.1);
       border-color: yellow;
     }
+
     #currentChannel {
       margin: 10px auto 30px;
       font-weight: bold;
       font-size: 1.2em;
     }
 
-    /* ปรับขนาด player ให้เล็กลง */
     .video-js {
       width: 100%;
-      max-width: 320px;  /* มือถือ */
+      max-width: 320px;
       aspect-ratio: 16 / 9;
       margin: 20px auto;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
+
     @media (min-width: 768px) {
       .video-js {
-        max-width: 400px; /* tablet */
+        max-width: 400px;
       }
     }
+
     @media (min-width: 1024px) {
       .video-js {
-        max-width: 480px; /* desktop */
+        max-width: 480px;
       }
     }
   </style>
@@ -105,9 +108,8 @@
   <button class="theme-toggle" onclick="toggleTheme()">🌗 ธีม</button>
 
   <h1>Tadio+ ดูทีวีออนไลน์</h1>
-  <p><a href="https://teera3447.github.io/tadioplus/" class="home-link">กลับสู่หน้าหลัก</a></p>
+  <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
 
-  <!-- Video Player -->
   <video
     id="tvPlayer"
     class="video-js vjs-default-skin"
@@ -124,7 +126,7 @@
 
   <div class="channel-list">
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('3 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('5HD', 'https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5 HD" class="channel-logo" onclick="playChannel('5 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8')">
     <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('7 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8')">
     <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('MCOT', 'https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8')">
     <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('NBT', 'https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8')">
@@ -153,7 +155,6 @@
       }
     });
 
-    // เปิดใช้งานตัวเลือกคุณภาพ
     player.httpSourceSelector();
     player.ready(() => {
       player.httpSourceSelector({ default: 'auto' });
@@ -161,17 +162,10 @@
 
     function playChannel(name, url) {
       document.getElementById('currentChannel').innerText = 'ขณะนี้รับชม: ' + name;
-
-      player.src({
-        src: url,
-        type: 'application/x-mpegURL'
-      });
-
+      player.src({ src: url, type: 'application/x-mpegURL' });
       player.ready(() => {
         player.load();
-        player.play().catch(() => {
-          console.log('Autoplay ถูกบล็อก ให้กดเล่นเอง');
-        });
+        player.play().catch(() => console.log('Autoplay ถูกบล็อก'));
       });
     }
 
@@ -179,9 +173,8 @@
       document.body.classList.toggle('light');
     }
 
-    // เล่นช่องแรกตอนโหลดหน้า (เลือก 3 HD)
+    // เปิดด้วยช่อง 3 HD
     playChannel('3 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8');
   </script>
-
 </body>
 </html>
