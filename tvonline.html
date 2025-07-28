@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ดูทีวีออนไลน์</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tadio+ ดูทีวีออนไลน์</title>
   <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet" />
   <style>
     body {
@@ -13,13 +13,12 @@
       margin: 0;
       padding: 20px;
       text-align: center;
+      transition: background-color 0.3s, color 0.3s;
     }
-
     .light-theme {
       background-color: #ffffff;
       color: #000000;
     }
-
     .theme-toggle {
       position: fixed;
       top: 10px;
@@ -30,14 +29,14 @@
       padding: 8px 12px;
       border-radius: 8px;
       cursor: pointer;
+      z-index: 1000;
+      transition: background 0.3s, color 0.3s;
     }
-
     .light-theme .theme-toggle {
       background: #ccc;
       color: black;
     }
-
-  #home-link {
+    #home-link {
       position: fixed;
       top: 10px;
       left: 10px;
@@ -47,88 +46,111 @@
       border-radius: 5px;
       text-decoration: none;
       color: #000;
-      z-index: 999;
+      z-index: 1000;
+      transition: background 0.3s, color 0.3s;
     }
-
+    .light-theme #home-link {
+      background: #444;
+      color: white;
+    }
     .channel-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 70px;
     }
-
     .channel-logo {
       width: 60px;
       height: auto;
       cursor: pointer;
       transition: transform 0.2s;
+      border-radius: 8px;
+      border: 2px solid transparent;
     }
-
     .channel-logo:hover {
       transform: scale(1.1);
+      border-color: yellow;
     }
-
     #current-channel {
       margin-top: 15px;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: bold;
     }
-
     .video-js {
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 16 / 9;
-  margin: 20px auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-}
-
-@media (min-width: 1024px) {
-  .video-js {
-    width: 30vw;             /* 30% ของความกว้างหน้าจอ */
-    aspect-ratio: 16 / 9;     /* ยังคงอัตราส่วน 16:9 */
-    height: auto;             /* ให้ความสูงปรับอัตโนมัติ */
-  }
-}
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    @media (min-width: 1024px) {
+      .video-js {
+        width: 50vw;
+        aspect-ratio: 16 / 9;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
-
   <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
   <button class="theme-toggle" onclick="toggleTheme()">🌗 เปลี่ยนธีม</button>
 
-  <video id="tvPlayer" class="video-js vjs-default-skin" controls preload="auto">
-    <source src="" type="application/x-mpegURL">
-  </video>
+  <video
+    id="tvPlayer"
+    class="video-js vjs-default-skin"
+    controls
+    preload="auto"
+    playsinline
+    crossorigin="anonymous"
+  ></video>
 
   <div id="current-channel">กรุณาเลือกช่องที่ต้องการรับชม</div>
 
   <div class="channel-container">
-    <!-- ใส่ช่องทั้งหมดที่คุณให้มา -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', '3 HD')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8', '5 HD')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', '7 HD')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8', 'MCOT')">
-    <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8', 'NBT')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://thaipbs-mcx0wm.cdn.byteark.com/live/playlist.m3u8', 'TPBS')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8', 'TNN16')">
-    <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8', 'JKN18')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8', 'NATION')">
-    <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8', 'PPTV')">
-    <img src="https://yt3.googleusercontent.com/EtQawLYDyDC8YniGWza4zl3QvpRgapW3B6nFWRz8SEwYI7zPbDZkGmeQScNCyc3CUVNN9psG7g=s900-c-k-c0x00ffffff-no-rj" alt="THAIRATH" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8', 'THAIRATH')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org', 'TPTV')">
-    <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbc/mono29/mono29.m3u8', 'MONO29')">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffc/altv/altv.m3u8', 'ALTV4')">
-    <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8', 'CH8')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', '3 HD')" />
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8', '5 HD')" />
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', '7 HD')" />
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8', 'MCOT')" />
+    <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8', 'NBT')" />
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://thaipbs-mcx0wm.cdn.byteark.com/live/playlist.m3u8', 'TPBS')" />
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8', 'TNN16')" />
+    <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8', 'JKN18')" />
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8', 'NATION')" />
+    <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8', 'PPTV')" />
+    <img src="https://yt3.googleusercontent.com/EtQawLYDyDC8YniGWza4zl3QvpRgapW3B6nFWRz8SEwYI7zPbDZkGmeQScNCyc3CUVNN9psG7g=s900-c-k-c0x00ffffff-no-rj" alt="THAIRATH" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8', 'THAIRATH')" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org', 'TPTV')" />
+    <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbc/mono29/mono29.m3u8', 'MONO29')" />
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffc/altv/altv.m3u8', 'ALTV4')" />
+    <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8', 'CH8')" />
   </div>
 
   <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
+  <script src="https://unpkg.com/videojs-http-streaming/dist/videojs-http-streaming.min.js"></script>
   <script>
-    const player = videojs('tvPlayer');
+    // สร้าง player และตั้งค่าให้ใช้ VHS (videojs-http-streaming)
+    const player = videojs('tvPlayer', {
+      html5: {
+        vhs: {
+          overrideNative: true, // บังคับใช้ VHS แทน native HLS เพื่อความเข้ากันได้สูงสุด
+        }
+      },
+      controls: true,
+      fluid: true,
+      controlBar: {
+        volumePanel: { inline: false },
+        pictureInPictureToggle: true,
+        fullscreenToggle: true,
+      }
+    });
 
     function playChannel(url, name) {
-      player.src({ type: 'application/x-mpegURL', src: url });
+      player.src({
+        src: url,
+        type: 'application/x-mpegURL'
+      });
       player.play();
       document.getElementById('current-channel').textContent = 'ขณะนี้รับชมช่อง: ' + name;
     }
