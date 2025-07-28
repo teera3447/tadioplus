@@ -87,16 +87,26 @@
 
     /* Player size approx YouTube normal size */
     .video-js {
-      width: 100%;
-      max-width: 640px;
+      width: 360px;       /* กำหนดความกว้างเริ่มต้น */
+      max-width: 100%;
       aspect-ratio: 16 / 9;
       height: auto;
       margin: 20px auto;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
+
+    /* บน desktop ให้อยู่ที่ 360px */
+    @media (min-width: 1024px) {
+      .video-js {
+        width: 800px;
+      }
+    }
+
+    /* บนหน้าจอเล็ก ๆ ให้เต็มความกว้าง */
     @media (max-width: 640px) {
       .video-js {
+        width: 100%;
         max-width: 100%;
       }
     }
