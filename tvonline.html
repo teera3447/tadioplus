@@ -1,119 +1,172 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tadio+ ดูทีวีออนไลน์</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tadio+ Player</title>
+
+  <!-- Video.js -->
+  <link href="https://unpkg.com/video.js@8/dist/video-js.min.css" rel="stylesheet" />
+  <script src="https://unpkg.com/video.js@8/dist/video.min.js"></script>
+  <script src="https://unpkg.com/@videojs/http-streaming@3.9.0/dist/videojs-http-streaming.min.js"></script>
+
   <style>
     body {
+      margin: 0;
       font-family: sans-serif;
-      text-align: center;
       background: #111;
       color: #fff;
-      margin: 0;
-      padding: 0;
+      text-align: center;
+      transition: background 0.3s, color 0.3s;
     }
+
+    body.light-mode {
+      background: #f5f5f5;
+      color: #111;
+    }
+
     h1 {
-      margin-top: 20px;
-      font-size: 2.5em;
-      color: #f9f9f9;
+      margin: 20px 0 10px;
     }
+
     .channel-list {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
-      margin-top: 20px;
-      padding: 0 10px;
+      margin: 20px;
     }
+
     .channel-logo {
-      width: 120px;
+      width: 100px;
       cursor: pointer;
       border: 2px solid transparent;
       border-radius: 10px;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s;
     }
+
     .channel-logo:hover {
       border-color: yellow;
       transform: scale(1.1);
     }
 
-    video {
-      width: 100%;
-      height: auto;
-      margin-top: 30px;
-      border-radius: 10px;
-      max-width: 800px;
-      background-color: #000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    .video-container {
+      max-width: 960px;
+      margin: auto;
+      padding: 10px;
     }
 
-    @media (max-width: 768px) {
-      .channel-logo {
-        width: 90px;
-      }
-      h1 {
-        font-size: 2em;
-      }
+    #themeToggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #444;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background 0.3s;
     }
 
-    @media (max-width: 480px) {
+    body.light-mode #themeToggle {
+      background: #ddd;
+      color: #000;
+    }
+
+    #currentChannel {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
       .channel-logo {
         width: 70px;
-      }
-      h1 {
-        font-size: 1.5em;
       }
     }
   </style>
 </head>
 <body>
-  <a href="https://teera3447.github.io/tadioplus/" style="color:white;">กลับสู่หน้าหลัก</a>
-  <h1>Tadio+ เว็บดูทีวีออนไลน์</h1>
 
-  <!-- ตัวเล่นวิดีโอ -->
-  <video id="tvPlayer" controls autoplay loop playsinline>
-    <source src="https://web.opendrive.com/api/v1/download/file.json/NzRfNDI2NTk0MjJf?temp_key=%10%156%D0%2A%25%A2%EA%F6%D0%16%AB%B3m6%F0%F0%0B%DB%D9%A9&inline=1" type="application/x-mpegURL">
-    <!-- fallback content for unsupported browsers -->
-    ผู้ใช้ของคุณไม่รองรับการแสดงผลวิดีโอ
-  </video>
-  <h2>คลิกช่องที่ต้องการรับชม</h2>
-  <!-- โลโก้ช่อง -->
+  <button id="themeToggle">🌗 โหมดมืด</button>
+  <h1>Tadio+ ดูทีวีออนไลน์</h1>
+
+  <div class="video-container">
+    <video
+      id="tvPlayer"
+      class="video-js vjs-default-skin vjs-big-play-centered"
+      controls
+      preload="auto"
+      playsinline
+      autoplay
+      width="100%"
+      height="auto"
+    ></video>
+    <div id="currentChannel">ขณะนี้รับชม: ช่อง 3HD</div>
+  </div>
+
+  <h2>คลิกเลือกช่อง</h2>
   <div class="channel-list">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8')">
-    <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8')">
-    <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8')">
-    <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8')">
-    <img src="https://yt3.googleusercontent.com/EtQawLYDyDC8YniGWza4zl3QvpRgapW3B6nFWRz8SEwYI7zPbDZkGmeQScNCyc3CUVNN9psG7g=s900-c-k-c0x00ffffff-no-rj" alt="THAIRATH" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org')">
-    <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbc/mono29/mono29.m3u8')">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffc/altv/altv.m3u8')">
-    <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8')">
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', 'ช่อง 3HD')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', 'ช่อง 7HD')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8', 'ช่อง MCOT')">
+    <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8', 'ช่อง 8')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org', 'ช่อง TPTV')">
+  </div>
 
-  <!-- โหลด HLS.js สำหรับเบราว์เซอร์ที่ไม่รองรับ HLS -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
-    function playChannel(url) {
-      const player = document.getElementById('tvPlayer');
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(player);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-          player.play();
-        });
-      } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-        player.src = url; // สำหรับเบราว์เซอร์ที่รองรับ natively
-        player.play();
+    let player;
+
+    function playChannel(url, channelName) {
+      if (player) {
+        player.dispose();
       }
+
+      player = videojs('tvPlayer', {
+        techOrder: ['html5'],
+        sources: [{
+          src: url,
+          type: 'application/x-mpegURL'
+        }],
+        controlBar: {
+          pictureInPictureToggle: true,
+          volumePanel: { inline: false },
+        },
+        responsive: true,
+        fluid: true,
+      });
+
+      player.ready(() => {
+        console.log('Playing:', channelName);
+      });
+
+      document.getElementById("currentChannel").textContent = "ขณะนี้รับชม: " + channelName;
+
+      player.on('error', () => {
+        console.error('เกิดข้อผิดพลาดในการโหลดช่อง');
+      });
     }
+
+    // เริ่มต้นด้วยช่องแรก
+    playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', 'ช่อง 3HD');
+
+    // Toggle Theme
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-mode');
+      toggleBtn.textContent = '🌞 โหมดสว่าง';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      const isLight = body.classList.contains('light-mode');
+      toggleBtn.textContent = isLight ? '🌞 โหมดสว่าง' : '🌗 โหมดมืด';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
   </script>
+
 </body>
 </html>
