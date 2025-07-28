@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tadio+ ดูทีวีออนไลน์</title>
+  <title>Tadio+ ดูทีวีออนไลน์ พร้อมปรับความชัด</title>
 
   <!-- Video.js CSS -->
   <link href="https://unpkg.com/video.js@8.5.2/dist/video-js.min.css" rel="stylesheet" />
@@ -75,10 +75,17 @@
     }
     .video-js {
       width: 100%;
-      max-width: 800px;
+      max-width: 480px;  /* ลดขนาด player */
+      height: auto;
       margin: 20px auto;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    @media (max-width: 480px) {
+      .video-js {
+        max-width: 100%;
+        height: auto;
+      }
     }
   </style>
 </head>
@@ -87,7 +94,7 @@
   <button class="theme-toggle" onclick="toggleTheme()">🌗 ธีม</button>
 
   <h1>Tadio+ ดูทีวีออนไลน์</h1>
-  <p><a href="https://teera3447.github.io/tadioplus/" style="color:yellow;">กลับสู่หน้าหลัก</a></p>
+  <p><a href="https://teera3447.github.io/tadioplus/" class="home-link">กลับสู่หน้าหลัก</a></p>
 
   <!-- Video Player -->
   <video
@@ -95,7 +102,6 @@
     class="video-js vjs-default-skin"
     controls
     autoplay
-    muted
     playsinline
     preload="auto"
   ></video>
