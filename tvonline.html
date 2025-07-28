@@ -125,18 +125,42 @@
       border-color: #f0c419;
     }
 
+    /* ✅ Responsive for smartphone */
     @media (max-width: 768px) {
       #container {
         flex-direction: column;
         align-items: center;
+        padding: 10px;
+        gap: 20px;
+      }
+
+      .video-js {
+        width: 100%;
+        max-width: 100%;
       }
 
       .channel-container {
         grid-template-columns: repeat(4, 60px);
       }
 
-      .video-js {
+      #top-bar {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+      }
+
+      #home-link,
+      .theme-toggle {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      .player-wrapper {
         width: 100%;
+      }
+
+      #current-channel {
+        text-align: center;
       }
     }
   </style>
@@ -165,6 +189,7 @@
 
       <div class="channel-wrapper">
         <div class="channel-container">
+          <!-- 🔁 วางช่องตามที่คุณใส่ไว้ -->
           <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', '3 HD')" />
           <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8', '5 HD')" />
           <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', '7 HD')" />
