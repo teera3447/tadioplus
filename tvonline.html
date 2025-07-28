@@ -76,20 +76,21 @@
     }
 
     .video-js {
-      width: 100%;
-      max-width: 100%;
-      aspect-ratio: 16 / 9;
-      margin: 20px auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-    }
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
 
-    @media (min-width: 1024px) {
-      .video-js {
-        width: 30vw; /* 30% ความกว้างหน้าจอ */
-        max-width: unset;
-      }
-    }
+@media (min-width: 1024px) {
+  .video-js {
+    width: 30vw;             /* 30% ของความกว้างหน้าจอ */
+    aspect-ratio: 16 / 9;     /* ยังคงอัตราส่วน 16:9 */
+    height: auto;             /* ให้ความสูงปรับอัตโนมัติ */
+  }
+}
   </style>
 </head>
 <body>
