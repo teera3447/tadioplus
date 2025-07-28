@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>สถานีวิทยุออนไลน์</title>
+  <meta charset="UTF-8" />
+  <title>ฟังวิทยุออนไลน์</title>
   <style>
     body {
       font-family: sans-serif;
       text-align: center;
+      margin: 20px;
     }
     #search-input {
       padding: 10px;
       font-size: 16px;
       width: 80%;
       max-width: 400px;
-      margin: 20px auto;
+      margin-bottom: 20px;
       border-radius: 6px;
       border: 1px solid #ccc;
     }
@@ -31,6 +32,13 @@
       flex-direction: column;
       align-items: center;
       cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .station-list li:hover {
+      background-color: #eee;
     }
     .station-list img {
       width: 100%;
@@ -40,63 +48,88 @@
       margin-top: 8px;
       font-weight: bold;
     }
+    #now-playing {
+      margin: 20px auto;
+      max-width: 400px;
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    #now-playing img {
+      width: 80px;
+      border-radius: 8px;
+    }
+    #now-playing span {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
   <h1>ฟังวิทยุออนไลน์</h1>
 
-  <input type="text" id="search-input" placeholder="ค้นหาสถานี...">
+  <input type="text" id="search-input" placeholder="ค้นหาสถานี..." />
 
   <ul class="station-list">
     <li data-stream-url="URL_สถานี_วิทยุ_09" data-station-name="สถานี 09" data-image="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09">
-      <img src="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09" alt="สถานี 09">
+      <img src="https://via.placeholder.com/400/8FBC8F/FFFFFF?Text=09" alt="สถานี 09" />
       <span>Reset</span>
     </li>
     <li data-stream-url="https://coolism-web.cdn.byteark.com/;stream/1" data-station-name="Cool Fahrenheit" data-image="https://img2.pic.in.th/pic/1000024190.jpg">
-      <img src="https://img2.pic.in.th/pic/1000024190.jpg" alt="Cool Fahrenheit">
+      <img src="https://img2.pic.in.th/pic/1000024190.jpg" alt="Cool Fahrenheit" />
       <span>Cool Fahrenheit</span>
     </li>
     <li data-stream-url="https://atimeonline3.smartclick.co.th/green" data-station-name="GreenWave" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" alt="GreenWave">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" alt="GreenWave" />
       <span>GreenWave</span>
     </li>
     <li data-stream-url="https://atimeonline3.smartclick.co.th/efm" data-station-name="EFM" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" alt="EFM">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" alt="EFM" />
       <span>EFM</span>
     </li>
     <li data-stream-url="https://22243.live.streamtheworld.com/GOODTIME_RADIOAAC.aac" data-station-name="Goodtime Radio" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10" alt="Goodtime Radio">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10" alt="Goodtime Radio" />
       <span>Goodtime Radio</span>
     </li>
     <li data-stream-url="https://radio11.plathong.net/7138/;stream.mp3" data-station-name="วิทยุครอบครัวข่าว 106" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10" alt="วิทยุครอบครัวข่าว 106">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10" alt="วิทยุครอบครัวข่าว 106" />
       <span>วิทยุครอบครัวข่าว 106</span>
     </li>
     <li data-stream-url="https://radio11.plathong.net/7590/;stream.mp3" data-station-name="Chula Radio Plus" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10" alt="Chula Radio Plus">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10" alt="Chula Radio Plus" />
       <span>Chula Radio Plus</span>
     </li>
     <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8510" data-station-name="จส.100" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10" alt="จส.100">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10" alt="จส.100" />
       <span>จส.100</span>
     </li>
     <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8425" data-station-name="วิทยุแห่งประเทศไทย 92.5" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10" alt="วิทยุแห่งประเทศไทย 92.5">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10" alt="วิทยุแห่งประเทศไทย 92.5" />
       <span>วิทยุแห่งประเทศไทย 92.5</span>
     </li>
     <li data-stream-url="URL_สถานี_วิทยุ_10" data-station-name="สถานี 10" data-image="https://via.placeholder.com/400/4682B4/FFFFFF?Text=10">
-      <img src="https://via.placeholder.com/400/4682B4/FFFFFF?Text=10" alt="สถานี 10">
+      <img src="https://via.placeholder.com/400/4682B4/FFFFFF?Text=10" alt="สถานี 10" />
       <span>สถานี 10</span>
     </li>
   </ul>
 
+  <div id="now-playing" style="display:none;">
+    <img id="now-playing-image" src="" alt="สถานีที่เล่น" />
+    <span id="now-playing-text"></span>
+  </div>
+
+  <audio id="radio-player" controls preload="none" style="width:80%; max-width:400px; margin-top: 20px;"></audio>
+
   <script>
+    // ฟังก์ชันคำนวณ Levenshtein Distance (Fuzzy Search)
     function levenshteinDistance(a, b) {
       const dp = Array(a.length + 1).fill(null).map(() => Array(b.length + 1).fill(0));
       for (let i = 0; i <= a.length; i++) dp[i][0] = i;
       for (let j = 0; j <= b.length; j++) dp[0][j] = j;
-
       for (let i = 1; i <= a.length; i++) {
         for (let j = 1; j <= b.length; j++) {
           if (a[i - 1] === b[j - 1]) {
@@ -119,12 +152,37 @@
       return distance <= threshold || text.includes(keyword);
     }
 
+    // ค้นหาสถานี
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('input', () => {
       const keyword = searchInput.value.trim().toLowerCase();
       document.querySelectorAll('.station-list li').forEach(li => {
         const name = li.dataset.stationName.toLowerCase();
         li.style.display = fuzzyMatch(name, keyword) ? 'flex' : 'none';
+      });
+    });
+
+    // เล่นสถานีเมื่อคลิก + อัปเดตสถานะ Now Playing
+    const player = document.getElementById('radio-player');
+    const nowPlaying = document.getElementById('now-playing');
+    const nowPlayingImage = document.getElementById('now-playing-image');
+    const nowPlayingText = document.getElementById('now-playing-text');
+
+    document.querySelectorAll('.station-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        const streamUrl = li.dataset.streamUrl;
+        const stationName = li.dataset.stationName;
+        const imageUrl = li.dataset.image;
+
+        player.src = streamUrl;
+        player.play().catch(e => {
+          console.warn('Autoplay blocked:', e);
+        });
+
+        nowPlayingImage.src = imageUrl || '';
+        nowPlayingImage.alt = stationName;
+        nowPlayingText.textContent = `กำลังเล่น: ${stationName}`;
+        nowPlaying.style.display = 'flex';
       });
     });
   </script>
