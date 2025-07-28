@@ -3,168 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ฟังวิทยุออนไลน์</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <title>Thai Radio Online</title>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #f0f0f0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     header {
-      background: #4a90e2;
+      background: #2c3e50;
       color: white;
       padding: 1rem;
       text-align: center;
       font-size: 1.5rem;
     }
-    #searchInput {
-      width: 80%;
-      max-width: 400px;
+    #search {
       margin: 1rem auto;
-      display: block;
+      max-width: 500px;
+      width: 90%;
       padding: 0.5rem;
-      border-radius: 10px;
-      border: 1px solid #ccc;
       font-size: 1rem;
     }
-    ul {
+    #station-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1rem;
+      padding: 1rem;
+    }
+    #station-list li {
       list-style: none;
-      padding: 1rem;
-    }
-    li {
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      cursor: pointer;
-      text-align: center;
-      padding: 1rem;
-      transition: transform 0.2s;
-    }
-    li:hover {
-      transform: scale(1.05);
-    }
-    li img {
-      width: 100%;
+      padding: 0.5rem;
       border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
     }
-    li span {
-      display: block;
-      margin-top: 0.5rem;
-      font-weight: bold;
+    #station-list li:hover {
+      background: #f9f9f9;
+    }
+    #station-list img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    #controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem;
+    }
+    #controls button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+    #controls button:hover {
+      background: #2980b9;
     }
     #current-station {
       text-align: center;
-      margin: 1rem;
-    }
-    #current-station img {
-      width: 150px;
-      border-radius: 50%;
-      margin-bottom: 0.5rem;
-    }
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1rem;
-    }
-    .controls button {
-      background: #4a90e2;
-      color: white;
-      border: none;
-      padding: 0.75rem 1rem;
-      border-radius: 50px;
       font-size: 1.2rem;
-      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    #webcam-container {
+      display: none;
+      margin: 1rem auto;
+      width: 90%;
+      max-width: 800px;
     }
     iframe {
       width: 100%;
-      max-width: 640px;
-      height: 360px;
-      display: none;
-      margin: 1rem auto;
+      height: 400px;
       border: none;
     }
   </style>
 </head>
 <body>
-  <header>📻 ฟังวิทยุออนไลน์</header>
-  <input type="text" id="searchInput" placeholder="🔍 ค้นหาสถานี..." />
-  <div id="current-station"></div>
-  <audio id="audio" controls style="display: block; margin: auto;"></audio>
-  <div class="controls">
-    <button id="prevBtn"><i class="fas fa-backward"></i></button>
-    <button id="nextBtn"><i class="fas fa-forward"></i></button>
-  </div>
-  <iframe id="webcamFrame" allowfullscreen></iframe>
-  <ul id="stationList">
-    <!-- สถานีวิทยุจะถูกเพิ่มที่นี่ -->
+  <header>📻 Thai Radio Online</header>
+
+  <input type="text" id="search" placeholder="ค้นหาสถานีวิทยุ...">
+
+  <ul id="station-list">
+    <li data-stream-url="https://coolism-web.cdn.byteark.com/;stream/1" data-station-name="Cool Fahrenheit" data-image="https://img2.pic.in.th/pic/1000024190.jpg">
+      <img src="https://img2.pic.in.th/pic/1000024190.jpg" alt="Cool Fahrenheit">
+      <span>Cool Fahrenheit</span>
+    </li>
+    <li data-stream-url="https://atimehd.smartclick.co.th/greenwave/hls/greenwave.m3u8" data-station-name="GreenWave" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" data-webcam="https://atimehd.smartclick.co.th/greenwave/hls/greenwave.m3u8">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" alt="GreenWave">
+      <span>GreenWave</span>
+    </li>
+    <li data-stream-url="https://atimeonline3.smartclick.co.th/efm" data-station-name="EFM" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" data-webcam="https://atimehd.smartclick.co.th/efm/hls/efm.m3u8">>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" alt="EFM">
+      <span>EFM</span>
+    </li>
+    <li data-stream-url="https://22243.live.streamtheworld.com/GOODTIME_RADIOAAC.aac" data-station-name="Goodtime Radio" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10" data-webcam="https://streaming.teroradio.com/Goodtime/Goodtime-Webcam/chunklist_w1698367261.m3u8>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10" alt="Goodtime Radio">
+      <span>Goodtime Radio</span>
+    </li>
   </ul>
 
+  <div id="controls">
+    <button id="prev">⏮ ก่อนหน้า</button>
+    <button id="play">▶️ เล่น/หยุด</button>
+    <button id="next">⏭ ถัดไป</button>
+  </div>
+
+  <div id="current-station"></div>
+
+  <div id="webcam-container">
+    <iframe id="webcam-frame" allow="autoplay"></iframe>
+  </div>
+
+  <audio id="audio" controls style="width: 100%; max-width: 500px; margin: auto; display: block;"></audio>
+
   <script>
-    const stations = `
-      <li data-stream-url="https://coolism-web.cdn.byteark.com/;stream/1" data-station-name="Cool Fahrenheit" data-image="https://img2.pic.in.th/pic/1000024190.jpg"></li>
-      <li data-stream-url="https://atimehd.smartclick.co.th/greenwave/hls/greenwave.m3u8" data-station-name="GreenWave" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10"></li>
-      <li data-stream-url="https://atimeonline3.smartclick.co.th/efm" data-station-name="EFM" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10"></li>
-      <li data-stream-url="https://22243.live.streamtheworld.com/GOODTIME_RADIOAAC.aac" data-station-name="Goodtime Radio" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYuJ7s_iLLvigZVjFIJoLn8m2f-8TiJpYkpkGr-lgkR_9LYIMgJf-kykc&s=10"></li>
-      <li data-stream-url="https://radio11.plathong.net/7138/;stream.mp3" data-station-name="วิทยุครอบครัวข่าว 106" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10"></li>
-      <li data-stream-url="https://radio11.plathong.net/7590/;stream.mp3" data-station-name="Chula Radio Plus" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10"></li>
-      <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8510" data-station-name="จส.100" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10"></li>
-      <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8425" data-station-name="วิทยุแห่งประเทศไทย 92.5" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10"></li>
-    `;
+    const stationList = document.getElementById('station-list');
+    const audio = document.getElementById('audio');
+    const currentStation = document.getElementById('current-station');
+    const webcamContainer = document.getElementById('webcam-container');
+    const webcamFrame = document.getElementById('webcam-frame');
+    const playBtn = document.getElementById('play');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const searchInput = document.getElementById('search');
 
-    const stationList = document.getElementById("stationList");
-    stationList.innerHTML = stations;
-
-    const audio = document.getElementById("audio");
-    const currentStation = document.getElementById("current-station");
-    const webcamFrame = document.getElementById("webcamFrame");
     let hls;
+    let currentIndex = -1;
+    const stations = Array.from(stationList.children);
 
-    document.querySelectorAll("#stationList li").forEach(li => {
-      const img = document.createElement("img");
-      img.src = li.dataset.image;
-      const span = document.createElement("span");
-      span.textContent = li.dataset.stationName;
-      li.appendChild(img);
-      li.appendChild(span);
-      li.addEventListener("click", () => playStation(li));
-    });
+    function playStation(index) {
+      if (index < 0 || index >= stations.length) return;
 
-    function playStation(li) {
+      const li = stations[index];
       const url = li.dataset.streamUrl;
       const name = li.dataset.stationName;
-      const image = li.dataset.image;
+      const webcam = li.dataset.webcam;
 
       if (hls) {
         hls.destroy();
         hls = null;
       }
 
-      if (Hls.isSupported()) {
+      if (Hls.isSupported() && url.endsWith('.m3u8')) {
         hls = new Hls();
         hls.loadSource(url);
         hls.attachMedia(audio);
         hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play());
-      } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+      } else {
         audio.src = url;
         audio.play();
-      } else {
-        alert("เบราว์เซอร์ของคุณไม่รองรับ HLS");
       }
 
-      currentStation.innerHTML = `<img src="${image}" alt=""> <div>กำลังเล่น: ${name}</div>`;
+      currentStation.textContent = 'กำลังเล่น: ' + name;
+      if (webcam) {
+        webcamContainer.style.display = 'block';
+        webcamFrame.src = webcam;
+      } else {
+        webcamContainer.style.display = 'none';
+        webcamFrame.src = '';
+      }
+      currentIndex = index;
     }
 
-    document.getElementById("searchInput").addEventListener("input", e => {
-      const term = e.target.value.toLowerCase();
-      document.querySelectorAll("#stationList li").forEach(li => {
-        const name = li.dataset.stationName.toLowerCase();
-        li.style.display = name.includes(term) ? "block" : "none";
+    stationList.addEventListener('click', e => {
+      const li = e.target.closest('li');
+      if (!li) return;
+      playStation(stations.indexOf(li));
+    });
+
+    playBtn.onclick = () => {
+      if (audio.paused) audio.play();
+      else audio.pause();
+    };
+
+    prevBtn.onclick = () => playStation(currentIndex - 1);
+    nextBtn.onclick = () => playStation(currentIndex + 1);
+
+    searchInput.addEventListener('input', () => {
+      const term = searchInput.value.toLowerCase();
+      stations.forEach(station => {
+        const name = station.dataset.stationName.toLowerCase();
+        station.style.display = name.includes(term) ? '' : 'none';
       });
     });
   </script>
