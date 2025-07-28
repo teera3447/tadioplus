@@ -44,6 +44,15 @@
       background: #ddd;
       color: #000;
     }
+    a.home-link {
+      color: yellow;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    body.light a.home-link {
+      color: #b8860b;
+    }
     .channel-list {
       display: flex;
       flex-wrap: wrap;
@@ -69,22 +78,24 @@
       font-weight: bold;
       font-size: 1.2em;
     }
-    @media (max-width: 768px) {
-      .channel-logo { width: 70px; }
-      h1 { font-size: 1.8em; }
-    }
+
+    /* ปรับขนาด player ให้เล็กลง */
     .video-js {
       width: 100%;
-      max-width: 480px;  /* ลดขนาด player */
-      height: auto;
+      max-width: 320px;  /* มือถือ */
+      aspect-ratio: 16 / 9;
       margin: 20px auto;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
-    @media (max-width: 480px) {
+    @media (min-width: 768px) {
       .video-js {
-        max-width: 100%;
-        height: auto;
+        max-width: 400px; /* tablet */
+      }
+    }
+    @media (min-width: 1024px) {
+      .video-js {
+        max-width: 480px; /* desktop */
       }
     }
   </style>
@@ -102,6 +113,7 @@
     class="video-js vjs-default-skin"
     controls
     autoplay
+    muted
     playsinline
     preload="auto"
   ></video>
