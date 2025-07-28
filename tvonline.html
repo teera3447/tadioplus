@@ -1,180 +1,140 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tadio+ ดูทีวีออนไลน์</title>
-
-  <link href="https://unpkg.com/video.js@8.5.2/dist/video-js.min.css" rel="stylesheet" />
-  <script src="https://unpkg.com/video.js@8.5.2/dist/video.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/videojs-http-source-selector@1.1.6/dist/videojs-http-source-selector.min.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ดูทีวีออนไลน์</title>
+  <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
       font-family: sans-serif;
-      background-color: #111;
+      background-color: #121212;
       color: white;
+      margin: 0;
+      padding: 20px;
       text-align: center;
-      transition: background-color 0.3s, color 0.3s;
     }
-    body.light {
-      background-color: #f2f2f2;
-      color: #111;
+
+    .light-theme {
+      background-color: #ffffff;
+      color: #000000;
     }
 
     .theme-toggle {
       position: fixed;
       top: 10px;
       right: 10px;
-      background: #333;
+      background: #444;
       color: white;
-      padding: 8px 14px;
       border: none;
-      border-radius: 20px;
+      padding: 8px 12px;
+      border-radius: 8px;
       cursor: pointer;
-      z-index: 10000;
     }
-    body.light .theme-toggle {
+
+    .light-theme .theme-toggle {
+      background: #ccc;
+      color: black;
+    }
+
+  #home-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      font-size: 14px;
       background: #ddd;
-      color: #000;
-    }
-
-    #home-link {
-      display: inline-block;
-      margin: 10px auto 20px;
-      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 5px;
       text-decoration: none;
-      color: yellow;
-      font-size: 1.1em;
-    }
-    body.light #home-link {
-      color: #b8860b;
+      color: #000;
+      z-index: 999;
     }
 
-    .channel-list {
+    .channel-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      margin: 20px auto;
-      padding: 0 10px;
-      max-width: 1000px;
+      gap: 10px;
+      margin-top: 20px;
     }
 
     .channel-logo {
-      width: 90px;
-      border-radius: 10px;
+      width: 60px;
+      height: auto;
       cursor: pointer;
-      transition: transform 0.2s ease, border 0.2s ease;
-      border: 2px solid transparent;
+      transition: transform 0.2s;
     }
 
     .channel-logo:hover {
       transform: scale(1.1);
-      border-color: yellow;
     }
 
-    #currentChannel {
-      margin: 10px auto 30px;
+    #current-channel {
+      margin-top: 15px;
+      font-size: 1rem;
       font-weight: bold;
-      font-size: 1.2em;
     }
 
     .video-js {
-      width: 50%;
-      max-width: 320px;
+      width: 100%;
+      max-width: 100%;
       aspect-ratio: 16 / 9;
       margin: 20px auto;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .video-js {
-        max-width: 400px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .video-js {
-        max-width: 480px;
+        width: 30vw; /* 30% ความกว้างหน้าจอ */
+        max-width: unset;
       }
     }
   </style>
 </head>
 <body>
 
-  <button class="theme-toggle" onclick="toggleTheme()">🌗 ธีม</button>
-
-  <h1>Tadio+ ดูทีวีออนไลน์</h1>
   <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
+  <button class="theme-toggle" onclick="toggleTheme()">🌗 เปลี่ยนธีม</button>
 
-  <video
-    id="tvPlayer"
-    class="video-js vjs-default-skin"
-    controls
-    autoplay
-    muted
-    playsinline
-    preload="auto"
-  ></video>
+  <video id="tvPlayer" class="video-js vjs-default-skin" controls preload="auto">
+    <source src="" type="application/x-mpegURL">
+  </video>
 
-  <div id="currentChannel">ขณะนี้รับชม: -</div>
+  <div id="current-channel">กรุณาเลือกช่องที่ต้องการรับชม</div>
 
-  <h2>คลิกช่องที่ต้องการรับชม</h2>
-
-  <div class="channel-list">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('3 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5 HD" class="channel-logo" onclick="playChannel('5 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('7 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('MCOT', 'https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8')">
-    <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('NBT', 'https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('TPBS', 'https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('TNN16', 'https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8')">
-    <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('JKN18', 'https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8')">
-    <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('NATION', 'https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8')">
-    <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('PPTV', 'https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8')">
-    <img src="https://yt3.googleusercontent.com/EtQawLYDyDC8YniGWza4zl3QvpRgapW3B6nFWRz8SEwYI7zPbDZkGmeQScNCyc3CUVNN9psG7g=s900-c-k-c0x00ffffff-no-rj" alt="THAIRATH" class="channel-logo" onclick="playChannel('THAIRATH', 'https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('TPTV', 'https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org')">
-    <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannel('MONO29', 'https://lb1-live-mv.v2h-cdn.com/hls/ffbc/mono29/mono29.m3u8')">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannel('ALTV4', 'https://lb1-live-mv.v2h-cdn.com/hls/fffc/altv/altv.m3u8')">
-    <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('CH8', 'https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8')">
+  <div class="channel-container">
+    <!-- ใส่ช่องทั้งหมดที่คุณให้มา -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', '3 HD')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffb/5hd/5hd.m3u8', '5 HD')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffac/7hd/7hd.m3u8', '7 HD')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8', 'MCOT')">
+    <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffe/nbt/nbt.m3u8', 'NBT')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="TPBS" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffd/tpbs/tpbs.m3u8', 'TPBS')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/121_y_vOC9d8VmjNiQJBHf4DEkryalx7XG13PR.png" alt="TNN16" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffdc/tnn/tnn.m3u8', 'TNN16')">
+    <img src="https://cms.dmpcdn.com/livetv/2021/06/15/3e4e0540-cdb4-11eb-9a22-7958179a38a7_original.png" alt="JKN18" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8', 'JKN18')">
+    <img src="https://media-mvtv-app.imgix.net/uploads/channel/123_y_edN0Mnwi3Tl7F9fqz4ELPVkraZh5OybB.png" alt="NATION" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffcc/nation/nation.m3u8', 'NATION')">
+    <img src="https://i.postimg.cc/d1CXP3St/PPTV.jpg" alt="PPTV" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8', 'PPTV')">
+    <img src="https://yt3.googleusercontent.com/EtQawLYDyDC8YniGWza4zl3QvpRgapW3B6nFWRz8SEwYI7zPbDZkGmeQScNCyc3CUVNN9psG7g=s900-c-k-c0x00ffffff-no-rj" alt="THAIRATH" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8', 'THAIRATH')">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/TPTV_logo_2014.png" alt="TPTV" class="channel-logo" onclick="playChannel('https://tv-live.tpchannel.org/live/tv_480p.m3u8?vhost=tv-live.tpchannel.org', 'TPTV')">
+    <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbc/mono29/mono29.m3u8', 'MONO29')">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/fffc/altv/altv.m3u8', 'ALTV4')">
+    <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffbe/ch8/ch8.m3u8', 'CH8')">
   </div>
 
+  <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
   <script>
-    let player = videojs('tvPlayer', {
-      autoplay: true,
-      controls: true,
-      responsive: true,
-      fluid: true,
-      html5: {
-        hls: {
-          overrideNative: true
-        }
-      }
-    });
+    const player = videojs('tvPlayer');
 
-    player.httpSourceSelector();
-    player.ready(() => {
-      player.httpSourceSelector({ default: 'auto' });
-    });
-
-    function playChannel(name, url) {
-      document.getElementById('currentChannel').innerText = 'ขณะนี้รับชม: ' + name;
-      player.src({ src: url, type: 'application/x-mpegURL' });
-      player.ready(() => {
-        player.load();
-        player.play().catch(() => console.log('Autoplay ถูกบล็อก'));
-      });
+    function playChannel(url, name) {
+      player.src({ type: 'application/x-mpegURL', src: url });
+      player.play();
+      document.getElementById('current-channel').textContent = 'ขณะนี้รับชมช่อง: ' + name;
     }
 
     function toggleTheme() {
-      document.body.classList.toggle('light');
+      document.body.classList.toggle('light-theme');
     }
-
-    // เปิดด้วยช่อง 3 HD
-    playChannel('3 HD', 'https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8');
   </script>
 </body>
 </html>
