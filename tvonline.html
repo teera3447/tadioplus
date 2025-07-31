@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tadio+ ดูทีวีออนไลน์</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Video.js CSS -->
-  <link href="https://unpkg.com/video.js@8.3.0/dist/video-js.min.css" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Kanit', sans-serif;
       background-color: #121212;
       color: white;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
+      transition: background-color 0.3s, color 0.3s;
     }
-
+    .light-theme {
+      background-color: #fff;
+      color: black;
+    }
     #top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
+      background: inherit;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-
-    .theme-toggle,
-    #home-link {
+    .theme-toggle, #home-link {
       background: #444;
       color: white;
       border: none;
@@ -40,42 +35,30 @@
       cursor: pointer;
       font-family: 'Kanit', sans-serif;
       text-decoration: none;
-      font-size: 16px;
+      transition: background 0.3s, color 0.3s;
     }
-
+    .light-theme .theme-toggle, .light-theme #home-link {
+      background: #ccc;
+      color: black;
+    }
     .site-title-centered {
       font-size: 24px;
       font-weight: bold;
       text-align: center;
       color: white;
     }
-
     .site-title-centered .subtitle {
       font-style: italic;
       font-weight: normal;
       margin-left: 6px;
       color: #ccc;
     }
-
-    .light-theme {
-      background-color: #fff;
-      color: black;
-    }
-
     .light-theme .site-title-centered {
       color: black;
     }
-
     .light-theme .site-title-centered .subtitle {
       color: #666;
     }
-
-    .light-theme .theme-toggle,
-    .light-theme #home-link {
-      background: #ccc;
-      color: black;
-    }
-
     #container {
       display: flex;
       justify-content: center;
@@ -84,51 +67,39 @@
       padding: 30px 40px;
       flex-wrap: nowrap;
     }
-
     .player-wrapper {
       max-width: 800px;
       flex: 1 1 500px;
     }
-
-    .video-js {
+    #tvPlayer {
       width: 100%;
-      aspect-ratio: 16/9;
-      height: auto;
+      aspect-ratio: 16 / 9;
+      background: black;
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
-
-    /* แก้แสดงปุ่มไม่ครบ */
-    .video-js .vjs-control-bar {
-      display: flex !important;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    #quality-wrapper {
+      margin-top: 8px;
+      font-size: 0.9rem;
     }
-
-    .video-js .vjs-progress-control {
-      flex: 1 1 100%;
-      order: 2;
-      margin-top: 4px;
+    #quality-selector {
+      background: #444;
+      color: white;
+      border-radius: 6px;
+      border: none;
+      padding: 4px 8px;
+      font-family: 'Kanit', sans-serif;
+      cursor: pointer;
     }
-
-    .video-js .vjs-volume-panel,
-    .video-js .vjs-play-control,
-    .video-js .vjs-fullscreen-control,
-    .video-js .vjs-playback-rate,
-    .video-js .vjs-remaining-time,
-    .video-js .vjs-picture-in-picture-control,
-    .video-js .vjs-current-time,
-    .video-js .vjs-duration,
-    .video-js .vjs-time-divider {
-      order: 1;
+    .light-theme #quality-selector {
+      background: #eee;
+      color: black;
     }
-
     #current-channel {
       margin-top: 20px;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: bold;
     }
-
     .channel-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -138,7 +109,6 @@
       padding: 10px;
       width: 300px;
     }
-
     .channel-logo {
       width: 100%;
       max-width: 100px;
@@ -148,63 +118,52 @@
       border: 2px solid transparent;
       transition: transform 0.2s, border-color 0.2s;
     }
-
     .channel-logo:hover {
       transform: scale(1.1);
       border-color: #f0c419;
     }
-
     .light-theme .channel-logo:hover {
       border-color: orange;
     }
-
+    /* Scrollbar */
     .channel-container::-webkit-scrollbar {
       width: 8px;
     }
-
     .channel-container::-webkit-scrollbar-thumb {
       background-color: rgba(255,255,255,0.3);
       border-radius: 4px;
     }
-
     @media (max-width: 768px) {
+      #top-bar {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+      }
+      .site-title-centered {
+        display: none;
+      }
       #container {
         flex-direction: column;
         padding: 10px;
-        gap: 20px;
-        align-items: center;
       }
-
       .player-wrapper {
         width: 100%;
         max-width: 100%;
       }
-
       .channel-container {
-        grid-template-columns: repeat(3, 1fr);
-        width: 100%;
+        grid-template-columns: repeat(4, 1fr);
         max-height: none;
-        padding: 10px 5px;
+        width: 100%;
+        gap: 10px;
       }
-
       .channel-logo {
         width: 100%;
-        max-width: 80px;
+        max-width: 100%;
+        aspect-ratio: 1;
       }
-
       #current-channel {
         text-align: center;
-        font-size: 1rem;
-      }
-
-      .site-title-centered {
-        font-size: 18px;
-      }
-
-      .theme-toggle,
-      #home-link {
-        padding: 6px 10px;
-        font-size: 14px;
+        margin-top: 10px;
       }
     }
   </style>
@@ -218,60 +177,197 @@
 
   <div id="container">
     <div class="player-wrapper">
-      <video
-        id="tvPlayer"
-        class="video-js vjs-default-skin"
-        controls
-        preload="auto"
-        playsinline
-        controlsList="nodownload"
-      >
-        <source src="" type="application/x-mpegURL" />
-      </video>
+      <video id="tvPlayer" controls playsinline></video>
+      <div id="quality-wrapper" style="display:none;">
+        <label for="quality-selector">ความละเอียด:</label>
+        <select id="quality-selector" onchange="selectQuality()">
+          <option value="-1">อัตโนมัติ</option>
+        </select>
+      </div>
       <div id="current-channel">กรุณาเลือกช่องที่ต้องการรับชม</div>
     </div>
 
-    <div class="channel-container">
-      <!-- วางโลโก้ช่องตรงนี้ (เหมือนที่คุณใส่มา) -->
-      <!-- ตัวอย่าง -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannel('https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8', '3 HD')" />
-      <!-- เพิ่มช่องอื่นตามเดิม -->
+    <div class="channel-container" aria-label="รายการช่องทีวี">
+      <!-- เรียงตามหมายเลขช่องดิจิทัลทีวี -->
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3GxZIIGdYtJC-yOefCF8MEAq8bl_oezZ5O3NvfeVBgKzTLrW2adMszXD1&s=10" alt="ALTV4" class="channel-logo" onclick="playChannelByIndex(0)" />
+      <img src="https://media-mvtv-app.imgix.net/uploads/channel/116_y_wetQDATmEJofzrj8pF0CHM6W9LNPcbRn.png" alt="Thai PBS" class="channel-logo" onclick="playChannelByIndex(1)" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Ch3HDLogo.png" alt="3 HD" class="channel-logo" onclick="playChannelByIndex(2)" />
+      <img src="https://media-mvtv-app.imgix.net/uploads/channel/118_y_GimRnJkEqLtCh2rUueBlFa9oDpNKsvSc.png" alt="5 HD" class="channel-logo" onclick="playChannelByIndex(3)" />
+      <img src="https://media-mvtv-app.imgix.net/uploads/channel/134_y_lPVyKhindFZtxqa3DRp8XN2j5QoGfkeL.png" alt="7 HD" class="channel-logo" onclick="playChannelByIndex(4)" />
+      <img src="https://images.seeklogo.com/logo-png/39/1/mono-29-logo-png_seeklogo-396777.png" alt="MONO29" class="channel-logo" onclick="playChannelByIndex(13)" />
+      <img src="https://yt3.googleusercontent.com/eVWxVmPdae_lqdfo2uhs189fOyxhOWwj2tdM3JrYnLLszKRBpFCTJrvPjT8sNq5FgjVPZq60Ig=s900-c-k-c0x00ffffff-no-rj" alt="CH8" class="channel-logo" onclick="playChannelByIndex(6)" />
+      <img src="https://media-mvtv-app.imgix.net/uploads/channel/129_y_QM4D2CX1RUHmVaWJcYIKqZowPEjubinT.png" alt="MCOT" class="channel-logo" onclick="playChannelByIndex(5)" />
+      <img src="https://ais-s.ais-vidnt.com/ais/play/origin/LIVE//channelicon/0001.png" alt="NBT" class="channel-logo" onclick="playChannelByIndex(7)" />
+      <img src="https://media-mvtv.imgix.net/channel/120_y_VSgE7P9GiDCxrhFWUALYpvzfM12cdqmH.png" alt="TPTV" class="channel-logo" onclick="playChannelByIndex(8)" />
+      <img src="https://media-mvtv.imgix.net/channel/121_y_uQNBde5zrpo4TKm9kOZPx6iRbGaACfFE.png" alt="TNN16" class="channel-logo" onclick="playChannelByIndex(9)" />
+      <img src="https://media-mvtv.imgix.net/channel/122_y_bzfht4O5uRNHylcq1D6nV9TvxmdXWaQP.png" alt="JKN18" class="channel-logo" onclick="playChannelByIndex(10)" />
+      <img src="https://media-mvtv.imgix.net/channel/123_y_3vyW276UFjIStew9DHJNs8AGKfdmZXpu.png" alt="Nation" class="channel-logo" onclick="playChannelByIndex(11)" />
+      <img src="https://img5.pic.in.th/file/secure-sv1/504665904_738005108575770_3554036735559312193_n.jpg" alt="MONO29" class="channel-logo" onclick="playChannelByIndex(12)" />
+      <img src="https://media-mvtv.imgix.net/channel/126_y_6PH49bDqlg1aSxGoNUdT83R5Jkeyf2mB.png" alt="GMM25" class="channel-logo" onclick="playChannelByIndex(14)" />
+      <img src="https://media-mvtv.imgix.net/channel/130_y_3Lx4j6ZzpIidKPqChaF2QRYeWorw79Jv.png" alt="One31" class="channel-logo" onclick="playChannelByIndex(15)" />
+      <img src="https://media-mvtv.imgix.net/channel/131_y_iJmHlFadZ0G8EhIYMw2A3OfbN1Qpzgou.png" alt="Thairath TV" class="channel-logo" onclick="playChannelByIndex(16)" />
+      <img src="https://media-mvtv.imgix.net/channel/133_y_kLIyaJt3VoGD8sqrHnhKPjZUQ0RE6mu4.png" alt="Amarin TV" class="channel-logo" onclick="playChannelByIndex(17)" />
+      <img src="https://media-mvtv.imgix.net/channel/135_y_7hl4KHdwBqS0VGNCskrDLyci538zY2Qx.png" alt="PPTV" class="channel-logo" onclick="playChannelByIndex(18)" />
+      <img src="https://media-mvtv.imgix.net/channel/124_y_1PI2djLbMJpXO0n5oywKiNDzsWfTuFg4.png" alt="Workpoint" class="channel-logo" onclick="playChannelByIndex(19)" />
+      <img src="https://media-mvtv.imgix.net/channel/125_y_vQwogyPUC1FsRhK9TmzSWqb8YI6aktcM.png" alt="True4U" class="channel-logo" onclick="playChannelByIndex(20)" />
     </div>
   </div>
 
-  <!-- Video.js JS -->
-  <script src="https://unpkg.com/video.js@8.3.0/dist/video.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
-    const player = videojs('tvPlayer', {
-      controls: true,
-      fluid: false,
-      controlBar: {
-        pictureInPictureToggle: true,
-        volumePanel: { inline: false },
-        currentTimeDisplay: true,
-        timeDivider: true,
-        durationDisplay: true,
-        remainingTimeDisplay: true,
-        progressControl: true,
-        playbackRateMenuButton: true,
-        fullscreenToggle: true
+    // ตัวอย่าง URL stream HLS (m3u8) จริง (กรุณาแทนที่ด้วย URL ของช่องที่คุณใช้)
+    const channels = [
+      {
+        name: "ALTV4",
+        url: "https://thaipbs-ujxrch.cdn.byteark.com/live/playlist.m3u8"
       },
-      playbackRates: [0.5, 1, 1.25, 1.5, 2],
-      html5: {
-        vhs: { overrideNative: true }
+      {
+        name: "Thai PBS",
+        url: "https://thaipbs-mcx0wm.cdn.byteark.com/live/playlist.m3u8"
+      },
+      {
+        name: "3 HD",
+        url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8?"
+      },
+      {
+        name: "5 HD",
+        url: "https://bitdash-a.akamaihd.net/content/mi/bbb-uhd/playlist.m3u8"
+      },
+      {
+        name: "7 HD",
+        url: "https://live-cdn-hwc.ch7.com/livech7hd/HD.m3u8"
+      },
+      {
+        name: "MCOT",
+        url: "https://lb1-live-mv.v2h-cdn.com/hls/ffbb/mcot/mcot.m3u8"
+      },
+      {
+        name: "CH8",
+        url: "https://mojimod.lv.loca.lt/ch8.m3u8"
+      },
+      {
+        name: "NBT",
+        url: "https://prsmedia-mykojh.cdn.byteark.com/fleetstream/live/index.m3u8"
+      },
+      {
+        name: "TPTV",
+        url: "https://tv-live.tpchannel.org/live/tv.m3u8"
+      },
+      {
+        name: "TNN16",
+        url: "https://live-us1.thaimomo.com/live-as/chtnn24-2/playlist.m3u8live&x_ark_signature=hyDjPCwjpEFaawzA4E57dg"
+      },
+      {
+        name: "JKN18",
+        url: "https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8"
+      },
+      {
+        name: "Nation",
+        url: "https://nationtv-1jdcjo.cdn.byteark.com/fleetstream/nationtvlive/index.m3u8"
+      },
+      {
+        name: "MONO29",
+        url: "https://monomax-uiripn.cdn.byteark.com/plain/th/playlist.m3u8"
+      },
+      {
+        name: "MONO29-alt",
+        url: "https://monomax-uiripn.cdn.byteark.com/plain/st/playlist.m3u8"
+      },
+      {
+        name: "GMM25",
+        url: "https://bcovlive-a.akamaihd.net/57d4bf695e80436d9335f4f50adbe438/ap-southeast-1/6415628290001/7e85dc4a59904e45b4fdffebd62e1d82/playlist_ssaiM.m3u8?givn=AQzzBGQE1XdBWtR8AjE2iACqTxVxy7cTrckdczIzE2dlv7KkzkSYOrYPlWnYnjlcq-ZgcJdNZykel7VgbNG4EchWtsnRIJ_ykS1e-Q5upZGRzHwILk46BCd_9fHstZ85I5FnteALmyJaevgehxcPdTITBzxVtKdMDW7EHJu9PbTyQPgFwSVSdLU9UDiISozBlCztMGJ5sWaH2FqNO3lBpdpl_4N8al3JiyfvonIz5lyOWoPbuoyEA51_7dkc56cm3c_hx-sJGlpuo0vAIhKQyxIfygZOIBlgBSyKQ3h2yKYlvbVNDGCp2cISpckowxCyJurYjBtjUZUqoVTNCgPxFA-iJkwg_1cbAR-EVXcqSmCYK57uT17B6X8Hi4o3EH7e19jMFbUO6ZVKgs5uSjObGgk6MAa4E9x_qWiTPazC2NOAsFxfY2gyYcecWliYNADXqpFWYnP5qojSm1npKTkG4C5ABZIBRawgK8oMm974Sk_AHACYEw4eR4SnhkdPq_59tngxZgzfkjOvROU_VYHYi7qcChCCJ4z9gYREv8HmxGL4J4RELoykrBqfoYG8UALI24AMZrIdca5woZw8Y240TrXbtsFolp2ALyJieEthqqPB5auMj3R4Mpq--3zoSrudMVi-44WX3lPewBv0ze7xPDXv9fpU_8cp1zltgmZXDXVsR5YkOeW9zPUGKGMGHH5aQ4OFdis-eaWzFQwV_FvHAViezbhgwZUG5DuqiHmnMJsBonEW-qGIfhnaes5FUeJOkCIfUyMfVfAqyAuZvplmQMAty-B5yXnilOB-g8iyOfgTpcZ1_PXsldDlXgE2Pw0dw35c3jvL5ef8E20.
+      },
+      {
+        name: "One31",
+        url: "https://bcovlive-a.akamaihd.net/b6603a14ea59440a95e9235e14bc9332/ap-southeast-1/6415628290001/9c3d7fc7d10840a69e48b5939ae886e0/playlist_ssaiM.m3u8?givn=AQzzBGQEMt5WO0n5I4VV-FpgtKlZTheXJ0_UNs97Q1jm6GV7GbVaJg874LphU0EPXkGHfwLNsHdgYPPYcwn3TE3kOoH6F0fEOHiUcHd0jNhZdUt8QaT3e0lEzCExBiVz4E8ICEICqxPsq5MeQxS5NnUoSIWHRf-tIv0damIAVBAJA30Vi1wQCJ7VGSK8C4gIC99S8z0vdSgSW35Fga_xEmPGpOR10qdYvheFOj2_CowdvuwTnP5Xqdwz-GJtWA4aIjTh2NcYdB0MuvdqSQwtAg3VOZZyDSXKu4_ndJ4jawBOhlzk4mLQIbqnt8icx-B7TxTNaGBxzuG_SPdW09542pTJohc7gokSt7rzGioh0ErTFvtrNYnJlOdpkEorSC3KO-wrabmgCMZ5kuxVfVoRjKv_JIZAObu3TzEuJHbmIREph_4sqzvxd1XXM3xXgc-FYqFyC7Ug7nLIN4wh8oy--8e128GFZAC9BSbMIMPJuwlIUNMZBf-XvInwAQ_4353X8ODmOti1l6ulLWXxtdVQ-abVLqvyEHkCM4eMTIq5Bmk_ix5f3MVqQDW5N1Rm5BZl02QC1PKvk7N5vB79lmRpb8gH8dw1KO77JfRmMlsaPcJoal1_4wAYVZtLM4DuHJDuwMZ72DJ4FG9JYMTcVqIfGbk9Gd3KVFaxjD910v-BnUeZetLYxWN4Wx43G62d4j1KFehQWaDg_H6dQFXLZBSW27gPBP6oBEXDxU4FTBkmhe7TSOSyQM3cV06fyPVt9ztBqbHv6ufwGxS4xsKM8YEYrIiOlNhiKZ3EjgJf0Bs8cgtZuSqsMntRXk3YgATB3cPy"
+      },
+      {
+        name: "Thairath TV",
+        url: "https://lb1-live-mv.v2h-cdn.com/hls/ffaf/thairath/thairath.m3u8"
+      },
+      {
+        name: "Amarin TV",
+        url: "https://live-us1.thaimomo.com/live-as/chamarin-2/playlist.m3u8"
+      },
+      {
+        name: "PPTV",
+        url: "https://lb1-live-mv.v2h-cdn.com/hls/ffab/pptv/pptv.m3u8"
+      },
+      {
+        name: "Workpoint",
+        url: "https://global-media.sooplive.com/live/workpoint/master.m3u8"
+      },
+      {
+        name: "True4U",
+        url: "https://lb1-live-mv.v2h-cdn.com/hls/ffca/true24/true24.m3u8"
       }
-    });
+    ];
 
-    function playChannel(url, name) {
-      player.src({ src: url, type: 'application/x-mpegURL' });
-      player.play();
-      document.getElementById('current-channel').textContent = 'ขณะนี้รับชมช่อง: ' + name;
+    const video = document.getElementById("tvPlayer");
+    const qualitySelector = document.getElementById("quality-selector");
+    const qualityWrapper = document.getElementById("quality-wrapper");
+    const currentChannel = document.getElementById("current-channel");
+
+    let hls = null;
+    let currentChannelIndex = 2; // เริ่มที่ 3 HD ตามคำขอ
+
+    function playChannelByIndex(index) {
+      currentChannelIndex = index;
+      playChannel(channels[index]);
+    }
+
+    function playChannel(channel) {
+      const { url, name } = channel;
+      currentChannel.textContent = `ขณะนี้: ${name}`;
+
+      if (hls) {
+        hls.destroy();
+        hls = null;
+      }
+      qualityWrapper.style.display = "none";
+      qualitySelector.innerHTML = '<option value="-1">อัตโนมัติ</option>';
+
+      if (Hls.isSupported()) {
+        hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+          if (data.levels.length > 1) {
+            qualityWrapper.style.display = "block";
+            qualitySelector.innerHTML = '<option value="-1">อัตโนมัติ</option>';
+            data.levels.forEach((level, idx) => {
+              const label = level.height
+                ? `${level.height}p (${Math.round(level.bitrate / 1000)} kbps)`
+                : `${Math.round(level.bitrate / 1000)} kbps`;
+              qualitySelector.innerHTML += `<option value="${idx}">${label}</option>`;
+            });
+          }
+          video.play();
+        });
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = url;
+        video.addEventListener("loadedmetadata", () => {
+          video.play();
+        });
+      } else {
+        alert("เบราว์เซอร์ของคุณไม่รองรับการเล่น HLS");
+      }
+    }
+
+    function selectQuality() {
+      if (!hls) return;
+      const level = parseInt(qualitySelector.value);
+      hls.currentLevel = level;
     }
 
     function toggleTheme() {
-      document.body.classList.toggle('light-theme');
+      document.body.classList.toggle("light-theme");
     }
+
+    // เริ่มเล่นช่อง 3 HD ตอนโหลดเสร็จ
+    window.addEventListener("load", () => {
+      playChannelByIndex(currentChannelIndex);
+    });
   </script>
 </body>
 </html>
