@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -9,9 +8,14 @@
   <style>
     body { font-family: 'Kanit', sans-serif; background:#121212; color:white; margin:0; }
     .light-theme { background:#fff; color:black; }
-    #top-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; }
-    .theme-toggle,#home-link{background:#444;color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;text-decoration:none;}
-    .light-theme .theme-toggle,.light-theme #home-link{background:#ccc;color:black;}
+    #top-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; gap:10px; }
+    .theme-toggle,#home-link,.search-toggle{background:#444;color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;text-decoration:none;}
+    .light-theme .theme-toggle,.light-theme #home-link,.light-theme .search-toggle{background:#ccc;color:black;}
+
+    /* โลโก้ */
+    .logo-main { font-size: 1.5rem; font-weight: bold; }
+    .logo-sub { font-size: 1rem; font-style: italic; opacity: 0.85; }
+
     #container { display:flex; gap:40px; padding:30px 40px; align-items:flex-start; }
     .player-wrapper { max-width:800px; flex:1 1 500px; }
     #tvPlayer { width:100%; aspect-ratio:16/9; background:black; border-radius:10px; }
@@ -19,22 +23,60 @@
     .channel-container { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-height:600px; overflow-y:auto; width:300px; }
     .channel-button { padding:10px; border-radius:8px; background:#333; color:white; text-align:center; cursor:pointer; transition:0.2s; font-size:14px; }
     .channel-button:hover { background:#f0c419; color:black; }
+
+    .select-wrapper { display: flex; gap: 10px; margin-top: 10px; }
+    .audio-select, .quality-select { padding: 6px 10px; border-radius: 4px; font-size: 1rem; border: 1px solid #444; background: #333; color: white; }
+    .light-theme .audio-select, .light-theme .quality-select { border-color: #ccc; background: #fff; color: black; }
+
+    /* กล่องค้นหา */
+    #search-box {
+      display:none;
+      padding:6px 10px;
+      border-radius:8px;
+      border:1px solid #666;
+      font-size:1rem;
+      background:#222;
+      color:white;
+    }
+    .light-theme #search-box {
+      background:#fff;
+      color:black;
+      border-color:#ccc;
+    }
+
+    /* Mobile */
     @media(max-width:768px){
       #container{flex-direction:column; padding:10px;}
       .channel-container{grid-template-columns:repeat(4,1fr); width:100%; gap:10px;}
       .channel-button{font-size:12px; padding:8px;}
       #current-channel{text-align:center;margin-top:10px;}
+
+      .site-title-centered {
+        flex: 1;
+        text-align: center;
+        font-size: 1.2rem;
+      }
+      #home-link, .theme-toggle, .search-toggle {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+      }
+      #search-box{ width:100%; margin-top:6px; }
     }
-    .select-wrapper { display: flex; gap: 10px; margin-top: 10px; }
-    .audio-select, .quality-select { padding: 6px 10px; border-radius: 4px; font-size: 1rem; border: 1px solid #444; background: #333; color: white; }
-    .light-theme .audio-select, .light-theme .quality-select { border-color: #ccc; background: #fff; color: black; }
   </style>
 </head>
 <body>
   <div id="top-bar">
     <a href="#" id="home-link">← กลับสู่หน้าหลัก</a>
-    <div class="site-title-centered">Tadio+ <span class="subtitle">ดูทีวีออนไลน์</span></div>
-    <button class="theme-toggle" onclick="toggleTheme()">🌗 เปลี่ยนธีม</button>
+    <div class="site-title-centered">
+      <strong class="logo-main">Tadio+</strong> <em class="logo-sub">ดูทีวีออนไลน์</em>
+    </div>
+    <div style="display:flex; gap:6px; align-items:center;">
+      <button class="theme-toggle" onclick="toggleTheme()">🌗</button>
+      <button class="search-toggle" onclick="toggleSearch()">🔍</button>
+    </div>
+  </div>
+  <div style="text-align:right; padding:0 20px;">
+    <input type="text" id="search-box" placeholder="ค้นหาช่องทีวี...">
   </div>
 
   <div id="container">
@@ -51,55 +93,21 @@
 
   <script id="iptv-data" type="application/json">
 [
-  {"name":"NBT","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffe/jvlbgvhf/jvlbgvhf.m3u8"},
-  {"name":"TPBS","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffd/muruugvl/muruugvl.m3u8"},
-  {"name":"ALTV","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffc/gvcvmuu/gvcvmuu.m3u8"},
-  {"name":"5HD","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffb/muushk/muushk.m3u8"},
-  {"name":"Boomerang","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffa/boomerang/boomerang.m3u8"},
-  {"name":"T SPORT","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffef/mulxvnghf/mulxvnghf.m3u8"},
-  {"name":"TPTV","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffec/murumuu/murumuu.m3u8"},
-  {"name":"TNN","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffdc/mugvhogvho/mugvhogvho.m3u8"},
-  {"name":"JKN18","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffda/jkn18/jkn18.m3u8"},
-  {"name":"ไทบ้านทีวี","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffcd/thaibaan/thaibaan.m3u8"},
-  {"name":"Nation","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffcc/goyjo/goyjo.m3u8"},
-  {"name":"Workpoint","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffcb/gbinrvp/gbinrvp.m3u8"},
-  {"name":"True24","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffca/mifainp/mifainp.m3u8"},
-  {"name":"GMM25","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbf/ugvhgvh/ugvhgvh.m3u8"},
-  {"name":"ช่อง 8","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbe/jvcxf/jvcxf.m3u8"},
-  {"name":"Boom Cartoon","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbd/boomanime/boomanime.m3u8"},
-  {"name":"MONO 29 (TH)","url":"https://monomax-uiripn.cdn.byteark.com/plain/th/playlist.m3u8"},
-  {"name":"MONO 29 (ST)","url":"https://monomax-uiripn.cdn.byteark.com/plain/st/playlist.m3u8"},
-  {"name":"MCOT","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbb/gdhk/gdhk.m3u8"},
-  {"name":"ONE","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffba/yogvfi/yogvfi.m3u8"},
-  {"name":"Thairath","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffaf/wmpiy/wmpiy.m3u8"},
-  {"name":"3HD","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffae/muulk/muulk.m3u8"},
-  {"name":"Amarin","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffad/vibomi/vibomi.m3u8"},
-  {"name":"7HD","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffac/gohg/gohg.m3u8"},
-  {"name":"PPTV","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffab/rurumuu/rurumuu.m3u8"},
-  {"name":"MVLAO","url":"https://lb1-live-mv.v2h-cdn.com/hls/ffaa/mvlao/mvlao.m3u8"},
-  {"name":"MVM","url":"https://lb1-live-mv.v2h-cdn.com/hls/feff/mvm/mvm.m3u8"},
-  {"name":"France 24","url":"https://lb1-live-mv.v2h-cdn.com/hls/fecd/france24/france24.m3u8"},
-  {"name":"CNA","url":"https://d2e1asnsl7br7b.cloudfront.net/4e4e0baa3d7b4c129b4f5655219e083d/index.m3u8"},
-  {"name":"NHK WORLD","url":"https://nhkworld-tv.akamaized.net/hls/live/2115640/nhkworld-tv/index_1M.m3u8"},
-  {"name":"CCTV4","url":"https://lb1-live-mv.v2h-cdn.com/hls/fefb/cctv4/cctv4.m3u8"},
-  {"name":"DLTV1","url":"https://cdn-live.dltv.ac.th/dltv01.m3u8"},
-  {"name":"DLTV2","url":"https://cdn-live.dltv.ac.th/dltv02.m3u8"},
-  {"name":"DLTV3","url":"https://cdn-live.dltv.ac.th/dltv03.m3u8"},
-  {"name":"DLTV4","url":"https://cdn-live.dltv.ac.th/dltv04.m3u8"},
-  {"name":"DLTV5","url":"https://cdn-live.dltv.ac.th/dltv05.m3u8"},
-  {"name":"DLTV6","url":"https://cdn-live.dltv.ac.th/dltv06.m3u8"},
-  {"name":"DLTV7","url":"https://cdn-live.dltv.ac.th/dltv07.m3u8"},
-  {"name":"DLTV8","url":"https://cdn-live.dltv.ac.th/dltv08.m3u8"},
-  {"name":"DLTV9","url":"https://cdn-live.dltv.ac.th/dltv09.m3u8"},
-  {"name":"DLTV10","url":"https://cdn-live.dltv.ac.th/dltv10.m3u8"},
-  {"name":"DLTV11","url":"https://cdn-live.dltv.ac.th/dltv11.m3u8"},
-  {"name":"DLTV12","url":"https://cdn-live.dltv.ac.th/dltv12.m3u8"},
-  {"name":"DLTV13","url":"https://cdn-live.dltv.ac.th/dltv13.m3u8"},
-  {"name":"DLTV14","url":"https://cdn-live.dltv.ac.th/dltv14.m3u8"},
-  {"name":"DLTV15","url":"https://cdn-live.dltv.ac.th/dltv15.m3u8"},
-  {"name":"Police TV","url":"https://cdn-th-vip.livestreaming.in.th/policetv/policetv/playlist.m3u8"},
-  {"name":"TV Muslim","url":"https://vdo.plathong.net/tvmuslim/tvmuslim/playlist.m3u8"},
-  {"name":"บุญนิยมทีวี","url":"https://live.x2.co.th/live/bntv_480p/index.m3u8"}
+ {"name":"NBT","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffe/jvlbgvhf/jvlbgvhf.m3u8"},
+ {"name":"TPBS","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffd/muruugvl/muruugvl.m3u8"},
+ {"name":"ALTV","url":"https://lb1-live-mv.v2h-cdn.com/hls/fffc/gvcvmuu/gvcvmuu.m3u8"},
+ {"name":"Channel 3","url":"https://cdn6.goprimetime.info/feed/ch3hd/index.m3u8"},
+ {"name":"Amarin TV","url":"https://cdn6.goprimetime.info/feed/amarin/index.m3u8"},
+ {"name":"Workpoint","url":"https://cdn6.goprimetime.info/feed/workpoint/index.m3u8"},
+ {"name":"Thairath TV","url":"https://cdn6.goprimetime.info/feed/thairath/index.m3u8"},
+ {"name":"ONE 31","url":"https://cdn6.goprimetime.info/feed/onehd/index.m3u8"},
+ {"name":"Nation TV","url":"https://cdn6.goprimetime.info/feed/nation/index.m3u8"},
+ {"name":"TNN 16","url":"https://cdn6.goprimetime.info/feed/tnn/index.m3u8"},
+ {"name":"PPTV HD","url":"https://cdn6.goprimetime.info/feed/pptv/index.m3u8"},
+ {"name":"True4U","url":"https://cdn6.goprimetime.info/feed/true4u/index.m3u8"},
+ {"name":"GMM 25","url":"https://cdn6.goprimetime.info/feed/gmm25/index.m3u8"},
+ {"name":"MONO 29 (TH)","url":"https://cdn6.goprimetime.info/feed/mono29/index.m3u8"},
+ {"name":"MONO 29 (ST)","url":"https://cdn6.goprimetime.info/feed/mono29st/index.m3u8"}
 ]
   </script>
 
@@ -108,7 +116,7 @@
     const data = JSON.parse(document.getElementById('iptv-data').textContent);
     let hls;
 
-    function renderChannels() {
+    function renderChannels(filter="") {
       const container = document.querySelector('.channel-container');
       container.innerHTML = '';
       const grouped = {};
@@ -118,6 +126,7 @@
         grouped[baseName].push(ch);
       });
       Object.keys(grouped).forEach(name => {
+        if(filter && !name.toLowerCase().includes(filter.toLowerCase())) return;
         const btn = document.createElement('div');
         btn.className = 'channel-button';
         btn.textContent = name;
@@ -137,10 +146,9 @@
 
       let url = list[0].url;
 
-      // Handle MONO 29 audio selection
       if (name === 'MONO 29') {
         audioSelect.style.display = 'block';
-        audioSelect.innerHTML = list.map(c => `<option value="${c.url}">${c.name.split(' ')[2] === '(ST)' ? 'Soundtrack' : 'Thai'}</option>`).join('');
+        audioSelect.innerHTML = list.map(c => `<option value="${c.url}">${c.name.includes('(ST)') ? 'Soundtrack' : 'Thai'}</option>`).join('');
         audioSelect.onchange = (e) => loadStream(e.target.value);
         url = audioSelect.value;
       }
@@ -157,10 +165,7 @@
           hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
             const levels = data.levels.map((level, i) => {
               if (level.height) {
-                return {
-                  label: `${level.height}p`,
-                  index: i
-                };
+                return { label: `${level.height}p`, index: i };
               }
               return null;
             }).filter(Boolean);
@@ -187,8 +192,17 @@
     }
 
     function toggleTheme(){ document.body.classList.toggle('light-theme'); }
+    function toggleSearch(){
+      const box=document.getElementById('search-box');
+      box.style.display=box.style.display==='none'?'inline-block':'none';
+      if(box.style.display!=='none'){ box.focus(); }
+    }
+
+    document.getElementById('search-box').addEventListener('input', (e)=>{
+      renderChannels(e.target.value);
+    });
+
     renderChannels();
   </script>
 </body>
 </html>
-
