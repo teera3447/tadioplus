@@ -1,70 +1,124 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าหลัก - Tadio+ ดูทีวีและวิทยุออนไลน์</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หน้าหลัก - Tadio+ ดูทีวีและวิทยุออนไลน์</title>
 
-        body {
-            font-family: 'Kanit', sans-serif; /* ใช้ฟอนต์ Kanit */
-            margin: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333; /* เปลี่ยนสีข้อความเป็นสีดำเพื่อให้เข้ากับสไตล์มินิมอล */
-        }
-        .container {
-            background-color: #fff;
-            padding: 40px; /* เพิ่ม padding เพื่อให้ดูโปร่งขึ้น */
-            border-radius: 10px; /* เพิ่มความโค้งมนเล็กน้อย */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* ลดความเข้มของเงา */
-            text-align: center;
-        }
-        .logo-container {
-            margin-bottom: 30px; /* เพิ่มระยะห่างจากโลโก้มากขึ้น */
-        }
-        .logo {
-            max-width: 150px; /* ลดขนาดโลโก้ให้ดูมินิมอล */
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        h1 {
-            margin-bottom: 25px;
-            font-size: 2em; /* ปรับขนาดหัวข้อ */
-            font-weight: 400; /* กำหนดความหนาของฟอนต์ */
-        }
-        .menu-button {
-            display: block;
-            width: 180px; /* ลดขนาดปุ่ม */
-            padding: 12px; /* ลด padding ปุ่ม */
-            margin: 8px auto; /* ปรับ margin ปุ่ม */
-            text-align: center;
-            text-decoration: none;
-            color: #333; /* เปลี่ยนสีข้อความปุ่มเป็นสีดำ */
-            background-color: #eee; /* เปลี่ยนสีพื้นหลังปุ่มเป็นสีเทาอ่อน */
-            border-radius: 8px; /* เพิ่มความโค้งมนให้ปุ่ม */
-            transition: background-color 0.3s ease;
-            border: 1px solid #ddd; /* เพิ่มเส้นขอบบางๆ */
-        }
-        .menu-button:hover {
-            background-color: #ddd; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
-        }
-    </style>
+  <!-- Manifest Inline -->
+  <link rel="manifest" id="manifestLink">
+  <meta name="theme-color" content="#f4f4f4">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
+
+    body {
+      font-family: 'Kanit', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .logo-container { margin-bottom: 30px; }
+    .logo { max-width: 150px; display: block; margin: 0 auto; }
+    h1 { margin-bottom: 25px; font-size: 2em; font-weight: 400; }
+    .menu-button {
+      display: block; width: 180px; padding: 12px; margin: 8px auto;
+      text-align: center; text-decoration: none; color: #333;
+      background-color: #eee; border-radius: 8px; transition: background-color 0.3s;
+      border: 1px solid #ddd;
+    }
+    .menu-button:hover { background-color: #ddd; }
+
+    .theme-toggle {
+      position: absolute; top: 15px; right: 15px; border: none;
+      background: none; font-size: 26px; cursor: pointer; transition: transform 0.3s;
+    }
+    .theme-toggle:hover { transform: rotate(20deg); }
+
+    body.dark { background-color: #121212; color: #f4f4f4; }
+    body.dark .container { background-color: #1e1e1e; color: #f4f4f4; }
+    body.dark .menu-button { background-color: #333; color: #f4f4f4; border: 1px solid #555; }
+    body.dark .menu-button:hover { background-color: #444; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo-container">
-            <img src="https://img2.pic.in.th/pic/1000021059.png" alt="โลโก้ Tadio+" class="logo">
-        </div>
-        <h1>เลือกรับชม/รับฟัง</h1>
-        <a href="tvonline.html" class="menu-button">ทีวีออนไลน์</a>
-        <a href="radio.html" class="menu-button">วิทยุออนไลน์</a>
+  <button class="theme-toggle" onclick="toggleTheme()">🌞</button>
+
+  <div class="container">
+    <div class="logo-container">
+      <img src="https://img2.pic.in.th/pic/1000021059.png" alt="โลโก้ Tadio+" class="logo">
     </div>
+    <h1>เลือกรับชม/รับฟัง</h1>
+    <a href="tvonline.html" class="menu-button">ทีวีออนไลน์</a>
+    <a href="radio.html" class="menu-button">วิทยุออนไลน์</a>
+  </div>
+
+  <script>
+    // Theme toggle
+    const body = document.body;
+    const themeToggle = document.querySelector('.theme-toggle');
+
+    function setTheme(theme){
+      if(theme==='dark'){
+        body.classList.add('dark');
+        themeToggle.textContent='🌙';
+      }else{
+        body.classList.remove('dark');
+        themeToggle.textContent='🌞';
+      }
+      localStorage.setItem('theme', theme);
+    }
+
+    function toggleTheme(){
+      setTheme(body.classList.contains('dark')?'light':'dark');
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+
+    // Inline manifest
+    const manifest = {
+      "name": "Tadio+ ดูทีวีและวิทยุออนไลน์",
+      "short_name": "Tadio+",
+      "start_url": "./index.html",
+      "display": "standalone",
+      "background_color": "#f4f4f4",
+      "theme_color": "#f4f4f4",
+      "icons": [
+        { "src": "https://img2.pic.in.th/pic/1000021059.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "https://img2.pic.in.th/pic/1000021059.png", "sizes": "512x512", "type": "image/png" }
+      ]
+    };
+    const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+    const manifestURL = URL.createObjectURL(manifestBlob);
+    document.getElementById('manifestLink').setAttribute('href', manifestURL);
+
+    // Inline service worker
+    if('serviceWorker' in navigator){
+      const swCode = `
+      const cacheName = 'tadio-cache-v1';
+      const assets = ['./'];
+      self.addEventListener('install', e => e.waitUntil(caches.open(cacheName).then(cache => cache.addAll(assets))));
+      self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.map(key => key !== cacheName ? caches.delete(key) : null)))));
+      self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(res => res || fetch(e.request))));
+      `;
+      const swBlob = new Blob([swCode], {type: 'application/javascript'});
+      const swURL = URL.createObjectURL(swBlob);
+      navigator.serviceWorker.register(swURL).then(reg=>console.log('SW registered', reg)).catch(err=>console.log('SW failed', err));
+    }
+  </script>
 </body>
 </html>
