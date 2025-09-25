@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>หน้าหลัก - Tadio+ ดูทีวีและวิทยุออนไลน์</title>
-
-  <!-- Manifest Inline -->
-  <link rel="manifest" id="manifestLink">
+  
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f4f4f4">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
-
     body {
       font-family: 'Kanit', sans-serif;
       margin: 0;
@@ -41,13 +39,11 @@
       border: 1px solid #ddd;
     }
     .menu-button:hover { background-color: #ddd; }
-
     .theme-toggle {
       position: absolute; top: 15px; right: 15px; border: none;
       background: none; font-size: 26px; cursor: pointer; transition: transform 0.3s;
     }
     .theme-toggle:hover { transform: rotate(20deg); }
-
     body.dark { background-color: #121212; color: #f4f4f4; }
     body.dark .container { background-color: #1e1e1e; color: #f4f4f4; }
     body.dark .menu-button { background-color: #333; color: #f4f4f4; border: 1px solid #555; }
@@ -67,7 +63,6 @@
   </div>
 
   <script>
-    // Theme toggle
     const body = document.body;
     const themeToggle = document.querySelector('.theme-toggle');
 
@@ -81,43 +76,16 @@
       }
       localStorage.setItem('theme', theme);
     }
-
     function toggleTheme(){
       setTheme(body.classList.contains('dark')?'light':'dark');
     }
-
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
 
-    // Inline manifest
-    const manifest = {
-      "name": "Tadio+ ดูทีวีและวิทยุออนไลน์",
-      "short_name": "Tadio+",
-      "start_url": "./index.html",
-      "display": "standalone",
-      "background_color": "#f4f4f4",
-      "theme_color": "#f4f4f4",
-      "icons": [
-        { "src": "https://img2.pic.in.th/pic/1000021059.png", "sizes": "192x192", "type": "image/png" },
-        { "src": "https://img2.pic.in.th/pic/1000021059.png", "sizes": "512x512", "type": "image/png" }
-      ]
-    };
-    const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
-    const manifestURL = URL.createObjectURL(manifestBlob);
-    document.getElementById('manifestLink').setAttribute('href', manifestURL);
-
-    // Inline service worker
     if('serviceWorker' in navigator){
-      const swCode = `
-      const cacheName = 'tadio-cache-v1';
-      const assets = ['./'];
-      self.addEventListener('install', e => e.waitUntil(caches.open(cacheName).then(cache => cache.addAll(assets))));
-      self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.map(key => key !== cacheName ? caches.delete(key) : null)))));
-      self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(res => res || fetch(e.request))));
-      `;
-      const swBlob = new Blob([swCode], {type: 'application/javascript'});
-      const swURL = URL.createObjectURL(swBlob);
-      navigator.serviceWorker.register(swURL).then(reg=>console.log('SW registered', reg)).catch(err=>console.log('SW failed', err));
+      navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('Service Worker Registered'))
+      .catch(err => console.log('Service Worker Failed', err));
     }
   </script>
 </body>
