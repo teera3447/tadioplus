@@ -2,67 +2,106 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tadio+ PRO</title>
+<title>Tadio+ IPTV</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
-body{margin:0;font-family:sans-serif;background:#111;color:#fff}
-header{padding:10px 15px;display:flex;justify-content:space-between;align-items:center}
-button{background:#333;color:#fff;border:none;padding:6px 10px;border-radius:6px}
-main{display:flex;gap:15px;padding:15px}
-video{width:100%;aspect-ratio:16/9;background:#000;border-radius:10px}
-.player{flex:1}
-#now{margin-top:6px;font-weight:bold}
-#stats{font-size:13px;opacity:.85;margin-top:4px}
-.channels{
-  width:360px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  overflow:auto;
-  max-height:80vh
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#0f172a;
+  color:#fff;
 }
-.ch{
-  background:#222;
-  padding:8px;
-  border-radius:6px;
+header{
+  padding:10px;
+  background:#020617;
   text-align:center;
-  font-size:12px;
-  cursor:pointer
+  font-weight:bold;
 }
-.ch:hover{background:#f0c419;color:#000}
+#app{
+  display:flex;
+  height:calc(100vh - 50px);
+}
+#playerWrap{
+  flex:1;
+  background:black;
+  display:flex;
+  flex-direction:column;
+}
+video{
+  width:100%;
+  height:100%;
+  background:black;
+}
+.controls{
+  display:flex;
+  gap:10px;
+  padding:6px;
+  background:#020617;
+}
+button{
+  padding:6px 10px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+#channels{
+  width:300px;
+  overflow-y:auto;
+  background:#020617;
+}
+.channel{
+  padding:8px 10px;
+  border-bottom:1px solid #1e293b;
+  cursor:pointer;
+}
+.channel:hover{
+  background:#1e293b;
+}
+.channel span{
+  color:#38bdf8;
+  margin-right:6px;
+}
+
 @media(max-width:768px){
- main{flex-direction:column}
- .channels{width:100%;grid-template-columns:repeat(5,1fr)}
+  #app{flex-direction:column;}
+  #channels{width:100%; height:40vh;}
 }
 </style>
 </head>
+
 <body>
+<header>📺 Tadio+ IPTV</header>
 
-<header>
-  <b>Tadio+ PRO</b>
-  <button onclick="pip()">📺 PIP</button>
-</header>
-
-<main>
-  <div class="player">
-    <video id="v" controls playsinline></video>
-    <div id="now">เลือกช่อง</div>
-    <div id="stats"></div>
+<div id="app">
+  <div id="playerWrap">
+    <video id="video" controls playsinline></video>
+    <div class="controls">
+      <button onclick="togglePIP()">📌 PIP</button>
+    </div>
   </div>
-  <div class="channels" id="list"></div>
-</main>
+  <div id="channels"></div>
+</div>
 
 <script>
-const PROXY = "iptv.tadioplus.workers.dev?url=";
+const PROXY = "https://iptv.tadioplus.workers.dev/?url=";
+
+function fixUrl(url){
+  return url.startsWith("http://")
+    ? PROXY + encodeURIComponent(url)
+    : url;
+}
 
 const channels = [
-{"name":"NBT","ch":2,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/playlist.m3u8?null"},
+{"name":"NBT","ch":2,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/playlist.m3u8"},
 {"name":"TPBS","ch":3,"url":"http://45.144.166.242:1935/ThaiPBS/t3_thaipbs/chunklist.m3u8"},
 {"name":"5HD","ch":5,"url":"https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8"},
+{"name":"Boomerang","ch":89,"url":"https://lb1-live-mv.v2h-cdn.com/partner/boom_part/boomreang.m3u8"},
 {"name":"T SPORT","ch":7,"url":"https://gmmztv.v2h-cdn.com/ffef/gmmz-tsport7.stream/playlist.m3u8"},
 {"name":"TPTV","ch":10,"url":"https://tv-live.tpchannel.org/live/tv.m3u8"},
 {"name":"TNN","ch":16,"url":"https://gmmztv.v2h-cdn.com/ffdc/gmmz-tnn16.stream/playlist.m3u8"},
+{"name":"JKN18","ch":28,"url":"http://45.144.166.242:1935//JKN/t3_jkn/playlist.m3u8"},
 {"name":"ไทบ้านทีวี","ch":21,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffcd/thaibaan/thaibaan.m3u8"},
 {"name":"Nation","ch":22,"url":"http://119.59.118.159/live/ch47/Mariogogo007/index.m3u8"},
 {"name":"Workpoint","ch":23,"url":"https://global-media.sooplive.com/live/workpoint/master.m3u8"},
@@ -70,90 +109,50 @@ const channels = [
 {"name":"GMM25","ch":25,"url":"https://bcovlive-a.akamaihd.net/57d4bf695e80436d9335f4f50adbe438/ap-southeast-1/6415628290001/7e85dc4a59904e45b4fdffebd62e1d82/playlist_ssaiM.m3u8"},
 {"name":"ช่อง 8","ch":26,"url":"https://prsmedia-mykojh.cdn.byteark.com/fleetstream/live/index.m3u8"},
 {"name":"Boom Cartoon","ch":27,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbd/boomanime/boomanime.m3u8"},
-{"name":"JKN18","ch":28,"url":"http://45.144.166.242:1935//JKN/t3_jkn/playlist.m3u8"},
-{"name":"MONO 29 (TH)","ch":29,"url":"https://monomax-uiripn.cdn.byteark.com/plain/th/playlist.m3u8"},
-{"name":"MONO 29 (ST)","ch":29,"url":"https://monomax-uiripn.cdn.byteark.com/plain/st/playlist.m3u8"},
+{"name":"MONO 29","ch":29,"url":"https://monomax-uiripn.cdn.byteark.com/plain/th/playlist.m3u8"},
 {"name":"MCOT","ch":30,"url":"https://mcothd-streaming-edge-cdn.mcot.net/tencentmcot/smil:tencentmcot.smil/playlist.m3u8"},
 {"name":"ONE","ch":31,"url":"https://live888.gstreamcdn.com/app/stream_31/ts:master.m3u8"},
 {"name":"Thairath","ch":32,"url":"https://live888.gstreamcdn.com/app/stream_32/ts:master.m3u8"},
 {"name":"3HD","ch":33,"url":"https://gmmztv.v2h-cdn.com/ffae/gmmz-ch3.stream/playlist.m3u8"},
 {"name":"Amarin","ch":34,"url":"http://203.151.150.235:8080/memfs/3a8d432e-a19c-4592-be5a-c42304116622.m3u8"},
 {"name":"7HD","ch":35,"url":"http://203.151.150.235:8080/memfs/b4d0494d-6866-4fba-8165-341c76627cf7.m3u8"},
-{"name":"PPTV","ch":36,"url":"http://203.151.150.235:8080/memfs/bb827e84-bc81-4682-8cd1-8d4250d24a9a.m3u8"},
+{"name":"PPTV","ch":36,"url":"http://203.151.150.235:8080/memfs/bb827e84-bc81-4682-8cd1-8d4250d24a9a.m3u8"}
+].sort((a,b)=>a.ch-b.ch);
 
-{"name":"MVLAO","ch":101,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffaa/mvlao/mvlao.m3u8"},
-{"name":"MVM","ch":102,"url":"https://lb1-live-mv.v2h-cdn.com/hls/feff/mvm/mvm.m3u8"},
-{"name":"France 24","ch":104,"url":"https://lb1-live-mv.v2h-cdn.com/partner/freance24_part/freance24.m3u8"},
-{"name":"CNA","ch":105,"url":"https://d2e1asnsl7br7b.cloudfront.net/4e4e0baa3d7b4c129b4f5655219e083d/index.m3u8"},
-{"name":"NHK WORLD","ch":106,"url":"https://nhkworld-tv.akamaized.net/hls/live/2115640/nhkworld-tv/index_1M.m3u8"},
-{"name":"CCTV4","ch":107,"url":"https://lb1-live-mv.v2h-cdn.com/hls/fefb/cctv4/cctv4.m3u8"},
-{"name":"ThaiChaiYo","ch":108,"url":"https://live-psi.thaichaiyo.tv/tcy/live-manifest.m3u8"},
-{"name":"TOP TV","ch":109,"url":"https://live.cool-channel.com/cool/live-manifest.m3u8"},
-{"name":"Lanthung TV","ch":110,"url":"https://live-us1.thaimomo.com/live-as/chlantung-2/chunklist_w1965870389.m3u8"},
-{"name":"Police TV","ch":111,"url":"https://cdn-th-vip.livestreaming.in.th/policetv/policetv/playlist.m3u8"},
+let hls;
+const video = document.getElementById("video");
 
-{"name":"DLTV1","ch":201,"url":"https://cdn-live.dltv.ac.th/dltv01.m3u8"},
-{"name":"DLTV2","ch":202,"url":"https://cdn-live.dltv.ac.th/dltv02.m3u8"},
-{"name":"DLTV3","ch":203,"url":"https://cdn-live.dltv.ac.th/dltv03.m3u8"},
-{"name":"DLTV4","ch":204,"url":"https://cdn-live.dltv.ac.th/dltv04.m3u8"},
-{"name":"DLTV5","ch":205,"url":"https://cdn-live.dltv.ac.th/dltv05.m3u8"},
-{"name":"DLTV6","ch":206,"url":"https://cdn-live.dltv.ac.th/dltv06.m3u8"},
-{"name":"DLTV7","ch":207,"url":"https://cdn-live.dltv.ac.th/dltv07.m3u8"},
-{"name":"DLTV8","ch":208,"url":"https://cdn-live.dltv.ac.th/dltv08.m3u8"},
-{"name":"DLTV9","ch":209,"url":"https://cdn-live.dltv.ac.th/dltv09.m3u8"},
-{"name":"DLTV10","ch":210,"url":"https://cdn-live.dltv.ac.th/dltv10.m3u8"},
-{"name":"DLTV11","ch":211,"url":"https://cdn-live.dltv.ac.th/dltv11.m3u8"},
-{"name":"DLTV12","ch":212,"url":"https://cdn-live.dltv.ac.th/dltv12.m3u8"},
-{"name":"DLTV13","ch":213,"url":"https://cdn-live.dltv.ac.th/dltv13.m3u8"},
-{"name":"DLTV14","ch":214,"url":"https://cdn-live.dltv.ac.th/dltv14.m3u8"},
-{"name":"DLTV15","ch":215,"url":"https://cdn-live.dltv.ac.th/dltv15.m3u8"}
-];
+function play(ch){
+  if(hls){ hls.destroy(); hls=null; }
+  const url = fixUrl(ch.url);
 
-const v=document.getElementById("v");
-const list=document.getElementById("list");
-const stats=document.getElementById("stats");
-let hls,cur,start;
-const stat=JSON.parse(localStorage.getItem("stat")||"{}");
+  if(video.canPlayType("application/vnd.apple.mpegurl")){
+    video.src = url;
+    video.play();
+  }else{
+    hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, ()=>video.play());
+  }
+}
 
-channels.sort((a,b)=>a.ch-b.ch).forEach(c=>{
- if(!stat[c.name]) stat[c.name]={open:0,time:0};
- const d=document.createElement("div");
- d.className="ch";
- d.textContent=c.ch;
- d.title=c.name;
- d.onclick=()=>play(c);
- list.appendChild(d);
+function togglePIP(){
+  if(document.pictureInPictureElement){
+    document.exitPictureInPicture();
+  }else{
+    video.requestPictureInPicture();
+  }
+}
+
+const list = document.getElementById("channels");
+channels.forEach(ch=>{
+  const div=document.createElement("div");
+  div.className="channel";
+  div.innerHTML=`<span>${ch.ch}</span>${ch.name}`;
+  div.onclick=()=>play(ch);
+  list.appendChild(div);
 });
-
-function fix(u){return u.startsWith("http://")?PROXY+encodeURIComponent(u):u}
-
-function play(c){
- if(cur){ stat[cur].time+=Date.now()-start; }
- cur=c.name;
- stat[cur].open++;
- start=Date.now();
- localStorage.setItem("stat",JSON.stringify(stat));
- document.getElementById("now").innerText=`CH ${c.ch} : ${c.name}`;
- stats.innerText=`👁️ ${stat[cur].open} ครั้ง | ⏱️ ${Math.floor(stat[cur].time/60000)} นาที`;
-
- if(hls){hls.destroy();hls=null}
- v.pause();v.src="";
- const url=fix(c.url);
-
- if(v.canPlayType("application/vnd.apple.mpegurl")){
-   v.src=url;v.play();return;
- }
- hls=new Hls();
- hls.loadSource(url);
- hls.attachMedia(v);
- hls.on(Hls.Events.MANIFEST_PARSED,()=>v.play());
-}
-
-function pip(){
- document.pictureInPictureElement
- ? document.exitPictureInPicture()
- : v.requestPictureInPicture();
-}
 </script>
 </body>
 </html>
