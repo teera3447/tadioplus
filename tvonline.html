@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Tadio+ ดูทีวีออนไลน์ (HQ)</title>
+    <title>Tadio+ IPTV Desktop Stable</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
@@ -47,22 +47,22 @@
         }
         .controls {
             display: flex;
-            gap: 10px;
-            padding: 10px;
+            gap: 12px;
+            padding: 12px;
             background: var(--panel-dark);
-            flex-wrap: wrap;
+            align-items: center;
         }
         button, select {
             padding: 8px 12px;
-            border: none;
+            border: 1px solid #334155;
             border-radius: 6px;
             cursor: pointer;
             background: #1e293b;
             color: white;
             font-size: 14px;
         }
-        button:hover { background: #334155; }
-        select { outline: none; border-right: 8px solid transparent; }
+        button:hover { background: #334155; border-color: var(--accent); }
+        select:focus { border-color: var(--accent); outline: none; }
         
         #channels {
             width: 320px;
@@ -89,11 +89,11 @@
             margin-right: 12px;
             min-width: 25px;
         }
+        #currentName { color: #94a3b8; font-size: 0.9rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
         @media(max-width: 768px) {
             #app { flex-direction: column; }
             #channels { width: 100%; height: 45vh; }
-            header { font-size: 1rem; padding: 10px; }
         }
     </style>
 </head>
@@ -105,20 +105,23 @@
     <div id="playerWrap">
         <video id="video" controls playsinline></video>
         <div class="controls">
-            <button onclick="togglePIP()">📌 PIP</button>
+            <button id="pipBtn" onclick="togglePIP()">📌 PIP</button>
             
-            <select id="qualitySelect" onchange="changeQuality()">
-                <option value="-1">Auto (ปรับอัตโนมัติ)</option>
-            </select>
+            <div style="display:flex; align-items:center; gap:5px;">
+                <label style="font-size:12px; color:#64748b;">คุณภาพ:</label>
+                <select id="qualitySelect" onchange="changeQuality()">
+                    <option value="-1">Auto</option>
+                </select>
+            </div>
 
-            <span id="currentName" style="margin-left:10px; align-self:center; color:#94a3b8; font-size: 0.9rem;">เลือกช่องเพื่อรับชม</span>
+            <span id="currentName">เลือกช่องเพื่อเริ่มรับชม...</span>
         </div>
     </div>
     <div id="channels"></div>
 </div>
 
 <script>
-    // ใส่ URL ของ Cloudflare Worker ที่คุณสร้างไว้
+    // ตั้งค่า Proxy ของคุณ
     const PROXY = "https://your-worker-name.yoursubdomain.workers.dev/?url=";
 
     const channels = [
@@ -149,8 +152,8 @@
 
     let hls;
     const video = document.getElementById("video");
-    const currentNameDisp = document.getElementById("currentName");
     const qualitySelect = document.getElementById("qualitySelect");
+    const currentNameDisp = document.getElementById("currentName");
 
     function fixUrl(url){
         if (url.startsWith("http://") || /^(http|https):\/\/\d+\.\d+\.\d+\.\d+/.test(url)) {
@@ -160,48 +163,57 @@
     }
 
     function play(ch, element){
+        // UI Update
         document.querySelectorAll('.channel').forEach(el => el.classList.remove('active'));
         element.classList.add('active');
         currentNameDisp.innerText = `กำลังรับชม: ${ch.name}`;
 
         const finalUrl = fixUrl(ch.url);
+
         if(hls){ hls.destroy(); }
 
         if (Hls.isSupported()) {
-            hls = new Hls();
+            hls = new Hls({
+                autoStartLoad: true,
+                startLevel: -1 // เริ่มที่ Auto
+            });
             hls.loadSource(finalUrl);
             hls.attachMedia(video);
             
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+            // สำคัญ: รอให้ Manifest โหลดเสร็จก่อนถึงจะเลือกคุณภาพได้
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
                 updateQualityMenu();
-                video.play();
+                video.play().catch(() => {
+                    console.log("Autoplay blocked. User needs to click play.");
+                });
+            });
+
+            // ตรวจสอบการเปลี่ยน Level (คุณภาพ) จริงๆ
+            hls.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {
+                console.log("Switched to quality level: " + data.level);
             });
 
             hls.on(Hls.Events.ERROR, (event, data) => {
-                if (data.fatal && finalUrl.includes(PROXY)) {
-                    hls.loadSource(ch.url);
-                }
+                if (data.fatal && finalUrl.includes(PROXY)) hls.loadSource(ch.url);
             });
         } 
         else if (video.canPlayType("application/vnd.apple.mpegurl")) {
             video.src = finalUrl;
-            video.play();
-            // Safari ไม่รองรับการเลือก Quality ผ่าน JS แบบละเอียดเหมือน Hls.js
-            qualitySelect.innerHTML = '<option>Auto (Native)</option>';
+            video.addEventListener('loadedmetadata', () => {
+                video.play();
+            });
         }
     }
 
     function updateQualityMenu() {
-        // ล้างเมนูเดิม (ยกเว้น Auto)
         qualitySelect.innerHTML = '<option value="-1">Auto (ปรับอัตโนมัติ)</option>';
-        
-        if (hls && hls.levels) {
+        if (hls && hls.levels && hls.levels.length > 0) {
+            // เรียงจากความละเอียดสูงไปต่ำ
             hls.levels.forEach((level, index) => {
                 const option = document.createElement("option");
                 option.value = index;
-                // แสดงชื่อความละเอียด เช่น 1080p หรือคำนวณจากความสูง
-                const name = level.name || level.height + "p";
-                option.text = name;
+                const height = level.height || (level.bitrate / 1000).toFixed(0) + "k";
+                option.text = height + (level.height ? "p" : "");
                 qualitySelect.appendChild(option);
             });
         }
@@ -209,15 +221,21 @@
 
     function changeQuality() {
         if (hls) {
-            hls.currentLevel = parseInt(qualitySelect.value);
+            const val = parseInt(qualitySelect.value);
+            console.log("Changing quality to level index:", val);
+            hls.currentLevel = val; // -1 คือ Auto
         }
     }
 
-    function togglePIP(){
-        if(document.pictureInPictureElement){
-            document.exitPictureInPicture();
-        } else if (video.requestPictureInPicture) {
-            video.requestPictureInPicture();
+    async function togglePIP(){
+        try {
+            if (video !== document.pictureInPictureElement) {
+                await video.requestPictureInPicture();
+            } else {
+                await document.exitPictureInPicture();
+            }
+        } catch (error) {
+            alert("เบราว์เซอร์ของคุณไม่รองรับ PIP หรือวิดีโอยังไม่พร้อม");
         }
     }
 
