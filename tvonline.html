@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Tadio+ ดูทีวีออนไลน์</title>
+    <title>Tadio+ ดูทีวีออนไลน์ (HQ)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
@@ -50,17 +50,19 @@
             gap: 10px;
             padding: 10px;
             background: var(--panel-dark);
+            flex-wrap: wrap;
         }
-        button {
-            padding: 8px 15px;
+        button, select {
+            padding: 8px 12px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             background: #1e293b;
             color: white;
-            transition: 0.2s;
+            font-size: 14px;
         }
         button:hover { background: #334155; }
+        select { outline: none; border-right: 8px solid transparent; }
         
         #channels {
             width: 320px;
@@ -91,6 +93,7 @@
         @media(max-width: 768px) {
             #app { flex-direction: column; }
             #channels { width: 100%; height: 45vh; }
+            header { font-size: 1rem; padding: 10px; }
         }
     </style>
 </head>
@@ -102,15 +105,20 @@
     <div id="playerWrap">
         <video id="video" controls playsinline></video>
         <div class="controls">
-            <button onclick="togglePIP()">📌 Picture in Picture</button>
-            <span id="currentName" style="margin-left:10px; align-self:center; color:#94a3b8;">เลือกช่องเพื่อรับชม</span>
+            <button onclick="togglePIP()">📌 PIP</button>
+            
+            <select id="qualitySelect" onchange="changeQuality()">
+                <option value="-1">Auto (ปรับอัตโนมัติ)</option>
+            </select>
+
+            <span id="currentName" style="margin-left:10px; align-self:center; color:#94a3b8; font-size: 0.9rem;">เลือกช่องเพื่อรับชม</span>
         </div>
     </div>
     <div id="channels"></div>
 </div>
 
 <script>
-    // ใส่ URL ของ Cloudflare Worker ที่สร้างไว้ที่นี่
+    // ใส่ URL ของ Cloudflare Worker ที่คุณสร้างไว้
     const PROXY = "https://your-worker-name.yoursubdomain.workers.dev/?url=";
 
     const channels = [
@@ -142,9 +150,9 @@
     let hls;
     const video = document.getElementById("video");
     const currentNameDisp = document.getElementById("currentName");
+    const qualitySelect = document.getElementById("qualitySelect");
 
     function fixUrl(url){
-        // ใช้ Proxy ถ้าเป็น http หรือเป็น IP Address เพื่อเลี่ยง Mixed Content/CORS
         if (url.startsWith("http://") || /^(http|https):\/\/\d+\.\d+\.\d+\.\d+/.test(url)) {
             return PROXY + encodeURIComponent(url);
         }
@@ -152,43 +160,68 @@
     }
 
     function play(ch, element){
-        // UI Update
         document.querySelectorAll('.channel').forEach(el => el.classList.remove('active'));
         element.classList.add('active');
         currentNameDisp.innerText = `กำลังรับชม: ${ch.name}`;
 
         const finalUrl = fixUrl(ch.url);
-
         if(hls){ hls.destroy(); }
 
         if (Hls.isSupported()) {
             hls = new Hls();
             hls.loadSource(finalUrl);
             hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
             
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                updateQualityMenu();
+                video.play();
+            });
+
             hls.on(Hls.Events.ERROR, (event, data) => {
-                if (data.fatal) {
-                    console.error("HLS Fatal Error, trying without proxy...");
-                    if (finalUrl.includes(PROXY)) hls.loadSource(ch.url);
+                if (data.fatal && finalUrl.includes(PROXY)) {
+                    hls.loadSource(ch.url);
                 }
             });
         } 
         else if (video.canPlayType("application/vnd.apple.mpegurl")) {
             video.src = finalUrl;
             video.play();
+            // Safari ไม่รองรับการเลือก Quality ผ่าน JS แบบละเอียดเหมือน Hls.js
+            qualitySelect.innerHTML = '<option>Auto (Native)</option>';
+        }
+    }
+
+    function updateQualityMenu() {
+        // ล้างเมนูเดิม (ยกเว้น Auto)
+        qualitySelect.innerHTML = '<option value="-1">Auto (ปรับอัตโนมัติ)</option>';
+        
+        if (hls && hls.levels) {
+            hls.levels.forEach((level, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                // แสดงชื่อความละเอียด เช่น 1080p หรือคำนวณจากความสูง
+                const name = level.name || level.height + "p";
+                option.text = name;
+                qualitySelect.appendChild(option);
+            });
+        }
+    }
+
+    function changeQuality() {
+        if (hls) {
+            hls.currentLevel = parseInt(qualitySelect.value);
         }
     }
 
     function togglePIP(){
         if(document.pictureInPictureElement){
             document.exitPictureInPicture();
-        } else {
+        } else if (video.requestPictureInPicture) {
             video.requestPictureInPicture();
         }
     }
 
-    // สร้างรายชื่อช่อง
+    // สร้างลิสต์ช่อง
     const list = document.getElementById("channels");
     channels.forEach(ch => {
         const div = document.createElement("div");
