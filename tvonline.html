@@ -1,158 +1,202 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<title>Tadio+ IPTV</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <meta charset="UTF-8">
+    <title>Tadio+ ดูทีวีออนไลน์</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-<style>
-body{
-  margin:0;
-  font-family:sans-serif;
-  background:#0f172a;
-  color:#fff;
-}
-header{
-  padding:10px;
-  background:#020617;
-  text-align:center;
-  font-weight:bold;
-}
-#app{
-  display:flex;
-  height:calc(100vh - 50px);
-}
-#playerWrap{
-  flex:1;
-  background:black;
-  display:flex;
-  flex-direction:column;
-}
-video{
-  width:100%;
-  height:100%;
-  background:black;
-}
-.controls{
-  display:flex;
-  gap:10px;
-  padding:6px;
-  background:#020617;
-}
-button{
-  padding:6px 10px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-}
-#channels{
-  width:300px;
-  overflow-y:auto;
-  background:#020617;
-}
-.channel{
-  padding:8px 10px;
-  border-bottom:1px solid #1e293b;
-  cursor:pointer;
-}
-.channel:hover{
-  background:#1e293b;
-}
-.channel span{
-  color:#38bdf8;
-  margin-right:6px;
-}
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-dark: #020617;
+            --accent: #38bdf8;
+            --text-main: #fff;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden;
+        }
+        header {
+            padding: 15px;
+            background: var(--panel-dark);
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #1e293b;
+        }
+        #app {
+            display: flex;
+            height: calc(100vh - 56px);
+        }
+        #playerWrap {
+            flex: 1;
+            background: black;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            background: black;
+            outline: none;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: var(--panel-dark);
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #1e293b;
+            color: white;
+            transition: 0.2s;
+        }
+        button:hover { background: #334155; }
+        
+        #channels {
+            width: 320px;
+            overflow-y: auto;
+            background: var(--panel-dark);
+            border-left: 1px solid #1e293b;
+        }
+        .channel {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #1e293b;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .channel:hover { background: #1e293b; }
+        .channel.active {
+            background: #1e293b;
+            border-left: 4px solid var(--accent);
+        }
+        .channel span {
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 12px;
+            min-width: 25px;
+        }
 
-@media(max-width:768px){
-  #app{flex-direction:column;}
-  #channels{width:100%; height:40vh;}
-}
-</style>
+        @media(max-width: 768px) {
+            #app { flex-direction: column; }
+            #channels { width: 100%; height: 45vh; }
+        }
+    </style>
 </head>
 
 <body>
-<header>📺 Tadio+ IPTV</header>
+<header>📺 Tadio+ IPTV Online</header>
 
 <div id="app">
-  <div id="playerWrap">
-    <video id="video" controls playsinline></video>
-    <div class="controls">
-      <button onclick="togglePIP()">📌 PIP</button>
+    <div id="playerWrap">
+        <video id="video" controls playsinline></video>
+        <div class="controls">
+            <button onclick="togglePIP()">📌 Picture in Picture</button>
+            <span id="currentName" style="margin-left:10px; align-self:center; color:#94a3b8;">เลือกช่องเพื่อรับชม</span>
+        </div>
     </div>
-  </div>
-  <div id="channels"></div>
+    <div id="channels"></div>
 </div>
 
 <script>
-const PROXY = "https://iptv.tadioplus.workers.dev/?url=";
+    // ใส่ URL ของ Cloudflare Worker ที่สร้างไว้ที่นี่
+    const PROXY = "https://your-worker-name.yoursubdomain.workers.dev/?url=";
 
-function fixUrl(url){
-  return url.startsWith("http://")
-    ? PROXY + encodeURIComponent(url)
-    : url;
-}
+    const channels = [
+        {"name":"NBT","ch":2,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/playlist.m3u8"},
+        {"name":"TPBS","ch":3,"url":"http://45.144.166.242:1935/ThaiPBS/t3_thaipbs/chunklist.m3u8"},
+        {"name":"5HD","ch":5,"url":"https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8"},
+        {"name":"T SPORT","ch":7,"url":"https://gmmztv.v2h-cdn.com/ffef/gmmz-tsport7.stream/playlist.m3u8"},
+        {"name":"TPTV","ch":10,"url":"https://tv-live.tpchannel.org/live/tv.m3u8"},
+        {"name":"TNN","ch":16,"url":"https://gmmztv.v2h-cdn.com/ffdc/gmmz-tnn16.stream/playlist.m3u8"},
+        {"name":"ไทบ้านทีวี","ch":21,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffcd/thaibaan/thaibaan.m3u8"},
+        {"name":"Nation","ch":22,"url":"http://119.59.118.159/live/ch47/Mariogogo007/index.m3u8"},
+        {"name":"Workpoint","ch":23,"url":"https://global-media.sooplive.com/live/workpoint/master.m3u8"},
+        {"name":"True24","ch":24,"url":"https://iptv36.vercel.app/api/true.m3u8?channel=true4u"},
+        {"name":"GMM25","ch":25,"url":"https://bcovlive-a.akamaihd.net/57d4bf695e80436d9335f4f50adbe438/ap-southeast-1/6415628290001/7e85dc4a59904e45b4fdffebd62e1d82/playlist_ssaiM.m3u8"},
+        {"name":"ช่อง 8","ch":26,"url":"https://prsmedia-mykojh.cdn.byteark.com/fleetstream/live/index.m3u8"},
+        {"name":"Boom Cartoon","ch":27,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbd/boomanime/boomanime.m3u8"},
+        {"name":"JKN18","ch":28,"url":"http://45.144.166.242:1935//JKN/t3_jkn/playlist.m3u8"},
+        {"name":"MONO 29","ch":29,"url":"https://monomax-uiripn.cdn.byteark.com/plain/th/playlist.m3u8"},
+        {"name":"MCOT","ch":30,"url":"https://mcothd-streaming-edge-cdn.mcot.net/tencentmcot/smil:tencentmcot.smil/playlist.m3u8"},
+        {"name":"ONE","ch":31,"url":"https://live888.gstreamcdn.com/app/stream_31/ts:master.m3u8"},
+        {"name":"Thairath","ch":32,"url":"https://live888.gstreamcdn.com/app/stream_32/ts:master.m3u8"},
+        {"name":"3HD","ch":33,"url":"https://gmmztv.v2h-cdn.com/ffae/gmmz-ch3.stream/playlist.m3u8"},
+        {"name":"Amarin","ch":34,"url":"http://203.151.150.235:8080/memfs/3a8d432e-a19c-4592-be5a-c42304116622.m3u8"},
+        {"name":"7HD","ch":35,"url":"http://203.151.150.235:8080/memfs/b4d0494d-6866-4fba-8165-341c76627cf7.m3u8"},
+        {"name":"PPTV","ch":36,"url":"http://203.151.150.235:8080/memfs/bb827e84-bc81-4682-8cd1-8d4250d24a9a.m3u8"},
+        {"name":"Boomerang","ch":89,"url":"https://lb1-live-mv.v2h-cdn.com/partner/boom_part/boomreang.m3u8"}
+    ].sort((a,b)=>a.ch-b.ch);
 
-const channels = [
-{"name":"NBT","ch":2,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/playlist.m3u8"},
-{"name":"TPBS","ch":3,"url":"http://45.144.166.242:1935/ThaiPBS/t3_thaipbs/chunklist.m3u8"},
-{"name":"5HD","ch":5,"url":"https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8"},
-{"name":"Boomerang","ch":89,"url":"https://lb1-live-mv.v2h-cdn.com/partner/boom_part/boomreang.m3u8"},
-{"name":"T SPORT","ch":7,"url":"https://gmmztv.v2h-cdn.com/ffef/gmmz-tsport7.stream/playlist.m3u8"},
-{"name":"TPTV","ch":10,"url":"https://tv-live.tpchannel.org/live/tv.m3u8"},
-{"name":"TNN","ch":16,"url":"https://gmmztv.v2h-cdn.com/ffdc/gmmz-tnn16.stream/playlist.m3u8"},
-{"name":"JKN18","ch":28,"url":"http://45.144.166.242:1935//JKN/t3_jkn/playlist.m3u8"},
-{"name":"ไทบ้านทีวี","ch":21,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffcd/thaibaan/thaibaan.m3u8"},
-{"name":"Nation","ch":22,"url":"http://119.59.118.159/live/ch47/Mariogogo007/index.m3u8"},
-{"name":"Workpoint","ch":23,"url":"https://global-media.sooplive.com/live/workpoint/master.m3u8"},
-{"name":"True24","ch":24,"url":"https://iptv36.vercel.app/api/true.m3u8?channel=true4u"},
-{"name":"GMM25","ch":25,"url":"https://bcovlive-a.akamaihd.net/57d4bf695e80436d9335f4f50adbe438/ap-southeast-1/6415628290001/7e85dc4a59904e45b4fdffebd62e1d82/playlist_ssaiM.m3u8"},
-{"name":"ช่อง 8","ch":26,"url":"https://prsmedia-mykojh.cdn.byteark.com/fleetstream/live/index.m3u8"},
-{"name":"Boom Cartoon","ch":27,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbd/boomanime/boomanime.m3u8"},
-{"name":"MONO 29","ch":29,"url":"https://monomax-uiripn.cdn.byteark.com/plain/th/playlist.m3u8"},
-{"name":"MCOT","ch":30,"url":"https://mcothd-streaming-edge-cdn.mcot.net/tencentmcot/smil:tencentmcot.smil/playlist.m3u8"},
-{"name":"ONE","ch":31,"url":"https://live888.gstreamcdn.com/app/stream_31/ts:master.m3u8"},
-{"name":"Thairath","ch":32,"url":"https://live888.gstreamcdn.com/app/stream_32/ts:master.m3u8"},
-{"name":"3HD","ch":33,"url":"https://gmmztv.v2h-cdn.com/ffae/gmmz-ch3.stream/playlist.m3u8"},
-{"name":"Amarin","ch":34,"url":"http://203.151.150.235:8080/memfs/3a8d432e-a19c-4592-be5a-c42304116622.m3u8"},
-{"name":"7HD","ch":35,"url":"http://203.151.150.235:8080/memfs/b4d0494d-6866-4fba-8165-341c76627cf7.m3u8"},
-{"name":"PPTV","ch":36,"url":"http://203.151.150.235:8080/memfs/bb827e84-bc81-4682-8cd1-8d4250d24a9a.m3u8"}
-].sort((a,b)=>a.ch-b.ch);
+    let hls;
+    const video = document.getElementById("video");
+    const currentNameDisp = document.getElementById("currentName");
 
-let hls;
-const video = document.getElementById("video");
+    function fixUrl(url){
+        // ใช้ Proxy ถ้าเป็น http หรือเป็น IP Address เพื่อเลี่ยง Mixed Content/CORS
+        if (url.startsWith("http://") || /^(http|https):\/\/\d+\.\d+\.\d+\.\d+/.test(url)) {
+            return PROXY + encodeURIComponent(url);
+        }
+        return url;
+    }
 
-function play(ch){
-  if(hls){ hls.destroy(); hls=null; }
-  const url = fixUrl(ch.url);
+    function play(ch, element){
+        // UI Update
+        document.querySelectorAll('.channel').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+        currentNameDisp.innerText = `กำลังรับชม: ${ch.name}`;
 
-  if(video.canPlayType("application/vnd.apple.mpegurl")){
-    video.src = url;
-    video.play();
-  }else{
-    hls = new Hls();
-    hls.loadSource(url);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, ()=>video.play());
-  }
-}
+        const finalUrl = fixUrl(ch.url);
 
-function togglePIP(){
-  if(document.pictureInPictureElement){
-    document.exitPictureInPicture();
-  }else{
-    video.requestPictureInPicture();
-  }
-}
+        if(hls){ hls.destroy(); }
 
-const list = document.getElementById("channels");
-channels.forEach(ch=>{
-  const div=document.createElement("div");
-  div.className="channel";
-  div.innerHTML=`<span>${ch.ch}</span>${ch.name}`;
-  div.onclick=()=>play(ch);
-  list.appendChild(div);
-});
+        if (Hls.isSupported()) {
+            hls = new Hls();
+            hls.loadSource(finalUrl);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+            
+            hls.on(Hls.Events.ERROR, (event, data) => {
+                if (data.fatal) {
+                    console.error("HLS Fatal Error, trying without proxy...");
+                    if (finalUrl.includes(PROXY)) hls.loadSource(ch.url);
+                }
+            });
+        } 
+        else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = finalUrl;
+            video.play();
+        }
+    }
+
+    function togglePIP(){
+        if(document.pictureInPictureElement){
+            document.exitPictureInPicture();
+        } else {
+            video.requestPictureInPicture();
+        }
+    }
+
+    // สร้างรายชื่อช่อง
+    const list = document.getElementById("channels");
+    channels.forEach(ch => {
+        const div = document.createElement("div");
+        div.className = "channel";
+        div.innerHTML = `<span>${ch.ch}</span> ${ch.name}`;
+        div.onclick = () => play(ch, div);
+        list.appendChild(div);
+    });
 </script>
 </body>
 </html>
