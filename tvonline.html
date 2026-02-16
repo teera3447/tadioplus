@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Tadio+ ดูทีวีออนไลน์</title>
+    <title>Tadio+ ดูทีวีออนไลน์ (Full Version)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
@@ -12,21 +12,25 @@
             --panel-dark: #020617;
             --accent: #38bdf8;
             --text-main: #fff;
+            --text-dim: #94a3b8;
         }
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Kanit', sans-serif;
             background: var(--bg-dark);
             color: var(--text-main);
             overflow: hidden;
         }
         header {
-            padding: 15px;
+            padding: 12px;
             background: var(--panel-dark);
             text-align: center;
             font-weight: bold;
             font-size: 1.2rem;
             border-bottom: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         #app {
             display: flex;
@@ -40,19 +44,20 @@
             position: relative;
         }
         video {
-            width: 90%;
-            height: 90%;
+            width: 100%;
+            height: 100%;
             background: black;
             outline: none;
         }
         .controls {
             display: flex;
             gap: 12px;
-            padding: 12px;
+            padding: 10px;
             background: var(--panel-dark);
             align-items: center;
+            flex-wrap: wrap;
         }
-        button, select {
+        button, select, input {
             padding: 8px 12px;
             border: 1px solid #334155;
             border-radius: 6px;
@@ -61,14 +66,20 @@
             color: white;
             font-size: 14px;
         }
+        input { cursor: text; width: 100%; box-sizing: border-box; }
         button:hover { background: #334155; border-color: var(--accent); }
-        select:focus { border-color: var(--accent); outline: none; }
         
         #channels {
             width: 320px;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
             background: var(--panel-dark);
             border-left: 1px solid #1e293b;
+        }
+        .search-box { padding: 10px; border-bottom: 1px solid #1e293b; }
+        #channelList {
+            flex: 1;
+            overflow-y: auto;
         }
         .channel {
             display: flex;
@@ -87,73 +98,127 @@
             color: var(--accent);
             font-weight: bold;
             margin-right: 12px;
-            min-width: 25px;
+            min-width: 30px;
         }
-        #currentName { color: #94a3b8; font-size: 0.9rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        #currentName { color: var(--text-dim); font-size: 0.85rem; }
 
         @media(max-width: 768px) {
             #app { flex-direction: column; }
-            #channels { width: 100%; height: 45vh; }
+            #channels { width: 100%; height: 40vh; border-left: none; border-top: 1px solid #1e293b; }
+            video { height: auto; aspect-ratio: 16/9; }
         }
     </style>
 </head>
 
 <body>
-<header>Tadio+ ดูทีวีออนไลน์</header>
+<header>
+    <span>Tadio+</span>
+    <span id="currentName">เลือกช่องเพื่อเริ่มรับชม...</span>
+</header>
 
 <div id="app">
     <div id="playerWrap">
         <video id="video" controls playsinline></video>
         <div class="controls">
-            <button id="pipBtn" onclick="togglePIP()">PIP</button>
-            
+            <button id="pipBtn" onclick="togglePIP()">PIP (จอเล็ก)</button>
             <div style="display:flex; align-items:center; gap:5px;">
                 <label style="font-size:12px; color:#64748b;">คุณภาพ:</label>
                 <select id="qualitySelect" onchange="changeQuality()">
                     <option value="-1">Auto</option>
                 </select>
             </div>
-
-            <span id="currentName">เลือกช่องเพื่อเริ่มรับชม...</span>
         </div>
     </div>
-    <div id="channels"></div>
+    
+    <div id="channels">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="ค้นหาชื่อช่องหรือเลข..." onkeyup="filterChannels()">
+        </div>
+        <div id="channelList"></div>
+    </div>
 </div>
 
 <script>
-    // ตั้งค่า Proxy ของคุณ
     const PROXY = "https://iptv.tadioplus.workers.dev/?url=";
 
     const channels = [
+        {"name":"MVTV ท้องถิ่นไทย","ch":1,"url":"https://edge2a.v2h-cdn.com/live_mvhub/mvtv75.stream/playlist.m3u8"},
         {"name":"NBT","ch":2,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/playlist.m3u8"},
         {"name":"TPBS","ch":3,"url":"https://thaipbs-live.cdn.byteark.com/live/playlist.m3u8"},
         {"name":"5HD","ch":5,"url":"https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8"},
-        {"name":"T SPORT","ch":7,"url":"https://gmmztv.v2h-cdn.com/ffef/gmmz-tsport7.stream/playlist.m3u8"},
+        {"name":"T SPORT","ch":7,"url":"https://live-us1.thaimomo.com/live-as/chtsport-2/playlist.m3u8"},
+        {"name":"MVMall Trend","ch":8,"url":"https://lb1-live-mv.v2h-cdn.com/hls/fdfe/mvmalltrend/mvmalltrend.m3u8"},
+        {"name":"MVMall Plus","ch":9,"url":"https://lb1-live-mv.v2h-cdn.com/hls/fded/mvmallplus/mvmallplus.m3u8"},
         {"name":"TPTV","ch":10,"url":"https://tv-live.tpchannel.org/live/tv.m3u8"},
-        {"name":"TNN","ch":16,"url":"https://gmmztv.v2h-cdn.com/ffdc/gmmz-tnn16.stream/playlist.m3u8"},
-        {"name":"CH18","ch":18,"url":"https://live-us1.thaimomo.com/live-as/chnewtv-2/chunklist.m3u8"},
-        {"name":"ไทบ้านทีวี","ch":21,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffcd/thaibaan/thaibaan.m3u8"},
-        {"name":"Nation","ch":22,"url":"https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/22/22.mpd"},
-        {"name":"Workpoint","ch":23,"url":"https://cri-streamer3.cdn.3bbtv.com:8443/3bb/live/23/23.mpd"},
-        {"name":"True24","ch":24,"url":"https://cco-streamer1.cdn.3bbtv.com:8443/3bb/live/24/24.mpd"},
-        {"name":"GMM25","ch":25,"url":"https://bcovlive-a.akamaihd.net/57d4bf695e80436d9335f4f50adbe438/ap-southeast-1/6415628290001/7e85dc4a59904e45b4fdffebd62e1d82/playlist_ssaiM.m3u8"},
-        {"name":"ช่อง 8","ch":27,"url":"https://prsmedia-mykojh.cdn.byteark.com/fleetstream/live/index.m3u8"},
-        {"name":"Boom Cartoon","ch":28,"url":"https://lb1-live-mv.v2h-cdn.com/hls/ffbd/boomanime/boomanime.m3u8"},
-        {"name":"MONO 29","ch":29,"url":"https://monomax-uiripn.cdn.byteark.com/plain/th/playlist.m3u8"},
-        {"name":"MCOT","ch":30,"url":"https://mcothd-streaming-edge-cdn.mcot.net/tencentmcot/smil:tencentmcot.smil/playlist.m3u8"},
-        {"name":"ONE","ch":31,"url":"https://live888.gstreamcdn.com/app/stream_31/ts:master.m3u8"},
-        {"name":"Thairath","ch":32,"url":"https://live888.gstreamcdn.com/app/stream_32/ts:master.m3u8"},
-        {"name":"3HD","ch":33,"url":"https://gmmztv.v2h-cdn.com/ffae/gmmz-ch3.stream/playlist.m3u8"},
-        {"name":"Amarin","ch":34,"url":"https://live-us1.thaimomo.com/live-as/chamarin-2/chunklist.m3u8"},
-        {"name":"7HD","ch":35,"url":"https://live-cdn.ch7.com/out/v1/eafeb02c55b64a15b278b1e66c7fc776/playlist.m3u8"},
-        {"name":"PPTV","ch":36,"url":"https://live-us1.thaimomo.com/live-as/chpptv-2/chunklist.m3u8"},
-        {"name":"Boomerang","ch":89,"url":"https://lb1-live-mv.v2h-cdn.com/partner/boom_part/boomreang.m3u8"}
-    ].sort((a,b)=>a.ch-b.ch);
+        {"name":"NBT North","ch":11,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:4f6e-aa34-2034-5492-c82d.smil/playlist.m3u8"},
+        {"name":"NBT South","ch":12,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:a834-75a7-a662-db55-5fa3.smil/playlist.m3u8"},
+        {"name":"NBT Northeast","ch":13,"url":"https://cdn-edge.iiptvcdn.com/live_event/smil:98ff-027d-46aa-1a6a-8480.smil/playlist.m3u8"},
+        {"name":"NBT Central","ch":14,"url":"https://lb1-live-mv.v2h-cdn.com/hls/fddc/mvmallliving/mvmallliving.m3u8"},
+        {"name":"TNN 16","ch":16,"url":"https://gmmztv.v2h-cdn.com/ffdc/gmmz-tnn16.stream/playlist.m3u8"},
+        {"name":"JKN18","ch":18,"url":"http://45.144.166.242:1935//JKN/t3_jkn/playlist.m3u8"},
+        {"name":"ไทบ้านทีวี","ch":21,"url":"https://edge2a.v2h-cdn.com/live_mvhub/thaiban.stream/playlist.m3u8"},
+        {"name":"Nation TV","ch":22,"url":"https://lb-gmmz.sky-cdn.com/gmm/nation.m3u8"},
+        {"name":"Workpoint","ch":23,"url":"https://lb-gmmz.sky-cdn.com/gmm/workpoint.m3u8"},
+        {"name":"True4U","ch":24,"url":"https://lb-gmmz.sky-cdn.com/gmm/true24.m3u8"},
+        {"name":"GMM25","ch":25,"url":"https://lb-gmmz.sky-cdn.com/gmm/gmm25.m3u8"},
+        {"name":"MIX MAJOR","ch":26,"url":"https://edge2a.v2h-cdn.com/ttd/mix/playlist.m3u8"},
+        {"name":"ช่อง 8","ch":27,"url":"https://lb-gmmz.sky-cdn.com/gmm/ch8.m3u8"},
+        {"name":"MONO 29","ch":29,"url":"https://monomax-uiripn.cdn.byteark.com/plain/th/480p/index.m3u8"},
+        {"name":"MCOT HD","ch":30,"url":"https://lb-gmmz.sky-cdn.com/gmm/mcot.m3u8"},
+        {"name":"ONE 31","ch":31,"url":"https://lb-gmmz.sky-cdn.com/gmm/one.m3u8"},
+        {"name":"Thairath TV","ch":32,"url":"http://45.144.166.242:1935//ThairathTV/t3_thairathtv/playlist.m3u8"},
+        {"name":"3HD","ch":33,"url":"https://lb-gmmz.sky-cdn.com/gmm/ch3.m3u8"},
+        {"name":"Amarin TV","ch":34,"url":"https://lb-gmmz.sky-cdn.com/gmm/amarin.m3u8"},
+        {"name":"7HD","ch":35,"url":"https://lb-gmmz.sky-cdn.com/gmm/ch7.m3u8"},
+        {"name":"PPTV HD","ch":36,"url":"https://lb-gmmz.sky-cdn.com/gmm/pptv.m3u8"},
+        {"name":"Boomerang","ch":89,"url":"https://lb1-live-mv.v2h-cdn.com/partner/boom_part/boomreang.m3u8"},
+        {"name":"Mango Mojito","ch":92,"url":"https://lb1-live-mv.v2h-cdn.com/partner/boom_cartoon_part/boom_catoon.m3u8"},
+        {"name":"MVLAO","ch":101,"url":"https://edge2a.v2h-cdn.com/live_mvhub/mvlao.stream/playlist.m3u8"},
+        {"name":"MVM","ch":102,"url":"https://edge2a.v2h-cdn.com/live_mvhub/mvm.stream/playlist.m3u8"},
+        {"name":"MVCTV3","ch":103,"url":"https://edge2a.v2h-cdn.com/ttd/mvc/playlist.m3u8"},
+        {"name":"France 24","ch":104,"url":"https://lb1-live-mv.v2h-cdn.com/partner/freance24_part/freance24.m3u8"},
+        {"name":"CNA","ch":105,"url":"https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index.m3u8"},
+        {"name":"Esan TV","ch":106,"url":"https://edge2a.v2h-cdn.com/ttd/esan/playlist.m3u8"},
+        {"name":"MV News","ch":107,"url":"https://edge2a.v2h-cdn.com/ttd/news/playlist.m3u8"},
+        {"name":"TVB Thai","ch":108,"url":"https://edge2a.v2h-cdn.com/ttd/tvb/playlist.m3u8"},
+        {"name":"Siam Channel","ch":109,"url":"https://edge2a.v2h-cdn.com/ttd/siam/playlist.m3u8"},
+        {"name":"Lido Channel","ch":110,"url":"https://edge2a.v2h-cdn.com/ttd/lido/playlist.m3u8"},
+        {"name":"Scala Channel","ch":111,"url":"https://edge2a.v2h-cdn.com/ttd/scala/playlist.m3u8"},
+        {"name":"Rama Channel","ch":112,"url":"https://edge2a.v2h-cdn.com/ttd/rama/playlist.m3u8"},
+        {"name":"Mutalu","ch":113,"url":"https://edge2a.v2h-cdn.com/ttd/mutalu/playlist.m3u8"},
+        {"name":"MV Go Sport","ch":114,"url":"https://edge2a.v2h-cdn.com/ttd/gosport/playlist.m3u8"},
+        {"name":"VTV News","ch":115,"url":"https://edge2a.v2h-cdn.com/ttd/vtvnews/playlist.m3u8"},
+        {"name":"Zee Nung","ch":116,"url":"https://amg17931-zee-amg17931c4-samsung-th-5592.playouts.now.amagi.tv/playlist/amg17931-asiatvusaltdfast-zeenung-samsungth/playlist.m3u8"},
+        {"name":"ThaiChaiYo","ch":117,"url":"https://live-psi.thaichaiyo.tv/tcy/live-480P.m3u8"},
+        {"name":"Top TV","ch":118,"url":"https://live.cool-channel.com/cool/live-480P.m3u8"},
+        {"name":"Channel 8 (Alt)","ch":119,"url":"https://cdn-th-vip.livestreaming.in.th/ch8/ch8/playlist.m3u8"},
+        {"name":"GBN US","ch":120,"url":"https://us.gbnus.com/live/dhamma_high/playlist.m3u8"},
+        {"name":"Boonniyom TV","ch":121,"url":"http://live.boonniyom.tv/live/bntvhd.m3u8"},
+        {"name":"Police TV","ch":122,"url":"https://cdn-th-vip.livestreaming.in.th/policetv/policetv/playlist.m3u8"},
+        {"name":"SBT TV","ch":123,"url":"http://122.155.12.107:1935/live/sbt_tv_aac_100/playlist.m3u8"},
+        {"name":"DLTV 1","ch":201,"url":"https://cdn-live.dltv.ac.th/dltv01.m3u8"},
+        {"name":"DLTV 2","ch":202,"url":"https://cdn-live.dltv.ac.th/dltv02.m3u8"},
+        {"name":"DLTV 3","ch":203,"url":"https://cdn-live.dltv.ac.th/dltv03.m3u8"},
+        {"name":"DLTV 4","ch":204,"url":"https://cdn-live.dltv.ac.th/dltv04.m3u8"},
+        {"name":"DLTV 5","ch":205,"url":"https://cdn-live.dltv.ac.th/dltv05.m3u8"},
+        {"name":"DLTV 6","ch":206,"url":"https://cdn-live.dltv.ac.th/dltv06.m3u8"},
+        {"name":"DLTV 7","ch":207,"url":"https://cdn-live.dltv.ac.th/dltv07.m3u8"},
+        {"name":"DLTV 8","ch":208,"url":"https://cdn-live.dltv.ac.th/dltv08.m3u8"},
+        {"name":"DLTV 9","ch":209,"url":"https://cdn-live.dltv.ac.th/dltv09.m3u8"},
+        {"name":"DLTV 10","ch":210,"url":"https://cdn-live.dltv.ac.th/dltv10.m3u8"},
+        {"name":"DLTV 11","ch":211,"url":"https://cdn-live.dltv.ac.th/dltv11.m3u8"},
+        {"name":"DLTV 12","ch":212,"url":"https://cdn-live.dltv.ac.th/dltv12.m3u8"},
+        {"name":"DLTV 13","ch":213,"url":"https://cdn-live.dltv.ac.th/dltv13.m3u8"},
+        {"name":"DLTV 14","ch":214,"url":"https://cdn-live.dltv.ac.th/dltv14.m3u8"},
+        {"name":"DLTV 15","ch":215,"url":"https://cdn-live.dltv.ac.th/dltv15.m3u8"},
+        {"name":"ETV","ch":216,"url":"http://150.95.66.20:1935/live/livestream/playlist.m3u8"}
+    ].sort((a,b)=>a.ch - b.ch);
 
     let hls;
     const video = document.getElementById("video");
     const qualitySelect = document.getElementById("qualitySelect");
     const currentNameDisp = document.getElementById("currentName");
+    const channelList = document.getElementById("channelList");
 
     function fixUrl(url){
         if (url.startsWith("http://") || /^(http|https):\/\/\d+\.\d+\.\d+\.\d+/.test(url)) {
@@ -163,91 +228,75 @@
     }
 
     function play(ch, element){
-        // UI Update
         document.querySelectorAll('.channel').forEach(el => el.classList.remove('active'));
         element.classList.add('active');
-        currentNameDisp.innerText = `กำลังรับชม: ${ch.name}`;
+        currentNameDisp.innerText = `กำลังรับชม: ${ch.name} (CH ${ch.ch})`;
 
         const finalUrl = fixUrl(ch.url);
-
         if(hls){ hls.destroy(); }
 
         if (Hls.isSupported()) {
-            hls = new Hls({
-                autoStartLoad: true,
-                startLevel: -1 // เริ่มที่ Auto
-            });
+            hls = new Hls({ autoStartLoad: true, startLevel: -1 });
             hls.loadSource(finalUrl);
             hls.attachMedia(video);
-            
-            // สำคัญ: รอให้ Manifest โหลดเสร็จก่อนถึงจะเลือกคุณภาพได้
             hls.on(Hls.Events.MANIFEST_PARSED, function() {
                 updateQualityMenu();
-                video.play().catch(() => {
-                    console.log("Autoplay blocked. User needs to click play.");
-                });
+                video.play().catch(() => {});
             });
-
-            // ตรวจสอบการเปลี่ยน Level (คุณภาพ) จริงๆ
-            hls.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {
-                console.log("Switched to quality level: " + data.level);
-            });
-
             hls.on(Hls.Events.ERROR, (event, data) => {
                 if (data.fatal && finalUrl.includes(PROXY)) hls.loadSource(ch.url);
             });
         } 
         else if (video.canPlayType("application/vnd.apple.mpegurl")) {
             video.src = finalUrl;
-            video.addEventListener('loadedmetadata', () => {
-                video.play();
-            });
+            video.play();
         }
     }
 
     function updateQualityMenu() {
-        qualitySelect.innerHTML = '<option value="-1">Auto (ปรับอัตโนมัติ)</option>';
-        if (hls && hls.levels && hls.levels.length > 0) {
-            // เรียงจากความละเอียดสูงไปต่ำ
+        qualitySelect.innerHTML = '<option value="-1">Auto</option>';
+        if (hls && hls.levels) {
             hls.levels.forEach((level, index) => {
                 const option = document.createElement("option");
                 option.value = index;
-                const height = level.height || (level.bitrate / 1000).toFixed(0) + "k";
-                option.text = height + (level.height ? "p" : "");
+                option.text = (level.height ? level.height + "p" : "Level " + index);
                 qualitySelect.appendChild(option);
             });
         }
     }
 
     function changeQuality() {
-        if (hls) {
-            const val = parseInt(qualitySelect.value);
-            console.log("Changing quality to level index:", val);
-            hls.currentLevel = val; // -1 คือ Auto
-        }
+        if (hls) hls.currentLevel = parseInt(qualitySelect.value);
     }
 
     async function togglePIP(){
         try {
-            if (video !== document.pictureInPictureElement) {
-                await video.requestPictureInPicture();
-            } else {
-                await document.exitPictureInPicture();
-            }
-        } catch (error) {
-            alert("เบราว์เซอร์ของคุณไม่รองรับ PIP หรือวิดีโอยังไม่พร้อม");
-        }
+            if (video !== document.pictureInPictureElement) await video.requestPictureInPicture();
+            else await document.exitPictureInPicture();
+        } catch (e) { alert("PIP ไม่พร้อมใช้งาน"); }
     }
 
-    // สร้างลิสต์ช่อง
-    const list = document.getElementById("channels");
-    channels.forEach(ch => {
-        const div = document.createElement("div");
-        div.className = "channel";
-        div.innerHTML = `<span>${ch.ch}</span> ${ch.name}`;
-        div.onclick = () => play(ch, div);
-        list.appendChild(div);
-    });
+    function renderChannels(data) {
+        channelList.innerHTML = "";
+        data.forEach(ch => {
+            const div = document.createElement("div");
+            div.className = "channel";
+            div.innerHTML = `<span>${ch.ch}</span> ${ch.name}`;
+            div.onclick = () => play(ch, div);
+            channelList.appendChild(div);
+        });
+    }
+
+    function filterChannels() {
+        const query = document.getElementById("searchInput").value.toLowerCase();
+        const filtered = channels.filter(ch => 
+            ch.name.toLowerCase().includes(query) || ch.ch.toString().includes(query)
+        );
+        renderChannels(filtered);
+    }
+
+    // Initial Load
+    renderChannels(channels);
 </script>
 </body>
 </html>
