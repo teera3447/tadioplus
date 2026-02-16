@@ -2,143 +2,48 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Tadio+ ดูทีวีออนไลน์ (Full Version)</title>
+    <title>Tadio+ (HTTP Support)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
     <style>
-        :root {
-            --bg-dark: #0f172a;
-            --panel-dark: #020617;
-            --accent: #38bdf8;
-            --text-main: #fff;
-            --text-dim: #94a3b8;
-        }
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', 'Kanit', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-main);
-            overflow: hidden;
-        }
-        header {
-            padding: 12px;
-            background: var(--panel-dark);
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            border-bottom: 1px solid #1e293b;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #app {
-            display: flex;
-            height: calc(100vh - 56px);
-        }
-        #playerWrap {
-            flex: 1;
-            background: black;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-        video {
-            width: 100%;
-            height: 100%;
-            background: black;
-            outline: none;
-        }
-        .controls {
-            display: flex;
-            gap: 12px;
-            padding: 10px;
-            background: var(--panel-dark);
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        button, select, input {
-            padding: 8px 12px;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            cursor: pointer;
-            background: #1e293b;
-            color: white;
-            font-size: 14px;
-        }
-        input { cursor: text; width: 100%; box-sizing: border-box; }
-        button:hover { background: #334155; border-color: var(--accent); }
-        
-        #channels {
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            background: var(--panel-dark);
-            border-left: 1px solid #1e293b;
-        }
-        .search-box { padding: 10px; border-bottom: 1px solid #1e293b; }
-        #channelList {
-            flex: 1;
-            overflow-y: auto;
-        }
-        .channel {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-bottom: 1px solid #1e293b;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        :root { --bg: #0f172a; --panel: #020617; --accent: #38bdf8; --text: #fff; }
+        body { margin: 0; font-family: sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+        header { padding: 15px; background: var(--panel); text-align: center; border-bottom: 1px solid #1e293b; font-weight: bold; }
+        #app { display: flex; height: calc(100vh - 56px); }
+        #playerWrap { flex: 1; background: #000; display: flex; flex-direction: column; }
+        video { width: 100%; height: 100%; flex: 1; }
+        #channels { width: 300px; background: var(--panel); overflow-y: auto; border-left: 1px solid #1e293b; }
+        .search-box { padding: 10px; sticky: top; background: var(--panel); }
+        input { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #334155; background: #1e293b; color: #fff; box-sizing: border-box; }
+        .channel { padding: 12px; border-bottom: 1px solid #1e293b; cursor: pointer; font-size: 14px; }
         .channel:hover { background: #1e293b; }
-        .channel.active {
-            background: #1e293b;
-            border-left: 4px solid var(--accent);
-        }
-        .channel span {
-            color: var(--accent);
-            font-weight: bold;
-            margin-right: 12px;
-            min-width: 30px;
-        }
-        #currentName { color: var(--text-dim); font-size: 0.85rem; }
-
-        @media(max-width: 768px) {
-            #app { flex-direction: column; }
-            #channels { width: 100%; height: 40vh; border-left: none; border-top: 1px solid #1e293b; }
-            video { height: auto; aspect-ratio: 16/9; }
-        }
+        .channel.active { border-left: 4px solid var(--accent); background: #1e293b; }
+        .controls { padding: 10px; background: var(--panel); display: flex; gap: 10px; align-items: center; }
+        @media(max-width: 768px) { #app { flex-direction: column; } #channels { width: 100%; height: 40vh; } }
     </style>
 </head>
-
 <body>
-<header>
-    <span>Tadio+</span>
-    <span id="currentName">เลือกช่องเพื่อเริ่มรับชม...</span>
-</header>
+
+<header>Tadio+ ดูทีวีออนไลน์</header>
 
 <div id="app">
     <div id="playerWrap">
         <video id="video" controls playsinline></video>
         <div class="controls">
-            <button id="pipBtn" onclick="togglePIP()">PIP (จอเล็ก)</button>
-            <div style="display:flex; align-items:center; gap:5px;">
-                <label style="font-size:12px; color:#64748b;">คุณภาพ:</label>
-                <select id="qualitySelect" onchange="changeQuality()">
-                    <option value="-1">Auto</option>
-                </select>
-            </div>
+            <select id="qualitySelect" onchange="changeQuality()"><option value="-1">Auto</option></select>
+            <small id="status" style="color: #64748b;">เลือกช่องเพื่อรับชม</small>
         </div>
     </div>
-    
     <div id="channels">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="ค้นหาชื่อช่องหรือเลข..." onkeyup="filterChannels()">
+            <input type="text" id="search" placeholder="ค้นหาช่อง..." oninput="filter()">
         </div>
-        <div id="channelList"></div>
+        <div id="list"></div>
     </div>
 </div>
 
 <script>
+    // Proxy ตัวนี้สำคัญมากสำหรับการเล่น http บนหน้าเว็บ https
     const PROXY = "https://iptv.tadioplus.workers.dev/?url=";
 
     const channels = [
@@ -212,91 +117,82 @@
         {"name":"DLTV 14","ch":214,"url":"https://cdn-live.dltv.ac.th/dltv14.m3u8"},
         {"name":"DLTV 15","ch":215,"url":"https://cdn-live.dltv.ac.th/dltv15.m3u8"},
         {"name":"ETV","ch":216,"url":"http://150.95.66.20:1935/live/livestream/playlist.m3u8"}
-    ].sort((a,b)=>a.ch - b.ch);
+    ];
 
     let hls;
-    const video = document.getElementById("video");
-    const qualitySelect = document.getElementById("qualitySelect");
-    const currentNameDisp = document.getElementById("currentName");
-    const channelList = document.getElementById("channelList");
+    const video = document.getElementById('video');
+    const qSelect = document.getElementById('qualitySelect');
 
-    function fixUrl(url){
-        if (url.startsWith("http://") || /^(http|https):\/\/\d+\.\d+\.\d+\.\d+/.test(url)) {
+    // ฟังก์ชันสำคัญ: บังคับให้ลิงก์ http ต้องผ่าน Proxy
+    function fixUrl(url) {
+        if (!url.startsWith('https://')) {
+            console.log("Using Proxy for HTTP link:", url);
             return PROXY + encodeURIComponent(url);
         }
         return url;
     }
 
-    function play(ch, element){
-        document.querySelectorAll('.channel').forEach(el => el.classList.remove('active'));
-        element.classList.add('active');
-        currentNameDisp.innerText = `กำลังรับชม: ${ch.name} (CH ${ch.ch})`;
-
+    function play(ch, el) {
         const finalUrl = fixUrl(ch.url);
-        if(hls){ hls.destroy(); }
+        document.querySelectorAll('.channel').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('status').innerText = "กำลังเล่น: " + ch.name;
+
+        if (hls) hls.destroy();
 
         if (Hls.isSupported()) {
-            hls = new Hls({ autoStartLoad: true, startLevel: -1 });
+            hls = new Hls({
+                // เพิ่มการตั้งค่าเพื่อรองรับการโหลดข้ามโดเมนที่อาจติดขัดจาก http
+                xhrSetup: function(xhr, url) {
+                    xhr.withCredentials = false;
+                }
+            });
             hls.loadSource(finalUrl);
             hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                updateQualityMenu();
-                video.play().catch(() => {});
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                updateQ();
+                video.play();
             });
-            hls.on(Hls.Events.ERROR, (event, data) => {
-                if (data.fatal && finalUrl.includes(PROXY)) hls.loadSource(ch.url);
-            });
-        } 
-        else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = finalUrl;
             video.play();
         }
     }
 
-    function updateQualityMenu() {
-        qualitySelect.innerHTML = '<option value="-1">Auto</option>';
+    function updateQ() {
+        qSelect.innerHTML = '<option value="-1">Auto</option>';
         if (hls && hls.levels) {
-            hls.levels.forEach((level, index) => {
-                const option = document.createElement("option");
-                option.value = index;
-                option.text = (level.height ? level.height + "p" : "Level " + index);
-                qualitySelect.appendChild(option);
+            hls.levels.forEach((l, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.text = (l.height || i) + 'p';
+                qSelect.appendChild(opt);
             });
         }
     }
 
     function changeQuality() {
-        if (hls) hls.currentLevel = parseInt(qualitySelect.value);
+        if (hls) hls.currentLevel = parseInt(qSelect.value);
     }
 
-    async function togglePIP(){
-        try {
-            if (video !== document.pictureInPictureElement) await video.requestPictureInPicture();
-            else await document.exitPictureInPicture();
-        } catch (e) { alert("PIP ไม่พร้อมใช้งาน"); }
+    function filter() {
+        const txt = document.getElementById('search').value.toLowerCase();
+        render(channels.filter(c => c.name.toLowerCase().includes(txt) || c.ch.toString().includes(txt)));
     }
 
-    function renderChannels(data) {
-        channelList.innerHTML = "";
+    function render(data) {
+        const container = document.getElementById('list');
+        container.innerHTML = "";
         data.forEach(ch => {
-            const div = document.createElement("div");
-            div.className = "channel";
-            div.innerHTML = `<span>${ch.ch}</span> ${ch.name}`;
+            const div = document.createElement('div');
+            div.className = 'channel';
+            div.innerHTML = `<strong>${ch.ch}</strong> - ${ch.name}`;
             div.onclick = () => play(ch, div);
-            channelList.appendChild(div);
+            container.appendChild(div);
         });
     }
 
-    function filterChannels() {
-        const query = document.getElementById("searchInput").value.toLowerCase();
-        const filtered = channels.filter(ch => 
-            ch.name.toLowerCase().includes(query) || ch.ch.toString().includes(query)
-        );
-        renderChannels(filtered);
-    }
-
-    // Initial Load
-    renderChannels(channels);
+    render(channels);
 </script>
 </body>
 </html>
