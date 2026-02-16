@@ -1,0 +1,280 @@
+#EXTINF:-1 tvg-chno="1" ch-number="1" tvg-id="MVTV ท้องถิ่นไทย (75).th" tvg-name="MVTV ท้องถิ่นไทย (75)" tvg-logo="https://media-mvtv.imgix.net/channel/30_y_6j8hFgB9MRvUswTeCySxbJf3k74NQloE.png" group-title="Entertain", MVTV ท้องถิ่นไทย (75)
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/live_mvhub/mvtv75.stream/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="2" ch-number="2" tvg-id="NBT.th" tvg-name="NBT" tvg-logo="https://media-mvtv.imgix.net/channel/115_y_fFG0J46IoYNzUjVKatsbL7vZByxiMqTm.png" group-title="Digital TV", NBT
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/playlist.m3u8?null
+
+#EXTINF:-1 tvg-chno="3" ch-number="3" tvg-id="TPBS.th" tvg-name="TPBS" tvg-logo="https://media-mvtv.imgix.net/channel/116_y_cze67bhJwH8CIOaqnULfg0kKPAs2TQW1.png" group-title="Digital TV", TPBS
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://thaipbs-live.cdn.byteark.com/live/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="5" ch-number="5" tvg-id="5HD.th" tvg-name="5HD" tvg-logo="https://media-mvtv.imgix.net/channel/118_y_0kEyP9Yrw5jTWflXevIZ1Dqhoa2mi4QO.png" group-title="Digital TV", 5HD
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="7" ch-number="7" tvg-id="T SPORT.th" tvg-name="T SPORT" tvg-logo="https://media-mvtv.imgix.net/channel/119_y_OhjxHr9fqS2i0NJvPUlcL85mn6e4FoIu.png" group-title="Digital TV", T SPORT
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://live-us1.thaimomo.com/live-as/chtsport-2/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="8" ch-number="8" tvg-id="MVMall Trend.th" tvg-name="MVMall Trend" tvg-logo="https://media-mvtv2.imgix.net/channel/89_y_l7aeSDC2FoVrMXdqQ93vutZisHmhxykL.jpg" group-title="Shopping", MVMall Trend
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb1-live-mv.v2h-cdn.com/hls/fdfe/mvmalltrend/mvmalltrend.m3u8
+
+#EXTINF:-1 tvg-chno="9" ch-number="9" tvg-id="MVMall Plus (51).th" tvg-name="MVMall Plus (51)" tvg-logo="https://media-mvtv6.imgix.net/channel/32_y_FVzqJyNiGrdE0seQxCptgUcfmOYbnhLK.png" group-title="Shopping", MVMall Plus (51)
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb1-live-mv.v2h-cdn.com/hls/fded/mvmallplus/mvmallplus.m3u8
+
+#EXTINF:-1 tvg-chno="10" ch-number="10" tvg-id="TPTV.th" tvg-name="TPTV" tvg-logo="https://media-mvtv.imgix.net/channel/120_y_VSgE7P9GiDCxrhFWUALYpvzfM12cdqmH.png" group-title="Digital TV", TPTV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://tv-live.tpchannel.org/live/tv.m3u8?vhost=tv-live.tpchannel.org
+
+#EXTINF:-1 tvg-chno="11" ch-number="11" tvg-id="NBT North.th" tvg-name="NBT North (11)" tvg-logo="https://media-mvtv.imgix.net/channel/36_y_LzOCkoTG95mZhJ6IrADcMafyPQ1qVBE4.png" group-title="Shopping", MVMall Healthy (58)
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-edge.iiptvcdn.com/live_event/smil:4f6e-aa34-2034-5492-c82d.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="12" ch-number="12" tvg-id="NBT South.th" tvg-name="NBT South (11)" tvg-logo="https://media-mvtv.imgix.net/channel/40_y_R3MIzeVEgNlZovn5byXDchKdr9P12QfF.jpg" group-title="Shopping", MVMall DD (59)
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-edge.iiptvcdn.com/live_event/smil:a834-75a7-a662-db55-5fa3.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="13" ch-number="13" tvg-id="NBT Northeast.th" tvg-name="NBT Northeast (11)" tvg-logo="https://media-mvtv.imgix.net/channel/40_y_R3MIzeVEgNlZovn5byXDchKdr9P12QfF.jpg" group-title="Shopping", MVMall DD (59)
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-edge.iiptvcdn.com/live_event/smil:98ff-027d-46aa-1a6a-8480.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="14" ch-number="14" tvg-id="NBT Central.th" tvg-name="NBT Central (11)" tvg-logo="https://media-mvtv.imgix.net/channel/171_y_XOJ6qMirnDGuk01TLQjlWho5PtKSa9Ud.png" group-title="Shopping", MVMall Living (26)
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb1-live-mv.v2h-cdn.com/hls/fddc/mvmallliving/mvmallliving.m3u8
+
+#EXTINF:-1 tvg-chno="16" ch-number="16" tvg-id="TNN.th" tvg-name="TNN" tvg-logo="https://media-mvtv.imgix.net/channel/121_y_uQNBde5zrpo4TKm9kOZPx6iRbGaACfFE.png" group-title="Digital TV", TNN
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://gmmztv.v2h-cdn.com/ffdc/gmmz-tnn16.stream/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="18" ch-number="18" tvg-id="JKN18.th" tvg-name="JKN18" tvg-logo="https://media-mvtv.imgix.net/channel/122_y_bzfht4O5uRNHylcq1D6nV9TvxmdXWaQP.png" group-title="Digital TV", JKN18
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+http://45.144.166.242:1935//JKN/t3_jkn/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="21" ch-number="21" tvg-id="ไทบ้านทีวี.th" tvg-name="ไทบ้านทีวี" tvg-logo="https://media-mvtv.imgix.net/channel/35_y_V2hcyg7xD4BpCIPSJT0un8zWYL6bAqfi.png" group-title="Entertain", ไทบ้านทีวี
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/live_mvhub/thaiban.stream/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="22" ch-number="22" tvg-id="Nation.th" tvg-name="Nation" tvg-logo="https://media-mvtv.imgix.net/channel/123_y_3vyW276UFjIStew9DHJNs8AGKfdmZXpu.png" group-title="Digital TV", Nation
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/nation.m3u8
+
+#EXTINF:-1 tvg-chno="23" ch-number="23" tvg-id="Workpoint.th" tvg-name="Workpoint" tvg-logo="https://media-mvtv.imgix.net/channel/124_y_1PI2djLbMJpXO0n5oywKiNDzsWfTuFg4.png" group-title="Digital TV", Workpoint
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/workpoint.m3u8
+
+#EXTINF:-1 tvg-chno="24" ch-number="24" tvg-id="True24.th" tvg-name="True24" tvg-logo="https://media-mvtv.imgix.net/channel/125_y_vQwogyPUC1FsRhK9TmzSWqb8YI6aktcM.png" group-title="Digital TV", True24
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/true24.m3u8
+
+#EXTINF:-1 tvg-chno="25" ch-number="25" tvg-id="GMM25.th" tvg-name="GMM25" tvg-logo="https://media-mvtv.imgix.net/channel/126_y_6PH49bDqlg1aSxGoNUdT83R5Jkeyf2mB.png" group-title="Digital TV", GMM25
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/gmm25.m3u8
+
+#EXTINF:-1 tvg-chno="26" ch-number="26" tvg-id="MIX MAJOR.th" tvg-name="MIX MAJOR" tvg-logo="https://media-mvtv7.imgix.net/channel/194_y_9BUVhAoK5Dzxwjdu2rgXWP8Sb7JOnFRt.png" group-title="Movie", Mix Major
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/mix/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="27" ch-number="27" tvg-id="ช่อง 8.th" tvg-name="ช่อง 8" tvg-logo="https://media-mvtv.imgix.net/channel/127_y_uhsXzFBxYD6Wq2mpZeIUb4M7RK1ECkn8.png" group-title="Digital TV", ช่อง 8
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/ch8.m3u8
+
+#EXTINF:-1 tvg-chno="29" ch-number="29" tvg-id="MONO 29.th" tvg-name="MONO 29" tvg-logo="https://media-mvtv.imgix.net/channel/128_y_KUvdGmb2hpV41ni5rCk9OlFoXePMA80Q.png" group-title="Digital TV", MONO 29
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://monomax-uiripn.cdn.byteark.com/plain/th/480p/index.m3u8
+
+#EXTINF:-1 tvg-chno="30" ch-number="30" tvg-id="MCOT.th" tvg-name="MCOT" tvg-logo="https://media-mvtv.imgix.net/channel/129_y_hG7Nj2qWnldBu0fkMDyvT8CwYXLI649F.png" group-title="Digital TV", MCOT
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/mcot.m3u8
+
+#EXTINF:-1 tvg-chno="31" ch-number="31" tvg-id="ONE.th" tvg-name="ONE" tvg-logo="https://media-mvtv.imgix.net/channel/130_y_3Lx4j6ZzpIidKPqChaF2QRYeWorw79Jv.png" group-title="Digital TV", ONE
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/one.m3u8
+
+#EXTINF:-1 tvg-chno="32" ch-number="32" tvg-id="Thairath.th" tvg-name="Thairath" tvg-logo="https://media-mvtv.imgix.net/channel/131_y_iJmHlFadZ0G8EhIYMw2A3OfbN1Qpzgou.png" group-title="Digital TV", Thairath
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+http://45.144.166.242:1935//ThairathTV/t3_thairathtv/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="33" ch-number="33" tvg-id="3HD.th" tvg-name="3HD" tvg-logo="https://media-mvtv.imgix.net/channel/132_y_TFYiXWvrUf4s8tbIwJ29S3zMNeqghGmB.png" group-title="Digital TV", 3HD
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/ch3.m3u8
+
+#EXTINF:-1 tvg-chno="34" ch-number="34" tvg-id="Amarin.th" tvg-name="Amarin" tvg-logo="https://media-mvtv.imgix.net/channel/133_y_kLIyaJt3VoGD8sqrHnhKPjZUQ0RE6mu4.png" group-title="Digital TV", Amarin
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/amarin.m3u8
+
+#EXTINF:-1 tvg-chno="35" ch-number="35" tvg-id="7HD.th" tvg-name="7HD" tvg-logo="https://media-mvtv.imgix.net/channel/134_y_YTkIZJDsbmX26owPRpAFSfW0eyz95vn4.png" group-title="Digital TV", 7HD
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/ch7.m3u8
+
+#EXTINF:-1 tvg-chno="36" ch-number="36" tvg-id="PPTV.th" tvg-name="PPTV" tvg-logo="https://media-mvtv.imgix.net/channel/135_y_7hl4KHdwBqS0VGNCskrDLyci538zY2Qx.png" group-title="Digital TV", PPTV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb-gmmz.sky-cdn.com/gmm/pptv.m3u8
+
+#EXTINF:-1 tvg-chno="89" ch-number="89" tvg-id="Boomerang.th" tvg-name="Boomerang" tvg-logo="https://media-mvtv8.imgix.net/channel/153_y_3V9s1SWHcnaNILkoXMmF8GER4ZTrxJvg.jpg" group-title="Cartoon", Boomerang
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb1-live-mv.v2h-cdn.com/partner/boom_part/boomreang.m3u8
+
+#EXTINF:-1 tvg-chno="92" ch-number="92" tvg-id="Mango Mojito.th" tvg-name="Mango Mojito" tvg-logo="https://media-mvtv.imgix.net/channel/188_y_SHbpOor8a2ClM0g3LFcsT5I4GkRmu6q9.jpg" group-title="Cartoon", Mango Mojito
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb1-live-mv.v2h-cdn.com/partner/boom_cartoon_part/boom_catoon.m3u8
+
+#EXTINF:-1 tvg-chno="101" ch-number="101" tvg-id="MVLAO.la" tvg-name="MVLAO" tvg-logo="https://media-mvtv.imgix.net/channel/33_y_H4Rw5iJ7py10NvGAPEhWbYD6SgfarXOc.png" group-title="Entertain", MVLAO
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/live_mvhub/mvlao.stream/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="102" ch-number="102" tvg-id="MVM.mn" tvg-name="MVM" tvg-logo="https://media-mvtv.imgix.net/channel/34_y_PNWygduIqYU4DxtCrMoRzp60JFbkAGHO.png" group-title="Entertain", MVM
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/live_mvhub/mvm.stream/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="103" ch-number="103" tvg-id="MVCTV3.kh" tvg-name="MVCTV3" tvg-logo="https://media-mvtv.imgix.net/channel/109_y_fT8KaRdJWBmucyAUSehgNozjGq4HDVCn.png" group-title="Entertain", MVCTV3
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/mvc/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="104" ch-number="104" tvg-id="France 24.th" tvg-name="France 24" tvg-logo="https://media-mvtv.imgix.net/channel/151_y_YrFS8xk32BmplLV4NcHgdXRsuU7TvWZ5.png" group-title="News", France 24
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://lb1-live-mv.v2h-cdn.com/partner/freance24_part/freance24.m3u8
+
+#EXTINF:-1 tvg-chno="105" ch-number="105" tvg-id="CNA.th" tvg-name="CNA" tvg-logo="https://media-mvtv.imgix.net/channel/152_y_zynZw6RpjUoxHbGMh28eCKk9BlqIXJAa.png" group-title="News", CNA
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index.m3u8
+
+#EXTINF:-1 tvg-chno="106" ch-number="106" tvg-id="Esan TV.th" tvg-name="Esan TV" tvg-logo="https://media-mvtv.imgix.net/channel/108_y_1ag4BfHbDWT63hVJMuCwGKjIXdYnNv0q.png" group-title="Entertain", Esan TV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/esan/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="107" ch-number="107" tvg-id="MV News.th" tvg-name="MV News" tvg-logo="https://media-mvtv7.imgix.net/channel/197_y_EVPjZHiuMN3X8OIxTpnDz2y4raCLv7lw.png" group-title="News", MV News
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/news/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="108" ch-number="108" tvg-id="TVB Thai.th" tvg-name="TVB Thai" tvg-logo="https://media-mvtv10.imgix.net/channel/196_y_cga1S5Y9WvxBPVKGhqIUtbyT6feCmoEk.jpg" group-title="Entertain", TVB Thai
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/tvb/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="109" ch-number="109" tvg-id="Siam Channel.th" tvg-name="Siam Channel" tvg-logo="https://media-mvtv.imgix.net/channel/37_y_8KPsXmUlvo3WdRBa4kFw57MAjYC0JpSn.png" group-title="Movie", Siam Channel
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/siam/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="110" ch-number="110" tvg-id="Lido Channel.th" tvg-name="Lido Channel" tvg-logo="https://media-mvtv.imgix.net/channel/38_y_1GdTFB60lkIKhROmJe9cgSLXYxuaZtWq.png" group-title="Movie", Lido Channel
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/lido/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="111" ch-number="111" tvg-id="Scala Channel.th" tvg-name="Scala Channel" tvg-logo="https://media-mvtv.imgix.net/channel/39_y_XlQsEw0e6upJZHaLvYhof1W3DkS9yTPi.png" group-title="Movie", Scala Channel
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/scala/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="112" ch-number="112" tvg-id="Rama Channel (MVTV).th" tvg-name="Rama Channel (MVTV)" tvg-logo="https://media-mvtv2.imgix.net/channel/193_y_DkM50ECZIn7GTaO3tgKYfih6AzUPoBHp.jpg" group-title="Movie", Rama Channel (MVTV)
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/rama/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="113" ch-number="113" tvg-id="Mutalu.th" tvg-name="Mutalu" tvg-logo="https://media-mvtv.imgix.net/channel/111_y_aDCJ36j9LTdRNsV8YvigI1ftnycXe5ou.png" group-title="Other", Mutatu
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/mutalu/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="114" ch-number="114" tvg-id="MV Go Sport.th" tvg-name="MV Go Sport" tvg-logo="https://media-mvtv.imgix.net/channel/110_y_GHkXZ0x2BSTv8Kh9cJnmsiwoEyRYUfOd.png" group-title="Sport", MV Go Sport
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/gosport/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="115" ch-number="115" tvg-id="VTV News.th" tvg-name="VTV News" tvg-logo="https://media-mvtv6.imgix.net/channel/195_y_3s7OdxiEKJZF5MelBVuNS1mPYCztRW9H.png" group-title="News", VTV News
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://edge2a.v2h-cdn.com/ttd/vtvnews/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="116" ch-number="116" tvg-id="Zee Nung.th" tvg-name="Zee Nung" tvg-logo="https://img5.pic.in.th/file/secure-sv1/zeenung1e9c17debc90dde9.jpg" group-title="Movie", Zee Nung
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://amg17931-zee-amg17931c4-samsung-th-5592.playouts.now.amagi.tv/playlist/amg17931-asiatvusaltdfast-zeenung-samsungth/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="117" ch-number="117" tvg-id="ThaiChaiYO.th" tvg-name="ThaiChaiYo" tvg-logo="https://img2.pic.in.th/thaichaiyo.jpg" group-title="Entertain", Thai Chai Yo
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://live-psi.thaichaiyo.tv/tcy/live-480P.m3u8
+
+#EXTINF:-1 tvg-chno="118" ch-number="118" tvg-id="Top TV.th" tvg-name="Top TV" tvg-logo="https://img5.pic.in.th/file/secure-sv1/toptv.png" group-title="Entertain", Top TV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://live.cool-channel.com/cool/live-480P.m3u8
+
+#EXTINF:-1 tvg-chno="119" ch-number="119" tvg-id="Channel8.th" tvg-name="Channel8" tvg-logo="https://img2.pic.in.th/channel8.jpg" group-title="Movie", Channel8
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-th-vip.livestreaming.in.th/ch8/ch8/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="120" ch-number="120" tvg-id="GBN US.th" tvg-name="GBN US" tvg-logo="https://img2.pic.in.th/gbnus.jpg" group-title="Other", GBN US
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://us.gbnus.com/live/dhamma_high/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="121" ch-number="121" tvg-id="Boonniyom TV.th" tvg-name="Boonniyom TV" tvg-logo="https://img5.pic.in.th/file/secure-sv1/boonniyomtv.png" group-title="Other", Boonniyom TV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+http://live.boonniyom.tv/live/bntvhd.m3u8
+
+#EXTINF:-1 tvg-chno="122" ch-number="122" tvg-id="Police TV.th" tvg-name="Police TV" tvg-logo="https://img2.pic.in.th/policetv.jpg" group-title="Other", Police TV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-th-vip.livestreaming.in.th/policetv/policetv/playlist.m3u8
+
+#EXTINF:-1 tvg-chno="123" ch-number="123" tvg-id="SBT TV.th" tvg-name="SBT TV" tvg-logo="" group-title="Other", SBT TV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+http://122.155.12.107:1935/live/sbt_tv_aac_100/playlist.m3u8
+
+
+#EXTINF:-1 tvg-chno="201" ch-number="201" tvg-id="DLTV1.th" tvg-name="DLTV1" tvg-logo="https://media-mvtv.imgix.net/channel/136_y_tPkVabFhc7iUGQdmlEDC5IxvJZj4326M.png" group-title="Education", DLTV1
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv01.m3u8
+
+#EXTINF:-1 tvg-chno="202" ch-number="202" tvg-id="DLTV2.th" tvg-name="DLTV2" tvg-logo="https://media-mvtv.imgix.net/channel/137_y_yQOMjhFVupi8I1oal5TScnbkfAYtJC2v.png" group-title="Education", DLTV2
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv02.m3u8
+
+#EXTINF:-1 tvg-chno="203" ch-number="203" tvg-id="DLTV3.th" tvg-name="DLTV3" tvg-logo="https://media-mvtv.imgix.net/channel/138_y_NrPWRcyIBzbd5kJ3n8MqHDOmoVpA19fS.png" group-title="Education", DLTV3
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv03.m3u8
+
+#EXTINF:-1 tvg-chno="204" ch-number="204" tvg-id="DLTV4.th" tvg-name="DLTV4" tvg-logo="https://media-mvtv.imgix.net/channel/139_y_gx6RdEWuPqjBnAwoCI2mrltX5vJU4bDO.png" group-title="Education", DLTV4
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv04.m3u8
+
+#EXTINF:-1 tvg-chno="205" ch-number="205" tvg-id="DLTV5.th" tvg-name="DLTV5" tvg-logo="https://media-mvtv.imgix.net/channel/140_y_0NYqGlHdDfQeZFoSUcMWsx1rtOyTXb78.png" group-title="Education", DLTV5
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv05.m3u8
+
+#EXTINF:-1 tvg-chno="206" ch-number="206" tvg-id="DLTV6.th" tvg-name="DLTV6" tvg-logo="https://media-mvtv.imgix.net/channel/141_y_gIp8YiEP6MQsdeb9hjKcBFmUHVw1kNxy.png" group-title="Education", DLTV6
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv06.m3u8
+
+#EXTINF:-1 tvg-chno="207" ch-number="207" tvg-id="DLTV7.th" tvg-name="DLTV7" tvg-logo="https://media-mvtv.imgix.net/channel/142_y_U53zK2mOiFQ9xsCMS7AJrvTtoEf6dpIc.png" group-title="Education", DLTV7
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv07.m3u8
+
+#EXTINF:-1 tvg-chno="208" ch-number="208" tvg-id="DLTV8.th" tvg-name="DLTV8" tvg-logo="https://media-mvtv.imgix.net/channel/143_y_k4YNqBSgRW1OndxQuU6Pac0CMJVKIf57.png" group-title="Education", DLTV8
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv08.m3u8
+
+#EXTINF:-1 tvg-chno="209" ch-number="209" tvg-id="DLTV9.th" tvg-name="DLTV9" tvg-logo="https://media-mvtv.imgix.net/channel/144_y_9yo8mDwnI5OLgCHKvfsZ42BMXTzEbrSe.png" group-title="Education", DLTV9
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv09.m3u8
+
+#EXTINF:-1 tvg-chno="210" ch-number="210" tvg-id="DLTV10.th" tvg-name="DLTV10" tvg-logo="https://media-mvtv.imgix.net/channel/145_y_9Fkli2DoLIP0EX56AHW74MhquQKfng1a.png" group-title="Education", DLTV10
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv10.m3u8
+
+#EXTINF:-1 tvg-chno="211" ch-number="211" tvg-id="DLTV11.th" tvg-name="DLTV11" tvg-logo="https://media-mvtv.imgix.net/channel/146_y_5LVm0hDdr2N19IOlU3MAtqscKSk6xgZe.png" group-title="Education", DLTV11
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv11.m3u8
+
+#EXTINF:-1 tvg-chno="212" ch-number="212" tvg-id="DLTV12.th" tvg-name="DLTV12" tvg-logo="https://media-mvtv.imgix.net/channel/147_y_Uel5LZmKGoutv2PJiFIx60jayQbpnzqT.png" group-title="Education", DLTV12
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv12.m3u8
+
+#EXTINF:-1 tvg-chno="213" ch-number="213" tvg-id="DLTV13.th" tvg-name="DLTV13" tvg-logo="https://media-mvtv.imgix.net/channel/148_y_23K7iaWFMTnyxjfH5NIhUpCgZc8SB4s9.png" group-title="Education", DLTV13
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv13.m3u8
+
+#EXTINF:-1 tvg-chno="214" ch-number="214" tvg-id="DLTV14.th" tvg-name="DLTV14" tvg-logo="https://media-mvtv.imgix.net/channel/149_y_EzhGev4MFkQUOR08CdZisfP5Lnw9Jx6A.png" group-title="Education", DLTV14
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv14.m3u8
+
+#EXTINF:-1 tvg-chno="215" ch-number="215" tvg-id="DLTV15.th" tvg-name="DLTV15" tvg-logo="https://media-mvtv.imgix.net/channel/150_y_eUWs21cyV38ARS0OZmtgILodzKiJqfaD.png" group-title="Education", DLTV15
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+https://cdn-live.dltv.ac.th/dltv15.m3u8
+
+#EXTINF:-1 tvg-chno="216" ch-number="216" tvg-id="ETV.th" tvg-name="ETV" tvg-logo="https://img2.pic.in.th/etv.jpg" group-title="Education", ETV
+#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
+http://150.95.66.20:1935/live/livestream/playlist.m3u8
