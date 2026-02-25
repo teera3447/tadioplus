@@ -1,17 +1,13 @@
 #EXTINF:-1 tvg-chno="1" ch-number="1" tvg-id="MVTV ท้องถิ่นไทย (75).th" tvg-name="MVTV ท้องถิ่นไทย (75)" tvg-logo="https://media-mvtv.imgix.net/channel/30_y_6j8hFgB9MRvUswTeCySxbJf3k74NQloE.png" group-title="Entertain", MVTV ท้องถิ่นไทย (75)
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 https://edge2a.v2h-cdn.com/live_mvhub/mvtv75.stream/playlist.m3u8
 
 #EXTINF:-1 tvg-chno="2" ch-number="2" tvg-id="NBT.th" tvg-name="NBT" tvg-logo="https://media-mvtv.imgix.net/channel/115_y_fFG0J46IoYNzUjVKatsbL7vZByxiMqTm.png" group-title="Digital TV", NBT
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/playlist.m3u8?null
 
 #EXTINF:-1 tvg-chno="3" ch-number="3" tvg-id="TPBS.th" tvg-name="TPBS" tvg-logo="https://media-mvtv.imgix.net/channel/116_y_cze67bhJwH8CIOaqnULfg0kKPAs2TQW1.png" group-title="Digital TV", TPBS
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 https://thaipbs-live.cdn.byteark.com/live/playlist.m3u8
 
 #EXTINF:-1 tvg-chno="5" ch-number="5" tvg-id="5HD.th" tvg-name="5HD" tvg-logo="https://media-mvtv.imgix.net/channel/118_y_0kEyP9Yrw5jTWflXevIZ1Dqhoa2mi4QO.png" group-title="Digital TV", 5HD
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8
 
 #EXTINF:-1 tvg-chno="7" ch-number="7" tvg-id="T SPORT.th" tvg-name="T SPORT" tvg-logo="https://media-mvtv.imgix.net/channel/119_y_OhjxHr9fqS2i0NJvPUlcL85mn6e4FoIu.png" group-title="Digital TV", T SPORT
@@ -264,17 +260,13 @@ https://cdn-live.dltv.ac.th/dltv11.m3u8
 https://cdn-live.dltv.ac.th/dltv12.m3u8
 
 #EXTINF:-1 tvg-chno="213" ch-number="213" tvg-id="DLTV13.th" tvg-name="DLTV13" tvg-logo="https://media-mvtv.imgix.net/channel/148_y_23K7iaWFMTnyxjfH5NIhUpCgZc8SB4s9.png" group-title="Education", DLTV13
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 https://cdn-live.dltv.ac.th/dltv13.m3u8
 
 #EXTINF:-1 tvg-chno="214" ch-number="214" tvg-id="DLTV14.th" tvg-name="DLTV14" tvg-logo="https://media-mvtv.imgix.net/channel/149_y_EzhGev4MFkQUOR08CdZisfP5Lnw9Jx6A.png" group-title="Education", DLTV14
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 https://cdn-live.dltv.ac.th/dltv14.m3u8
 
 #EXTINF:-1 tvg-chno="215" ch-number="215" tvg-id="DLTV15.th" tvg-name="DLTV15" tvg-logo="https://media-mvtv.imgix.net/channel/150_y_eUWs21cyV38ARS0OZmtgILodzKiJqfaD.png" group-title="Education", DLTV15
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 https://cdn-live.dltv.ac.th/dltv15.m3u8
 
 #EXTINF:-1 tvg-chno="216" ch-number="216" tvg-id="ETV.th" tvg-name="ETV" tvg-logo="https://img2.pic.in.th/etv.jpg" group-title="Education", ETV
-#EXTVLCOPT:http-user-agent=VLC/3.0.11 LibVLC
 http://150.95.66.20:1935/live/livestream/playlist.m3u8
