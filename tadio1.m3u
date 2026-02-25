@@ -67,7 +67,7 @@ https://amg17931-zee-amg17931c4-samsung-th-5592.playouts.now.amagi.tv/playlist/a
 #EXTINF:-1 tvg-chno="117" ch-number="117" tvg-id="ThaiChaiYO.th" tvg-name="ThaiChaiYo" tvg-logo="https://img2.pic.in.th/thaichaiyo.jpg" group-title="Entertain", Thai Chai Yo
 https://live-psi.thaichaiyo.tv/tcy/live-480P.m3u8
 #EXTINF:-1 tvg-chno="118" ch-number="118" tvg-id="Top TV.th" tvg-name="Top TV" tvg-logo="https://img5.pic.in.th/file/secure-sv1/toptv.png" group-title="Entertain", Top TV
-https://live.cool-channel.com/cool/live-480P.m3u8
+https://live-psi.cool-channel.com/cool/live-480P.m3u8
 #EXTINF:-1 tvg-chno="119" ch-number="119" tvg-id="Channel8.th" tvg-name="Channel8" tvg-logo="https://img2.pic.in.th/channel8.jpg" group-title="Movie", Channel8
 https://cdn-th-vip.livestreaming.in.th/ch8/ch8/playlist.m3u8
 #EXTINF:-1 tvg-chno="120" ch-number="120" tvg-id="GBN US.th" tvg-name="GBN US" tvg-logo="https://img2.pic.in.th/gbnus.jpg" group-title="Other", GBN US
