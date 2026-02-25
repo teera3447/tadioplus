@@ -2,74 +2,80 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Tadio+ (Video.js Edition)</title>
+    <title>Tadio+ TV Online (Perfect UI)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <link href="https://unpkg.com/@videojs/themes@1.0.1/dist/fantasy/index.css" rel="stylesheet">
 
     <style>
-        :root { 
-            --bg: #0f172a; --panel: #020617; --accent: #38bdf8; --text: #f8fafc; 
-        }
-
-        body { 
-            margin: 0; font-family: 'Segoe UI', sans-serif; 
-            background: var(--bg); color: var(--text); overflow: hidden; 
-        }
-
-        header { 
-            padding: 15px; background: var(--panel); text-align: center; 
-            border-bottom: 1px solid #1e293b; font-weight: bold;
-        }
-
+        :root { --bg: #0f172a; --panel: #020617; --accent: #38bdf8; --text: #f8fafc; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+        header { padding: 15px; background: var(--panel); text-align: center; border-bottom: 1px solid #1e293b; font-weight: bold; }
         #app { display: flex; height: calc(100vh - 56px); }
-
-        /* ปรับแต่ง Player ให้เต็มกรอบ */
-        #playerWrap { 
-            flex: 1; background: #000; display: flex; flex-direction: column;
-        }
+        #playerWrap { flex: 1; background: #000; position: relative; display: flex; flex-direction: column; }
         
+        /* --- Video.js Perfect UI Customization --- */
         .video-js { width: 100% !important; height: 100% !important; }
-
-        #channels { 
-            width: 320px; background: var(--panel); 
-            display: flex; flex-direction: column; border-left: 1px solid #1e293b; 
+        
+        /* จัดตำแหน่งปุ่มคุณภาพและ LIVE ไม่ให้ทับกัน */
+        .vjs-quality-selector {
+            order: 2; /* ลำดับที่สองต่อจากปุ่ม Play */
+            margin-right: 15px !important;
         }
 
+        /* เปลี่ยนไอคอน Quality ที่พัง ให้เป็นข้อความ HD ที่ดูทันสมัย */
+        .vjs-quality-selector .vjs-menu-button-placeholder:before {
+            content: "HD" !important;
+            font-family: Arial, sans-serif !important;
+            font-weight: 900;
+            font-size: 14px !important;
+            line-height: 3.2 !important; /* จัดให้อยู่กลางแนวตั้ง */
+            color: var(--accent);
+        }
+
+        /* ปรับแต่งปุ่ม LIVE ให้แยกออกมาชัดเจน */
+        .vjs-live-control {
+            order: 3;
+            margin-left: 5px !important;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        /* ปรับแต่ง Volume และปุ่มอื่นๆ ให้อยู่ฝั่งขวา */
+        .vjs-volume-panel { order: 10; margin-left: auto !important; }
+        .vjs-fullscreen-control { order: 11; }
+
+        /* ปรับแต่งเมนูเลือกความละเอียดให้สวยงาม */
+        .vjs-menu-content { background-color: #1e293b !important; border-radius: 4px; }
+        .vjs-menu-item:hover { background-color: var(--accent) !important; color: #000 !important; }
+        .vjs-menu-item.vjs-selected { background-color: #334155 !important; }
+
+        #channels { width: 320px; background: var(--panel); display: flex; flex-direction: column; border-left: 1px solid #1e293b; }
         .search-box { padding: 15px; }
-        input { 
-            width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #334155; 
-            background: #1e293b; color: #fff; box-sizing: border-box; outline: none;
-        }
-
+        input { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #1e293b; color: #fff; outline: none; box-sizing: border-box; }
         #list { flex: 1; overflow-y: auto; }
-        .channel { 
-            padding: 12px 15px; border-bottom: 1px solid #1e293b; 
-            cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 12px;
-        }
+        .channel { padding: 12px; border-bottom: 1px solid #1e293b; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 10px; }
         .channel:hover { background: #1e293b; }
         .channel.active { border-left: 4px solid var(--accent); background: #1e293b; }
-        .channel img { width: 35px; height: 35px; object-fit: contain; background: #fff; border-radius: 4px; }
-
-        .status-bar { padding: 10px; background: #020617; font-size: 12px; color: #94a3b8; border-top: 1px solid #1e293b; }
-
-        @media(max-width: 768px) { 
-            #app { flex-direction: column; } 
-            #channels { width: 100%; height: 45vh; } 
-        }
+        .channel img { width: 30px; height: 30px; object-fit: contain; background: #fff; border-radius: 4px; }
+        .status-bar { padding: 8px 15px; background: #020617; font-size: 11px; color: #64748b; border-top: 1px solid #1e293b; }
+        
+        @media(max-width: 768px) { #app { flex-direction: column; } #channels { width: 100%; height: 45vh; } }
     </style>
 </head>
 <body>
 
-<header>Tadio+ TV ONLINE (Video.js)</header>
+<header>Tadio+ Premium TV</header>
 
 <div id="app">
     <div id="playerWrap">
         <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" playsinline></video>
-        <div class="status-bar" id="status">กำลังเริ่มต้นระบบ...</div>
+        <div class="status-bar" id="status">กำลังเริ่มต้น...</div>
     </div>
-
     <div id="channels">
         <div class="search-box">
             <input type="text" id="search" placeholder="ค้นหาช่อง..." oninput="filter()">
@@ -79,98 +85,87 @@
 </div>
 
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+<script src="https://unpkg.com/videojs-contrib-quality-levels@4.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
+<script src="https://unpkg.com/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
 
 <script>
-    /** * CONFIGURATION: เปลี่ยน URL เป็น Worker ของคุณ
-     */
     const BASE_WORKER_URL = "https://iptv.tadioplus.workers.dev"; 
-    const M3U_URL = `${BASE_WORKER_URL}/list`; 
-    const PROXY   = `${BASE_WORKER_URL}/?url=`;
+    const GITHUB_BACKUP = "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u";
 
     let allChannels = [];
     const statusText = document.getElementById('status');
-    
-    // ตั้งค่าตัวเครื่องเล่น Video.js
-    const player = videojs('my-video', {
-        fluid: false,
-        autoplay: false,
-        responsive: true,
-        controlBar: {
-            children: [
-                'playToggle',
-                'volumePanel',
-                'currentTimeDisplay',
-                'timeDivider',
-                'durationDisplay',
-                'progressControl',
-                'liveDisplay', // แสดงปุ่ม LIVE สำหรับ HLS
-                'fullscreenToggle',
-            ],
-        }
+    let v_player;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        v_player = videojs('my-video', {
+            fluid: false,
+            responsive: true,
+            autoplay: false,
+            controlBar: {
+                // ระบุลำดับปุ่มเพื่อให้กระจายตัวสวยงาม
+                children: [
+                    'playToggle',
+                    'qualitySelector',
+                    'liveDisplay',
+                    'progressControl', // แถบเวลา
+                    'volumePanel',
+                    'fullscreenToggle',
+                ],
+            }
+        });
+
+        v_player.hlsQualitySelector({ displayCurrentQuality: true });
+        loadM3U();
     });
 
-    // 1. โหลดข้อมูลรายการช่อง
     async function loadM3U() {
+        let fetchUrl = `${BASE_WORKER_URL}/list`;
         try {
-            const response = await fetch(M3U_URL);
+            statusText.innerText = "กำลังดึงข้อมูล...";
+            let response = await fetch(fetchUrl);
             const data = await response.text();
-            const lines = data.split('\n');
-            const channels = [];
-            
-            for (let i = 0; i < lines.length; i++) {
-                if (lines[i].startsWith('#EXTINF:')) {
-                    const info = lines[i];
-                    const url = lines[i + 1]?.trim();
-                    if (url && url.startsWith('http')) {
-                        const name = info.split(',')[1] || "Unknown Channel";
-                        const logoMatch = info.match(/tvg-logo="([^"]+)"/);
-                        const logo = logoMatch ? logoMatch[1] : "";
-                        channels.push({ name, url, logo });
-                    }
-                }
-            }
-            allChannels = channels;
-            render(allChannels);
-            statusText.innerText = `พร้อมใช้งาน: โหลดแล้ว ${allChannels.length} ช่อง`;
+            parseM3U(data);
         } catch (error) {
-            statusText.innerText = "Error: ไม่สามารถดึงข้อมูลรายการช่องได้";
+            const res = await fetch(GITHUB_BACKUP);
+            const text = await res.text();
+            parseM3U(text);
         }
     }
 
-    // 2. ฟังก์ชัน Proxy
+    function parseM3U(data) {
+        const lines = data.split('\n');
+        const channels = [];
+        for (let i = 0; i < lines.length; i++) {
+            if (lines[i].startsWith('#EXTINF:')) {
+                const info = lines[i];
+                const url = lines[i + 1]?.trim();
+                if (url && url.startsWith('http')) {
+                    const name = info.split(',')[1] || "Unknown Channel";
+                    const logoMatch = info.match(/tvg-logo="([^"]+)"/);
+                    const logo = logoMatch ? logoMatch[1] : "";
+                    channels.push({ name, url, logo });
+                }
+            }
+        }
+        allChannels = channels;
+        render(allChannels);
+        statusText.innerText = `Online: ${allChannels.length} Channels`;
+    }
+
     function fixUrl(url) {
-        if (url.includes('livedoomovies') || url.includes('m3u8') || !url.startsWith('https://')) {
-            return PROXY + encodeURIComponent(url);
+        if (url.includes('livedoomovies') || !url.startsWith('https://')) {
+            return `${BASE_WORKER_URL}/?url=` + encodeURIComponent(url);
         }
         return url;
     }
 
-    // 3. ฟังก์ชันเล่น (Video.js version)
     function play(ch, el) {
         const finalUrl = fixUrl(ch.url);
-        
-        // UI Highlighting
         document.querySelectorAll('.channel').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
-        statusText.innerText = "กำลังเชื่อมต่อ: " + ch.name;
-
-        // สั่งเปลี่ยน Source ใน Video.js
-        player.src({
-            src: finalUrl,
-            type: 'application/x-mpegURL' // กำหนดประเภทว่าเป็น HLS
-        });
-
-        player.play().catch(err => {
-            console.log("Autoplay blocked or link error");
-        });
-
-        player.on('playing', () => {
-            statusText.innerText = "กำลังฉาย: " + ch.name;
-        });
-
-        player.on('error', () => {
-            statusText.innerText = "เกิดข้อผิดพลาดในการเล่นช่องนี้ (ลิงก์อาจหมดอายุ)";
-        });
+        statusText.innerText = "Connecting to " + ch.name + "...";
+        v_player.src({ src: finalUrl, type: 'application/x-mpegURL' });
+        v_player.play();
     }
 
     function filter() {
@@ -184,14 +179,12 @@
         data.forEach(ch => {
             const div = document.createElement('div');
             div.className = 'channel';
-            const img = ch.logo ? `<img src="${ch.logo}" onerror="this.style.display='none'">` : '📺';
+            const img = ch.logo ? `<img src="${ch.logo}" onerror="this.src='https://via.placeholder.com/30x30?text=TV'">` : '📺';
             div.innerHTML = `${img} <span>${ch.name}</span>`;
             div.onclick = () => play(ch, div);
             container.appendChild(div);
         });
     }
-
-    loadM3U();
 </script>
 </body>
 </html>
