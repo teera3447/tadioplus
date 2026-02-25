@@ -3,7 +3,7 @@ https://lb1-live-mv.v2h-cdn.com/partner/mvtv_part/mvtv.m3u8
 #EXTINF:-1 tvg-chno="2" ch-number="2" tvg-id="NBT.th" tvg-name="NBT" tvg-logo="https://media-mvtv.imgix.net/channel/115_y_fFG0J46IoYNzUjVKatsbL7vZByxiMqTm.png" group-title="Digital TV", NBT
 https://cdn-edge.iiptvcdn.com/live_event/smil:1180-0c9c-ad1f-4e5d-aa48.smil/playlist.m3u8?null
 #EXTINF:-1 tvg-chno="3" ch-number="3" tvg-id="TPBS.th" tvg-name="TPBS" tvg-logo="https://media-mvtv.imgix.net/channel/116_y_cze67bhJwH8CIOaqnULfg0kKPAs2TQW1.png" group-title="Digital TV", TPBS
-https://thaipbs-mcx0wm.cdn.byteark.com/live/playlist_480p/index.m3u8
+https://www.livedoomovies.com:4431/02_THAIPBS_720p/playlist.m3u8
 #EXTINF:-1 tvg-chno="5" ch-number="5" tvg-id="5HD.th" tvg-name="5HD" tvg-logo="https://media-mvtv.imgix.net/channel/118_y_0kEyP9Yrw5jTWflXevIZ1Dqhoa2mi4QO.png" group-title="Digital TV", 5HD
 https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8
 #EXTINF:-1 tvg-chno="7" ch-number="7" tvg-id="T SPORT.th" tvg-name="T SPORT" tvg-logo="https://media-mvtv.imgix.net/channel/119_y_OhjxHr9fqS2i0NJvPUlcL85mn6e4FoIu.png" group-title="Digital TV", T SPORT
@@ -41,7 +41,7 @@ https://lb-gmmz.sky-cdn.com/gmm/mcot.m3u8
 #EXTINF:-1 tvg-chno="31" ch-number="31" tvg-id="ONE.th" tvg-name="ONE" tvg-logo="https://media-mvtv.imgix.net/channel/130_y_3Lx4j6ZzpIidKPqChaF2QRYeWorw79Jv.png" group-title="Digital TV", ONE
 https://lb-gmmz.sky-cdn.com/gmm/one.m3u8
 #EXTINF:-1 tvg-chno="32" ch-number="32" tvg-id="Thairath.th" tvg-name="Thairath" tvg-logo="https://media-mvtv.imgix.net/channel/131_y_iJmHlFadZ0G8EhIYMw2A3OfbN1Qpzgou.png" group-title="Digital TV", Thairath
-http://45.144.166.242:1935//ThairathTV/t3_thairathtv/playlist.m3u8
+https://live888.gstreamcdn.com/app/stream_32/ts:master.m3u8
 #EXTINF:-1 tvg-chno="33" ch-number="33" tvg-id="3HD.th" tvg-name="3HD" tvg-logo="https://media-mvtv.imgix.net/channel/132_y_TFYiXWvrUf4s8tbIwJ29S3zMNeqghGmB.png" group-title="Digital TV", 3HD
 https://lb-gmmz.sky-cdn.com/gmm/ch3.m3u8
 #EXTINF:-1 tvg-chno="34" ch-number="34" tvg-id="Amarin.th" tvg-name="Amarin" tvg-logo="https://media-mvtv.imgix.net/channel/133_y_kLIyaJt3VoGD8sqrHnhKPjZUQ0RE6mu4.png" group-title="Digital TV", Amarin
@@ -57,7 +57,7 @@ https://lb1-live-mv.v2h-cdn.com/partner/boom_cartoon_part/boom_catoon.m3u8
 #EXTINF:-1 tvg-chno="101" ch-number="101" tvg-id="MVLAO.la" tvg-name="MVLAO" tvg-logo="https://media-mvtv.imgix.net/channel/33_y_H4Rw5iJ7py10NvGAPEhWbYD6SgfarXOc.png" group-title="Entertain", MVLAO
 https://lb1-live-mv.v2h-cdn.com/partner/mvlao_part/mvlao.m3u8
 #EXTINF:-1 tvg-chno="102" ch-number="102" tvg-id="MVM.mn" tvg-name="MVM" tvg-logo="https://media-mvtv.imgix.net/channel/34_y_PNWygduIqYU4DxtCrMoRzp60JFbkAGHO.png" group-title="Entertain", MVM
-https://lb1-live-mv.v2h-cdn.com/partner/mvm_part/mvlao.m3u8
+https://lb1-live-mv.v2h-cdn.com/partner/mvm_part/mvm.m3u8
 #EXTINF:-1 tvg-chno="104" ch-number="104" tvg-id="France 24.th" tvg-name="France 24" tvg-logo="https://media-mvtv.imgix.net/channel/151_y_YrFS8xk32BmplLV4NcHgdXRsuU7TvWZ5.png" group-title="News", France 24
 https://lb1-live-mv.v2h-cdn.com/partner/freance24_part/freance24.m3u8
 #EXTINF:-1 tvg-chno="105" ch-number="105" tvg-id="CNA.th" tvg-name="CNA" tvg-logo="https://media-mvtv.imgix.net/channel/152_y_zynZw6RpjUoxHbGMh28eCKk9BlqIXJAa.png" group-title="News", CNA
