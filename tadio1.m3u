@@ -3,7 +3,7 @@ https://lb1-live-mv.v2h-cdn.com/partner/mvtv_part/mvtv.m3u8
 #EXTINF:-1 tvg-chno="2" ch-number="2" tvg-id="NBT.th" tvg-name="NBT" tvg-logo="https://media-mvtv.imgix.net/channel/115_y_fFG0J46IoYNzUjVKatsbL7vZByxiMqTm.png" group-title="Digital TV", NBT
 https://cdn-edge.iiptvcdn.com/live_event/smil:1180-0c9c-ad1f-4e5d-aa48.smil/playlist.m3u8?null
 #EXTINF:-1 tvg-chno="3" ch-number="3" tvg-id="TPBS.th" tvg-name="TPBS" tvg-logo="https://media-mvtv.imgix.net/channel/116_y_cze67bhJwH8CIOaqnULfg0kKPAs2TQW1.png" group-title="Digital TV", TPBS
-https://www.livedoomovies.com:4431/02_THAIPBS_720p/playlist.m3u8
+https://www.livedoomovies.com:4431/02_THAIPBS_720p/playlist.m3u8?_t=1772047060486
 #EXTINF:-1 tvg-chno="5" ch-number="5" tvg-id="5HD.th" tvg-name="5HD" tvg-logo="https://media-mvtv.imgix.net/channel/118_y_0kEyP9Yrw5jTWflXevIZ1Dqhoa2mi4QO.png" group-title="Digital TV", 5HD
 https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8
 #EXTINF:-1 tvg-chno="7" ch-number="7" tvg-id="T SPORT.th" tvg-name="T SPORT" tvg-logo="https://media-mvtv.imgix.net/channel/119_y_OhjxHr9fqS2i0NJvPUlcL85mn6e4FoIu.png" group-title="Digital TV", T SPORT
