@@ -5,177 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Tadio+ ฟังวิทยุออนไลน์</title>
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+  
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; transition: all 0.3s ease; }
+    body { font-family: 'Kanit', sans-serif; margin: 0; padding: 20px; text-align: center; background-color: #f8f9fa; color: #333; }
+    body.dark { background-color: #1a1a1a; color: #eee; }
 
-    body {
-      font-family: 'Kanit', sans-serif;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-      background-color: #fff;
-      color: #000;
-    }
+    #home-link, #toggle-theme { position: fixed; top: 15px; font-size: 14px; padding: 8px 15px; border-radius: 20px; text-decoration: none; cursor: pointer; z-index: 1000; border: none; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    #home-link { left: 15px; color: #333; }
+    #toggle-theme { right: 15px; }
+    body.dark #home-link, body.dark #toggle-theme { background: #333; color: #fff; }
 
-    body.dark {
-      background-color: #111;
-      color: #fff;
-    }
+    h1 { margin-top: 70px; font-size: 24px; color: #ff4757; }
+    #search-input { padding: 12px 20px; font-size: 16px; width: 100%; max-width: 400px; margin-bottom: 25px; border-radius: 25px; border: 1px solid #ddd; outline: none; }
+    #search-input:focus { border-color: #ff4757; box-shadow: 0 0 8px rgba(255, 71, 87, 0.2); }
 
-    #home-link {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      font-size: 14px;
-      background: #ddd;
-      padding: 6px 12px;
-      border-radius: 5px;
-      text-decoration: none;
-      color: #000;
-      z-index: 999;
-    }
-
-    #toggle-theme {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      font-size: 14px;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 999;
-      background: #ddd;
-      border: none;
-    }
-
-    body.dark #toggle-theme {
-      background: #444;
-      color: #fff;
-    }
-
-    h1 {
-      margin-top: 60px;
-      font-size: 22px;
-    }
-
-    #search-input {
-      padding: 10px;
-      font-size: 16px;
-      width: 90%;
-      max-width: 400px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
+    /* Player Box */
     #now-playing {
-      margin: 10px auto 20px;
-      max-width: 500px;
-      background: #f0f0f0;
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-      flex-direction: column;
-      align-items: center;
+      margin: 10px auto 30px; max-width: 450px; background: #fff; padding: 20px; border-radius: 20px;
+      display: none; flex-direction: column; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
+    body.dark #now-playing { background: #2d2d2d; }
+    #now-playing img { width: 120px; height: 120px; border-radius: 15px; object-fit: cover; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    #now-playing-text { font-size: 1.1em; font-weight: bold; margin-bottom: 15px; }
 
-    body.dark #now-playing {
-      background: #222;
-    }
+    /* Custom Controls */
+    .controls { display: flex; align-items: center; gap: 15px; width: 100%; justify-content: center; }
+    .play-btn { background: #ff4757; color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-size: 16px; font-weight: bold; }
+    .play-btn:hover { background: #ff6b81; transform: scale(1.05); }
+    .volume-container { display: flex; align-items: center; gap: 10px; }
+    input[type=range] { cursor: pointer; accent-color: #ff4757; }
 
-    #now-playing img {
-      width: 100px;
-      border-radius: 8px;
-    }
+    /* Station Grid */
+    ul.station-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; max-width: 800px; margin: 0 auto; }
+    .station-list li { background: #fff; border-radius: 15px; padding: 15px; cursor: pointer; border: 1px solid transparent; }
+    body.dark .station-list li { background: #2d2d2d; }
+    .station-list li:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: #ff4757; }
+    .station-list img { width: 80px; height: 80px; border-radius: 10px; margin-bottom: 10px; }
+    .station-list span { display: block; font-size: 0.85em; font-weight: 500; }
 
-    #now-playing span {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
-
-    #radio-player {
-      width: 100%;
-      max-width: 400px;
-      margin-top: 10px;
-    }
-
-    ul.station-list {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .station-list li {
-      width: 45%;
-      max-width: 180px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      background: #fff;
-      transition: background-color 0.3s ease;
-    }
-
-    body.dark .station-list li {
-      background: #333;
-      border-color: #555;
-    }
-
-    .station-list li:hover {
-      background-color: #eee;
-    }
-
-    .station-list img {
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    .station-list span {
-      margin-top: 8px;
-      font-weight: bold;
-      font-size: 0.9em;
-    }
-
-    @media (max-width: 600px) {
-      .station-list li {
-        width: 90%;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
-
-      #search-input {
-        font-size: 14px;
-      }
-
-      #now-playing img {
-        width: 80px;
-      }
+    @media (max-width: 480px) {
+      ul.station-list { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
-  <button id="toggle-theme">🌗</button>
+  <a href="https://teera3447.github.io/tadioplus/" id="home-link">← หน้าหลัก</a>
+  <button id="toggle-theme">🌗 ธีม</button>
 
-  <h1>Tadio+ ฟังวิทยุออนไลน์</h1>
-
-  <input type="text" id="search-input" placeholder="ค้นหาสถานี..." />
+  <h1>Tadio+ วิทยุออนไลน์</h1>
+  <input type="text" id="search-input" placeholder="ค้นหาคลื่นวิทยุ..." />
 
   <div id="now-playing">
-    <img id="now-playing-image" src="" alt="สถานีที่เล่น" />
-    <span id="now-playing-text"></span>
-    <audio id="radio-player" controls preload="none"></audio>
+    <img id="now-playing-image" src="" alt="Station" />
+    <span id="now-playing-text">กรุณาเลือกสถานี</span>
+    
+    <div class="controls">
+      <button id="play-pause-btn" class="play-btn">Pause</button>
+      <div class="volume-container">
+        <span>🔈</span>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="1">
+        <span>🔊</span>
+      </div>
+    </div>
   </div>
 
   <ul class="station-list" id="station-list">
@@ -191,17 +85,17 @@
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" alt="EFM">
       <span>EFM</span>
     </li>
-    <li data-stream-url="https://atimeonline3.smartclick.co.th/hotwave" data-station-name="HotWave" data-image="https://pbs.twimg.com/profile_images/1807722461401841664/F5WYtN6X_400x400.jpg">
-       <img src="https://pbs.twimg.com/profile_images/1807722461401841664/F5WYtN6X_400x400.jpg" alt="HotWave">
-       <span>HotWave</span>
+    <li data-stream-url="https://atimeonline3.smartclick.co.th/hotwave" data-station-name="HotWave Krub" data-image="https://img5.pic.in.th/file/secure-sv1/hotwave.png">
+       <img src="https://img5.pic.in.th/file/secure-sv1/hotwave.png" alt="HotWave Krub">
+       <span>HotWave Krub</span>
     </li>
      <li data-stream-url="https://radio14.plathong.net/7086/;" data-station-name="Sweet FM 88.5" data-image="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg">
       <img src="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg" alt="Sweet FM 88.5">
       <span>Sweet FM 88.5</span>
     </li>
-    <li data-stream-url="https://28163.live.streamtheworld.com/HITZ_955AAC_128.aac" data-station-name="HITZ Thailand" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Ttre-Wk8wYR74F4PjvDGZJoTtvtrm5DsiQ&s">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Ttre-Wk8wYR74F4PjvDGZJoTtvtrm5DsiQ&s" alt="HITZ Thailand">
-      <span>HITZ Thailand</span>
+    <li data-stream-url="https://streaming.flexconnect.net/voiceflex/voiceflex/playlist.m3u8" data-station-name="Flex 104.5" data-image="https://img2.pic.in.th/flex.jpeg">
+      <img src="https://img2.pic.in.th/flex.jpegs" alt="Flex 104.5">
+      <span>Flex 104.5</span>
     </li>
     <li data-stream-url="https://radio11.plathong.net/7138/;stream.mp3" data-station-name="วิทยุครอบครัวข่าว 106" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10" alt="วิทยุครอบครัวข่าว 106">
@@ -210,6 +104,10 @@
     <li data-stream-url="https://radio11.plathong.net/7590/;stream.mp3" data-station-name="Chula Radio Plus" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10" alt="Chula Radio Plus">
       <span>Chula Radio Plus</span>
+    </li>
+    <li data-stream-url="https://tkx5l99p.mcot.net/Mellow/fm975.stream_aac/playlist.m3u8" data-station-name="Mellow POP" data-image="https://img2.pic.in.th/mellowpop.png">
+      <img src="https://img2.pic.in.th/mellowpop.png" alt="Mellow POP">
+      <span>Mellow POP</span>
     </li>
     <li data-stream-url="https://cdn-th2.livestreaming.in.th/shoutcast/8510" data-station-name="จส.100" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10" alt="จส.100">
@@ -227,10 +125,18 @@
        <img src="https://img2.pic.in.th/sunshineradio.jpg" alt="Sunshine Radio">
        <span>Sunshine Radio</span>
     </li>
-  </ul>
+    <li data-stream-url="https://4122.radio4.thzhost.com/;stream" data-station-name="Yesterday 106.5 FM Phuket" data-image="https://img2.pic.in.th/yesterday1065phuket.jpg">
+       <img src="https://img2.pic.in.th/yesterday1065phuket.jpg" alt="Yesterday 106.5 FM Phuket">
+       <span>Yesterday 106.5 FM Phuket</span>
+    </li>
+    </ul>
 
   <script>
-    const player = document.getElementById('radio-player');
+    let radioSound = null;
+    let currentVol = 1;
+
+    const btnPlayPause = document.getElementById('play-pause-btn');
+    const volumeSlider = document.getElementById('volume-slider');
     const nowPlaying = document.getElementById('now-playing');
     const nowPlayingText = document.getElementById('now-playing-text');
     const nowPlayingImage = document.getElementById('now-playing-image');
@@ -242,48 +148,72 @@
         const url = li.dataset.streamUrl;
         const name = li.dataset.stationName;
         const img = li.dataset.image;
-        player.src = url;
-        player.play();
-        nowPlayingText.textContent = `กำลังเล่น: ${name}`;
-        nowPlayingImage.src = img;
-        nowPlaying.style.display = 'flex';
+
+        playStation(url, name, img);
       });
     });
 
-    // ค้นหาแบบ fuzzy
+    function playStation(url, name, img) {
+      // หยุดสถานีเดิมแบบมี Fade out
+      if (radioSound) {
+        const oldSound = radioSound;
+        oldSound.fade(currentVol, 0, 1000);
+        setTimeout(() => oldSound.unload(), 1000);
+      }
+
+      // สร้างตัวเล่นใหม่
+      radioSound = new Howl({
+        src: [url],
+        html5: true, // บังคับโหมด HTML5 สำหรับ Streaming
+        format: ['mp3', 'aac', 'm3u8'],
+        volume: 0,
+        onloaderror: function() { alert("โหลดสถานีล้มเหลว ลิงก์อาจเสียครับ"); }
+      });
+
+      radioSound.play();
+      radioSound.fade(0, currentVol, 1500);
+
+      // อัปเดต UI
+      nowPlayingText.textContent = `กำลังเล่น: ${name}`;
+      nowPlayingImage.src = img;
+      nowPlaying.style.display = 'flex';
+      btnPlayPause.textContent = "Pause";
+    }
+
+    // ปุ่ม Play/Pause
+    btnPlayPause.addEventListener('click', () => {
+      if (!radioSound) return;
+      
+      if (radioSound.playing()) {
+        radioSound.pause();
+        btnPlayPause.textContent = "Play";
+      } else {
+        radioSound.play();
+        btnPlayPause.textContent = "Pause";
+      }
+    });
+
+    // ปรับระดับเสียง
+    volumeSlider.addEventListener('input', (e) => {
+      currentVol = e.target.value;
+      if (radioSound) {
+        radioSound.volume(currentVol);
+      }
+    });
+
+    // ค้นหา (แบบเดิมของคุณ)
     searchInput.addEventListener('input', () => {
       const keyword = searchInput.value.toLowerCase();
       stationList.forEach(li => {
         const name = li.dataset.stationName.toLowerCase();
-        const similarity = levenshteinDistance(keyword, name);
-        li.style.display = (name.includes(keyword) || similarity <= 2) ? 'flex' : 'none';
+        li.style.display = name.includes(keyword) ? 'block' : 'none';
       });
     });
 
     // เปลี่ยนธีม
-    const toggleBtn = document.getElementById('toggle-theme');
-    toggleBtn.addEventListener('click', () => {
+    document.getElementById('toggle-theme').addEventListener('click', () => {
       document.body.classList.toggle('dark');
     });
-
-    // ฟังก์ชัน fuzzy
-    function levenshteinDistance(a, b) {
-      const matrix = Array.from({ length: a.length + 1 }, () => []);
-      for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
-      for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
-      for (let i = 1; i <= a.length; i++) {
-        for (let j = 1; j <= b.length; j++) {
-          const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-          matrix[i][j] = Math.min(
-            matrix[i - 1][j] + 1,
-            matrix[i][j - 1] + 1,
-            matrix[i - 1][j - 1] + cost
-          );
-        }
-      }
-      return matrix[a.length][b.length];
-    }
   </script>
-
 </body>
 </html>
