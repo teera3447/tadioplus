@@ -34,7 +34,7 @@ https://lb-gmmz.sky-cdn.com/gmm/true24.m3u8
 https://lb-gmmz.sky-cdn.com/gmm/gmm25.m3u8
 #EXTINF:-1 tvg-chno="27" ch-number="27" tvg-id="ช่อง 8.th" tvg-name="ช่อง 8" tvg-logo="https://media-mvtv.imgix.net/channel/127_y_uhsXzFBxYD6Wq2mpZeIUb4M7RK1ECkn8.png" group-title="Digital TV", ช่อง 8
 https://lb-gmmz.sky-cdn.com/gmm/ch8.m3u8
-#EXTINF:-1 tvg-chno="29" ch-number="29" tvg-id="MONO 29.th" tvg-name="MONO 29" tvg-logo="https://media-mvtv.imgix.net/channel/128_y_KUvdGmb2hpV41ni5rCk9OlFoXePMA80Q.png" group-title="Digital TV", MONO 29
+#EXTINF:-1 tvg-chno="28" ch-number="28" tvg-id="MONO 29.th" tvg-name="MONO 29" tvg-logo="https://media-mvtv.imgix.net/channel/128_y_KUvdGmb2hpV41ni5rCk9OlFoXePMA80Q.png" group-title="Digital TV", MONO 29
 https://monomax-uiripn.cdn.byteark.com/plain/th/480p/index.m3u8
 #EXTINF:-1 tvg-chno="29" ch-number="29" tvg-id="MONO 29ST.th" tvg-name="MONO 29ST" tvg-logo="https://media-mvtv.imgix.net/channel/128_y_KUvdGmb2hpV41ni5rCk9OlFoXePMA80Q.png" group-title="Digital TV", MONO 29 SoundTrack
 https://monomax-uiripn.cdn.byteark.com/plain/st/480p/index.m3u8
