@@ -75,7 +75,7 @@ https://cdn-th-vip.livestreaming.in.th/ch8/ch8/playlist.m3u8
 #EXTINF:-1 tvg-chno="120" ch-number="120" tvg-id="GBN US.th" tvg-name="GBN US" tvg-logo="https://img2.pic.in.th/gbnus.jpg" group-title="Other", GBN US
 https://raw.githubusercontent.com/BellezaEmporium/IPTV_Exception/refs/heads/master/channels/us/gbnus.m3u8
 #EXTINF:-1 tvg-chno="121" ch-number="121" tvg-id="Boonniyom TV.th" tvg-name="Boonniyom TV" tvg-logo="https://img5.pic.in.th/file/secure-sv1/boonniyomtv.png" group-title="Other", Boonniyom TV
-http://live.boonniyom.tv/live/bntvhd.m3u8
+https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/bntv.m3u8
 #EXTINF:-1 tvg-chno="122" ch-number="122" tvg-id="Police TV.th" tvg-name="Police TV" tvg-logo="https://img2.pic.in.th/policetv.jpg" group-title="Other", Police TV
 https://cdn-th-vip.livestreaming.in.th/policetv/policetv/playlist.m3u8
 #EXTINF:-1 tvg-chno="123" ch-number="123" tvg-id="SBB TV.th" tvg-name="SBB TV" tvg-logo="https://img5.pic.in.th/file/secure-sv1/sbbtv.png" group-title="Other", SBB TV
