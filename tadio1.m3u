@@ -61,7 +61,7 @@ https://lb1-live-mv.v2h-cdn.com/partner/mvlao_part/mvlao.m3u8
 #EXTINF:-1 tvg-chno="102" ch-number="102" tvg-id="MVM.mn" tvg-name="MVM" tvg-logo="https://media-mvtv.imgix.net/channel/34_y_PNWygduIqYU4DxtCrMoRzp60JFbkAGHO.png" group-title="Entertain", MVM
 https://lb1-live-mv.v2h-cdn.com/partner/mvm_part/mvm.m3u8
 #EXTINF:-1 tvg-chno="104" ch-number="104" tvg-id="France 24.th" tvg-name="France 24" tvg-logo="https://media-mvtv.imgix.net/channel/151_y_YrFS8xk32BmplLV4NcHgdXRsuU7TvWZ5.png" group-title="News", France 24
-https://lb1-live-mv.v2h-cdn.com/partner/freance24_part/freance24.m3u8
+https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/m3u8/france24en.m3u8
 #EXTINF:-1 tvg-chno="105" ch-number="105" tvg-id="CNA.th" tvg-name="CNA" tvg-logo="https://media-mvtv.imgix.net/channel/152_y_zynZw6RpjUoxHbGMh28eCKk9BlqIXJAa.png" group-title="News", CNA
 https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index.m3u8
 #EXTINF:-1 tvg-chno="116" ch-number="116" tvg-id="Zee Nung.th" tvg-name="Zee Nung" tvg-logo="https://img5.pic.in.th/file/secure-sv1/zeenung1e9c17debc90dde9.jpg" group-title="Movie", Zee Nung
@@ -75,7 +75,7 @@ https://cdn-th-vip.livestreaming.in.th/ch8/ch8/playlist.m3u8
 #EXTINF:-1 tvg-chno="120" ch-number="120" tvg-id="GBN US.th" tvg-name="GBN US" tvg-logo="https://img2.pic.in.th/gbnus.jpg" group-title="Other", GBN US
 https://raw.githubusercontent.com/BellezaEmporium/IPTV_Exception/refs/heads/master/channels/us/gbnus.m3u8
 #EXTINF:-1 tvg-chno="121" ch-number="121" tvg-id="Boonniyom TV.th" tvg-name="Boonniyom TV" tvg-logo="https://img5.pic.in.th/file/secure-sv1/boonniyomtv.png" group-title="Other", Boonniyom TV
-https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/bntv.m3u8
+https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/m3u8/bntv.m3u8
 #EXTINF:-1 tvg-chno="122" ch-number="122" tvg-id="Police TV.th" tvg-name="Police TV" tvg-logo="https://img2.pic.in.th/policetv.jpg" group-title="Other", Police TV
 https://cdn-th-vip.livestreaming.in.th/policetv/policetv/playlist.m3u8
 #EXTINF:-1 tvg-chno="123" ch-number="123" tvg-id="SBB TV.th" tvg-name="SBB TV" tvg-logo="https://img5.pic.in.th/file/secure-sv1/sbbtv.png" group-title="Other", SBB TV
