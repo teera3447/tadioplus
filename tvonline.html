@@ -16,16 +16,17 @@
             --accent: #ff4757; 
             --text: #333333; 
             --border: #eeeeee;
-            --shadow: rgba(0,0,0,0.05);
+            --hover: #fff1f2;
         }
 
+        /* Dark Mode Settings */
         body.dark { 
-            --bg: #1a1a1a; 
-            --panel: #2d2d2d; 
+            --bg: #121212; 
+            --panel: #1e1e1e; 
             --accent: #ff4757; 
             --text: #eeeeee; 
-            --border: #444444;
-            --shadow: rgba(0,0,0,0.3);
+            --border: #333333;
+            --hover: #2d2d2d;
         }
 
         * { box-sizing: border-box; transition: background 0.3s, color 0.3s; }
@@ -35,52 +36,63 @@
             font-family: 'Kanit', sans-serif; 
             background: var(--bg); 
             color: var(--text); 
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            overflow: hidden; /* ล็อคหน้าจอไม่ให้ scroll ทั้งหน้า */
         }
 
-        /* Navigation & Header */
+        /* Header */
         header { 
-            padding: 15px; 
+            padding: 0 20px; 
             background: var(--panel); 
-            text-align: center; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             border-bottom: 1px solid var(--border); 
-            font-weight: 600; 
-            font-size: 20px;
-            color: var(--accent);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            height: 60px;
+            flex-shrink: 0;
         }
+        .logo { font-weight: 600; font-size: 20px; color: var(--accent); }
 
         #home-link, #toggle-theme { 
-            position: absolute; top: 12px; font-size: 13px; padding: 6px 15px; 
+            font-size: 13px; padding: 6px 15px; 
             border-radius: 20px; text-decoration: none; cursor: pointer; 
             border: 1px solid var(--border); background: var(--panel); color: var(--text);
-            box-shadow: 0 2px 5px var(--shadow);
         }
-        #home-link { left: 15px; }
-        #toggle-theme { right: 15px; }
 
-        /* Main Layout */
+        /* Layout Container */
         #app { 
             display: flex; 
-            flex: 1;
-            overflow: hidden; 
+            flex: 1; 
+            overflow: hidden; /* ให้ลูกจัดการ scroll เอง */
         }
 
+        /* Player Section (Left) */
         #playerWrap { 
             flex: 1; 
             background: #000; 
             display: flex; 
             flex-direction: column; 
-            justify-content: center;
+            position: relative;
         }
-
         .video-js { width: 100% !important; height: 100% !important; }
 
-        /* Sidebar Channels */
+        /* Status Bar ใต้เครื่องเล่น */
+        .status-bar { 
+            padding: 8px 15px; 
+            background: rgba(0,0,0,0.8); 
+            font-size: 12px; 
+            color: #aaa; 
+            position: absolute;
+            bottom: 50px; /* เหนือ control bar นิดหน่อย */
+            left: 10px;
+            border-radius: 5px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Sidebar Section (Right) */
         #channels { 
             width: 350px; 
             background: var(--panel); 
@@ -89,103 +101,98 @@
             border-left: 1px solid var(--border); 
         }
 
-        .search-box { padding: 20px; border-bottom: 1px solid var(--border); }
+        .search-box { padding: 15px; border-bottom: 1px solid var(--border); }
         input { 
-            width: 100%; 
-            padding: 12px 20px; 
-            border-radius: 25px; 
-            border: 1px solid var(--border); 
-            background: var(--bg); 
-            color: var(--text); 
-            outline: none; 
+            width: 100%; padding: 10px 15px; 
+            border-radius: 20px; border: 1px solid var(--border); 
+            background: var(--bg); color: var(--text); outline: none; 
             font-family: 'Kanit';
         }
-        input:focus { border-color: var(--accent); }
 
-        #list { flex: 1; overflow-y: auto; padding: 10px; }
+        /* แถบเลื่อนรายการช่อง */
+        #list { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 10px; 
+        }
         
+        /* สไตล์ Scrollbar ให้ดูสวยขึ้น */
+        #list::-webkit-scrollbar { width: 6px; }
+        #list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        body.dark #list::-webkit-scrollbar-thumb { background: #444; }
+
         .channel { 
-            padding: 12px 15px; 
-            margin-bottom: 8px;
-            border-radius: 12px;
+            padding: 10px; 
+            margin-bottom: 5px;
+            border-radius: 10px;
             cursor: pointer; 
             display: flex; 
             align-items: center; 
-            gap: 15px;
-            border: 1px solid transparent;
+            gap: 12px;
+            border: 2px solid transparent;
         }
-        .channel:hover { background: var(--bg); transform: translateX(5px); }
+        .channel:hover { background: var(--hover); }
         .channel.active { 
-            background: var(--bg); 
+            background: var(--hover); 
             border-color: var(--accent);
-            box-shadow: 0 4px 10px var(--shadow);
         }
 
         .channel img { 
-            width: 45px; height: 45px; 
+            width: 40px; height: 40px; 
             object-fit: contain; 
             background: #fff; 
-            border-radius: 10px; 
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px; 
+            padding: 3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .channel span { font-size: 15px; font-weight: 400; }
-
-        .status-bar { 
-            padding: 10px 20px; 
-            background: var(--panel); 
-            font-size: 12px; 
-            color: #888; 
-            border-top: 1px solid var(--border); 
-        }
+        .channel span { font-size: 14px; font-weight: 400; }
 
         /* Footer */
         footer {
             background: var(--panel);
-            padding: 20px;
+            padding: 10px;
             text-align: center;
             border-top: 1px solid var(--border);
-            font-size: 13px;
+            font-size: 12px;
             color: #888;
+            flex-shrink: 0;
         }
-        footer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+        footer a { color: var(--accent); text-decoration: none; }
 
-        /* Responsive */
-        @media(max-width: 900px) { 
-            #app { flex-direction: column; overflow: visible; } 
-            #channels { width: 100%; height: auto; border-left: none; }
+        /* Mobile Responsive */
+        @media(max-width: 850px) { 
+            body { overflow-y: auto; height: auto; }
+            #app { flex-direction: column; height: auto; } 
+            #channels { width: 100%; border-left: none; height: 500px; }
             #playerWrap { height: 56.25vw; min-height: 250px; }
-            #list { max-height: 500px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับสู่หน้าหลัก</a>
-    Tadio+ TV Online
+    <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับหน้าหลัก</a>
+    <div class="logo">Tadio+ TV</div>
     <button id="toggle-theme">🌗 ธีม</button>
 </header>
 
 <div id="app">
     <div id="playerWrap">
         <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" playsinline></video>
-        <div class="status-bar" id="status">กำลังเริ่มต้น...</div>
+        <div class="status-bar" id="status">เตรียมความพร้อม...</div>
     </div>
     
     <div id="channels">
         <div class="search-box">
-            <input type="text" id="search" placeholder="ค้นหาช่องโทรทัศน์..." oninput="filter()">
+            <input type="text" id="search" placeholder="🔍 ค้นหาช่องรายการ..." oninput="filter()">
         </div>
-        <div id="list"></div>
+        <div id="list">
+            </div>
     </div>
 </div>
 
 <footer>
-    <p>© 2026 <strong>Tadio+</strong> | ดูทีวีและฟังวิทยุออนไลน์ฟรี 24 ชั่วโมง</p>
-    <div class="footer-links">
-        <a href="https://forms.gle/Bh3rELNDStE91HiN8">แจ้งปัญหาการใช้งาน</a> • <a href="#">นโยบายความเป็นส่วนตัว</a>
-    </div>
+    <p>© 2026 <strong>Tadio+</strong> | <a href="https://forms.gle/Bh3rELNDStE91HiN8">แจ้งปัญหา</a></p>
 </footer>
 
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
@@ -193,7 +200,7 @@
 <script src="https://unpkg.com/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
 
 <script>
-    // Theme Logic
+    // --- ระบบเปลี่ยนธีม ---
     const themeBtn = document.getElementById('toggle-theme');
     const savedTheme = localStorage.getItem('tadio-tv-theme');
     if (savedTheme === 'dark') document.body.classList.add('dark');
@@ -203,7 +210,7 @@
         localStorage.setItem('tadio-tv-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
 
-    // Player & Data Logic (คงเดิมตามของคุณ)
+    // --- ระบบเล่นวิดีโอ (คงเดิมจากโค้ดคุณ) ---
     const BASE_WORKER_URL = "https://iptv.tadioplus.workers.dev"; 
     const GITHUB_BACKUP = "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u";
 
@@ -232,10 +239,9 @@
     });
 
     async function loadM3U() {
-        let fetchUrl = `${BASE_WORKER_URL}/list`;
         try {
-            statusText.innerText = "⏳ กำลังดึงข้อมูลช่องรายการ...";
-            let response = await fetch(fetchUrl);
+            statusText.innerText = "⏳ กำลังดึงข้อมูล...";
+            let response = await fetch(`${BASE_WORKER_URL}/list`);
             const data = await response.text();
             parseM3U(data);
         } catch (error) {
@@ -262,7 +268,7 @@
         }
         allChannels = channels;
         render(allChannels);
-        statusText.innerText = `🟢 ออนไลน์: ${allChannels.length} ช่องรายการ`;
+        statusText.innerText = `🟢 พร้อมรับชม ${allChannels.length} ช่อง`;
     }
 
     function fixUrl(url) {
@@ -276,14 +282,9 @@
         const finalUrl = fixUrl(ch.url);
         document.querySelectorAll('.channel').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
-        statusText.innerText = "📡 กำลังเชื่อมต่อ: " + ch.name;
+        statusText.innerText = "📡 เชื่อมต่อ: " + ch.name;
         v_player.src({ src: finalUrl, type: 'application/x-mpegURL' });
         v_player.play();
-        
-        // Auto scroll to player on mobile
-        if(window.innerWidth <= 900) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
     }
 
     function filter() {
@@ -297,7 +298,7 @@
         data.forEach(ch => {
             const div = document.createElement('div');
             div.className = 'channel';
-            const img = ch.logo ? `<img src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50x50?text=TV'">` : '📺';
+            const img = ch.logo ? `<img src="${ch.logo}" onerror="this.src='https://via.placeholder.com/40x40?text=TV'">` : '📺';
             div.innerHTML = `${img} <span>${ch.name}</span>`;
             div.onclick = () => play(ch, div);
             container.appendChild(div);
