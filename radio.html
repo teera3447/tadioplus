@@ -4,72 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Tadio+ ฟังวิทยุออนไลน์</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   
   <style>
-    * { box-sizing: border-box; transition: all 0.3s ease; }
-    body { font-family: 'Kanit', sans-serif; margin: 0; padding: 20px; text-align: center; background-color: #f8f9fa; color: #333; }
+    * { box-sizing: border-box; transition: background 0.3s, color 0.3s, transform 0.2s; }
+    body { 
+      font-family: 'Kanit', sans-serif; 
+      margin: 0; padding: 20px; text-align: center; 
+      background-color: #f8f9fa; color: #333; 
+    }
     body.dark { background-color: #1a1a1a; color: #eee; }
 
-    #home-link, #toggle-theme { position: fixed; top: 15px; font-size: 14px; padding: 8px 15px; border-radius: 20px; text-decoration: none; cursor: pointer; z-index: 1000; border: none; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    #home-link, #toggle-theme { 
+      position: fixed; top: 15px; font-size: 14px; padding: 8px 15px; 
+      border-radius: 20px; text-decoration: none; cursor: pointer; z-index: 1000; 
+      border: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    }
     #home-link { left: 15px; color: #333; }
     #toggle-theme { right: 15px; }
     body.dark #home-link, body.dark #toggle-theme { background: #333; color: #fff; }
 
-    h1 { margin-top: 70px; font-size: 24px; color: #ff4757; }
-    #search-input { padding: 12px 20px; font-size: 16px; width: 100%; max-width: 400px; margin-bottom: 25px; border-radius: 25px; border: 1px solid #ddd; outline: none; }
-    #search-input:focus { border-color: #ff4757; box-shadow: 0 0 8px rgba(255, 71, 87, 0.2); }
-
-    /* Player Box */
-    #now-playing {
-      margin: 10px auto 30px; max-width: 450px; background: #fff; padding: 20px; border-radius: 20px;
-      display: none; flex-direction: column; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    h1 { margin-top: 70px; font-size: 28px; color: #ff4757; letter-spacing: 1px; }
+    
+    #search-input { 
+      padding: 12px 25px; font-size: 16px; width: 100%; max-width: 400px; 
+      margin-bottom: 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-    body.dark #now-playing { background: #2d2d2d; }
-    #now-playing img { width: 120px; height: 120px; border-radius: 15px; object-fit: cover; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-    #now-playing-text { font-size: 1.1em; font-weight: bold; margin-bottom: 15px; }
+    #search-input:focus { border-color: #ff4757; box-shadow: 0 0 12px rgba(255, 71, 87, 0.2); }
 
-    /* Custom Controls */
-    .controls { display: flex; align-items: center; gap: 15px; width: 100%; justify-content: center; }
-    .play-btn { background: #ff4757; color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-size: 16px; font-weight: bold; }
-    .play-btn:hover { background: #ff6b81; transform: scale(1.05); }
+    #now-playing {
+      margin: 10px auto 30px; max-width: 450px; background: #fff; padding: 25px; 
+      border-radius: 25px; display: none; flex-direction: column; align-items: center; 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+    body.dark #now-playing { background: #2d2d2d; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+    
+    #now-playing img { 
+      width: 140px; height: 140px; border-radius: 20px; object-fit: cover; 
+      margin-bottom: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+    }
+    
+    #now-playing-text { font-size: 1.2em; font-weight: 600; margin-bottom: 5px; color: #ff4757; }
+    #now-playing-song { font-size: 0.9em; color: #666; margin-bottom: 10px; font-style: italic; }
+    body.dark #now-playing-song { color: #aaa; }
+    #loading-status { font-size: 0.85em; color: #747d8c; margin-bottom: 20px; min-height: 20px; }
+
+    .controls { display: flex; align-items: center; gap: 20px; width: 100%; justify-content: center; }
+    .play-btn { 
+      background: #ff4757; color: white; border: none; padding: 12px 35px; 
+      border-radius: 25px; cursor: pointer; font-size: 18px; font-weight: 600; 
+      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+    }
+    .play-btn:hover { background: #ff6b81; transform: translateY(-2px); }
     .volume-container { display: flex; align-items: center; gap: 10px; }
-    input[type=range] { cursor: pointer; accent-color: #ff4757; }
+    input[type=range] { cursor: pointer; accent-color: #ff4757; width: 100px; }
 
-    /* Station Grid */
-    ul.station-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; max-width: 800px; margin: 0 auto; }
-    .station-list li { background: #fff; border-radius: 15px; padding: 15px; cursor: pointer; border: 1px solid transparent; }
+    .share-btn { 
+      margin-top: 20px; background: transparent; color: #747d8c; border: 1px solid #ddd; 
+      padding: 6px 15px; border-radius: 15px; cursor: pointer; font-size: 13px; 
+    }
+    .share-btn:hover { background: #f1f2f6; color: #ff4757; }
+    body.dark .share-btn { border-color: #444; color: #999; }
+
+    ul.station-list { 
+      list-style: none; padding: 0; display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+      gap: 20px; max-width: 950px; margin: 0 auto; 
+    }
+    .station-list li { 
+      background: #fff; border-radius: 18px; padding: 15px; cursor: pointer; 
+      border: 1px solid transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
     body.dark .station-list li { background: #2d2d2d; }
-    .station-list li:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: #ff4757; }
-    .station-list img { width: 80px; height: 80px; border-radius: 10px; margin-bottom: 10px; }
-    .station-list span { display: block; font-size: 0.85em; font-weight: 500; }
+    .station-list li:hover { 
+      transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #ff4757; 
+    }
+    .station-list img { width: 100px; height: 100px; border-radius: 12px; margin-bottom: 12px; object-fit: cover; }
+    .station-list span { display: block; font-size: 0.9em; font-weight: 500; height: 40px; overflow: hidden; }
+
+    /* Footer Styles */
+    footer {
+      margin-top: 50px; padding: 30px 20px; border-top: 1px solid #ddd;
+      font-size: 14px; color: #747d8c;
+    }
+    body.dark footer { border-top-color: #333; color: #999; }
+    footer a { color: #ff4757; text-decoration: none; margin: 0 5px; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { margin-top: 10px; }
 
     @media (max-width: 480px) {
-      ul.station-list { grid-template-columns: repeat(2, 1fr); }
+      ul.station-list { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      h1 { font-size: 22px; }
     }
   </style>
 </head>
 <body>
 
-  <a href="https://teera3447.github.io/tadioplus/" id="home-link">← หน้าหลัก</a>
+  <a href="#" id="home-link">← หน้าหลัก</a>
   <button id="toggle-theme">🌗 ธีม</button>
 
   <h1>Tadio+ วิทยุออนไลน์</h1>
   <input type="text" id="search-input" placeholder="ค้นหาคลื่นวิทยุ..." />
 
+  <audio id="radio-player" preload="none"></audio>
+
   <div id="now-playing">
     <img id="now-playing-image" src="" alt="Station" />
-    <span id="now-playing-text">กรุณาเลือกสถานี</span>
-    
+    <div id="now-playing-text">เลือกสถานี</div>
+    <div id="now-playing-song">🎵 พร้อมรับฟังความสนุก</div>
+    <div id="loading-status"></div>
     <div class="controls">
-      <button id="play-pause-btn" class="play-btn">Pause</button>
+      <button id="play-pause-btn" class="play-btn">Play</button>
       <div class="volume-container">
         <span>🔈</span>
         <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="1">
         <span>🔊</span>
       </div>
     </div>
+    <button id="share-btn" class="share-btn" style="display: none;">🔗 แชร์ให้เพื่อน</button>
   </div>
 
   <ul class="station-list" id="station-list">
@@ -89,7 +143,7 @@
        <img src="https://img5.pic.in.th/file/secure-sv1/hotwave.png" alt="HotWave Krub">
        <span>HotWave Krub</span>
     </li>
-     <li data-stream-url="https://radio14.plathong.net/7086/;" data-station-name="Sweet FM 88.5" data-image="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg">
+    <li data-stream-url="https://radio14.plathong.net/7086/;" data-station-name="Sweet FM 88.5" data-image="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg">
       <img src="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg" alt="Sweet FM 88.5">
       <span>Sweet FM 88.5</span>
     </li>
@@ -133,91 +187,107 @@
        <img src="https://img2.pic.in.th/yesterday1065phuket.jpg" alt="Yesterday 106.5 FM Phuket">
        <span>Yesterday 106.5 FM Phuket</span>
     </li>
-    </ul>
+  </ul>
+
+  <footer>
+    <p>© 2026 Tadio+ | ฟังวิทยุออนไลน์ได้ทุกที่ ทุกเวลา</p>
+    <div class="footer-links">
+      <a href="#">นโยบายความเป็นส่วนตัว</a> • 
+      <a href="#">ติดต่อเรา</a>
+    </div>
+  </footer>
 
   <script>
-    let radioSound = null;
-    let currentVol = 1;
-
+    const audioEl = document.getElementById('radio-player');
     const btnPlayPause = document.getElementById('play-pause-btn');
     const volumeSlider = document.getElementById('volume-slider');
     const nowPlaying = document.getElementById('now-playing');
     const nowPlayingText = document.getElementById('now-playing-text');
     const nowPlayingImage = document.getElementById('now-playing-image');
+    const nowPlayingSong = document.getElementById('now-playing-song');
+    const loadingStatus = document.getElementById('loading-status');
+    const shareBtn = document.getElementById('share-btn');
     const stationList = document.querySelectorAll('.station-list li');
     const searchInput = document.getElementById('search-input');
+    const themeBtn = document.getElementById('toggle-theme');
+
+    let hls = null;
+    let currentVol = 1;
+    let currentStationName = "";
+
+    const savedTheme = localStorage.getItem('tadio-theme');
+    if (savedTheme === 'dark') document.body.classList.add('dark');
+
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('tadio-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sharedStation = urlParams.get('station');
+      if (sharedStation) {
+        const target = Array.from(stationList).find(li => li.dataset.stationName === sharedStation);
+        if (target) setTimeout(() => target.click(), 800);
+      }
+    });
 
     stationList.forEach(li => {
       li.addEventListener('click', () => {
-        const url = li.dataset.streamUrl;
-        const name = li.dataset.stationName;
-        const img = li.dataset.image;
-
-        playStation(url, name, img);
+        playStation(li.dataset.streamUrl, li.dataset.stationName, li.dataset.image);
       });
     });
 
     function playStation(url, name, img) {
-      // หยุดสถานีเดิมแบบมี Fade out
-      if (radioSound) {
-        const oldSound = radioSound;
-        oldSound.fade(currentVol, 0, 1000);
-        setTimeout(() => oldSound.unload(), 1000);
-      }
-
-      // สร้างตัวเล่นใหม่
-      radioSound = new Howl({
-        src: [url],
-        html5: true, // บังคับโหมด HTML5 สำหรับ Streaming
-        format: ['mp3', 'aac', 'm3u8'],
-        volume: 0,
-        onloaderror: function() { alert("โหลดสถานีล้มเหลว ลิงก์อาจเสียครับ"); }
-      });
-
-      radioSound.play();
-      radioSound.fade(0, currentVol, 1500);
-
-      // อัปเดต UI
-      nowPlayingText.textContent = `กำลังเล่น: ${name}`;
+      currentStationName = name;
+      nowPlayingText.textContent = name;
       nowPlayingImage.src = img;
       nowPlaying.style.display = 'flex';
+      shareBtn.style.display = 'inline-block';
+      loadingStatus.textContent = "⏳ กำลังเชื่อมต่อสัญญาณ...";
+      nowPlayingSong.textContent = "🎵 Live Stream: " + name;
       btnPlayPause.textContent = "Pause";
+      audioEl.volume = currentVol;
+      if (hls) { hls.destroy(); hls = null; }
+      if (url.includes('.m3u8') && Hls.isSupported()) {
+        hls = new Hls(); hls.loadSource(url); hls.attachMedia(audioEl);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => audioEl.play());
+      } else {
+        audioEl.src = url;
+        audioEl.play().catch(e => console.log(e));
+      }
     }
 
-    // ปุ่ม Play/Pause
     btnPlayPause.addEventListener('click', () => {
-      if (!radioSound) return;
-      
-      if (radioSound.playing()) {
-        radioSound.pause();
-        btnPlayPause.textContent = "Play";
-      } else {
-        radioSound.play();
-        btnPlayPause.textContent = "Pause";
-      }
+      if (audioEl.paused) { audioEl.play(); btnPlayPause.textContent = "Pause"; }
+      else { audioEl.pause(); btnPlayPause.textContent = "Play"; loadingStatus.textContent = "⏸️ หยุดชั่วคราว"; }
     });
 
-    // ปรับระดับเสียง
     volumeSlider.addEventListener('input', (e) => {
-      currentVol = e.target.value;
-      if (radioSound) {
-        radioSound.volume(currentVol);
-      }
+      currentVol = e.target.value; audioEl.volume = currentVol;
     });
 
-    // ค้นหา (แบบเดิมของคุณ)
     searchInput.addEventListener('input', () => {
-      const keyword = searchInput.value.toLowerCase();
+      const query = searchInput.value.toLowerCase();
       stationList.forEach(li => {
         const name = li.dataset.stationName.toLowerCase();
-        li.style.display = name.includes(keyword) ? 'block' : 'none';
+        li.style.display = name.includes(query) ? 'block' : 'none';
       });
     });
 
-    // เปลี่ยนธีม
-    document.getElementById('toggle-theme').addEventListener('click', () => {
-      document.body.classList.toggle('dark');
+    shareBtn.addEventListener('click', async () => {
+      const shareUrl = `${window.location.origin}${window.location.pathname}?station=${encodeURIComponent(currentStationName)}`;
+      if (navigator.share) {
+        try { await navigator.share({ title: `ฟังวิทยุ ${currentStationName}`, url: shareUrl }); }
+        catch (e) { console.log(e); }
+      } else {
+        navigator.clipboard.writeText(shareUrl); alert("คัดลอกลิงก์แล้ว! 🔗");
+      }
     });
+
+    audioEl.addEventListener('playing', () => loadingStatus.textContent = "✅ กำลังออกอากาศ");
+    audioEl.addEventListener('waiting', () => loadingStatus.textContent = "⏳ กำลังโหลดข้อมูล...");
+    audioEl.addEventListener('error', () => { loadingStatus.textContent = "❌ ลิงก์เสียหรือสัญญาณขาดหาย"; btnPlayPause.textContent = "Play"; });
   </script>
 </body>
 </html>
