@@ -11,8 +11,10 @@
     <style>
         :root { --bg: #0f172a; --panel: #020617; --accent: #38bdf8; --text: #f8fafc; }
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
-        header { padding: 15px; background: var(--panel); text-align: center; border-bottom: 1px solid #1e293b; font-weight: bold; }
-        #app { display: flex; height: calc(100vh - 56px); }
+        header { padding: 15px; background: var(--panel); text-align: center; border-bottom: 1px solid #1e293b; font-weight: bold; height: 56px; box-sizing: border-box; }
+        
+        #app { display: flex; height: calc(100vh - 56px - 75px); } /* ปรับความสูงเผื่อ Footer */
+        
         #playerWrap { flex: 1; background: #000; position: relative; display: flex; flex-direction: column; }
         #home-link {
           position: fixed;
@@ -27,44 +29,19 @@
           z-index: 999;
         }
         
-        /* --- Video.js Perfect UI Customization --- */
         .video-js { width: 100% !important; height: 100% !important; }
-        
-        /* จัดตำแหน่งปุ่มคุณภาพและ LIVE ไม่ให้ทับกัน */
-        .vjs-quality-selector {
-            order: 2; /* ลำดับที่สองต่อจากปุ่ม Play */
-            margin-right: 15px !important;
-        }
-
-        /* เปลี่ยนไอคอน Quality ที่พัง ให้เป็นข้อความ HD ที่ดูทันสมัย */
+        .vjs-quality-selector { order: 2; margin-right: 15px !important; }
         .vjs-quality-selector .vjs-menu-button-placeholder:before {
             content: "HD" !important;
             font-family: Arial, sans-serif !important;
             font-weight: 900;
             font-size: 14px !important;
-            line-height: 3.2 !important; /* จัดให้อยู่กลางแนวตั้ง */
+            line-height: 3.2 !important;
             color: var(--accent);
         }
-
-        /* ปรับแต่งปุ่ม LIVE ให้แยกออกมาชัดเจน */
-        .vjs-live-control {
-            order: 3;
-            margin-left: 5px !important;
-            display: flex;
-            align-items: center;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
-
-        /* ปรับแต่ง Volume และปุ่มอื่นๆ ให้อยู่ฝั่งขวา */
+        .vjs-live-control { order: 3; display: flex; align-items: center; text-transform: uppercase; font-size: 11px; }
         .vjs-volume-panel { order: 10; margin-left: auto !important; }
         .vjs-fullscreen-control { order: 11; }
-
-        /* ปรับแต่งเมนูเลือกความละเอียดให้สวยงาม */
-        .vjs-menu-content { background-color: #1e293b !important; border-radius: 4px; }
-        .vjs-menu-item:hover { background-color: var(--accent) !important; color: #000 !important; }
-        .vjs-menu-item.vjs-selected { background-color: #334155 !important; }
 
         #channels { width: 320px; background: var(--panel); display: flex; flex-direction: column; border-left: 1px solid #1e293b; }
         .search-box { padding: 15px; }
@@ -75,8 +52,25 @@
         .channel.active { border-left: 4px solid var(--accent); background: #1e293b; }
         .channel img { width: 30px; height: 30px; object-fit: contain; background: #fff; border-radius: 4px; }
         .status-bar { padding: 8px 15px; background: #020617; font-size: 11px; color: #64748b; border-top: 1px solid #1e293b; }
+
+        /* Footer Styles */
+        footer {
+            background: var(--panel);
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #1e293b;
+            font-size: 13px;
+            color: #64748b;
+            height: 75px;
+            box-sizing: border-box;
+        }
+        footer a { color: var(--accent); text-decoration: none; margin: 0 5px; }
         
-        @media(max-width: 768px) { #app { flex-direction: column; } #channels { width: 100%; height: 45vh; } }
+        @media(max-width: 768px) { 
+            #app { flex-direction: column; height: auto; overflow-y: visible; } 
+            #channels { width: 100%; height: 45vh; }
+            body { overflow-y: auto; }
+        }
     </style>
 </head>
 <body>
@@ -96,11 +90,19 @@
     </div>
 </div>
 
+<footer>
+    <p>© 2026 <strong>Tadio+</strong> | ดูทีวีและฟังวิทยุออนไลน์ฟรี 24 ชั่วโมง</p>
+    <div class="footer-links">
+        <a href="https://forms.gle/Bh3rELNDStE91HiN8">แจ้งปัญหาการใช้งาน</a> • <a href="#">นโยบายความเป็นส่วนตัว</a>
+    </div>
+</footer>
+
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 <script src="https://unpkg.com/videojs-contrib-quality-levels@4.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
 <script src="https://unpkg.com/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
 
 <script>
+    // ... (Script เดิมของคุณทั้งหมด ไม่ต้องแก้ไขส่วนนี้) ...
     const BASE_WORKER_URL = "https://iptv.tadioplus.workers.dev"; 
     const GITHUB_BACKUP = "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u";
 
@@ -114,18 +116,16 @@
             responsive: true,
             autoplay: false,
             controlBar: {
-                // ระบุลำดับปุ่มเพื่อให้กระจายตัวสวยงาม
                 children: [
                     'playToggle',
                     'qualitySelector',
                     'liveDisplay',
-                    'progressControl', // แถบเวลา
+                    'progressControl',
                     'volumePanel',
                     'fullscreenToggle',
                 ],
             }
         });
-
         v_player.hlsQualitySelector({ displayCurrentQuality: true });
         loadM3U();
     });
