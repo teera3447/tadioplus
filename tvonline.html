@@ -19,7 +19,6 @@
             --hover: #fff1f2;
         }
 
-        /* Dark Mode Settings */
         body.dark { 
             --bg: #121212; 
             --panel: #1e1e1e; 
@@ -39,10 +38,9 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* ล็อคหน้าจอไม่ให้ scroll ทั้งหน้า */
+            overflow: hidden;
         }
 
-        /* Header */
         header { 
             padding: 0 20px; 
             background: var(--panel); 
@@ -61,14 +59,13 @@
             border: 1px solid var(--border); background: var(--panel); color: var(--text);
         }
 
-        /* Layout Container */
         #app { 
             display: flex; 
             flex: 1; 
-            overflow: hidden; /* ให้ลูกจัดการ scroll เอง */
+            overflow: hidden;
         }
 
-        /* Player Section (Left) */
+        /* Player Section */
         #playerWrap { 
             flex: 1; 
             background: #000; 
@@ -76,23 +73,28 @@
             flex-direction: column; 
             position: relative;
         }
-        .video-js { width: 100% !important; height: 100% !important; }
+        
+        /* แก้ไขให้ Video.js แสดงผลเต็มพื้นที่และไม่จอดำในมือถือ */
+        .video-js { 
+            width: 100% !important; 
+            height: 100% !important; 
+            min-height: 250px;
+        }
 
         /* Status Bar ใต้เครื่องเล่น */
         .status-bar { 
-            padding: 8px 15px; 
-            background: rgba(0,0,0,0.8); 
-            font-size: 12px; 
-            color: #aaa; 
-            position: absolute;
-            bottom: 50px; /* เหนือ control bar นิดหน่อย */
-            left: 10px;
-            border-radius: 5px;
-            z-index: 10;
-            pointer-events: none;
+            padding: 10px 15px; 
+            background: var(--panel); 
+            font-size: 14px; 
+            color: var(--text); 
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
         }
 
-        /* Sidebar Section (Right) */
+        /* Sidebar Section */
         #channels { 
             width: 350px; 
             background: var(--panel); 
@@ -109,14 +111,12 @@
             font-family: 'Kanit';
         }
 
-        /* แถบเลื่อนรายการช่อง */
         #list { 
             flex: 1; 
             overflow-y: auto; 
             padding: 10px; 
         }
         
-        /* สไตล์ Scrollbar ให้ดูสวยขึ้น */
         #list::-webkit-scrollbar { width: 6px; }
         #list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
         body.dark #list::-webkit-scrollbar-thumb { background: #444; }
@@ -145,9 +145,7 @@
             padding: 3px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .channel span { font-size: 14px; font-weight: 400; }
 
-        /* Footer */
         footer {
             background: var(--panel);
             padding: 10px;
@@ -163,12 +161,12 @@
         @media(max-width: 850px) { 
             body { overflow-y: auto; height: auto; }
             #app { flex-direction: column; height: auto; } 
+            #playerWrap { height: 56.25vw; min-height: 230px; flex: none; }
             #channels { width: 100%; border-left: none; height: 500px; }
-            #playerWrap { height: 56.25vw; min-height: 250px; }
         }
     </style>
 </head>
-<body>
+<body class="">
 
 <header>
     <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับหน้าหลัก</a>
@@ -179,15 +177,15 @@
 <div id="app">
     <div id="playerWrap">
         <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" playsinline></video>
-        <div class="status-bar" id="status">เตรียมความพร้อม...</div>
+        
+        <div class="status-bar" id="status">⏳ เตรียมความพร้อม...</div>
     </div>
     
     <div id="channels">
         <div class="search-box">
             <input type="text" id="search" placeholder="🔍 ค้นหาช่องรายการ..." oninput="filter()">
         </div>
-        <div id="list">
-            </div>
+        <div id="list"></div>
     </div>
 </div>
 
@@ -197,14 +195,13 @@
       <a href="https://forms.gle/Bh3rELNDStE91HiN8">แจ้งปัญหาการใช้งาน</a> • 
       <a href="#">นโยบายความเป็นส่วนตัว</a>
     </div>
-  </footer>
+</footer>
 
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 <script src="https://unpkg.com/videojs-contrib-quality-levels@4.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
 <script src="https://unpkg.com/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
 
 <script>
-    // --- ระบบเปลี่ยนธีม ---
     const themeBtn = document.getElementById('toggle-theme');
     const savedTheme = localStorage.getItem('tadio-tv-theme');
     if (savedTheme === 'dark') document.body.classList.add('dark');
@@ -214,7 +211,6 @@
         localStorage.setItem('tadio-tv-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
 
-    // --- ระบบเล่นวิดีโอ (คงเดิมจากโค้ดคุณ) ---
     const BASE_WORKER_URL = "https://iptv.tadioplus.workers.dev"; 
     const GITHUB_BACKUP = "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u";
 
@@ -224,31 +220,35 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         v_player = videojs('my-video', {
-            fluid: false,
             responsive: true,
+            fluid: true, // ปรับขนาดตาม Container อัตโนมัติ
             autoplay: false,
+            playbackRates: [0.5, 1, 1.5, 2],
             controlBar: {
                 children: [
                     'playToggle',
+                    'volumePanel',
                     'qualitySelector',
                     'liveDisplay',
-                    'progressControl',
-                    'volumePanel',
                     'fullscreenToggle',
                 ],
             }
         });
+        
         v_player.hlsQualitySelector({ displayCurrentQuality: true });
         loadM3U();
     });
 
     async function loadM3U() {
         try {
-            statusText.innerText = "⏳ กำลังดึงข้อมูล...";
-            let response = await fetch(`${BASE_WORKER_URL}/list`);
+            statusText.innerHTML = "⏳ กำลังดึงข้อมูล...";
+            // เพิ่ม Cache Buster เพื่อป้องกันข้อมูลเก่าค้าง
+            let response = await fetch(`${BASE_WORKER_URL}/list?t=${Date.now()}`);
+            if (!response.ok) throw new Error('Worker Error');
             const data = await response.text();
             parseM3U(data);
         } catch (error) {
+            console.log("Worker failed, using backup...", error);
             const res = await fetch(GITHUB_BACKUP);
             const text = await res.text();
             parseM3U(text);
@@ -272,11 +272,12 @@
         }
         allChannels = channels;
         render(allChannels);
-        statusText.innerText = `🟢 พร้อมรับชม ${allChannels.length} ช่อง`;
+        statusText.innerHTML = `🟢 พร้อมรับชม ${allChannels.length} ช่อง`;
     }
 
     function fixUrl(url) {
-        if (url.includes('livedoomovies') || !url.startsWith('https://')) {
+        // ตรวจสอบว่าเป็น HTTP หรือ URL ที่ต้องการ Proxy หรือไม่
+        if (url.startsWith('http://') || url.includes('livedoomovies')) {
             return `${BASE_WORKER_URL}/?url=` + encodeURIComponent(url);
         }
         return url;
@@ -286,9 +287,18 @@
         const finalUrl = fixUrl(ch.url);
         document.querySelectorAll('.channel').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
-        statusText.innerText = "📡 เชื่อมต่อ: " + ch.name;
+        
+        statusText.innerHTML = `📡 เชื่อมต่อ: <b>${ch.name}</b>`;
+        
         v_player.src({ src: finalUrl, type: 'application/x-mpegURL' });
-        v_player.play();
+        v_player.play().catch(e => {
+            console.log("Autoplay blocked or load error");
+        });
+
+        // เลื่อนหน้าจอขึ้นไปที่เครื่องเล่นเมื่อกดเลือกช่องในมือถือ
+        if (window.innerWidth <= 850) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
     function filter() {
