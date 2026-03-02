@@ -74,25 +74,23 @@
             position: relative;
         }
         
-        /* แก้ไขให้ Video.js แสดงผลเต็มพื้นที่และไม่จอดำในมือถือ */
+        /* บังคับขนาด Player ให้ถูกต้อง */
         .video-js { 
             width: 100% !important; 
             height: 100% !important; 
-            min-height: 250px;
         }
 
-        /* Status Bar ใต้เครื่องเล่น */
-        .status-bar { 
-            padding: 10px 15px; 
-            background: var(--panel); 
-            font-size: 14px; 
-            color: var(--text); 
+        /* Status Bar ใต้เครื่องเล่น (ย้ายมาไว้ข้างนอก Video) */
+        .status-container {
+            background: var(--panel);
+            padding: 12px 20px;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 400;
+            justify-content: space-between;
+            flex-shrink: 0;
         }
+        #status { font-size: 14px; font-weight: 400; color: var(--text); }
 
         /* Sidebar Section */
         #channels { 
@@ -161,12 +159,13 @@
         @media(max-width: 850px) { 
             body { overflow-y: auto; height: auto; }
             #app { flex-direction: column; height: auto; } 
-            #playerWrap { height: 56.25vw; min-height: 230px; flex: none; }
-            #channels { width: 100%; border-left: none; height: 500px; }
+            #playerWrap { height: 56.25vw; min-height: 230px; flex: none; position: sticky; top: 0; z-index: 100;}
+            #channels { width: 100%; border-left: none; height: auto; min-height: 500px; }
+            .status-container { position: sticky; top: 56.25vw; z-index: 99; }
         }
     </style>
 </head>
-<body class="">
+<body>
 
 <header>
     <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับหน้าหลัก</a>
@@ -177,11 +176,13 @@
 <div id="app">
     <div id="playerWrap">
         <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" playsinline></video>
-        
-        <div class="status-bar" id="status">⏳ เตรียมความพร้อม...</div>
     </div>
     
     <div id="channels">
+        <div class="status-container">
+            <div id="status">⏳ เตรียมความพร้อม...</div>
+        </div>
+
         <div class="search-box">
             <input type="text" id="search" placeholder="🔍 ค้นหาช่องรายการ..." oninput="filter()">
         </div>
@@ -202,6 +203,7 @@
 <script src="https://unpkg.com/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
 
 <script>
+    // --- ระบบเปลี่ยนธีม ---
     const themeBtn = document.getElementById('toggle-theme');
     const savedTheme = localStorage.getItem('tadio-tv-theme');
     if (savedTheme === 'dark') document.body.classList.add('dark');
@@ -211,6 +213,7 @@
         localStorage.setItem('tadio-tv-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
 
+    // --- ระบบเครื่องเล่น ---
     const BASE_WORKER_URL = "https://iptv.tadioplus.workers.dev"; 
     const GITHUB_BACKUP = "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u";
 
@@ -221,9 +224,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         v_player = videojs('my-video', {
             responsive: true,
-            fluid: true, // ปรับขนาดตาม Container อัตโนมัติ
+            fluid: true,
             autoplay: false,
-            playbackRates: [0.5, 1, 1.5, 2],
             controlBar: {
                 children: [
                     'playToggle',
@@ -234,21 +236,19 @@
                 ],
             }
         });
-        
         v_player.hlsQualitySelector({ displayCurrentQuality: true });
         loadM3U();
     });
 
     async function loadM3U() {
         try {
-            statusText.innerHTML = "⏳ กำลังดึงข้อมูล...";
-            // เพิ่ม Cache Buster เพื่อป้องกันข้อมูลเก่าค้าง
+            statusText.innerText = "⏳ กำลังดึงข้อมูล...";
             let response = await fetch(`${BASE_WORKER_URL}/list?t=${Date.now()}`);
-            if (!response.ok) throw new Error('Worker Error');
+            if(!response.ok) throw new Error();
             const data = await response.text();
             parseM3U(data);
         } catch (error) {
-            console.log("Worker failed, using backup...", error);
+            console.log("Worker error, switching to backup.");
             const res = await fetch(GITHUB_BACKUP);
             const text = await res.text();
             parseM3U(text);
@@ -276,8 +276,8 @@
     }
 
     function fixUrl(url) {
-        // ตรวจสอบว่าเป็น HTTP หรือ URL ที่ต้องการ Proxy หรือไม่
-        if (url.startsWith('http://') || url.includes('livedoomovies')) {
+        // บังคับผ่าน Proxy ถ้าเป็น HTTP หรือแหล่งที่ติด CORS
+        if (url.startsWith('http://') || url.includes('livedoomovies') || url.includes('m3u8')) {
             return `${BASE_WORKER_URL}/?url=` + encodeURIComponent(url);
         }
         return url;
@@ -291,12 +291,10 @@
         statusText.innerHTML = `📡 เชื่อมต่อ: <b>${ch.name}</b>`;
         
         v_player.src({ src: finalUrl, type: 'application/x-mpegURL' });
-        v_player.play().catch(e => {
-            console.log("Autoplay blocked or load error");
-        });
+        v_player.play();
 
-        // เลื่อนหน้าจอขึ้นไปที่เครื่องเล่นเมื่อกดเลือกช่องในมือถือ
-        if (window.innerWidth <= 850) {
+        // ในมือถือ เมื่อกดแล้วให้เลื่อนขึ้นไปที่วิดีโอ
+        if(window.innerWidth < 850) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
