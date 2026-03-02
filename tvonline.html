@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Tadio+ ดูทีวีออนไลน์</title>
+    <title>Tadio+ TV (16:9 Forced)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
@@ -23,50 +23,36 @@
 
         /* Player Section */
         #playerWrap { flex: 1; background: #000; display: flex; flex-direction: column; position: relative; }
+        
+        /* บังคับให้ภาพในวิดีโอยืดเต็มพื้นที่ (แก้ปัญหา 4:3) */
+        .video-js video { 
+            object-fit: fill !important; 
+        }
         .video-js { width: 100% !important; height: 100% !important; }
 
-        /* Status Bar */
-        .status-bar { padding: 12px 20px; background: var(--panel); font-size: 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; color: var(--text); font-weight: 400; }
+        .status-bar { padding: 12px 20px; background: var(--panel); font-size: 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; color: var(--text); }
 
-        /* Sidebar Section */
+        /* Sidebar */
         #channels { width: 350px; background: var(--panel); display: flex; flex-direction: column; border-left: 1px solid var(--border); }
         .search-box { padding: 15px; border-bottom: 1px solid var(--border); }
         input { width: 100%; padding: 10px 15px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; }
 
         #list { flex: 1; overflow-y: auto; padding: 10px; }
         
-        /* ตกแต่งปุ่มช่องรายการ และขอบสีแดงตอน Hover */
         .channel { 
-            padding: 10px; 
-            margin-bottom: 8px; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            border: 2px solid transparent; /* เตรียมพื้นที่ขอบ */
-            background: var(--bg);
+            padding: 10px; margin-bottom: 8px; border-radius: 12px; cursor: pointer; 
+            display: flex; align-items: center; gap: 12px; border: 2px solid transparent; background: var(--bg);
         }
         
-        .channel:hover { 
-            border-color: var(--accent); /* ขอบสีแดงตอนเอาเมาส์วาง */
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .channel.active { 
-            background: var(--accent); 
-            color: #fff !important; 
-            border-color: var(--accent); 
-        }
-        
-        .channel img { width: 45px; height: 45px; object-fit: contain; background: #fff; border-radius: 8px; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .channel:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .channel.active { background: var(--accent); color: #fff !important; border-color: var(--accent); }
+        .channel img { width: 45px; height: 45px; object-fit: contain; background: #fff; border-radius: 8px; padding: 4px; }
 
         @media(max-width: 850px) { 
             body { overflow-y: auto; height: auto; }
             #app { flex-direction: column; }
             #playerWrap { height: 56.25vw; min-height: 230px; flex: none; position: sticky; top: 0; z-index: 100; }
-            #channels { width: 100%; border: none; height: auto; min-height: 500px; }
+            #channels { width: 100%; border: none; height: auto; }
         }
     </style>
 </head>
@@ -100,46 +86,35 @@
     const BASE_WORKER_URL = "https://iptv.tadioplus.workers.dev"; 
     let allChannels = [];
 
-    // --- ระบบจัดการธีม (จำค่า) ---
+    // --- ระบบจัดการธีม ---
     function toggleTheme() {
         const isDark = document.body.classList.toggle('dark');
         localStorage.setItem('tadioplus_theme', isDark ? 'dark' : 'light');
     }
+    if (localStorage.getItem('tadioplus_theme') === 'dark') document.body.classList.add('dark');
 
-    function initTheme() {
-        if (localStorage.getItem('tadioplus_theme') === 'dark') {
-            document.body.classList.add('dark');
-        }
-    }
-    initTheme();
-
-    // --- ตั้งค่า Player (เน้นโหลดไว) ---
+    // --- ตั้งค่า Player (บังคับ 16:9 และเน้นโหลดไว) ---
     const player = videojs('my-video', {
         fluid: true,
+        aspectRatio: '16:9', // บังคับสัดส่วนเฟรมเครื่องเล่น
+        fill: true,          // ให้วิดีโอขยายเต็ม Container
         autoplay: false,
         liveui: true,
-        responsive: true,
         html5: {
-            vhs: { overrideNative: true }, // บังคับใช้ VHS ของ video.js เพื่อความเร็วในการ Buffer
-            nativeAudioTracks: false,
-            nativeVideoTracks: false
-        },
-        controlBar: {
-            children: ['playToggle', 'volumePanel', 'qualitySelector', 'liveDisplay', 'fullscreenToggle']
+            vhs: { overrideNative: true }
         }
     });
 
     player.hlsQualitySelector({ displayCurrentQuality: true });
 
-    // --- ฟังก์ชันดึงข้อมูล ---
     async function loadM3U() {
         try {
-            document.getElementById('status').innerText = "⏳ กำลังดึงข้อมูลล่าสุด...";
+            document.getElementById('status').innerText = "⏳ กำลังดึงข้อมูล...";
             const res = await fetch(`${BASE_WORKER_URL}/list`);
             const data = await res.text();
             parseM3U(data);
         } catch (e) {
-            document.getElementById('status').innerText = "❌ เกิดข้อผิดพลาดในการโหลด";
+            document.getElementById('status').innerText = "❌ เกิดข้อผิดพลาด";
         }
     }
 
@@ -173,22 +148,15 @@
     }
 
     function play(ch, el) {
-        let playUrl = ch.url;
-
-        // ใช้ Proxy เฉพาะ http ธรรมดา (กัน Mixed Content)
-        if (ch.url.startsWith('http://')) {
-            playUrl = `${BASE_WORKER_URL}/?url=` + encodeURIComponent(ch.url);
-        }
+        let playUrl = ch.url.startsWith('http://') ? `${BASE_WORKER_URL}/?url=` + encodeURIComponent(ch.url) : ch.url;
         
         document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
         el.classList.add('active');
         document.getElementById('status').innerHTML = `📡 กำลังเล่น: <b>${ch.name}</b>`;
         
-        // Reset player ก่อนเปลี่ยนช่องเพื่อลดอาการ Buffer ค้าง
-        player.pause();
         player.src({ src: playUrl, type: 'application/x-mpegURL' });
-        player.load(); // บังคับโหลดทันที
-        player.play().catch(e => console.log("Auto-play blocked by browser"));
+        player.load();
+        player.play().catch(e => {});
         
         if(window.innerWidth < 850) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
