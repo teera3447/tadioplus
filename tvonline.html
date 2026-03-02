@@ -2,301 +2,122 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>Tadio+ ดูทีวีออนไลน์</title>
+    <title>Tadio+ TV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-    <link href="https://unpkg.com/@videojs/themes@1.0.1/dist/fantasy/index.css" rel="stylesheet">
-
     <style>
-        :root { 
-            --bg: #f8f9fa; 
-            --panel: #ffffff; 
-            --accent: #ff4757; 
-            --text: #333333; 
-            --border: #eeeeee;
-            --hover: #fff1f2;
-        }
-
-        body.dark { 
-            --bg: #121212; 
-            --panel: #1e1e1e; 
-            --accent: #ff4757; 
-            --text: #eeeeee; 
-            --border: #333333;
-            --hover: #2d2d2d;
-        }
-
-        * { box-sizing: border-box; transition: background 0.3s, color 0.3s; }
-
-        body { 
-            margin: 0; 
-            font-family: 'Kanit', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        header { 
-            padding: 0 20px; 
-            background: var(--panel); 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border); 
-            height: 60px;
-            flex-shrink: 0;
-        }
+        :root { --bg: #f8f9fa; --panel: #ffffff; --accent: #ff4757; --text: #333; --border: #eee; }
+        body.dark { --bg: #121212; --panel: #1e1e1e; --text: #eee; --border: #333; }
+        body { margin: 0; font-family: 'Kanit', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        header { padding: 0 20px; background: var(--panel); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); height: 60px; flex-shrink: 0; }
         .logo { font-weight: 600; font-size: 20px; color: var(--accent); }
-
-        #home-link, #toggle-theme { 
-            font-size: 13px; padding: 6px 15px; 
-            border-radius: 20px; text-decoration: none; cursor: pointer; 
-            border: 1px solid var(--border); background: var(--panel); color: var(--text);
-        }
-
-        #app { 
-            display: flex; 
-            flex: 1; 
-            overflow: hidden;
-        }
-
-        /* Player Section */
-        #playerWrap { 
-            flex: 1; 
-            background: #000; 
-            display: flex; 
-            flex-direction: column; 
-            position: relative;
-        }
-        
-        /* บังคับขนาด Player ให้ถูกต้อง */
-        .video-js { 
-            width: 100% !important; 
-            height: 100% !important; 
-        }
-
-        /* Status Bar ใต้เครื่องเล่น (ย้ายมาไว้ข้างนอก Video) */
-        .status-container {
-            background: var(--panel);
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-shrink: 0;
-        }
-        #status { font-size: 14px; font-weight: 400; color: var(--text); }
-
-        /* Sidebar Section */
-        #channels { 
-            width: 350px; 
-            background: var(--panel); 
-            display: flex; 
-            flex-direction: column; 
-            border-left: 1px solid var(--border); 
-        }
-
+        #app { display: flex; flex: 1; overflow: hidden; }
+        #playerWrap { flex: 1; background: #000; display: flex; flex-direction: column; }
+        .video-js { width: 100% !important; height: 100% !important; }
+        .status-bar { padding: 10px 15px; background: var(--panel); font-size: 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+        #channels { width: 350px; background: var(--panel); display: flex; flex-direction: column; border-left: 1px solid var(--border); }
         .search-box { padding: 15px; border-bottom: 1px solid var(--border); }
-        input { 
-            width: 100%; padding: 10px 15px; 
-            border-radius: 20px; border: 1px solid var(--border); 
-            background: var(--bg); color: var(--text); outline: none; 
-            font-family: 'Kanit';
-        }
-
-        #list { 
-            flex: 1; 
-            overflow-y: auto; 
-            padding: 10px; 
-        }
-        
-        #list::-webkit-scrollbar { width: 6px; }
-        #list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
-        body.dark #list::-webkit-scrollbar-thumb { background: #444; }
-
-        .channel { 
-            padding: 10px; 
-            margin-bottom: 5px;
-            border-radius: 10px;
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px;
-            border: 2px solid transparent;
-        }
-        .channel:hover { background: var(--hover); }
-        .channel.active { 
-            background: var(--hover); 
-            border-color: var(--accent);
-        }
-
-        .channel img { 
-            width: 40px; height: 40px; 
-            object-fit: contain; 
-            background: #fff; 
-            border-radius: 8px; 
-            padding: 3px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        footer {
-            background: var(--panel);
-            padding: 10px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            font-size: 12px;
-            color: #888;
-            flex-shrink: 0;
-        }
-        footer a { color: var(--accent); text-decoration: none; }
-
-        /* Mobile Responsive */
+        input { width: 100%; padding: 10px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; }
+        #list { flex: 1; overflow-y: auto; padding: 10px; }
+        .channel { padding: 10px; margin-bottom: 5px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 12px; }
+        .channel:hover { background: #fff1f2; }
+        .channel.active { background: var(--accent); color: #fff; }
+        .channel img { width: 40px; height: 40px; object-fit: contain; background: #fff; border-radius: 8px; padding: 2px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         @media(max-width: 850px) { 
             body { overflow-y: auto; height: auto; }
-            #app { flex-direction: column; height: auto; } 
-            #playerWrap { height: 56.25vw; min-height: 230px; flex: none; position: sticky; top: 0; z-index: 100;}
-            #channels { width: 100%; border-left: none; height: auto; min-height: 500px; }
-            .status-container { position: sticky; top: 56.25vw; z-index: 99; }
+            #app { flex-direction: column; }
+            #playerWrap { height: 56.25vw; min-height: 230px; flex: none; position: sticky; top: 0; z-index: 100; }
+            #channels { width: 100%; border: none; height: auto; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="https://teera3447.github.io/tadioplus/" id="home-link">← กลับหน้าหลัก</a>
+    <a href="https://teera3447.github.io/tadioplus/" style="text-decoration:none; color:var(--text); font-size:14px;">← หน้าหลัก</a>
     <div class="logo">Tadio+ TV</div>
-    <button id="toggle-theme">🌗 ธีม</button>
+    <button onclick="document.body.classList.toggle('dark')" style="cursor:pointer; border:1px solid var(--border); background:var(--panel); color:var(--text); border-radius:15px; padding:4px 12px;">🌗 ธีม</button>
 </header>
 
 <div id="app">
     <div id="playerWrap">
-        <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" playsinline></video>
+        <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" playsinline></video>
+        <div class="status-bar" id="status">⏳ กำลังโหลดรายการช่อง...</div>
     </div>
     
     <div id="channels">
-        <div class="status-container">
-            <div id="status">⏳ เตรียมความพร้อม...</div>
-        </div>
-
         <div class="search-box">
-            <input type="text" id="search" placeholder="🔍 ค้นหาช่องรายการ..." oninput="filter()">
+            <input type="text" id="search" placeholder="🔍 ค้นหาชื่อช่อง..." oninput="filter()">
         </div>
         <div id="list"></div>
     </div>
 </div>
 
-<footer>
-    <p>© 2026 Tadio+ | ดูทีวีและฟังวิทยุออนไลน์ฟรี 24 ชั่วโมง</p>
-    <div class="footer-links">
-      <a href="https://forms.gle/Bh3rELNDStE91HiN8">แจ้งปัญหาการใช้งาน</a> • 
-      <a href="#">นโยบายความเป็นส่วนตัว</a>
-    </div>
-</footer>
-
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-<script src="https://unpkg.com/videojs-contrib-quality-levels@4.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
-<script src="https://unpkg.com/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
-
 <script>
-    // --- ระบบเปลี่ยนธีม ---
-    const themeBtn = document.getElementById('toggle-theme');
-    const savedTheme = localStorage.getItem('tadio-tv-theme');
-    if (savedTheme === 'dark') document.body.classList.add('dark');
-
-    themeBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-        localStorage.setItem('tadio-tv-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-    });
-
-    // --- ระบบเครื่องเล่น ---
     const BASE_WORKER_URL = "https://iptv.tadioplus.workers.dev"; 
-    const GITHUB_BACKUP = "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u";
-
     let allChannels = [];
-    const statusText = document.getElementById('status');
-    let v_player;
-
-    document.addEventListener('DOMContentLoaded', () => {
-        v_player = videojs('my-video', {
-            responsive: true,
-            fluid: true,
-            autoplay: false,
-            controlBar: {
-                children: [
-                    'playToggle',
-                    'volumePanel',
-                    'qualitySelector',
-                    'liveDisplay',
-                    'fullscreenToggle',
-                ],
-            }
-        });
-        v_player.hlsQualitySelector({ displayCurrentQuality: true });
-        loadM3U();
-    });
+    let player = videojs('my-video', { fluid: true });
 
     async function loadM3U() {
         try {
-            statusText.innerText = "⏳ กำลังดึงข้อมูล...";
-            let response = await fetch(`${BASE_WORKER_URL}/list?t=${Date.now()}`);
-            if(!response.ok) throw new Error();
-            const data = await response.text();
+            const res = await fetch(`${BASE_WORKER_URL}/list`);
+            const data = await res.text();
             parseM3U(data);
-        } catch (error) {
-            console.log("Worker error, switching to backup.");
-            const res = await fetch(GITHUB_BACKUP);
-            const text = await res.text();
-            parseM3U(text);
+        } catch (e) {
+            document.getElementById('status').innerText = "❌ โหลดข้อมูลไม่สำเร็จ";
         }
     }
 
     function parseM3U(data) {
         const lines = data.split('\n');
-        const channels = [];
+        allChannels = [];
         for (let i = 0; i < lines.length; i++) {
             if (lines[i].startsWith('#EXTINF:')) {
-                const info = lines[i];
-                const url = lines[i + 1]?.trim();
+                const name = lines[i].split(',')[1] || "Unknown";
+                const logoMatch = lines[i].match(/tvg-logo="([^"]+)"/);
+                const url = lines[i+1]?.trim();
                 if (url && url.startsWith('http')) {
-                    const name = info.split(',')[1] || "Unknown Channel";
-                    const logoMatch = info.match(/tvg-logo="([^"]+)"/);
-                    const logo = logoMatch ? logoMatch[1] : "";
-                    channels.push({ name, url, logo });
+                    allChannels.push({ name, url, logo: logoMatch ? logoMatch[1] : "" });
                 }
             }
         }
-        allChannels = channels;
         render(allChannels);
-        statusText.innerHTML = `🟢 พร้อมรับชม ${allChannels.length} ช่อง`;
+        document.getElementById('status').innerText = `🟢 พบทั้งหมด ${allChannels.length} ช่องรายการ`;
     }
 
-    function fixUrl(url) {
-        // บังคับผ่าน Proxy ถ้าเป็น HTTP หรือแหล่งที่ติด CORS
-        if (url.startsWith('http://') || url.includes('livedoomovies') || url.includes('m3u8')) {
-            return `${BASE_WORKER_URL}/?url=` + encodeURIComponent(url);
-        }
-        return url;
+    function render(data) {
+        const list = document.getElementById('list');
+        list.innerHTML = "";
+        data.forEach(ch => {
+            const div = document.createElement('div');
+            div.className = 'channel';
+            div.innerHTML = `<img src="${ch.logo || '📺'}" onerror="this.src='https://via.placeholder.com/40?text=TV'"> <span>${ch.name}</span>`;
+            div.onclick = () => play(ch, div);
+            list.appendChild(div);
+        });
     }
 
     function play(ch, el) {
-        const finalUrl = fixUrl(ch.url);
-        document.querySelectorAll('.channel').forEach(i => i.classList.remove('active'));
-        el.classList.add('active');
-        
-        statusText.innerHTML = `📡 เชื่อมต่อ: <b>${ch.name}</b>`;
-        
-        v_player.src({ src: finalUrl, type: 'application/x-mpegURL' });
-        v_player.play();
+        let finalUrl = ch.url;
 
-        // ในมือถือ เมื่อกดแล้วให้เลื่อนขึ้นไปที่วิดีโอ
-        if(window.innerWidth < 850) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // --- เงื่อนไข: บังคับ Proxy เฉพาะ http หรือช่องจาก livedoomovies ---
+        if (ch.url.startsWith('http://') || ch.url.includes('livedoomovies')) {
+            finalUrl = `${BASE_WORKER_URL}/?url=` + encodeURIComponent(ch.url);
+            console.log("Playing via Proxy (HTTP/CORS Fix)");
+        } else {
+            console.log("Playing Directly (HTTPS)");
         }
+        
+        document.querySelectorAll('.channel').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('status').innerHTML = `📡 กำลังรับชม: <b>${ch.name}</b>`;
+        
+        player.src({ src: finalUrl, type: 'application/x-mpegURL' });
+        player.play().catch(e => console.log("Playback error or blocked"));
+        
+        if(window.innerWidth < 850) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function filter() {
@@ -304,18 +125,7 @@
         render(allChannels.filter(c => c.name.toLowerCase().includes(txt)));
     }
 
-    function render(data) {
-        const container = document.getElementById('list');
-        container.innerHTML = "";
-        data.forEach(ch => {
-            const div = document.createElement('div');
-            div.className = 'channel';
-            const img = ch.logo ? `<img src="${ch.logo}" onerror="this.src='https://via.placeholder.com/40x40?text=TV'">` : '📺';
-            div.innerHTML = `${img} <span>${ch.name}</span>`;
-            div.onclick = () => play(ch, div);
-            container.appendChild(div);
-        });
-    }
+    loadM3U();
 </script>
 </body>
 </html>
