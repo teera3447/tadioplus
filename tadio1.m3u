@@ -1,3 +1,4 @@
+#EXTM3U
 #EXTINF:-1 tvg-chno="1" ch-number="1" tvg-id="MVTV ท้องถิ่นไทย (75).th" tvg-name="MVTV ท้องถิ่นไทย (75)" tvg-logo="https://media-mvtv.imgix.net/channel/30_y_6j8hFgB9MRvUswTeCySxbJf3k74NQloE.png" group-title="Entertain", MVTV ท้องถิ่นไทย (75)
 https://lb1-live-mv.v2h-cdn.com/partner/mvtv_part/mvtv.m3u8
 #EXTINF:-1 tvg-chno="2" ch-number="2" tvg-id="NBT.th" tvg-name="NBT" tvg-logo="https://media-mvtv.imgix.net/channel/115_y_fFG0J46IoYNzUjVKatsbL7vZByxiMqTm.png" group-title="Digital TV", NBT
@@ -20,8 +21,6 @@ https://cdn-edge.iiptvcdn.com/live_event/smil:98ff-027d-46aa-1a6a-8480.smil/play
 https://cdn-edge.iiptvcdn.com/live_event/smil:6ee0-5126-0cee-7ba2-18b7.smil/playlist.m3u8
 #EXTINF:-1 tvg-chno="16" ch-number="16" tvg-id="TNN.th" tvg-name="TNN" tvg-logo="https://media-mvtv.imgix.net/channel/121_y_uQNBde5zrpo4TKm9kOZPx6iRbGaACfFE.png" group-title="Digital TV", TNN
 https://lb-gmmz.sky-cdn.com/gmm/tnn16.m3u8
-#EXTINF:-1 tvg-chno="18" ch-number="18" tvg-id="JKN18.th" tvg-name="JKN18" tvg-logo="https://media-mvtv.imgix.net/channel/122_y_bzfht4O5uRNHylcq1D6nV9TvxmdXWaQP.png" group-title="Digital TV", JKN18
-http://45.144.166.242:1935//JKN/t3_jkn/playlist.m3u8
 #EXTINF:-1 tvg-chno="21" ch-number="21" tvg-id="ไทบ้านทีวี.th" tvg-name="ไทบ้านทีวี" tvg-logo="https://media-mvtv.imgix.net/channel/35_y_V2hcyg7xD4BpCIPSJT0un8zWYL6bAqfi.png" group-title="Entertain", ไทบ้านทีวี
 https://lb1-live-mv.v2h-cdn.com/partner/thaibaan_part/thaibaan.m3u8
 #EXTINF:-1 tvg-chno="22" ch-number="22" tvg-id="Nation.th" tvg-name="Nation" tvg-logo="https://media-mvtv.imgix.net/channel/123_y_3vyW276UFjIStew9DHJNs8AGKfdmZXpu.png" group-title="Digital TV", Nation
