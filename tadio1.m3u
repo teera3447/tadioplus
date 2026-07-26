@@ -3,10 +3,10 @@
 https://lb1-live-mv.v2h-cdn.com/partner/mvtv_part/mvtv.m3u8
 #EXTINF:-1 tvg-chno="2" ch-number="2" tvg-id="NBT.th" tvg-name="NBT" tvg-logo="https://img1.pic.in.th/images/nbt2.png" group-title="Digital TV", NBT
 https://cdn-edge.iiptvcdn.com/live_event/smil:1180-0c9c-ad1f-4e5d-aa48.smil/playlist.m3u8?null
-#EXTINF:-1 tvg-chno="3" ch-number="3" tvg-id="TPBS.th" tvg-name="TPBS" tvg-logo="https://img2.pic.in.th/tpbs.jpeg" group-title="Digital TV", TPBS
+#EXTINF:-1 tvg-chno="3" ch-number="3" tvg-id="TPBS.th" tvg-name="TPBS" tvg-logo="https://s3.dooflixlive.com/assets/images/tv/digital/thaipbs.png" group-title="Digital TV", TPBS
 https://thaipbs-ophctt.cdn.byteark.com/live/playlist_480p/index.m3u8
 #EXTINF:-1 tvg-chno="5" ch-number="5" tvg-id="5HD.th" tvg-name="5HD" tvg-logo="https://img1.pic.in.th/images/Logo_tv5.png" group-title="Digital TV", 5HD
-https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8
+https://live-us1.thaimomo.com/live-as/ch5hd-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="7" ch-number="7" tvg-id="T SPORT.th" tvg-name="T SPORT" tvg-logo="https://img1.pic.in.th/images/tsp7.jpg" group-title="Digital TV", T SPORT
 https://live-us1.thaimomo.com/live-as/chtsport-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="10" ch-number="10" tvg-id="TPTV.th" tvg-name="TPTV" tvg-logo="https://img2.pic.in.th/TPTV_logo_2014.png" group-title="Digital TV", TPTV
@@ -20,19 +20,19 @@ https://cdn-edge.iiptvcdn.com/live_event/smil:98ff-027d-46aa-1a6a-8480.smil/play
 #EXTINF:-1 tvg-chno="14" ch-number="14" tvg-id="NBT Central.th" tvg-name="NBT Central (11)" tvg-logo="" group-title="Shopping", NBT Central (11)
 https://cdn-edge.iiptvcdn.com/live_event/smil:6ee0-5126-0cee-7ba2-18b7.smil/playlist.m3u8
 #EXTINF:-1 tvg-chno="16" ch-number="16" tvg-id="TNN.th" tvg-name="TNN" tvg-logo="https://img1.pic.in.th/images/tnn.webp" group-title="Digital TV", TNN
-https://lb-gmmz.sky-cdn.com/gmm_live/16_tnn_16.m3u8
+https://live-us1.thaimomo.com/live-as/chtnn24-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="21" ch-number="21" tvg-id="ไทบ้านทีวี.th" tvg-name="ไทบ้านทีวี" tvg-logo="https://img2.pic.in.th/thaibaan.jpg" group-title="Entertain", ไทบ้านทีวี
 https://lb1-live-mv.v2h-cdn.com/partner/thaibaan_part/thaibaan.m3u8
 #EXTINF:-1 tvg-chno="22" ch-number="22" tvg-id="Nation.th" tvg-name="Nation" tvg-logo="https://img1.pic.in.th/images/nation22.webp" group-title="Digital TV", Nation
-https://lb-gmmz.sky-cdn.com/gmm_live/22_nation_22.m3u8
+https://live-us1.thaimomo.com/live-as/chNation-3/playlist.m3u8
 #EXTINF:-1 tvg-chno="23" ch-number="23" tvg-id="Workpoint.th" tvg-name="Workpoint" tvg-logo="https://img1.pic.in.th/images/workpoint.png" group-title="Digital TV", Workpoint
-https://lb-gmmz.sky-cdn.com/gmm_live/23_workpoint_23.m3u8
+https://live-us1.thaimomo.com/live-as/chworkpointt-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="24" ch-number="24" tvg-id="True4u.th" tvg-name="True4U" tvg-logo="https://img2.pic.in.th/true4u.jpeg" group-title="Digital TV", True4U
-https://lb-gmmz.sky-cdn.com/gmm_live/24_true_24.m3u8
+https://live-us1.thaimomo.com/live-as/chTrue4u-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="25" ch-number="25" tvg-id="GMM25.th" tvg-name="GMM25" tvg-logo="https://img1.pic.in.th/images/gmm25.jpeg" group-title="Digital TV", GMM25
-https://lb-gmmz.sky-cdn.com/gmm_live/25_gmm_25.m3u8
+https://live-us1.thaimomo.com/live-as/chgmmchannel-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="27" ch-number="27" tvg-id="ช่อง 8.th" tvg-name="ช่อง 8" tvg-logo="https://img1.pic.in.th/images/ch827.jpg" group-title="Digital TV", ช่อง 8
-https://lb-gmmz.sky-cdn.com/gmm_live/8_ch_8.m3u8
+https://live-us1.thaimomo.com/live-as/cheight-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="28" ch-number="28" tvg-id="MONOMAX Sports.th" tvg-name="MONOMAX Sports" tvg-logo="https://img2.pic.in.th/monosp29.jpg" group-title="Digital TV", MONOMAX Sports
 https://live-us1.thaimomo.com/live-as/chmono29-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="29" ch-number="29" tvg-id="MONOMAX Sports.th" tvg-name="MONOMAX Sports" tvg-logo="https://img2.pic.in.th/monosp29.jpg" group-title="Digital TV", MONOMAX Sports ST
@@ -40,19 +40,19 @@ https://live888.gstreamcdn.com/app/monoe/ts:master.m3u8
 #EXTINF:-1 tvg-chno="30" ch-number="30" tvg-id="MCOT.th" tvg-name="MCOT" tvg-logo="https://media-mvtv.imgix.net/channel/129_y_hG7Nj2qWnldBu0fkMDyvT8CwYXLI649F.png" group-title="Digital TV", MCOT
 https://mcothd-streaming-edge-cdn.mcot.net/tencentmcot/smil:tencentmcot.smil/chunklist_w298295584_b1000000.m3u8
 #EXTINF:-1 tvg-chno="31" ch-number="31" tvg-id="ONE.th" tvg-name="ONE" tvg-logo="https://media-mvtv.imgix.net/channel/130_y_3Lx4j6ZzpIidKPqChaF2QRYeWorw79Jv.png" group-title="Digital TV", ONE
-https://lb-gmmz.sky-cdn.com/gmm_live/31_one_31.m3u8
+https://live-us1.thaimomo.com/live-as/chmcothd-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="32" ch-number="32" tvg-id="Thairath.th" tvg-name="Thairath" tvg-logo="https://media-mvtv.imgix.net/channel/131_y_iJmHlFadZ0G8EhIYMw2A3OfbN1Qpzgou.png" group-title="Digital TV", Thairath
 https://live888.gstreamcdn.com/app/stream_32/ts:master.m3u8
 #EXTINF:-1 tvg-chno="33" ch-number="33" tvg-id="3HD.th" tvg-name="3HD" tvg-logo="https://media-mvtv.imgix.net/channel/132_y_TFYiXWvrUf4s8tbIwJ29S3zMNeqghGmB.png" group-title="Digital TV", 3HD
-https://lb-gmmz.sky-cdn.com/gmm_live/3_ch_3.m3u8
+https://live-us1.thaimomo.com/live-as/ch3hd-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="34" ch-number="34" tvg-id="Amarin.th" tvg-name="Amarin" tvg-logo="https://media-mvtv.imgix.net/channel/133_y_kLIyaJt3VoGD8sqrHnhKPjZUQ0RE6mu4.png" group-title="Digital TV", Amarin
 https://lb-gmmz.sky-cdn.com/gmm_live/34_amarin_34.m3u8
 #EXTINF:-1 tvg-chno="35" ch-number="35" tvg-id="7HD.th" tvg-name="7HD" tvg-logo="https://media-mvtv.imgix.net/channel/134_y_YTkIZJDsbmX26owPRpAFSfW0eyz95vn4.png" group-title="Digital TV", 7HD
 https://lb-gmmz.sky-cdn.com/gmm_live/7_ch_7.m3u8
 #EXTINF:-1 tvg-chno="36" ch-number="36" tvg-id="PPTV.th" tvg-name="PPTV" tvg-logo="https://media-mvtv.imgix.net/channel/135_y_7hl4KHdwBqS0VGNCskrDLyci538zY2Qx.png" group-title="Digital TV", PPTV
-https://lb-gmmz.sky-cdn.com/gmm_live/36_pptv_36.m3u8
+https://live-us1.thaimomo.com/live-as/chpptv-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="89" ch-number="89" tvg-id="Boomerang.th" tvg-name="Boomerang" tvg-logo="https://media-mvtv8.imgix.net/channel/153_y_3V9s1SWHcnaNILkoXMmF8GER4ZTrxJvg.jpg" group-title="Cartoon", Boomerang
-https://lb1-live-mv.v2h-cdn.com/partner/boom_part/boomreang.m3u8
+https://live-us1.thaimomo.com/live-as/chboomerang-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="92" ch-number="92" tvg-id="Mango Mojito.th" tvg-name="Mango Mojito" tvg-logo="https://media-mvtv.imgix.net/channel/188_y_SHbpOor8a2ClM0g3LFcsT5I4GkRmu6q9.jpg" group-title="Cartoon", Mango Mojito
 https://lb1-live-mv.v2h-cdn.com/partner/boom_cartoon_part/boom_catoon.m3u8
 #EXTINF:-1 tvg-chno="101" ch-number="101" tvg-id="MVLAO.la" tvg-name="MVLAO" tvg-logo="https://media-mvtv.imgix.net/channel/33_y_H4Rw5iJ7py10NvGAPEhWbYD6SgfarXOc.png" group-title="Entertain", MVLAO
@@ -87,6 +87,14 @@ https://lb1-live-mv.v2h-cdn.com/partner/mv_family_part/mvmall_family.m3u8
 https://lb1-live-mv.v2h-cdn.com/partner/mv_plus_part/mvmall_plus.m3u8
 #EXTINF:-1 tvg-chno="127" ch-number="127" tvg-id="NBT World.th" tvg-name="NBT World" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/NBT_World_2025.svg/960px-NBT_World_2025.svg.png" group-title="International", NBT World
 https://cdn-edge.iiptvcdn.com/live_event/smil:d36f-93c1-9c58-fdcc-427f.smil/playlist.m3u8
+#EXTINF:-1 tvg-chno="128" ch-number="128" tvg-id="RAMA Channel.th" tvg-name="RAMA Channel" tvg-logo="https://www.rama.mahidol.ac.th/ramachannel/wp-content/uploads/2023/03/logo-rama-topA.png" group-title="Other", RAMA Channel
+https://ramach.ddns.net/live/ramalive/index.m3u8
+#EXTINF:-1 tvg-chno="129" ch-number="129" tvg-id="TEST.th" tvg-name="TEST" tvg-logo="" group-title="TEST", TEST1
+https://netcdn-tr.metfone.com.kh/netcdn-live-29/manifest/VTV4_HD/master.m3u8?timestamp=1785091302&wmkid=0&token=e0f9c8c60dd4cfecd858eb1112094a2f&uid=3925877
+#EXTINF:-1 tvg-chno="130" ch-number="130" tvg-id="TV5MONDE Asie.fr" tvg-name="TV5MONDE Asie" tvg-logo="https://bo-apac.tv5monde.com/sites/default/files/tv5monde_apac%20%281%29.png" group-title="Entertain", TV5MONDE Asie
+https://ott.tv5monde.com/Content/HLS/Live/channel(seasie)/variant.m3u8
+#EXTINF:-1 tvg-chno="131" ch-number="131" tvg-id="NHK WORLD.jp" tvg-name="NHK WORLD" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPOhkWJfkm-FcT4agmxooYSDpQbvXjMkbygX7ELFiIag&s=10" group-title="News", NHK WORLD
+https://media-tyo.hls.nhkworld.jp/hls/w/live/master.m3u8
 #EXTINF:-1 tvg-chno="201" ch-number="201" tvg-id="DLTV1.th" tvg-name="DLTV1" tvg-logo="https://media-mvtv.imgix.net/channel/136_y_tPkVabFhc7iUGQdmlEDC5IxvJZj4326M.png" group-title="Education", DLTV1
 https://cdn-live.dltv.ac.th/dltv01.m3u8
 #EXTINF:-1 tvg-chno="202" ch-number="202" tvg-id="DLTV2.th" tvg-name="DLTV2" tvg-logo="https://media-mvtv.imgix.net/channel/137_y_yQOMjhFVupi8I1oal5TScnbkfAYtJC2v.png" group-title="Education", DLTV2
