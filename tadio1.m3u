@@ -129,3 +129,5 @@ https://cdn-live.dltv.ac.th/dltv13.m3u8
 https://cdn-live.dltv.ac.th/dltv14.m3u8
 #EXTINF:-1 tvg-chno="215" ch-number="215" tvg-id="DLTV15.th" tvg-name="DLTV15" tvg-logo="https://media-mvtv.imgix.net/channel/150_y_eUWs21cyV38ARS0OZmtgILodzKiJqfaD.png" group-title="Education", DLTV15
 https://cdn-live.dltv.ac.th/dltv15.m3u8
+#EXTINF:-1 tvg-chno="400" ch-number="400" tvg-id="GREENWAVE.th" tvg-name="GREENWAVE" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" group-title="Radio", GREENWAVE
+https://atimeonline3.smartclick.co.th/green
