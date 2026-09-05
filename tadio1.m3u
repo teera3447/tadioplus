@@ -20,7 +20,7 @@ https://cdn-edge.iiptvcdn.com/live_event/smil:98ff-027d-46aa-1a6a-8480.smil/play
 #EXTINF:-1 tvg-chno="14" ch-number="14" tvg-id="NBT Central.th" tvg-name="NBT Central (11)" tvg-logo="" group-title="Shopping", NBT Central (11)
 https://cdn-edge.iiptvcdn.com/live_event/smil:6ee0-5126-0cee-7ba2-18b7.smil/playlist.m3u8
 #EXTINF:-1 tvg-chno="16" ch-number="16" tvg-id="TNN.th" tvg-name="TNN" tvg-logo="https://img1.pic.in.th/images/tnn.webp" group-title="Digital TV", TNN
-https://lb-gmmz.sky-cdn.com/gmm_live/16_tnn_16.m3u8
+https://live-us1.thaimomo.com/live-as/chtnn24-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="21" ch-number="21" tvg-id="ไทบ้านทีวี.th" tvg-name="ไทบ้านทีวี" tvg-logo="https://img2.pic.in.th/thaibaan.jpg" group-title="Entertain", ไทบ้านทีวี
 https://lb1-live-mv.v2h-cdn.com/partner/thaibaan_part/thaibaan.m3u8
 #EXTINF:-1 tvg-chno="22" ch-number="22" tvg-id="Nation.th" tvg-name="Nation" tvg-logo="https://img1.pic.in.th/images/nation22.webp" group-title="Digital TV", Nation
