@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>TadioPlus TV Online</title>
+    <!-- ใช้ hls.js เวอร์ชันเก่าที่เสถียรและรองรับเบราว์เซอร์เก่า -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@0.14.17/dist/hls.min.js"></script>
+    <style>
+        body { font-family: Tahoma, sans-serif; text-align: center; background: #222; color: #fff; padding: 20px; }
+        select { font-size: 16px; padding: 5px; width: 100%; max-width: 600px; margin-bottom: 20px; }
+        video { width: 100%; max-width: 600px; background: #000; }
+        #status { margin-top: 10px; color: #aaa; }
+    </style>
+</head>
+<body>
+
+    <h2>TadioPlus TV</h2>
+    
+    <!-- เมนูเลือกช่อง -->
+    <select id="channelSelect" onchange="playSelectedChannel()">
+        <option value="">-- กำลังโหลดรายชื่อช่อง... --</option>
+    </select>
+
+    <br>
+
+    <!-- เครื่องเล่นวิดีโอ -->
+    <video id="videoPlayer" controls></video>
+    <div id="status"></div>
+
+    <script>
+        var video = document.getElementById('videoPlayer');
+        var channelSelect = document.getElementById('channelSelect');
+        var statusText = document.getElementById('status');
+        var hlsPlayer = null;
+
+        // ลิงก์ m3u จาก GitHub
+        var m3uUrl = 'https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u';
+
+        // ฟังก์ชันเล่นวิดีโอ (รองรับเบราว์เซอร์เก่าผ่าน Hls.js หรือเล่นตรงบน Safari)
+        function playStream(url) {
+            if (Hls.isSupported()) {
+                if (hlsPlayer) {
+                    hlsPlayer.destroy(); // ล้างตัวเล่นเก่าก่อน
+                }
+                hlsPlayer = new Hls();
+                hlsPlayer.loadSource(url);
+                hlsPlayer.attachMedia(video);
+                hlsPlayer.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                    statusText.innerHTML = "กำลังเล่น...";
+                });
+                hlsPlayer.on(Hls.Events.ERROR, function(event, data) {
+                    if (data.fatal) statusText.innerHTML = "ไม่สามารถเล่นช่องนี้ได้";
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // สำหรับ Safari
+                video.src = url;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                    statusText.innerHTML = "กำลังเล่น...";
+                });
+            } else {
+                statusText.innerHTML = "เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอนี้";
+            }
+        }
+
+        // เมื่อผู้ใช้เปลี่ยนช่องจาก Dropdown
+        function playSelectedChannel() {
+            var selectedUrl = channelSelect.value;
+            if (selectedUrl !== "") {
+                statusText.innerHTML = "กำลังโหลดสตรีม...";
+                playStream(selectedUrl);
+            }
+        }
+
+        // ฟังก์ชันดึงและแปลงไฟล์ M3U แบบเบราว์เซอร์รุ่นเก่า (ES5)
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', m3uUrl, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var lines = xhr.responseText.split('\n');
+                    var currentName = "ช่องไม่ทราบชื่อ";
+                    
+                    // ล้างเมนู
+                    channelSelect.innerHTML = '<option value="">-- เลือกช่องรายการ --</option>';
+
+                    for (var i = 0; i < lines.length; i++) {
+                        var line = lines[i].replace(/^\s+|\s+$/g, ''); // ตัดช่องว่าง
+                        
+                        if (line.indexOf('#EXTINF:') === 0) {
+                            // หาชื่อช่อง (ข้อความหลังเครื่องหมายจุลภาคตัวสุดท้าย)
+                            var parts = line.split(',');
+                            if (parts.length > 1) {
+                                currentName = parts[1];
+                            }
+                        } else if (line !== '' && line.indexOf('#') !== 0) {
+                            // บรรทัดที่เป็น URL
+                            var option = document.createElement('option');
+                            option.value = line;
+                            option.text = currentName;
+                            channelSelect.appendChild(option);
+                            
+                            // รีเซ็ตชื่อช่อง
+                            currentName = "ช่องไม่ทราบชื่อ";
+                        }
+                    }
+                    statusText.innerHTML = "โหลดรายชื่อช่องสำเร็จ กรุณาเลือกช่อง";
+                } else {
+                    channelSelect.innerHTML = '<option value="">-- โหลดรายชื่อช่องล้มเหลว --</option>';
+                    statusText.innerHTML = "ไม่สามารถเชื่อมต่อไฟล์ M3U ได้";
+                }
+            }
+        };
+        xhr.send();
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>TadioPlus Radio</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; text-align: center; background: #f4f4f4; padding: 20px; }
+        select { font-size: 16px; padding: 8px; width: 100%; max-width: 400px; margin-bottom: 20px; }
+        audio { width: 100%; max-width: 400px; }
+        #status { margin-top: 15px; font-size: 14px; color: #555; }
+    </style>
+</head>
+<body>
+
+    <h2>TadioPlus Radio</h2>
+
+    <!-- รายชื่อสถานี -->
+    <select id="radioSelect" onchange="playSelectedRadio()">
+        <option value="">-- เลือกสถานีวิทยุ --</option>
+    </select>
+
+    <br>
+
+    <!-- เครื่องเล่นวิทยุ -->
+    <audio id="audioPlayer" controls></audio>
+    <div id="status">กรุณาเลือกสถานีเพื่อฟัง</div>
+
+    <script>
+        // ----------------------------------------------------
+        // ส่วนนี้คือ "รายชื่อจากโค้ด" ที่คุณสามารถเพิ่ม/ลด/แก้ไขได้เอง
+        // ----------------------------------------------------
+        var radioList = [
+            { name: "สถานีวิทยุ ตัวอย่างที่ 1", url: "http://stream.example.com/radio1.mp3" },
+            { name: "สถานีวิทยุ ตัวอย่างที่ 2", url: "http://stream.example.com/radio2.aac" },
+            { name: "สถานีวิทยุ M3U8 (ถ้ามี)", url: "m3u8/bntv.m3u8" }
+        ];
+
+        var audioSelect = document.getElementById('radioSelect');
+        var audio = document.getElementById('audioPlayer');
+        var statusText = document.getElementById('status');
+
+        // ใส่รายชื่อสถานีลงใน Dropdown
+        for (var i = 0; i < radioList.length; i++) {
+            var option = document.createElement('option');
+            option.value = radioList[i].url;
+            option.text = radioList[i].name;
+            audioSelect.appendChild(option);
+        }
+
+        // ฟังก์ชันเล่นวิทยุ
+        function playSelectedRadio() {
+            var selectedUrl = audioSelect.value;
+            if (selectedUrl !== "") {
+                audio.src = selectedUrl;
+                audio.play();
+                statusText.innerHTML = "กำลังเล่น: " + audioSelect.options[audioSelect.selectedIndex].text;
+            } else {
+                audio.pause();
+                statusText.innerHTML = "หยุดเล่น";
+            }
+        }
+
+        // แจ้งเตือนเมื่อเล่นไม่ได้ (เช่น ลิงก์เสีย)
+        audio.onerror = function() {
+            if (audioSelect.value !== "") {
+                statusText.innerHTML = "ขออภัย ไม่สามารถเล่นสถานีนี้ได้ (ลิงก์อาจเสียหรือเบราว์เซอร์ไม่รองรับ)";
+            }
+        };
+    </script>
+</body>
+</html>
