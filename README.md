@@ -15,7 +15,7 @@ Tadio+ TV & Radio Online
 -วิธีใช้งาน-
 
 1. เปิดหน้าเว็บผ่าน GitHub Pages
-   https://teera3447.github.io/tadioplus/
+   https://tadioplus.vercel.app/
 
 
 3. คลิกเลือกเมนูทีวีหรือวิทยุที่ต้องการรับชม
@@ -31,4 +31,4 @@ HTML / CSS / JavaScript
 
 hls.js สำหรับเล่นวิดีโอ .m3u8
 
-GitHub Pages สำหรับโฮสต์เว็บไซต์
+Vercel สำหรับโฮสต์เว็บไซต์
