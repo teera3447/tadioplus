@@ -2,30 +2,26 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <!-- ตั้งค่า Viewport ให้พอดีกับหน้าจอมือถือทุกรุ่น -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>TadioPlus - หน้าหลัก</title>
-    
-    <!-- เรียกใช้ไฟล์ manifest สำหรับระบบ PWA (ติดตั้งแอพ) -->
     <link rel="manifest" href="manifest.json">
     
     <style>
-        /* ใช้ CSS พื้นฐานที่เบราว์เซอร์เก่าทุกตัวรู้จัก (ไม่ใช้ Flexbox หรือ Grid) */
         body {
-            font-family: Arial, Tahoma, sans-serif;
+            font-family: Tahoma, Arial, sans-serif;
             background-color: #222;
             color: #fff;
             text-align: center;
             margin: 0;
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
         h1 {
             color: #4CAF50;
-            font-size: 36px;
-            margin-bottom: 40px;
+            font-size: 32px;
+            margin-bottom: 30px;
         }
         .menu-container {
+            width: 100%;
             max-width: 400px;
             margin: 0 auto;
         }
@@ -34,19 +30,16 @@
             background-color: #333;
             color: #fff;
             text-decoration: none;
-            font-size: 20px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            border: 2px solid #555;
-            border-radius: 8px;
-            cursor: pointer;
+            font-size: 18px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
         }
         .menu-button:hover {
             background-color: #4CAF50;
-            border-color: #4CAF50;
         }
         .footer {
-            margin-top: 50px;
+            margin-top: 40px;
             font-size: 12px;
             color: #888;
         }
@@ -57,10 +50,7 @@
     <h1>TadioPlus</h1>
 
     <div class="menu-container">
-        <!-- ลิงก์ไปยังหน้าทีวี -->
         <a href="./oldversion/tvonline.html" class="menu-button">ดูทีวีออนไลน์ (TV Online)</a>
-        
-        <!-- ลิงก์ไปยังหน้าวิทยุ -->
         <a href="./oldversion/radio.html" class="menu-button">ฟังวิทยุ (Radio)</a>
     </div>
 
@@ -69,19 +59,15 @@
     </div>
 
     <script>
-        // โค้ดสำหรับลงทะเบียน Service Worker (sw.js)
-        // ใช้ if ตรวจสอบก่อน เพื่อไม่ให้เบราว์เซอร์เก่า (เช่น IE รุ่นเก่า) เกิด Error หากไม่รู้จัก
-        if ('serviceWorker' in navigator) {
-            // ใช้คำสั่งแบบ ES5 (ไม่ใช้ Arrow Function)
-            navigator.serviceWorker.register('sw.js')
+        if (window.navigator && 'serviceWorker' in window.navigator) {
+            window.navigator.serviceWorker.register('sw.js')
             .then(function(registration) {
-                console.log('Service Worker ลงทะเบียนสำเร็จ: ', registration.scope);
+                if (window.console) console.log('Service Worker OK');
             })
             .catch(function(error) {
-                console.log('Service Worker ลงทะเบียนไม่สำเร็จ: ', error);
+                if (window.console) console.log('Service Worker Error');
             });
         }
     </script>
-
 </body>
 </html>
