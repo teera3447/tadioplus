@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>TadioPlus Radio</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 8px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .menu-button {
+            display: inline-block;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>TadioPlus Radio</h2>
+    <a href="index.html" class="menu-button">กลับสู่หน้าหลัก</a>
+
+    <!-- รายชื่อสถานี -->
+    <select id="radioSelect" onchange="playSelectedRadio()">
+        <option value="">-- กำลังโหลดรายการสถานี... --</option>
+    </select>
+    <br>
+    <!-- เครื่องเล่นวิทยุ -->
+    <audio id="audioPlayer" controls></audio>
+    <div id="status">กรุณาเลือกสถานีเพื่อฟัง</div>
+    <script>
+        var audioSelect = document.getElementById('radioSelect');
+        var audio = document.getElementById('audioPlayer');
+        var statusText = document.getElementById('status');
+
+        // ลิงก์ไปยังไฟล์ M3U บน GitHub
+        var m3uUrl = "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio_radio1.m3u";
+
+        // ฟังก์ชันดึงและแปลงข้อมูล M3U
+        function fetchPlaylist() {
+            fetch(m3uUrl)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.text();
+                })
+                .then(function (data) {
+                    parseM3U(data);
+                })
+                .catch(function (error) {
+                    audioSelect.innerHTML = '<option value="">-- ไม่สามารถโหลดรายการสถานีได้ --</option>';
+                    statusText.innerHTML = "เกิดข้อผิดพลาดในการโหลดไฟล์ M3U";
+                    console.error("Error fetching M3U:", error);
+                });
+        }
+
+        // ฟังก์ชันแกะข้อมูลในรูปแบบ M3U Format
+        function parseM3U(m3uContent) {
+            var lines = m3uContent.split('\n');
+            var radioList = [];
+            var currentName = "";
+
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].trim();
+
+                // ถ้ารายการเริ่มต้นด้วย #EXTINF ให้ดึงชื่อสถานี
+                if (line.startsWith('#EXTINF:')) {
+                    var commaIndex = line.indexOf(',');
+                    if (commaIndex !== -1) {
+                        currentName = line.substring(commaIndex + 1).trim();
+                    }
+                }
+                    // ถ้าเป็นบรรทัด URL (ไม่ขึ้นต้นด้วย # และไม่ว่างเปล่า)
+                else if (line !== "" && !line.startsWith('#')) {
+                    var url = line;
+                    var name = currentName || url; // ใช้ URL แทน หากไม่มีชื่อสถานี
+                    radioList.push({ name: name, url: url });
+                    currentName = ""; // รีเซ็ตชื่อสถานีสำหรับรอบถัดไป
+                }
+            }
+
+            // ใส่รายการสถานีลงใน Dropdown
+            audioSelect.innerHTML = '<option value="">-- เลือกสถานีวิทยุ --</option>';
+            for (var j = 0; j < radioList.length; j++) {
+                var option = document.createElement('option');
+                option.value = radioList[j].url;
+                option.text = radioList[j].name;
+                audioSelect.appendChild(option);
+            }
+        }
+
+        // ฟังก์ชันเล่นวิทยุ
+        function playSelectedRadio() {
+            var selectedUrl = audioSelect.value;
+            if (selectedUrl !== "") {
+                audio.src = selectedUrl;
+                audio.play();
+                statusText.innerHTML = "กำลังเล่น: " + audioSelect.options[audioSelect.selectedIndex].text;
+            } else {
+                audio.pause();
+                statusText.innerHTML = "หยุดเล่น";
+            }
+        }
+
+        // แจ้งเตือนเมื่อเล่นไม่ได้
+        audio.onerror = function () {
+            if (audioSelect.value !== "") {
+                statusText.innerHTML = "ขออภัย ไม่สามารถเล่นสถานีนี้ได้ (ลิงก์อาจเสียหรือเบราว์เซอร์ไม่รองรับ)";
+            }
+        };
+
+        // เรียกใช้งานเมื่อเปิดหน้าเว็บ
+        fetchPlaylist();
+    </script>
+</body>
+</html>
