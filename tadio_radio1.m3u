@@ -1,2 +1,31 @@
-#EXTINF:-1 tvg-chno="400" ch-number="400" tvg-id="GREENWAVE.th" tvg-name="GREENWAVE" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" group-title="Radio", GREENWAVE
+#EXTM3U
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbwQX6gPjkDRpbnXPUX0iyBdD4T8Nt8wMh90sbdTBjI2dGajInfVSrIMlv&s=10" group-title="Tadio+",GreenWave
 https://atimeonline3.smartclick.co.th/green
+#EXTINF:-1 tvg-logo="https://img2.pic.in.th/pic/1000024190.jpg" group-title="Tadio+",Cool Fahrenheit
+https://coolism-web.cdn.byteark.com/;stream/1
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROWKykCfOiIdVsKmXhoThQs56ua-xSd_EjLuV0y-3WEnYbjCI1zV4OICs7&s=10" group-title="Tadio+",EFM
+https://atimeonline3.smartclick.co.th/efm
+#EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/hotwave.png" group-title="Tadio+",HotWave Krub
+https://atimeonline.smartclick.co.th/hotwave
+#EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg" group-title="Tadio+",Sweet FM 88.5
+https://radio14.plathong.net/7086/;
+#EXTINF:-1 tvg-logo="https://img2.pic.in.th/smooth.jpg" group-title="Tadio+",Smooth FM 105.5
+https://3i4812r7.mcot.net/FM1055/fm1055.stream_aac/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10" group-title="Tadio+",วิทยุครอบครัวข่าว 106
+https://radio11.plathong.net/7138/;stream.mp3
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10" group-title="Tadio+",Chula Radio Plus
+https://radio11.plathong.net/7590/;stream.mp3
+#EXTINF:-1 tvg-logo="https://img2.pic.in.th/mellowpop.png" group-title="Tadio+",Mellow POP
+https://tkx5l99p.mcot.net/Mellow/fm975.stream_aac/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10" group-title="Tadio+",จส.100
+https://cdn-th2.livestreaming.in.th/shoutcast/8510
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10" group-title="Tadio+",วิทยุแห่งประเทศไทย 92.5
+https://cdn-th2.livestreaming.in.th/shoutcast/8425
+#EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/ltmfm95.jpg" group-title="Tadio+",ลูกทุ่งมหานคร FM95
+https://t24d2ljc.mcot.net/FM95/fm95.stream_aac/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://img2.pic.in.th/sunshineradio.jpg" group-title="Tadio+",Sunshine Radio
+https://cdn-th2.livestreaming.in.th/shoutcast/8030
+#EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/great93.jpg" group-title="Tadio+",Great93
+https://radio.vpsthai.net/proxy/fqzpihwq/stream
+#EXTINF:-1 tvg-logo="https://img2.pic.in.th/yesterday1065phuket.jpg" group-title="Tadio+",Yesterday 106.5 FM Phuket
+https://4122.radio4.thzhost.com/;stream
