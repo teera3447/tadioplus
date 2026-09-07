@@ -9,28 +9,28 @@ https://atimeonline3.smartclick.co.th/efm
 https://atimeonline.smartclick.co.th/hotwave
 #EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg" group-title="Tadio+",Sweet FM 88.5
 https://radio14.plathong.net/7086/;
-#EXTINF:-1,ลูกทุ่งมหานคร FM95
-http://rstream.mcot.net:8000/fm95
+#EXTINF:-1,Quality Radio FM97
+http://rstream.mcot.net:8000/fm97
 #EXTINF:-1,Active Radio FM99
 http://rstream.mcot.net:8000/fm99
 #EXTINF:-1,News Network FM100.5
 http://rstream.mcot.net:8000/fm1005
-#EXTINF:-1,MET 107
-http://rstream.mcot.net:8000/fm107
+#EXTINF:-1,Thinking Radio
+http://rstream.mcot.net:8000/fm965_2
 #EXTINF:-1 tvg-logo="https://img2.pic.in.th/smooth.jpg" group-title="Tadio+",Smooth FM 105.5
-https://3i4812r7.mcot.net/FM1055/fm1055.stream_aac/playlist.m3u8
+http://rstream.mcot.net:8000/fm1055
 #EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlKoSdYz_B40IVNm_SbNOUzeBaZEJUJqf_K6avXujhLW7bktPsDFdcLSE&s=10" group-title="Tadio+",วิทยุครอบครัวข่าว 106
 https://radio11.plathong.net/7138/;stream.mp3
 #EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSu4du9E6iOehqzoexpEFCsxikjzybiAugGaCpyj1bwg0TOcz8zVDOb5mB&s=10" group-title="Tadio+",Chula Radio Plus
 https://radio11.plathong.net/7590/;stream.mp3
 #EXTINF:-1 tvg-logo="https://img2.pic.in.th/mellowpop.png" group-title="Tadio+",Mellow POP
-https://tkx5l99p.mcot.net/Mellow/fm975.stream_aac/playlist.m3u8
+http://rstream.mcot.net:8000/fm975
 #EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQILt2OPdpX6BW4_oT5AwWOXQakeF5ykiZ7qe5GHYu9zlgnAqhnEs1DjNL2&s=10" group-title="Tadio+",จส.100
 https://cdn-th2.livestreaming.in.th/shoutcast/8510
 #EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuIISJxnCkdqagRUnCxXjN5ZDEETX1wE4TRR_HS-GRIpgNtYw0yIIf54&s=10" group-title="Tadio+",วิทยุแห่งประเทศไทย 92.5
 https://cdn-th2.livestreaming.in.th/shoutcast/8425
 #EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/ltmfm95.jpg" group-title="Tadio+",ลูกทุ่งมหานคร FM95
-https://t24d2ljc.mcot.net/FM95/fm95.stream_aac/chunklist_w1642159338.m3u8
+http://rstream.mcot.net:8000/fm95
 #EXTINF:-1 tvg-logo="https://img2.pic.in.th/sunshineradio.jpg" group-title="Tadio+",Sunshine Radio
 https://cdn-th2.livestreaming.in.th/shoutcast/8030
 #EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/great93.jpg" group-title="Tadio+",Great93
