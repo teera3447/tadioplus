@@ -9,12 +9,16 @@ https://atimeonline3.smartclick.co.th/efm
 https://atimeonline.smartclick.co.th/hotwave
 #EXTINF:-1 tvg-logo="https://img5.pic.in.th/file/secure-sv1/sweetfm885.jpg" group-title="Tadio+",Sweet FM 88.5
 https://radio14.plathong.net/7086/;
+#EXTINF:-1,MUNforward
+https://cdn-th2.livestreaming.in.th/shoutcast/8730
 #EXTINF:-1,Quality Radio FM97
-http://rstream.mcot.net:8000/fm97
+https://cdn-th2.livestreaming.in.th/shoutcast/8610
 #EXTINF:-1,Active Radio FM99
 http://rstream.mcot.net:8000/fm99
 #EXTINF:-1,News Network FM100.5
 http://rstream.mcot.net:8000/fm1005
+#EXTINF:-1,Mitikao 90.5 FM
+https://live1.smartbomb.co.th/live
 #EXTINF:-1,Thinking Radio
 http://rstream.mcot.net:8000/fm965_2
 #EXTINF:-1 tvg-logo="https://img2.pic.in.th/smooth.jpg" group-title="Tadio+",Smooth FM 105.5
@@ -37,3 +41,5 @@ https://cdn-th2.livestreaming.in.th/shoutcast/8030
 https://radio.vpsthai.net/proxy/fqzpihwq/stream
 #EXTINF:-1 tvg-logo="https://img2.pic.in.th/yesterday1065phuket.jpg" group-title="Tadio+",Yesterday 106.5 FM Phuket
 https://4122.radio4.thzhost.com/;stream
+#EXTINF:-1,Test Radio m3u8
+https://ymqaf8yp.mcot.net/FM1005/fm1005.stream_aac/playlist.m3u8
