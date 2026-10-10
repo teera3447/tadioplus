@@ -8,8 +8,8 @@ android {
         applicationId "com.tadiotv.app"
         minSdkVersion 17          // Android 4.2 Jelly Bean
         targetSdkVersion 33
-        versionCode 4
-        versionName "2.2"
+        versionCode 5
+        versionName "2.3"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }

@@ -32,6 +32,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.source.BehindLiveWindowException;
 import com.google.android.exoplayer2.Format;
@@ -62,9 +63,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-
 /**
  * Tadio TV - หน้าจอหลัก
  * - โหลดรายการช่องจากเพลย์ลิสต์ M3U (อัปเดตอัตโนมัติทุกวัน)
@@ -73,16 +71,6 @@ import javax.net.ssl.SSLContext;
  * รองรับ Android 4.2 (API 17) ขึ้นไป
  */
 public class MainActivity extends AppCompatActivity {
-
-    /* Android 4.2/4.3 ยังไม่เปิด TLS 1.2 ให้เอง ทำให้สตรีม https เล่นไม่ได้ */
-    static {
-        try {
-            SSLContext sc = SSLContext.getInstance("TLSv1.2");
-            sc.init(null, null, null);
-            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-        } catch (Throwable ignored) {
-        }
-    }
 
     private static final String PREF = "tadio_pref";
     private static final String KEY_FAV = "favorites";
@@ -163,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         loadData();
 
         ui.post(nowTicker);
+        showLastCrashIfAny();
     }
 
     private void bindViews() {
@@ -221,6 +210,44 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    /** ถ้าครั้งก่อนแอปปิดเอง จะแสดงสาเหตุ (จาก crash.log) หนึ่งครั้ง เพื่อแจ้งนักพัฒนาได้ */
+    private void showLastCrashIfAny() {
+        try {
+            java.io.File f = new java.io.File(getFilesDir(), App.CRASH_FILE);
+            if (!f.exists()) {
+                return;
+            }
+            java.io.FileInputStream in = new java.io.FileInputStream(f);
+            byte[] buf = new byte[(int) Math.min(f.length(), 2500)];
+            int n = in.read(buf);
+            in.close();
+            f.delete();
+            if (n <= 0) {
+                return;
+            }
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.crash_title)
+                    .setMessage(new String(buf, 0, n, "UTF-8"))
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
+        } catch (Throwable ignored) {
+        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        LogoLoader.clear();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        if (level >= TRIM_MEMORY_RUNNING_LOW) {
+            LogoLoader.clear();
+        }
+    }
+
     /** กลับเข้าแอป/ปิดไดอะล็อกแล้ว Android มักเอาโหมดเต็มจอออก จึงตั้งซ้ำทุกครั้งที่หน้าต่างได้โฟกัส */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -246,14 +273,23 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                boolean firstRun = ChannelStore.lastPlaylistTime(MainActivity.this) == 0;
-                boolean stale = System.currentTimeMillis() - ChannelStore.lastPlaylistTime(MainActivity.this) > DAY_MS;
-                final List<Channel> list = ChannelStore.loadChannels(MainActivity.this, firstRun || stale);
+                List<Channel> loaded = new ArrayList<Channel>();
+                Map<String, List<EpgProgram>> loadedEpg = new LinkedHashMap<String, List<EpgProgram>>();
+                EpgMap loadedMap = new EpgMap();
+                try {
+                    boolean firstRun = ChannelStore.lastPlaylistTime(MainActivity.this) == 0;
+                    boolean stale = System.currentTimeMillis() - ChannelStore.lastPlaylistTime(MainActivity.this) > DAY_MS;
+                    loaded = ChannelStore.loadChannels(MainActivity.this, firstRun || stale);
 
-                boolean epgStale = System.currentTimeMillis() - ChannelStore.lastEpgTime(MainActivity.this) > DAY_MS;
-                final Map<String, List<EpgProgram>> epgData =
-                        ChannelStore.loadEpg(MainActivity.this, firstRun || epgStale);
-                final EpgMap map = EpgMap.load(MainActivity.this);
+                    boolean epgStale = System.currentTimeMillis() - ChannelStore.lastEpgTime(MainActivity.this) > DAY_MS;
+                    loadedEpg = ChannelStore.loadEpg(MainActivity.this, firstRun || epgStale);
+                    loadedMap = EpgMap.load(MainActivity.this);
+                } catch (Throwable t) {
+                    // อย่าให้เธรดเบื้องหลังล้มแล้วทำให้ทั้งแอปปิด (เช่น OutOfMemoryError) ใช้ข้อมูลเท่าที่ได้
+                }
+                final List<Channel> list = loaded;
+                final Map<String, List<EpgProgram>> epgData = loadedEpg;
+                final EpgMap map = loadedMap;
 
                 ui.post(new Runnable() {
                     @Override
@@ -338,7 +374,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupPlayer() {
         trackSelector = new DefaultTrackSelector(this);
-        player = new ExoPlayer.Builder(this).setTrackSelector(trackSelector).build();
+        // บัฟเฟอร์เล็ก: ค่าเริ่มต้นของ ExoPlayer จองหน่วยความจำได้เป็นร้อย MB ทำให้เครื่องแรมน้อย
+        // (Android 4.x heap 64-128MB) เด้งออกเองหลังเล่นไปสักพัก
+        DefaultLoadControl loadControl = new DefaultLoadControl.Builder()
+                .setBufferDurationsMs(10000, 25000, 1500, 3000)
+                .setTargetBufferBytes(6 * 1024 * 1024)
+                .setPrioritizeTimeOverSizeThresholds(false)
+                .setBackBuffer(0, false)
+                .build();
+        player = new ExoPlayer.Builder(this)
+                .setTrackSelector(trackSelector)
+                .setLoadControl(loadControl)
+                .build();
         player.setRepeatMode(Player.REPEAT_MODE_OFF);
         player.addListener(new Player.Listener() {
             @Override
@@ -604,7 +651,12 @@ public class MainActivity extends AppCompatActivity {
     private void applyQuality(int height, int bitrate) {
         DefaultTrackSelector.Parameters.Builder b = trackSelector.getParameters().buildUpon();
         if (height <= 0) {
-            b.setMaxVideoSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+            if (Build.VERSION.SDK_INT < 21) {
+                // เครื่องเก่าถอดรหัส 1080p ไม่ไหว (ภาพกระตุก/แรมเต็ม) จำกัดโหมดอัตโนมัติที่ 720p
+                b.setMaxVideoSize(1280, 720);
+            } else {
+                b.setMaxVideoSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+            }
             b.setMaxVideoBitrate(Integer.MAX_VALUE);
         } else {
             b.setMaxVideoSize(10000, height);
@@ -924,10 +976,18 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final boolean ok = ChannelStore.refreshAll(MainActivity.this);
+                boolean done = false;
+                try {
+                    done = ChannelStore.refreshAll(MainActivity.this);
+                } catch (Throwable ignored) {
+                }
+                final boolean ok = done;
                 ui.post(new Runnable() {
                     @Override
                     public void run() {
+                        if (destroyed) {
+                            return;
+                        }
                         if (ok) {
                             toast(R.string.refresh_done);
                         } else {

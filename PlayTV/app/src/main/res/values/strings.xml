@@ -46,6 +46,7 @@
 
     <string name="pick_channel">เลือกช่อง</string>
     <string name="ok">ตกลง</string>
+    <string name="crash_title">ครั้งก่อนแอปปิดผิดปกติ (ส่งข้อความนี้ให้ผู้พัฒนา)</string>
 
     <string name="info_name">ช่อง:</string>
     <string name="info_ch_no">เลขช่อง:</string>
