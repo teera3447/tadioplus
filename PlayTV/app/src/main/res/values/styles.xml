@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorPrimary">@color/brand_orange</item>
+        <item name="colorPrimaryDark">@color/brand_orange_dark</item>
+        <item name="colorAccent">@color/brand_orange</item>
+    </style>
+
+    <style name="IconBtn">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_icon_button</item>
+        <item name="android:textColor">@color/brand_orange</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

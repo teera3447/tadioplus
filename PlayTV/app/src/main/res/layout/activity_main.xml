@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  โครงหน้าจอ: ไม่ใช้ ScrollView ครอบทั้งหน้าอีกต่อไป
+  - ส่วนบน (หัวแอป/ค้นหา/แท็บ, วิดีโอ, ข้อมูลช่อง, ปุ่ม) อยู่กับที่
+  - มีเฉพาะ "ตารางช่อง" (RecyclerView) ที่เลื่อนขึ้นลงได้ (layout_height=0dp + weight=1)
+  - โหมดเต็มจอ: ซ่อนทุกอย่าง แล้วให้ playerContainer สูง match_parent จึงพอดีจอแนวนอนเสมอ
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/contentRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ================= แถบหัวแอป ================= -->
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:id="@+id/btnMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:text="☰"
+                android:textColor="#F26F21"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_logo_box"
+                    android:gravity="center"
+                    android:text="T"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="@string/app_name"
+                    android:textColor="#111111"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnList"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="≡"
+                android:textColor="#9E9E9E"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <!-- ================= ช่องค้นหา ================= -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp">
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_search"
+                android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#9E9E9E"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- ================= แถบแท็บหมวดช่อง ================= -->
+        <HorizontalScrollView
+            android:id="@+id/tabScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="8dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/tabBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+        <!-- ================= พื้นที่เล่นวิดีโอ ================= -->
+        <FrameLayout
+            android:id="@+id/playerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#000000"
+            android:keepScreenOn="true">
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/playerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000"
+                app:resize_mode="fit"
+                app:show_buffering="always"
+                app:use_controller="true" />
+
+            <TextView
+                android:id="@+id/btnPrev"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_circle_white"
+                android:gravity="center"
+                android:text="◀"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnNext"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/bg_circle_white"
+                android:gravity="center"
+                android:text="▶"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnQuality"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_gravity="right|bottom"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/bg_overlay_dark"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/quality_auto"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnFullscreen"
+                android:layout_width="30dp"
+                android:layout_height="26dp"
+                android:layout_gravity="left|bottom"
+                android:layout_marginLeft="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/bg_overlay_dark"
+                android:gravity="center"
+                android:text="@string/icon_fullscreen"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <!-- ================= แถวข้อมูลช่อง ================= -->
+        <LinearLayout
+            android:id="@+id/infoRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:minHeight="54dp"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvChannelName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="#222222"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="#F26F21"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvChno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/bg_chip"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:textColor="#F26F21"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnInfo"
+                style="@style/IconBtn"
+                android:text="i" />
+
+            <TextView
+                android:id="@+id/btnShare"
+                style="@style/IconBtn"
+                android:text="↗" />
+
+            <TextView
+                android:id="@+id/btnFavIcon"
+                style="@style/IconBtn"
+                android:text="♡" />
+        </LinearLayout>
+
+        <!-- ================= ปุ่ม ช่องโปรด / ช่องทั้งหมด ================= -->
+        <LinearLayout
+            android:id="@+id/buttonsRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/btnFavorites"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_left"
+                android:gravity="center"
+                android:text="@string/favorites"
+                android:textColor="#F26F21"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnAll"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_right"
+                android:gravity="center"
+                android:text="@string/all_channels"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- ================= หัวข้อรายการช่อง ================= -->
+        <LinearLayout
+            android:id="@+id/sectionLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="6dp">
+
+            <TextView
+                android:id="@+id/tvSection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/all_section"
+                android:textColor="#555555"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/btnEpg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/epg_title"
+                android:textColor="#F26F21"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- ================= ตารางช่อง (เลื่อนได้) ================= -->
+        <FrameLayout
+            android:id="@+id/listArea"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#F4F4F4">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="ifContentScrolls"
+                android:padding="4dp"
+                android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="24dp"
+                android:text="@string/no_result"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <!-- ================= แถบล่าง ================= -->
+        <LinearLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111111"
+            android:gravity="center_vertical"
+            android:minHeight="58dp"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvUpdated"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/loading_data"
+                android:textColor="#FFD54F"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/btnRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_pill_orange"
+                android:gravity="center"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:text="@string/refresh_now"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+</LinearLayout>
