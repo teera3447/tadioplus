@@ -1,0 +1,99 @@
+10-10 16:34:49.662 D/AndroidRuntime( 2023): 
+10-10 16:34:49.662 D/AndroidRuntime( 2023): >>>>>> AndroidRuntime START com.android.internal.os.RuntimeInit <<<<<<
+10-10 16:34:49.662 D/AndroidRuntime( 2023): CheckJNI is ON
+10-10 16:34:49.692 D/AndroidRuntime( 2023): Calling main entry com.android.commands.am.Am
+10-10 16:34:49.692 I/ActivityManager( 1322): START u0 {flg=0x10000000 cmp=com.tadiotv.app/.MainActivity} from pid 2023
+10-10 16:34:49.702 D/AndroidRuntime( 2023): Shutting down VM
+10-10 16:34:49.712 I/ActivityManager( 1322): Start proc com.tadiotv.app for activity com.tadiotv.app/.MainActivity: pid=2034 uid=10046 gids={50046, 3003, 1028}
+10-10 16:34:49.732 I/MultiDex( 2034): MultiDexExtractor(/data/app/com.tadiotv.app-1.apk, /data/data/com.tadiotv.app/code_cache/secondary-dexes)
+10-10 16:34:49.732 I/MultiDex( 2034): Blocking on lock /data/data/com.tadiotv.app/code_cache/secondary-dexes/MultiDex.lock
+10-10 16:34:49.732 I/MultiDex( 2034): /data/data/com.tadiotv.app/code_cache/secondary-dexes/MultiDex.lock locked
+10-10 16:34:49.732 I/MultiDex( 2034): MultiDexExtractor.load(/data/app/com.tadiotv.app-1.apk, false, )
+10-10 16:34:49.742 I/MultiDex( 2034): Extraction is needed for file /data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip
+10-10 16:34:49.742 I/MultiDex( 2034): Extracting /data/data/com.tadiotv.app/code_cache/secondary-dexes/tmp-com.tadiotv.app-1.apk.classes950585714.zip
+10-10 16:34:50.502 I/MultiDex( 2034): Renaming to /data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip
+10-10 16:34:50.502 I/MultiDex( 2034): Extraction succeeded '/data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip': length 3843215 - crc: 2766442708
+10-10 16:34:50.562 D/dalvikvm( 2034): DexOpt: --- BEGIN 'com.tadiotv.app-1.apk.classes2.zip' (bootstrap=0) ---
+10-10 16:34:50.852 D/dalvikvm( 2034): DexOpt: --- END 'com.tadiotv.app-1.apk.classes2.zip' (success) ---
+10-10 16:34:50.852 D/dalvikvm( 2034): DEX prep '/data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip': unzip in 54ms, rewrite 286ms
+10-10 16:34:51.012 I/ExoPlayerImpl( 2034): Init afea5e20 [ExoPlayerLib/2.18.7] [generic_x86, Android SDK built for x86, unknown, 18]
+10-10 16:34:51.812 I/ActivityManager( 1322): Displayed com.tadiotv.app/.MainActivity: +2s107ms
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:30.352 D/AndroidRuntime( 2096): 
+10-10 16:35:30.352 D/AndroidRuntime( 2096): >>>>>> AndroidRuntime START com.android.internal.os.RuntimeInit <<<<<<
+10-10 16:35:30.352 D/AndroidRuntime( 2096): CheckJNI is ON
+10-10 16:35:30.382 D/AndroidRuntime( 2096): Calling main entry com.android.commands.input.Input
+10-10 16:35:30.382 D/AndroidRuntime( 2096): Shutting down VM
+10-10 16:35:32.612 D/AndroidRuntime( 2106): 
+10-10 16:35:32.612 D/AndroidRuntime( 2106): >>>>>> AndroidRuntime START com.android.internal.os.RuntimeInit <<<<<<
+10-10 16:35:32.612 D/AndroidRuntime( 2106): CheckJNI is ON
+10-10 16:35:32.632 D/AndroidRuntime( 2106): Calling main entry com.android.commands.input.Input
+10-10 16:35:32.632 D/AndroidRuntime( 2106): Shutting down VM
+10-10 16:35:32.632 I/AndroidRuntime( 2106): NOTE: attach of thread 'Binder_1' failed

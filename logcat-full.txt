@@ -1,0 +1,744 @@
+--------- beginning of /dev/log/main
+10-10 16:34:49.662 D/AndroidRuntime( 2023): 
+10-10 16:34:49.662 D/AndroidRuntime( 2023): >>>>>> AndroidRuntime START com.android.internal.os.RuntimeInit <<<<<<
+10-10 16:34:49.662 D/AndroidRuntime( 2023): CheckJNI is ON
+10-10 16:34:49.662 D/dalvikvm( 2023): Trying to load lib libjavacore.so 0x0
+10-10 16:34:49.662 D/dalvikvm( 2023): Added shared lib libjavacore.so 0x0
+10-10 16:34:49.662 D/dalvikvm( 2023): Trying to load lib libnativehelper.so 0x0
+10-10 16:34:49.662 D/dalvikvm( 2023): Added shared lib libnativehelper.so 0x0
+10-10 16:34:49.692 D/AndroidRuntime( 2023): Calling main entry com.android.commands.am.Am
+10-10 16:34:49.692 D/dalvikvm( 2023): Note: class Landroid/app/ActivityManagerNative; has 163 unimplemented (abstract) methods
+10-10 16:34:49.692 D/gralloc_ranchu( 1139): gralloc_alloc: Creating ashmem region of size 217088
+10-10 16:34:49.692 D/        ( 1322): HostConnection::get() New Host Connection established 0xb9986500, tid 1333
+10-10 16:34:49.692 D/EGL_emulation( 1139): eglMakeCurrent: 0xb86da000: ver 1 0
+10-10 16:34:49.692 D/gralloc_ranchu( 1139): gralloc_alloc: Creating ashmem region of size 217088
+--------- beginning of /dev/log/system
+10-10 16:34:49.692 I/ActivityManager( 1322): START u0 {flg=0x10000000 cmp=com.tadiotv.app/.MainActivity} from pid 2023
+10-10 16:34:49.702 D/AndroidRuntime( 2023): Shutting down VM
+10-10 16:34:49.702 D/dalvikvm( 2034): Not late-enabling CheckJNI (already on)
+10-10 16:34:49.702 D/dalvikvm( 2023): GC_CONCURRENT freed 90K, 16% free 501K/596K, paused 0ms+0ms, total 0ms
+10-10 16:34:49.712 I/ActivityManager( 1322): Start proc com.tadiotv.app for activity com.tadiotv.app/.MainActivity: pid=2034 uid=10046 gids={50046, 3003, 1028}
+10-10 16:34:49.722 D/EGL_emulation( 1139): eglMakeCurrent: 0xb86da000: ver 1 0
+10-10 16:34:49.722 D/EGL_emulation( 1696): eglMakeCurrent: 0xb989e210: ver 2 0
+10-10 16:34:49.732 I/MultiDex( 2034): VM with version 1.6.0 does not have multidex support
+10-10 16:34:49.732 I/MultiDex( 2034): Installing application
+10-10 16:34:49.732 I/MultiDex( 2034): MultiDexExtractor(/data/app/com.tadiotv.app-1.apk, /data/data/com.tadiotv.app/code_cache/secondary-dexes)
+10-10 16:34:49.732 I/MultiDex( 2034): Blocking on lock /data/data/com.tadiotv.app/code_cache/secondary-dexes/MultiDex.lock
+10-10 16:34:49.732 I/MultiDex( 2034): /data/data/com.tadiotv.app/code_cache/secondary-dexes/MultiDex.lock locked
+10-10 16:34:49.732 I/MultiDex( 2034): MultiDexExtractor.load(/data/app/com.tadiotv.app-1.apk, false, )
+10-10 16:34:49.732 I/MultiDex( 2034): Detected that extraction must be performed.
+10-10 16:34:49.742 I/MultiDex( 2034): Extraction is needed for file /data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip
+10-10 16:34:49.742 I/MultiDex( 2034): Extracting /data/data/com.tadiotv.app/code_cache/secondary-dexes/tmp-com.tadiotv.app-1.apk.classes950585714.zip
+10-10 16:34:49.742 D/gralloc_ranchu( 1139): gralloc_alloc: Creating ashmem region of size 819200
+10-10 16:34:49.772 D/EGL_emulation( 1696): eglMakeCurrent: 0xb989e210: ver 2 0
+10-10 16:34:49.772 D/EGL_emulation( 1696): eglMakeCurrent: 0xb989e210: ver 2 0
+10-10 16:34:50.312 D/ConnectivityService( 1322): [CheckMp] isMobileOk: newUrl=http://142.250.139.100/generate_204
+10-10 16:34:50.352 D/dalvikvm( 1612): GC_CONCURRENT freed 408K, 14% free 3067K/3540K, paused 0ms+1ms, total 2ms
+10-10 16:34:50.352 E/logwrapper( 2048): executing /system/bin/ip failed: No such file or directory
+10-10 16:34:50.352 D/ConnectivityService( 1322): [CheckMp] isMobileOk: connected responseCode=204
+10-10 16:34:50.352 D/ConnectivityService( 1322): [CheckMp] isMobileOk: F stop hipri
+10-10 16:34:50.352 D/MobileDataStateTracker( 1322): default: setEnableFailFastMobileData(enabled=0)
+10-10 16:34:50.352 D/ConnectivityService( 1322): stopUsingNetworkFeature: teardown net 0: enableHIPRI
+10-10 16:34:50.352 D/MobileDataStateTracker( 1322): hipri: Broadcast received: android.intent.action.ANY_DATA_STATE apnType=hipri
+10-10 16:34:50.352 D/MobileDataStateTracker( 1322): hipri: hipri setting isAvailable to false
+10-10 16:34:50.352 D/MobileDataStateTracker( 1322): hipri: Received state=DISCONNECTED, old=CONNECTED, reason=dataDisabled
+10-10 16:34:50.352 D/MobileDataStateTracker( 1322): hipri: setDetailed state, old =CONNECTED and new state=DISCONNECTED
+10-10 16:34:50.352 D/ConnectivityService( 1322): ConnectivityChange for mobile_hipri: DISCONNECTED/DISCONNECTED
+10-10 16:34:50.362 E/SecondaryTablController( 1136): ip route del failed: /system/bin/ip route del 10.0.2.2/32 via 0.0.0.0 dev eth0 table 60
+10-10 16:34:50.362 E/logwrapper( 2049): executing /system/bin/ip failed: No such file or directory
+10-10 16:34:50.362 W/FrameworkListener( 1136): Handler 'interface' error (No such device)
+10-10 16:34:50.372 E/SecondaryTablController( 1136): ip route del failed: /system/bin/ip route del 0.0.0.0/0 via 10.0.2.2 dev eth0 table 60
+10-10 16:34:50.372 W/FrameworkListener( 1136): Handler 'interface' error (No such device)
+10-10 16:34:50.372 D/Nat464Xlat( 1322): requiresClat: netType=5, hasIPv4Address=true
+10-10 16:34:50.502 I/MultiDex( 2034): Renaming to /data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip
+10-10 16:34:50.502 D/dalvikvm( 2034): GC_CONCURRENT freed 163K, 9% free 2681K/2920K, paused 2ms+0ms, total 3ms
+10-10 16:34:50.502 I/MultiDex( 2034): Extraction succeeded '/data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip': length 3843215 - crc: 2766442708
+10-10 16:34:50.512 I/MultiDex( 2034): load found 1 secondary dex files
+10-10 16:34:50.562 D/dalvikvm( 2034): DexOpt: --- BEGIN 'com.tadiotv.app-1.apk.classes2.zip' (bootstrap=0) ---
+10-10 16:34:50.632 W/dalvikvm( 2051): method Landroidx/appcompat/widget/DropDownListView;.lookForSelectablePosition incorrectly overrides package-private method with same name in Landroid/widget/ListView;
+10-10 16:34:50.672 D/dalvikvm( 2051): DexOpt: couldn't find field Landroid/content/res/Configuration;.colorMode
+10-10 16:34:50.682 D/dalvikvm( 2051): DexOpt: couldn't find field Landroid/content/pm/PackageInfo;.signingInfo
+10-10 16:34:50.682 D/dalvikvm( 2051): DexOpt: couldn't find static field Landroid/graphics/Bitmap$Config;.HARDWARE
+10-10 16:34:50.692 D/dalvikvm( 2051): DexOpt: couldn't find field Landroid/view/inputmethod/EditorInfo;.contentMimeTypes
+10-10 16:34:50.722 W/dalvikvm( 2051): DexOpt: method is in an interface
+10-10 16:34:50.732 I/dalvikvm( 2051): DexOpt: illegal method access (call Landroid/view/View;.isAccessibilityFocused ()Z from Lcom/google/android/exoplayer2/ui/PlayerControlView$Api21;)
+10-10 16:34:50.762 D/dalvikvm( 2051): DexOpt: couldn't find field Landroid/content/pm/ResolveInfo;.providerInfo
+10-10 16:34:50.792 E/cutils-trace( 2051): Error opening trace file: Permission denied (13)
+10-10 16:34:50.792 D/dalvikvm( 2051): GC_FOR_ALLOC freed 208K, 11% free 1831K/2044K, paused 1ms, total 1ms
+10-10 16:34:50.802 I/dalvikvm( 2051): DexOpt: illegal method access (call Landroid/widget/TextView;.getTextDirectionHeuristic ()Landroid/text/TextDirectionHeuristic; from Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl29;)
+10-10 16:34:50.822 D/dalvikvm( 2051): DexOpt: load 33ms, verify+opt 162ms, 5578244 bytes
+10-10 16:34:50.852 D/dalvikvm( 2034): DexOpt: --- END 'com.tadiotv.app-1.apk.classes2.zip' (success) ---
+10-10 16:34:50.852 D/dalvikvm( 2034): DEX prep '/data/data/com.tadiotv.app/code_cache/secondary-dexes/com.tadiotv.app-1.apk.classes2.zip': unzip in 54ms, rewrite 286ms
+10-10 16:34:50.852 I/MultiDex( 2034): install done
+10-10 16:34:50.852 I/dalvikvm( 2034): Could not find method android.os.Trace.isEnabled, referenced from method androidx.tracing.Trace.isEnabled
+10-10 16:34:50.852 W/dalvikvm( 2034): VFY: unable to resolve static method 2411: Landroid/os/Trace;.isEnabled ()Z
+10-10 16:34:50.852 D/dalvikvm( 2034): VFY: replacing opcode 0x71 at 0x0004
+10-10 16:34:50.852 D/WM-WrkMgrInitializer( 2034): Initializing WorkManager with default configuration.
+10-10 16:34:50.852 I/dalvikvm( 2034): Could not find method android.content.Context.isDeviceProtectedStorage, referenced from method androidx.work.impl.WorkManagerImpl.internalInit
+10-10 16:34:50.852 W/dalvikvm( 2034): VFY: unable to resolve virtual method 640: Landroid/content/Context;.isDeviceProtectedStorage ()Z
+10-10 16:34:50.852 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0020
+10-10 16:34:50.852 I/dalvikvm( 2034): Could not find method android.content.Context.getNoBackupFilesDir, referenced from method androidx.work.impl.WorkDatabasePathHelper.getNoBackupPath
+10-10 16:34:50.852 W/dalvikvm( 2034): VFY: unable to resolve virtual method 625: Landroid/content/Context;.getNoBackupFilesDir ()Ljava/io/File;
+10-10 16:34:50.852 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0002
+10-10 16:34:50.852 I/dalvikvm( 2034): Could not find method android.app.ActivityManager.isLowRamDevice, referenced from method androidx.room.RoomDatabase$JournalMode.isLowRamDevice
+10-10 16:34:50.852 W/dalvikvm( 2034): VFY: unable to resolve virtual method 140: Landroid/app/ActivityManager;.isLowRamDevice ()Z
+10-10 16:34:50.852 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0006
+10-10 16:34:50.852 I/dalvikvm( 2034): Could not find method android.content.Context.getNoBackupFilesDir, referenced from method androidx.sqlite.db.framework.FrameworkSQLiteOpenHelper.getDelegate
+10-10 16:34:50.852 W/dalvikvm( 2034): VFY: unable to resolve virtual method 625: Landroid/content/Context;.getNoBackupFilesDir ()Ljava/io/File;
+10-10 16:34:50.852 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x001c
+10-10 16:34:50.852 W/dalvikvm( 2034): Unable to resolve superclass of Landroidx/work/impl/background/systemjob/SystemJobService; (82)
+10-10 16:34:50.852 W/dalvikvm( 2034): Link of class 'Landroidx/work/impl/background/systemjob/SystemJobService;' failed
+10-10 16:34:50.852 E/dalvikvm( 2034): Could not find class 'androidx.work.impl.background.systemjob.SystemJobService', referenced from method androidx.work.impl.Schedulers.createBestAvailableBackgroundScheduler
+10-10 16:34:50.852 W/dalvikvm( 2034): VFY: unable to resolve const-class 3654 (Landroidx/work/impl/background/systemjob/SystemJobService;) in Landroidx/work/impl/Schedulers;
+10-10 16:34:50.852 D/dalvikvm( 2034): VFY: replacing opcode 0x1c at 0x000d
+10-10 16:34:50.862 D/dalvikvm( 1322): GC_CONCURRENT freed 437K, 62% free 5246K/13736K, paused 0ms+1ms, total 6ms
+10-10 16:34:50.862 W/dalvikvm( 2034): Unable to resolve superclass of Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback; (373)
+10-10 16:34:50.862 W/dalvikvm( 2034): Link of class 'Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback;' failed
+10-10 16:34:50.862 E/dalvikvm( 2034): Could not find class 'androidx.work.impl.constraints.trackers.NetworkStateTracker$NetworkStateCallback', referenced from method androidx.work.impl.constraints.trackers.NetworkStateTracker.<init>
+10-10 16:34:50.862 W/dalvikvm( 2034): VFY: unable to resolve new-instance 3678 (Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback;) in Landroidx/work/impl/constraints/trackers/NetworkStateTracker;
+10-10 16:34:50.862 D/dalvikvm( 2034): VFY: replacing opcode 0x22 at 0x0015
+10-10 16:34:50.862 I/dalvikvm( 2034): Could not find method android.net.ConnectivityManager.getActiveNetwork, referenced from method androidx.work.impl.constraints.trackers.NetworkStateTracker.isActiveNetworkValidated
+10-10 16:34:50.862 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1982: Landroid/net/ConnectivityManager;.getActiveNetwork ()Landroid/net/Network;
+10-10 16:34:50.862 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x000b
+10-10 16:34:50.862 W/dalvikvm( 2034): Unable to resolve superclass of Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback; (373)
+10-10 16:34:50.862 W/dalvikvm( 2034): Link of class 'Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback;' failed
+10-10 16:34:50.862 I/dalvikvm( 2034): Could not find method android.net.ConnectivityManager.registerDefaultNetworkCallback, referenced from method androidx.work.impl.constraints.trackers.NetworkStateTracker.startTracking
+10-10 16:34:50.862 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1988: Landroid/net/ConnectivityManager;.registerDefaultNetworkCallback (Landroid/net/ConnectivityManager$NetworkCallback;)V
+10-10 16:34:50.862 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0018
+10-10 16:34:50.862 W/dalvikvm( 2034): Unable to resolve superclass of Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback; (373)
+10-10 16:34:50.862 W/dalvikvm( 2034): Link of class 'Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback;' failed
+10-10 16:34:50.862 I/dalvikvm( 2034): Could not find method android.net.ConnectivityManager.unregisterNetworkCallback, referenced from method androidx.work.impl.constraints.trackers.NetworkStateTracker.stopTracking
+10-10 16:34:50.862 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1989: Landroid/net/ConnectivityManager;.unregisterNetworkCallback (Landroid/net/ConnectivityManager$NetworkCallback;)V
+10-10 16:34:50.862 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0018
+10-10 16:34:50.862 W/dalvikvm( 2034): Unable to resolve superclass of Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback; (373)
+10-10 16:34:50.862 W/dalvikvm( 2034): Link of class 'Landroidx/work/impl/constraints/trackers/NetworkStateTracker$NetworkStateCallback;' failed
+10-10 16:34:50.862 D/dalvikvm( 2034): DexOpt: unable to opt direct call 0x6b2e at 0x17 in Landroidx/work/impl/constraints/trackers/NetworkStateTracker;.<init>
+10-10 16:34:50.872 I/dalvikvm( 2034): Could not find method android.app.AlarmManager.setExact, referenced from method androidx.work.impl.utils.ForceStopRunnable.setAlarm
+10-10 16:34:50.872 W/dalvikvm( 2034): VFY: unable to resolve virtual method 159: Landroid/app/AlarmManager;.setExact (IJLandroid/app/PendingIntent;)V
+10-10 16:34:50.872 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0027
+10-10 16:34:50.872 I/dalvikvm( 2034): Could not find method android.app.ActivityManager.getHistoricalProcessExitReasons, referenced from method androidx.work.impl.utils.ForceStopRunnable.isForceStopped
+10-10 16:34:50.872 W/dalvikvm( 2034): VFY: unable to resolve virtual method 137: Landroid/app/ActivityManager;.getHistoricalProcessExitReasons (Ljava/lang/String;II)Ljava/util/List;
+10-10 16:34:50.872 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x002a
+10-10 16:34:50.872 I/dalvikvm( 2034): Could not find method android.os.Handler.createAsync, referenced from method androidx.arch.core.executor.DefaultTaskExecutor.createAsync
+10-10 16:34:50.872 W/dalvikvm( 2034): VFY: unable to resolve static method 2210: Landroid/os/Handler;.createAsync (Landroid/os/Looper;)Landroid/os/Handler;
+10-10 16:34:50.872 D/dalvikvm( 2034): VFY: replacing opcode 0x71 at 0x0006
+10-10 16:34:50.872 I/dalvikvm( 2034): Could not find method android.app.Activity.registerActivityLifecycleCallbacks, referenced from method androidx.lifecycle.ProcessLifecycleOwner$3.onActivityPreCreated
+10-10 16:34:50.872 W/dalvikvm( 2034): VFY: unable to resolve virtual method 124: Landroid/app/Activity;.registerActivityLifecycleCallbacks (Landroid/app/Application$ActivityLifecycleCallbacks;)V
+10-10 16:34:50.872 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0005
+10-10 16:34:50.872 D/dalvikvm( 2034): GC_CONCURRENT freed 321K, 13% free 2781K/3168K, paused 0ms+0ms, total 2ms
+10-10 16:34:50.882 D/dalvikvm( 2034): GC_FOR_ALLOC freed 267K, 18% free 2745K/3336K, paused 2ms, total 2ms
+10-10 16:34:50.882 I/dalvikvm-heap( 2034): Grow heap (frag case) to 2.977MB for 245772-byte allocation
+10-10 16:34:50.882 D/dalvikvm( 2034): GC_FOR_ALLOC freed 112K, 20% free 2873K/3580K, paused 1ms, total 1ms
+10-10 16:34:50.882 D/dalvikvm( 2034): GC_FOR_ALLOC freed <1K, 20% free 2873K/3580K, paused 2ms, total 2ms
+10-10 16:34:50.882 I/dalvikvm-heap( 2034): Grow heap (frag case) to 3.214MB for 363218-byte allocation
+10-10 16:34:50.882 D/dalvikvm( 2034): GC_FOR_ALLOC freed <1K, 18% free 3227K/3936K, paused 1ms, total 1ms
+10-10 16:34:50.922 D/dalvikvm( 2034): GC_CONCURRENT freed 581K, 23% free 3046K/3936K, paused 0ms+2ms, total 3ms
+10-10 16:34:50.932 D/dalvikvm( 2034): GC_CONCURRENT freed 347K, 20% free 3153K/3936K, paused 1ms+0ms, total 3ms
+10-10 16:34:50.942 D/dalvikvm( 2034): DexOpt: couldn't find field Landroid/view/WindowManager$LayoutParams;.layoutInDisplayCutoutMode
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to resolve instance field 902
+10-10 16:34:50.942 D/dalvikvm( 2034): VFY: replacing opcode 0x59 at 0x0013
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/window/OnBackInvokedDispatcher;)
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/window/OnBackInvokedDispatcher;)
+10-10 16:34:50.942 I/dalvikvm( 2034): Could not find method androidx.core.app.ComponentActivity.onMultiWindowModeChanged, referenced from method androidx.activity.ComponentActivity.onMultiWindowModeChanged
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to resolve virtual method 12526: Landroidx/core/app/ComponentActivity;.onMultiWindowModeChanged (ZLandroid/content/res/Configuration;)V
+10-10 16:34:50.942 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0004
+10-10 16:34:50.942 I/dalvikvm( 2034): Could not find method androidx.core.app.ComponentActivity.onPictureInPictureModeChanged, referenced from method androidx.activity.ComponentActivity.onPictureInPictureModeChanged
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to resolve virtual method 12529: Landroidx/core/app/ComponentActivity;.onPictureInPictureModeChanged (ZLandroid/content/res/Configuration;)V
+10-10 16:34:50.942 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0004
+10-10 16:34:50.942 I/dalvikvm( 2034): Could not find method androidx.core.app.ComponentActivity.onRequestPermissionsResult, referenced from method androidx.activity.ComponentActivity.onRequestPermissionsResult
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to resolve virtual method 12531: Landroidx/core/app/ComponentActivity;.onRequestPermissionsResult (I[Ljava/lang/String;[I)V
+10-10 16:34:50.942 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0020
+10-10 16:34:50.942 I/dalvikvm( 2034): Could not find method androidx.core.app.ComponentActivity.reportFullyDrawn, referenced from method androidx.activity.ComponentActivity.reportFullyDrawn
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to resolve virtual method 12535: Landroidx/core/app/ComponentActivity;.reportFullyDrawn ()V
+10-10 16:34:50.942 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0012
+10-10 16:34:50.942 I/dalvikvm( 2034): Could not find method androidx.core.app.ComponentActivity.reportFullyDrawn, referenced from method androidx.activity.ComponentActivity.reportFullyDrawn
+10-10 16:34:50.942 W/dalvikvm( 2034): VFY: unable to resolve virtual method 12535: Landroidx/core/app/ComponentActivity;.reportFullyDrawn ()V
+10-10 16:34:50.942 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0022
+10-10 16:34:50.952 D/dalvikvm( 2034): GC_CONCURRENT freed 658K, 26% free 2917K/3936K, paused 2ms+0ms, total 4ms
+10-10 16:34:50.952 D/AppCompatDelegate( 2034): Checking for metadata for AppLocalesMetadataHolderService : Service not found
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/os/LocaleList;)
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/os/LocaleList;)
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/os/LocaleList;)
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/os/LocaleList;)
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/os/LocaleList;)
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/os/LocaleList;)
+10-10 16:34:50.952 I/dalvikvm( 2034): Could not find method android.os.LocaleList.matchesLanguageAndScript, referenced from method androidx.core.os.LocaleListCompat.matchesLanguageAndScript
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to resolve static method 2258: Landroid/os/LocaleList;.matchesLanguageAndScript (Ljava/util/Locale;Ljava/util/Locale;)Z
+10-10 16:34:50.952 D/dalvikvm( 2034): VFY: replacing opcode 0x71 at 0x0006
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/os/LocaleList;)
+10-10 16:34:50.952 E/dalvikvm( 2034): Could not find class 'android.os.LocaleList', referenced from method androidx.core.os.LocaleListCompat.wrap
+10-10 16:34:50.952 W/dalvikvm( 2034): VFY: unable to resolve check-cast 416 (Landroid/os/LocaleList;) in Landroidx/core/os/LocaleListCompat;
+10-10 16:34:50.952 D/dalvikvm( 2034): VFY: replacing opcode 0x1f at 0x0001
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/WindowInsets;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/WindowInsets;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/WindowInsets;)
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.view.WindowInsets.equals, referenced from method androidx.core.view.ViewCompat.dispatchApplyWindowInsets
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 5048: Landroid/view/WindowInsets;.equals (Ljava/lang/Object;)Z
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0010
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/WindowInsets;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/WindowInsets;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/WindowInsets;)
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.view.WindowInsets.equals, referenced from method androidx.core.view.ViewCompat.onApplyWindowInsets
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 5048: Landroid/view/WindowInsets;.equals (Ljava/lang/Object;)Z
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0010
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.getAutoSizeMaxTextSize, referenced from method androidx.appcompat.widget.AppCompatTextView.access$001
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6030: Landroid/widget/TextView;.getAutoSizeMaxTextSize ()I
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.setFirstBaselineToTopHeight, referenced from method androidx.appcompat.widget.AppCompatTextView.access$1001
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6118: Landroid/widget/TextView;.setFirstBaselineToTopHeight (I)V
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.getAutoSizeMinTextSize, referenced from method androidx.appcompat.widget.AppCompatTextView.access$101
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6031: Landroid/widget/TextView;.getAutoSizeMinTextSize ()I
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.setLastBaselineToBottomHeight, referenced from method androidx.appcompat.widget.AppCompatTextView.access$1101
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6125: Landroid/widget/TextView;.setLastBaselineToBottomHeight (I)V
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.getAutoSizeStepGranularity, referenced from method androidx.appcompat.widget.AppCompatTextView.access$201
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6032: Landroid/widget/TextView;.getAutoSizeStepGranularity ()I
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.getAutoSizeTextAvailableSizes, referenced from method androidx.appcompat.widget.AppCompatTextView.access$301
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6033: Landroid/widget/TextView;.getAutoSizeTextAvailableSizes ()[I
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.getAutoSizeTextType, referenced from method androidx.appcompat.widget.AppCompatTextView.access$401
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6034: Landroid/widget/TextView;.getAutoSizeTextType ()I
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.getTextClassifier, referenced from method androidx.appcompat.widget.AppCompatTextView.access$501
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6072: Landroid/widget/TextView;.getTextClassifier ()Landroid/view/textclassifier/TextClassifier;
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.setAutoSizeTextTypeUniformWithConfiguration, referenced from method androidx.appcompat.widget.AppCompatTextView.access$601
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6100: Landroid/widget/TextView;.setAutoSizeTextTypeUniformWithConfiguration (IIII)V
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.setAutoSizeTextTypeUniformWithPresetSizes, referenced from method androidx.appcompat.widget.AppCompatTextView.access$701
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6101: Landroid/widget/TextView;.setAutoSizeTextTypeUniformWithPresetSizes ([II)V
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.setAutoSizeTextTypeWithDefaults, referenced from method androidx.appcompat.widget.AppCompatTextView.access$801
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6102: Landroid/widget/TextView;.setAutoSizeTextTypeWithDefaults (I)V
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.TextView.setTextClassifier, referenced from method androidx.appcompat.widget.AppCompatTextView.access$901
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 6139: Landroid/widget/TextView;.setTextClassifier (Landroid/view/textclassifier/TextClassifier;)V
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.EditText.getTextClassifier, referenced from method androidx.appcompat.widget.AppCompatEditText.access$001
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 5593: Landroid/widget/EditText;.getTextClassifier ()Landroid/view/textclassifier/TextClassifier;
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 I/dalvikvm( 2034): Could not find method android.widget.EditText.setTextClassifier, referenced from method androidx.appcompat.widget.AppCompatEditText.access$101
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to resolve virtual method 5616: Landroid/widget/EditText;.setTextClassifier (Landroid/view/textclassifier/TextClassifier;)V
+10-10 16:34:50.962 D/dalvikvm( 2034): VFY: replacing opcode 0x6f at 0x0000
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.962 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.972 D/dalvikvm( 2034): GC_CONCURRENT freed 359K, 23% free 3053K/3936K, paused 0ms+1ms, total 4ms
+10-10 16:34:50.972 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.972 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.972 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/view/textclassifier/TextClassifier;)
+10-10 16:34:50.972 I/dalvikvm( 2034): Could not find method android.content.res.Resources.getColor, referenced from method com.google.android.exoplayer2.ui.PlayerView.configureEditModeLogoV23
+10-10 16:34:50.972 W/dalvikvm( 2034): VFY: unable to resolve virtual method 45: Landroid/content/res/Resources;.getColor (ILandroid/content/res/Resources$Theme;)I
+10-10 16:34:50.972 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x000c
+10-10 16:34:50.972 I/dalvikvm( 2034): Could not find method android.media.AudioManager.generateAudioSessionId, referenced from method com.google.android.exoplayer2.util.Util.generateAudioSessionIdV21
+10-10 16:34:50.972 W/dalvikvm( 2034): VFY: unable to resolve virtual method 98: Landroid/media/AudioManager;.generateAudioSessionId ()I
+10-10 16:34:50.972 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x000c
+10-10 16:34:50.982 D/dalvikvm( 2034): GC_CONCURRENT freed 60K, 14% free 3399K/3936K, paused 1ms+2ms, total 5ms
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve static field 4067 (DISPLAY) in Ljava/util/Locale$Category;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x62 at 0x0006
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method android.view.Display.getMode, referenced from method com.google.android.exoplayer2.util.Util.getDisplaySizeV23
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve virtual method 296: Landroid/view/Display;.getMode ()Landroid/view/Display$Mode;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0000
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method java.util.Locale.toLanguageTag, referenced from method com.google.android.exoplayer2.util.Util.getLocaleLanguageTagV21
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve virtual method 15759: Ljava/util/Locale;.toLanguageTag ()Ljava/lang/String;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0000
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method android.content.res.Configuration.getLocales, referenced from method com.google.android.exoplayer2.util.Util.getSystemLocalesV24
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve virtual method 42: Landroid/content/res/Configuration;.getLocales ()Landroid/os/LocaleList;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0000
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method android.security.NetworkSecurityPolicy.getInstance, referenced from method com.google.android.exoplayer2.util.Util.isTrafficRestricted
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve static method 237: Landroid/security/NetworkSecurityPolicy;.getInstance ()Landroid/security/NetworkSecurityPolicy;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x71 at 0x000c
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method android.content.Context.registerReceiver, referenced from method com.google.android.exoplayer2.util.Util.registerReceiverNotExported
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve virtual method 25: Landroid/content/Context;.registerReceiver (Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;I)Landroid/content/Intent;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x000c
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method android.app.Activity.checkSelfPermission, referenced from method com.google.android.exoplayer2.util.Util.requestExternalStoragePermission
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve virtual method 0: Landroid/app/Activity;.checkSelfPermission (Ljava/lang/String;)I
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0002
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method android.content.Context.startForegroundService, referenced from method com.google.android.exoplayer2.util.Util.startForegroundService
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve virtual method 26: Landroid/content/Context;.startForegroundService (Landroid/content/Intent;)Landroid/content/ComponentName;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0006
+10-10 16:34:50.982 E/dalvikvm( 2034): Could not find class 'android.graphics.drawable.RippleDrawable', referenced from method androidx.appcompat.widget.AppCompatImageHelper.hasOverlappingRendering
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve instanceof 242 (Landroid/graphics/drawable/RippleDrawable;) in Landroidx/appcompat/widget/AppCompatImageHelper;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x20 at 0x000c
+10-10 16:34:50.982 E/dalvikvm( 2034): Could not find class 'android.view.accessibility.CaptioningManager', referenced from method com.google.android.exoplayer2.ui.SubtitleView.getUserCaptionFontScale
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve check-cast 802 (Landroid/view/accessibility/CaptioningManager;) in Lcom/google/android/exoplayer2/ui/SubtitleView;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x1f at 0x001a
+10-10 16:34:50.982 E/dalvikvm( 2034): Could not find class 'android.view.accessibility.CaptioningManager', referenced from method com.google.android.exoplayer2.ui.SubtitleView.getUserCaptionStyle
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve check-cast 802 (Landroid/view/accessibility/CaptioningManager;) in Lcom/google/android/exoplayer2/ui/SubtitleView;
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x1f at 0x0018
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve instance field 936
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x52 at 0x0002
+10-10 16:34:50.982 I/dalvikvm( 2034): Could not find method android.view.accessibility.CaptioningManager$CaptionStyle.hasForegroundColor, referenced from method com.google.android.exoplayer2.ui.CaptionStyleCompat.createFromCaptionStyleV21
+10-10 16:34:50.982 W/dalvikvm( 2034): VFY: unable to resolve virtual method 5381: Landroid/view/accessibility/CaptioningManager$CaptionStyle;.hasForegroundColor ()Z
+10-10 16:34:50.982 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0002
+10-10 16:34:50.992 I/dalvikvm( 2034): Could not find method android.graphics.drawable.Drawable.setLayoutDirection, referenced from method com.google.android.exoplayer2.ui.DefaultTimeBar.setDrawableLayoutDirection
+10-10 16:34:50.992 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1434: Landroid/graphics/drawable/Drawable;.setLayoutDirection (I)Z
+10-10 16:34:50.992 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0006
+10-10 16:34:50.992 I/dalvikvm( 2034): Could not find method com.google.android.exoplayer2.ui.DefaultTimeBar.setSystemGestureExclusionRects, referenced from method com.google.android.exoplayer2.ui.DefaultTimeBar.setSystemGestureExclusionRectsV29
+10-10 16:34:50.992 W/dalvikvm( 2034): VFY: unable to resolve virtual method 39106: Lcom/google/android/exoplayer2/ui/DefaultTimeBar;.setSystemGestureExclusionRects (Ljava/util/List;)V
+10-10 16:34:50.992 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x001f
+10-10 16:34:50.992 W/dalvikvm( 2034): VFY: unable to resolve static field 924 (ACTION_SCROLL_FORWARD) in Landroid/view/accessibility/AccessibilityNodeInfo$AccessibilityAction;
+10-10 16:34:50.992 D/dalvikvm( 2034): VFY: replacing opcode 0x62 at 0x001e
+10-10 16:34:51.002 D/dalvikvm( 2034): GC_CONCURRENT freed 196K, 9% free 3602K/3936K, paused 0ms+1ms, total 4ms
+10-10 16:34:51.002 E/dalvikvm( 2034): Could not find class 'android.view.accessibility.CaptioningManager', referenced from method com.google.android.exoplayer2.trackselection.TrackSelectionParameters$Builder.setPreferredTextLanguageAndRoleFlagsToCaptioningManagerSettingsV19
+10-10 16:34:51.002 W/dalvikvm( 2034): VFY: unable to resolve check-cast 136 (Landroid/view/accessibility/CaptioningManager;) in Lcom/google/android/exoplayer2/trackselection/TrackSelectionParameters$Builder;
+10-10 16:34:51.002 D/dalvikvm( 2034): VFY: replacing opcode 0x1f at 0x0014
+10-10 16:34:51.012 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/AudioDeviceInfo;)
+10-10 16:34:51.012 I/ExoPlayerImpl( 2034): Init afea5e20 [ExoPlayerLib/2.18.7] [generic_x86, Android SDK built for x86, unknown, 18]
+10-10 16:34:51.012 I/dalvikvm( 2034): Could not find method android.media.MediaFormat.setFeatureEnabled, referenced from method com.google.android.exoplayer2.video.MediaCodecVideoRenderer.configureTunnelingV21
+10-10 16:34:51.012 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1805: Landroid/media/MediaFormat;.setFeatureEnabled (Ljava/lang/String;Z)V
+10-10 16:34:51.012 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0004
+10-10 16:34:51.012 E/dalvikvm( 2034): Could not find class 'android.media.MediaCodec$CodecException', referenced from method com.google.android.exoplayer2.mediacodec.MediaCodecRenderer.isMediaCodecExceptionV21
+10-10 16:34:51.012 W/dalvikvm( 2034): VFY: unable to resolve instanceof 301 (Landroid/media/MediaCodec$CodecException;) in Lcom/google/android/exoplayer2/mediacodec/MediaCodecRenderer;
+10-10 16:34:51.012 D/dalvikvm( 2034): VFY: replacing opcode 0x20 at 0x0000
+10-10 16:34:51.012 E/dalvikvm( 2034): Could not find class 'android.media.MediaCodec$CodecException', referenced from method com.google.android.exoplayer2.mediacodec.MediaCodecRenderer.isRecoverableMediaCodecExceptionV21
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve instanceof 301 (Landroid/media/MediaCodec$CodecException;) in Lcom/google/android/exoplayer2/mediacodec/MediaCodecRenderer;
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x20 at 0x0000
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.MediaCrypto.setMediaDrmSession, referenced from method com.google.android.exoplayer2.mediacodec.MediaCodecRenderer.updateDrmSessionV23
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1745: Landroid/media/MediaCrypto;.setMediaDrmSession ([B)V
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x000a
+10-10 16:34:51.022 D/dalvikvm( 2034): GC_CONCURRENT freed 283K, 9% free 3712K/4064K, paused 0ms+2ms, total 4ms
+10-10 16:34:51.022 E/dalvikvm( 2034): Could not find class 'android.media.AudioFormat$Builder', referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.getAudioFormat
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve new-instance 46 (Landroid/media/AudioFormat$Builder;) in Lcom/google/android/exoplayer2/audio/DefaultAudioSink;
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x22 at 0x0000
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/AudioAttributes;)
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.AudioManager.getPlaybackOffloadSupport, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.getOffloadedPlaybackSupport
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve static method 99: Landroid/media/AudioManager;.getPlaybackOffloadSupport (Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)I
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x71 at 0x0006
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.AudioManager.isOffloadedPlaybackSupported, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.getOffloadedPlaybackSupport
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve static method 100: Landroid/media/AudioManager;.isOffloadedPlaybackSupported (Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)Z
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x71 at 0x000b
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.AudioTrack.setOffloadDelayPadding, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.initializeAudioTrack
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve virtual method 112: Landroid/media/AudioTrack;.setOffloadDelayPadding (II)V
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x002e
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.AudioTrack.isOffloadedPlayback, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.isOffloadedPlayback
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve virtual method 107: Landroid/media/AudioTrack;.isOffloadedPlayback ()Z
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0006
+10-10 16:34:51.022 E/dalvikvm( 2034): Could not find class 'android.media.PlaybackParams', referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.setAudioTrackPlaybackParametersV23
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve new-instance 58 (Landroid/media/PlaybackParams;) in Lcom/google/android/exoplayer2/audio/DefaultAudioSink;
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x22 at 0x0006
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/AudioAttributes;)
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.AudioTrack.write, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.writeNonBlockingV21
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve virtual method 118: Landroid/media/AudioTrack;.write (Ljava/nio/ByteBuffer;II)I
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0001
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.AudioTrack.write, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.writeNonBlockingWithAvSyncV21
+10-10 16:34:51.022 W/dalvikvm( 2034): VFY: unable to resolve virtual method 119: Landroid/media/AudioTrack;.write (Ljava/nio/ByteBuffer;IIJ)I
+10-10 16:34:51.022 D/dalvikvm( 2034): VFY: replacing opcode 0x74 at 0x000e
+10-10 16:34:51.022 I/dalvikvm( 2034): Could not find method android.media.AudioTrack.write, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.writeNonBlockingWithAvSyncV21
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to resolve virtual method 118: Landroid/media/AudioTrack;.write (Ljava/nio/ByteBuffer;II)I
+10-10 16:34:51.032 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0052
+10-10 16:34:51.032 I/dalvikvm( 2034): Could not find method android.media.AudioTrack.setOffloadEndOfStream, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.handleBuffer
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to resolve virtual method 113: Landroid/media/AudioTrack;.setOffloadEndOfStream ()V
+10-10 16:34:51.032 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0058
+10-10 16:34:51.032 I/dalvikvm( 2034): Could not find method android.media.AudioTrack.setOffloadDelayPadding, referenced from method com.google.android.exoplayer2.audio.DefaultAudioSink.handleBuffer
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to resolve virtual method 112: Landroid/media/AudioTrack;.setOffloadDelayPadding (II)V
+10-10 16:34:51.032 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0069
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/AudioDeviceInfo;)
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/AudioDeviceInfo;)
+10-10 16:34:51.032 D/dalvikvm( 2034): DexOpt: unable to opt direct call 0x005d at 0x02 in Lcom/google/android/exoplayer2/audio/DefaultAudioSink;.getAudioFormat
+10-10 16:34:51.032 D/dalvikvm( 2034): DexOpt: unable to opt direct call 0x007f at 0x08 in Lcom/google/android/exoplayer2/audio/DefaultAudioSink;.setAudioTrackPlaybackParametersV23
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/metrics/LogSessionId;)
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/metrics/LogSessionId;)
+10-10 16:34:51.032 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Landroid/media/metrics/LogSessionId;)
+10-10 16:34:51.042 I/dalvikvm( 2034): Could not find method android.media.AudioManager.abandonAudioFocusRequest, referenced from method com.google.android.exoplayer2.AudioFocusManager.abandonAudioFocusV26
+10-10 16:34:51.042 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1638: Landroid/media/AudioManager;.abandonAudioFocusRequest (Landroid/media/AudioFocusRequest;)I
+10-10 16:34:51.042 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0006
+10-10 16:34:51.042 E/dalvikvm( 2034): Could not find class 'android.media.AudioFocusRequest$Builder', referenced from method com.google.android.exoplayer2.AudioFocusManager.requestAudioFocusV26
+10-10 16:34:51.042 W/dalvikvm( 2034): VFY: unable to resolve new-instance 286 (Landroid/media/AudioFocusRequest$Builder;) in Lcom/google/android/exoplayer2/AudioFocusManager;
+10-10 16:34:51.042 D/dalvikvm( 2034): VFY: replacing opcode 0x22 at 0x000a
+10-10 16:34:51.042 E/dalvikvm( 2034): Could not find class 'android.media.AudioFocusRequest$Builder', referenced from method com.google.android.exoplayer2.AudioFocusManager.requestAudioFocusV26
+10-10 16:34:51.042 W/dalvikvm( 2034): VFY: unable to resolve new-instance 286 (Landroid/media/AudioFocusRequest$Builder;) in Lcom/google/android/exoplayer2/AudioFocusManager;
+10-10 16:34:51.042 D/dalvikvm( 2034): VFY: replacing opcode 0x22 at 0x0012
+10-10 16:34:51.042 I/dalvikvm( 2034): Could not find method android.media.AudioManager.requestAudioFocus, referenced from method com.google.android.exoplayer2.AudioFocusManager.requestAudioFocusV26
+10-10 16:34:51.042 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1650: Landroid/media/AudioManager;.requestAudioFocus (Landroid/media/AudioFocusRequest;)I
+10-10 16:34:51.042 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0047
+10-10 16:34:51.042 D/dalvikvm( 2034): DexOpt: unable to opt direct call 0x0658 at 0x0e in Lcom/google/android/exoplayer2/AudioFocusManager;.requestAudioFocusV26
+10-10 16:34:51.042 D/dalvikvm( 2034): DexOpt: unable to opt direct call 0x0659 at 0x16 in Lcom/google/android/exoplayer2/AudioFocusManager;.requestAudioFocusV26
+10-10 16:34:51.042 I/dalvikvm( 2034): Could not find method android.media.AudioManager.getStreamMinVolume, referenced from method com.google.android.exoplayer2.StreamVolumeManager.getMinVolume
+10-10 16:34:51.042 W/dalvikvm( 2034): VFY: unable to resolve virtual method 1642: Landroid/media/AudioManager;.getStreamMinVolume (I)I
+10-10 16:34:51.042 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x000a
+10-10 16:34:51.052 D/dalvikvm( 2034): GC_CONCURRENT freed 312K, 10% free 3806K/4188K, paused 2ms+1ms, total 7ms
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 I/dalvikvm( 2034): Could not find method java.time.Duration.toMillis, referenced from method androidx.work.PeriodicWorkRequest$Builder.<init>
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to resolve virtual method 51068: Ljava/time/Duration;.toMillis ()J
+10-10 16:34:51.052 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0005
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 I/dalvikvm( 2034): Could not find method java.time.Duration.toMillis, referenced from method androidx.work.PeriodicWorkRequest$Builder.<init>
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to resolve virtual method 51068: Ljava/time/Duration;.toMillis ()J
+10-10 16:34:51.052 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0005
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 I/dalvikvm( 2034): Could not find method java.time.Duration.toMillis, referenced from method androidx.work.WorkRequest$Builder.keepResultsForAtLeast
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to resolve virtual method 51068: Ljava/time/Duration;.toMillis ()J
+10-10 16:34:51.052 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0002
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 I/dalvikvm( 2034): Could not find method java.time.Duration.toMillis, referenced from method androidx.work.WorkRequest$Builder.setBackoffCriteria
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to resolve virtual method 51068: Ljava/time/Duration;.toMillis ()J
+10-10 16:34:51.052 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0009
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 I/dalvikvm( 2034): Could not find method java.time.Duration.toMillis, referenced from method androidx.work.WorkRequest$Builder.setInitialDelay
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to resolve virtual method 51068: Ljava/time/Duration;.toMillis ()J
+10-10 16:34:51.052 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0002
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 I/dalvikvm( 2034): Could not find method java.time.Duration.toMillis, referenced from method androidx.work.Constraints$Builder.setTriggerContentMaxDelay
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to resolve virtual method 51068: Ljava/time/Duration;.toMillis ()J
+10-10 16:34:51.052 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0000
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to find class referenced in signature (Ljava/time/Duration;)
+10-10 16:34:51.052 I/dalvikvm( 2034): Could not find method java.time.Duration.toMillis, referenced from method androidx.work.Constraints$Builder.setTriggerContentUpdateDelay
+10-10 16:34:51.052 W/dalvikvm( 2034): VFY: unable to resolve virtual method 51068: Ljava/time/Duration;.toMillis ()J
+10-10 16:34:51.052 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0000
+10-10 16:34:51.062 I/dalvikvm( 2034): Could not find method android.app.Application.getProcessName, referenced from method androidx.work.impl.utils.ProcessUtils.getProcessName
+10-10 16:34:51.062 W/dalvikvm( 2034): VFY: unable to resolve static method 181: Landroid/app/Application;.getProcessName ()Ljava/lang/String;
+10-10 16:34:51.062 D/dalvikvm( 2034): VFY: replacing opcode 0x71 at 0x0006
+10-10 16:34:51.072 D/dalvikvm( 2034): GC_CONCURRENT freed 285K, 9% free 3914K/4268K, paused 0ms+0ms, total 2ms
+10-10 16:34:51.082 I/dalvikvm( 2034): Could not find method android.app.AlarmManager.setExact, referenced from method androidx.work.impl.background.systemalarm.Alarms.setExactAlarm
+10-10 16:34:51.082 W/dalvikvm( 2034): VFY: unable to resolve virtual method 159: Landroid/app/AlarmManager;.setExact (IJLandroid/app/PendingIntent;)V
+10-10 16:34:51.082 D/dalvikvm( 2034): VFY: replacing opcode 0x6e at 0x0024
+10-10 16:34:51.122 D/libEGL  ( 2034): loaded /system/lib/egl/libEGL_emulation.so
+10-10 16:34:51.122 D/libEGL  ( 2034): loaded /system/lib/egl/libGLESv1_CM_emulation.so
+10-10 16:34:51.122 D/libEGL  ( 2034): loaded /system/lib/egl/libGLESv2_emulation.so
+10-10 16:34:51.122 D/        ( 2034): HostConnection::get() New Host Connection established 0xb996fcc0, tid 2034
+10-10 16:34:51.132 D/EGL_emulation( 2034): eglCreateContext: 0xb99ea440: maj 2 min 0 rcv 2
+10-10 16:34:51.132 D/EGL_emulation( 2034): eglMakeCurrent: 0xb99ea440: ver 2 0
+10-10 16:34:51.142 D/OpenGLRenderer( 2034): Enabling debug mode 0
+10-10 16:34:51.212 D/dalvikvm( 2034): GC_CONCURRENT freed 224K, 7% free 4095K/4388K, paused 1ms+1ms, total 4ms
+10-10 16:34:51.282 D/dalvikvm( 2034): GC_CONCURRENT freed 353K, 10% free 4166K/4588K, paused 1ms+0ms, total 3ms
+10-10 16:34:51.332 D/dalvikvm( 2034): GC_CONCURRENT freed 367K, 10% free 4244K/4680K, paused 1ms+0ms, total 3ms
+10-10 16:34:51.392 D/dalvikvm( 1322): GC_CONCURRENT freed 618K, 63% free 5200K/13736K, paused 2ms+0ms, total 8ms
+10-10 16:34:51.402 D/dalvikvm( 2034): GC_CONCURRENT freed 394K, 10% free 4320K/4784K, paused 2ms+1ms, total 5ms
+10-10 16:34:51.452 D/dalvikvm( 1322): GC_CONCURRENT freed 563K, 63% free 5198K/13736K, paused 2ms+1ms, total 8ms
+10-10 16:34:51.482 D/dalvikvm( 1322): GC_CONCURRENT freed 561K, 63% free 5198K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:51.512 D/dalvikvm( 1322): GC_CONCURRENT freed 595K, 63% free 5199K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:51.532 D/dalvikvm( 1322): GC_CONCURRENT freed 688K, 63% free 5198K/13736K, paused 0ms+1ms, total 6ms
+10-10 16:34:51.552 D/dalvikvm( 1322): GC_CONCURRENT freed 633K, 63% free 5198K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:51.582 D/dalvikvm( 1322): GC_CONCURRENT freed 688K, 63% free 5198K/13736K, paused 0ms+0ms, total 6ms
+10-10 16:34:51.602 D/dalvikvm( 1322): GC_CONCURRENT freed 685K, 63% free 5199K/13736K, paused 0ms+1ms, total 6ms
+10-10 16:34:51.622 D/dalvikvm( 1322): GC_CONCURRENT freed 690K, 63% free 5198K/13736K, paused 1ms+1ms, total 8ms
+10-10 16:34:51.622 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 4ms
+10-10 16:34:51.642 D/dalvikvm( 1322): GC_CONCURRENT freed 685K, 63% free 5199K/13736K, paused 0ms+0ms, total 6ms
+10-10 16:34:51.662 D/dalvikvm( 1322): GC_CONCURRENT freed 690K, 63% free 5198K/13736K, paused 1ms+0ms, total 6ms
+10-10 16:34:51.662 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 1ms
+10-10 16:34:51.682 D/dalvikvm( 1322): GC_CONCURRENT freed 684K, 63% free 5198K/13736K, paused 0ms+2ms, total 7ms
+10-10 16:34:51.702 D/dalvikvm( 1322): GC_CONCURRENT freed 643K, 63% free 5199K/13736K, paused 0ms+0ms, total 4ms
+10-10 16:34:51.722 D/dalvikvm( 1322): GC_CONCURRENT freed 638K, 63% free 5198K/13736K, paused 2ms+0ms, total 6ms
+10-10 16:34:51.752 D/dalvikvm( 1322): GC_CONCURRENT freed 668K, 63% free 5200K/13736K, paused 1ms+0ms, total 6ms
+10-10 16:34:51.772 D/dalvikvm( 1322): GC_CONCURRENT freed 691K, 63% free 5199K/13736K, paused 0ms+1ms, total 6ms
+10-10 16:34:51.792 D/dalvikvm( 1322): GC_CONCURRENT freed 684K, 63% free 5199K/13736K, paused 1ms+1ms, total 6ms
+10-10 16:34:51.802 W/IInputConnectionWrapper( 1696): showStatusIcon on inactive InputConnection
+10-10 16:34:51.812 I/ActivityManager( 1322): Displayed com.tadiotv.app/.MainActivity: +2s107ms
+10-10 16:34:51.822 D/dalvikvm( 2034): GC_CONCURRENT freed 504K, 12% free 4316K/4888K, paused 1ms+1ms, total 5ms
+10-10 16:34:51.832 D/dalvikvm( 1322): GC_CONCURRENT freed 560K, 63% free 5200K/13736K, paused 3ms+1ms, total 7ms
+10-10 16:34:51.872 D/dalvikvm( 1322): GC_CONCURRENT freed 646K, 63% free 5186K/13736K, paused 1ms+1ms, total 6ms
+10-10 16:34:51.902 D/dalvikvm( 1322): GC_CONCURRENT freed 661K, 63% free 5187K/13736K, paused 4ms+2ms, total 9ms
+10-10 16:34:51.932 D/dalvikvm( 1322): GC_CONCURRENT freed 614K, 63% free 5188K/13736K, paused 1ms+0ms, total 6ms
+10-10 16:34:51.972 D/dalvikvm( 1322): GC_CONCURRENT freed 589K, 63% free 5187K/13736K, paused 2ms+3ms, total 10ms
+10-10 16:34:52.012 D/dalvikvm( 1322): GC_CONCURRENT freed 663K, 63% free 5190K/13736K, paused 0ms+1ms, total 9ms
+10-10 16:34:52.042 D/dalvikvm( 1322): GC_CONCURRENT freed 563K, 63% free 5186K/13736K, paused 1ms+1ms, total 5ms
+10-10 16:34:52.072 D/dalvikvm( 1322): GC_CONCURRENT freed 622K, 63% free 5186K/13736K, paused 0ms+0ms, total 5ms
+10-10 16:34:52.102 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5185K/13736K, paused 0ms+0ms, total 11ms
+10-10 16:34:52.102 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 4ms
+10-10 16:34:52.132 D/dalvikvm( 1322): GC_CONCURRENT freed 677K, 63% free 5200K/13736K, paused 0ms+3ms, total 7ms
+10-10 16:34:52.152 D/dalvikvm( 1322): GC_CONCURRENT freed 658K, 63% free 5185K/13736K, paused 1ms+0ms, total 7ms
+10-10 16:34:52.182 D/dalvikvm( 1322): GC_CONCURRENT freed 626K, 63% free 5185K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:52.212 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5185K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:52.242 D/dalvikvm( 1322): GC_CONCURRENT freed 685K, 63% free 5185K/13736K, paused 1ms+1ms, total 10ms
+10-10 16:34:52.242 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 5ms
+10-10 16:34:52.272 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5185K/13736K, paused 1ms+0ms, total 7ms
+10-10 16:34:52.272 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 2ms
+10-10 16:34:52.292 D/dalvikvm( 1791): GC_CONCURRENT freed 206K, 10% free 2655K/2928K, paused 1ms+0ms, total 3ms
+10-10 16:34:52.312 D/dalvikvm( 1322): GC_CONCURRENT freed 679K, 63% free 5191K/13736K, paused 0ms+1ms, total 6ms
+10-10 16:34:52.312 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 4ms
+10-10 16:34:52.342 D/dalvikvm( 1322): GC_CONCURRENT freed 669K, 63% free 5189K/13736K, paused 0ms+1ms, total 4ms
+10-10 16:34:52.362 D/dalvikvm( 1322): GC_CONCURRENT freed 567K, 63% free 5188K/13736K, paused 2ms+0ms, total 8ms
+10-10 16:34:52.392 D/dalvikvm( 1322): GC_CONCURRENT freed 576K, 63% free 5188K/13736K, paused 2ms+0ms, total 7ms
+10-10 16:34:52.412 D/dalvikvm( 2034): GC_CONCURRENT freed 358K, 9% free 4478K/4908K, paused 1ms+3ms, total 10ms
+10-10 16:34:52.442 D/dalvikvm( 1322): GC_CONCURRENT freed 650K, 63% free 5189K/13736K, paused 4ms+0ms, total 17ms
+10-10 16:34:52.482 D/dalvikvm( 1322): GC_CONCURRENT freed 620K, 63% free 5188K/13736K, paused 2ms+2ms, total 9ms
+10-10 16:34:52.512 D/dalvikvm( 1322): GC_CONCURRENT freed 668K, 63% free 5191K/13736K, paused 0ms+0ms, total 6ms
+10-10 16:34:52.532 D/dalvikvm( 1322): GC_CONCURRENT freed 671K, 63% free 5187K/13736K, paused 0ms+1ms, total 4ms
+10-10 16:34:52.542 D/AlertService( 1770): Beginning updateAlertNotification
+10-10 16:34:52.552 D/AlertService( 1770): No fired or scheduled alerts
+10-10 16:34:52.562 D/dalvikvm( 1322): GC_CONCURRENT freed 563K, 63% free 5187K/13736K, paused 1ms+1ms, total 7ms
+10-10 16:34:52.572 D/AlertService( 1770): Scheduling next alarm with AlarmScheduler. sEventReminderReceived: null
+10-10 16:34:52.572 D/AlarmScheduler( 1770): No events found starting within 1 week.
+10-10 16:34:52.592 D/dalvikvm( 1322): GC_CONCURRENT freed 559K, 63% free 5186K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:52.622 D/dalvikvm( 1322): GC_CONCURRENT freed 572K, 63% free 5189K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:52.652 D/dalvikvm( 1322): GC_CONCURRENT freed 679K, 63% free 5188K/13736K, paused 0ms+3ms, total 10ms
+10-10 16:34:52.672 D/dalvikvm( 1322): GC_CONCURRENT freed 684K, 63% free 5187K/13736K, paused 0ms+2ms, total 6ms
+10-10 16:34:52.702 D/dalvikvm( 1322): GC_CONCURRENT freed 645K, 63% free 5187K/13736K, paused 0ms+2ms, total 6ms
+10-10 16:34:52.732 D/dalvikvm( 1322): GC_CONCURRENT freed 609K, 63% free 5188K/13736K, paused 0ms+0ms, total 5ms
+10-10 16:34:52.762 D/dalvikvm( 1322): GC_CONCURRENT freed 663K, 63% free 5195K/13736K, paused 0ms+0ms, total 5ms
+10-10 16:34:52.782 D/dalvikvm( 1322): GC_CONCURRENT freed 697K, 63% free 5187K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:52.782 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 1ms
+10-10 16:34:52.812 D/dalvikvm( 1322): GC_CONCURRENT freed 560K, 63% free 5187K/13736K, paused 4ms+0ms, total 9ms
+10-10 16:34:52.842 D/dalvikvm( 1322): GC_CONCURRENT freed 612K, 63% free 5186K/13736K, paused 1ms+2ms, total 8ms
+10-10 16:34:52.872 D/dalvikvm( 1322): GC_CONCURRENT freed 664K, 63% free 5188K/13736K, paused 1ms+1ms, total 5ms
+10-10 16:34:52.902 D/dalvikvm( 1322): GC_CONCURRENT freed 675K, 63% free 5186K/13736K, paused 0ms+0ms, total 9ms
+10-10 16:34:52.922 D/dalvikvm( 1322): GC_CONCURRENT freed 568K, 63% free 5187K/13736K, paused 1ms+0ms, total 6ms
+10-10 16:34:52.952 D/dalvikvm( 1322): GC_CONCURRENT freed 666K, 63% free 5187K/13736K, paused 2ms+0ms, total 8ms
+10-10 16:34:52.982 D/dalvikvm( 1322): GC_CONCURRENT freed 687K, 63% free 5186K/13736K, paused 3ms+0ms, total 10ms
+10-10 16:34:52.982 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 1ms
+10-10 16:34:53.002 D/dalvikvm( 2034): GC_CONCURRENT freed 438K, 10% free 4660K/5176K, paused 0ms+0ms, total 4ms
+10-10 16:34:53.022 D/dalvikvm( 1322): GC_CONCURRENT freed 609K, 63% free 5187K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:53.042 D/dalvikvm( 1322): GC_CONCURRENT freed 677K, 63% free 5186K/13736K, paused 1ms+4ms, total 9ms
+10-10 16:34:53.072 D/dalvikvm( 1322): GC_CONCURRENT freed 659K, 63% free 5188K/13736K, paused 2ms+1ms, total 6ms
+10-10 16:34:53.102 D/dalvikvm( 1322): GC_CONCURRENT freed 687K, 63% free 5187K/13736K, paused 1ms+3ms, total 15ms
+10-10 16:34:53.102 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 9ms
+10-10 16:34:53.102 D/dalvikvm( 2034): GC_FOR_ALLOC freed 80K, 12% free 4733K/5332K, paused 4ms, total 4ms
+10-10 16:34:53.102 I/dalvikvm-heap( 2034): Grow heap (frag case) to 4.988MB for 318584-byte allocation
+10-10 16:34:53.112 D/dalvikvm( 2034): GC_FOR_ALLOC freed <1K, 11% free 5044K/5644K, paused 6ms, total 6ms
+10-10 16:34:53.142 D/dalvikvm( 1322): GC_CONCURRENT freed 634K, 63% free 5187K/13736K, paused 2ms+2ms, total 11ms
+10-10 16:34:53.172 D/dalvikvm( 1322): GC_CONCURRENT freed 681K, 63% free 5186K/13736K, paused 1ms+0ms, total 6ms
+10-10 16:34:53.202 D/dalvikvm( 1322): GC_CONCURRENT freed 642K, 63% free 5186K/13736K, paused 1ms+0ms, total 4ms
+10-10 16:34:53.242 D/dalvikvm( 1322): GC_CONCURRENT freed 685K, 63% free 5187K/13736K, paused 6ms+0ms, total 13ms
+10-10 16:34:53.242 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 3ms
+10-10 16:34:53.252 D/dalvikvm( 2034): GC_CONCURRENT freed 1013K, 19% free 4786K/5900K, paused 1ms+0ms, total 4ms
+10-10 16:34:53.272 D/dalvikvm( 1322): GC_CONCURRENT freed 559K, 63% free 5186K/13736K, paused 1ms+1ms, total 5ms
+10-10 16:34:53.302 D/dalvikvm( 1322): GC_CONCURRENT freed 667K, 63% free 5187K/13736K, paused 4ms+1ms, total 10ms
+10-10 16:34:53.332 D/dalvikvm( 1322): GC_CONCURRENT freed 664K, 63% free 5187K/13736K, paused 2ms+0ms, total 10ms
+10-10 16:34:53.362 D/dalvikvm( 1322): GC_CONCURRENT freed 660K, 63% free 5188K/13736K, paused 1ms+1ms, total 6ms
+10-10 16:34:53.372 D/Tethering( 1322): MasterInitialState.processMessage what=3
+10-10 16:34:53.372 D/CaptivePortalTracker( 1322): NoActiveNetworkState{ what=1 when=0 obj=NetworkInfo: type: mobile_hipri[LTE], state: DISCONNECTED/DISCONNECTED, reason: dataDisabled, extra: epc.tmobile.com, roaming: false, failover: false, isAvailable: true, isConnectedToProvisioningNetwork: false }
+10-10 16:34:53.372 D/CaptivePortalTracker( 1322): NoActiveNetworkState not a wifi connectivity change, ignore
+10-10 16:34:53.382 D/Tethering( 1322): MasterInitialState.processMessage what=3
+10-10 16:34:53.382 D/CaptivePortalTracker( 1322): NoActiveNetworkState{ what=1 when=-1ms obj=NetworkInfo: type: mobile[LTE], state: CONNECTED/CONNECTED, reason: connected, extra: epc.tmobile.com, roaming: false, failover: false, isAvailable: true, isConnectedToProvisioningNetwork: false }
+10-10 16:34:53.382 D/CaptivePortalTracker( 1322): NoActiveNetworkState not a wifi connectivity change, ignore
+10-10 16:34:53.402 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5196K/13736K, paused 1ms+1ms, total 10ms
+10-10 16:34:53.442 D/dalvikvm( 1322): GC_CONCURRENT freed 679K, 63% free 5191K/13736K, paused 0ms+1ms, total 5ms
+10-10 16:34:53.472 D/dalvikvm( 1322): GC_CONCURRENT freed 683K, 63% free 5195K/13736K, paused 1ms+0ms, total 8ms
+10-10 16:34:53.472 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 1ms
+10-10 16:34:53.472 D/dalvikvm( 2034): GC_FOR_ALLOC freed 258K, 15% free 5043K/5900K, paused 3ms, total 3ms
+10-10 16:34:53.512 D/dalvikvm( 1322): GC_CONCURRENT freed 651K, 63% free 5187K/13736K, paused 2ms+2ms, total 9ms
+10-10 16:34:53.532 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5187K/13736K, paused 2ms+0ms, total 6ms
+10-10 16:34:53.562 D/EGL_emulation( 1696): eglMakeCurrent: 0xb989e210: ver 2 0
+10-10 16:34:53.562 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5187K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:53.592 D/dalvikvm( 1322): GC_CONCURRENT freed 667K, 63% free 5188K/13736K, paused 2ms+2ms, total 9ms
+10-10 16:34:53.622 D/dalvikvm( 1322): GC_CONCURRENT freed 688K, 63% free 5187K/13736K, paused 1ms+1ms, total 6ms
+10-10 16:34:53.622 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 1ms
+10-10 16:34:53.652 D/dalvikvm( 1322): GC_CONCURRENT freed 656K, 63% free 5188K/13736K, paused 2ms+1ms, total 9ms
+10-10 16:34:53.682 D/dalvikvm( 1322): GC_CONCURRENT freed 575K, 63% free 5187K/13736K, paused 2ms+1ms, total 8ms
+10-10 16:34:53.702 D/dalvikvm( 1322): GC_CONCURRENT freed 676K, 63% free 5188K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:53.732 D/dalvikvm( 1322): GC_CONCURRENT freed 623K, 63% free 5187K/13736K, paused 0ms+1ms, total 5ms
+10-10 16:34:53.762 D/dalvikvm( 1322): GC_CONCURRENT freed 648K, 63% free 5187K/13736K, paused 0ms+1ms, total 9ms
+10-10 16:34:53.792 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5187K/13736K, paused 1ms+2ms, total 11ms
+10-10 16:34:53.792 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 6ms
+10-10 16:34:53.832 D/dalvikvm( 1322): GC_CONCURRENT freed 684K, 63% free 5204K/13736K, paused 0ms+0ms, total 10ms
+10-10 16:34:53.852 D/dalvikvm( 1322): GC_CONCURRENT freed 705K, 63% free 5187K/13736K, paused 0ms+1ms, total 5ms
+10-10 16:34:53.882 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5187K/13736K, paused 0ms+0ms, total 7ms
+10-10 16:34:53.882 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 5ms
+10-10 16:34:53.902 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5187K/13736K, paused 1ms+1ms, total 6ms
+10-10 16:34:53.902 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 1ms
+10-10 16:34:53.932 D/dalvikvm( 1322): GC_CONCURRENT freed 662K, 63% free 5188K/13736K, paused 2ms+1ms, total 9ms
+10-10 16:34:53.952 D/dalvikvm( 1322): GC_CONCURRENT freed 562K, 63% free 5187K/13736K, paused 0ms+1ms, total 4ms
+10-10 16:34:53.982 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5187K/13736K, paused 2ms+0ms, total 5ms
+10-10 16:34:54.012 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5187K/13736K, paused 0ms+1ms, total 10ms
+10-10 16:34:54.012 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 5ms
+10-10 16:34:54.042 D/dalvikvm( 1322): GC_CONCURRENT freed 657K, 63% free 5189K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:54.072 D/dalvikvm( 1322): GC_CONCURRENT freed 651K, 63% free 5188K/13736K, paused 1ms+2ms, total 7ms
+10-10 16:34:54.102 D/dalvikvm( 1322): GC_CONCURRENT freed 591K, 63% free 5187K/13736K, paused 2ms+0ms, total 7ms
+10-10 16:34:54.122 D/dalvikvm( 1322): GC_CONCURRENT freed 559K, 63% free 5187K/13736K, paused 1ms+1ms, total 5ms
+10-10 16:34:54.152 D/dalvikvm( 1322): GC_CONCURRENT freed 676K, 63% free 5188K/13736K, paused 2ms+0ms, total 7ms
+10-10 16:34:54.182 D/dalvikvm( 1322): GC_CONCURRENT freed 607K, 63% free 5187K/13736K, paused 0ms+0ms, total 6ms
+10-10 16:34:54.212 D/dalvikvm( 1322): GC_CONCURRENT freed 615K, 63% free 5187K/13736K, paused 0ms+1ms, total 9ms
+10-10 16:34:54.252 D/dalvikvm( 1322): GC_CONCURRENT freed 569K, 63% free 5187K/13736K, paused 1ms+1ms, total 8ms
+10-10 16:34:54.272 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5187K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:54.302 D/dalvikvm( 1322): GC_CONCURRENT freed 601K, 63% free 5187K/13736K, paused 1ms+1ms, total 7ms
+10-10 16:34:54.322 D/dalvikvm( 1322): GC_CONCURRENT freed 663K, 63% free 5188K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:54.352 D/dalvikvm( 1322): GC_CONCURRENT freed 688K, 63% free 5187K/13736K, paused 1ms+1ms, total 8ms
+10-10 16:34:54.352 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 4ms
+10-10 16:34:54.382 D/dalvikvm( 1322): GC_CONCURRENT freed 685K, 63% free 5187K/13736K, paused 1ms+1ms, total 7ms
+10-10 16:34:54.382 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 2ms
+10-10 16:34:54.402 D/dalvikvm( 1322): GC_CONCURRENT freed 595K, 63% free 5187K/13736K, paused 1ms+1ms, total 6ms
+10-10 16:34:54.432 D/dalvikvm( 1322): GC_CONCURRENT freed 636K, 63% free 5187K/13736K, paused 2ms+0ms, total 11ms
+10-10 16:34:54.462 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5187K/13736K, paused 1ms+2ms, total 9ms
+10-10 16:34:54.462 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 4ms
+10-10 16:34:54.492 D/dalvikvm( 1322): GC_CONCURRENT freed 604K, 63% free 5188K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:54.522 D/dalvikvm( 1322): GC_CONCURRENT freed 669K, 63% free 5195K/13736K, paused 5ms+1ms, total 12ms
+10-10 16:34:54.552 D/dalvikvm( 1322): GC_CONCURRENT freed 697K, 63% free 5187K/13736K, paused 0ms+1ms, total 11ms
+10-10 16:34:54.552 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 6ms
+10-10 16:34:54.582 D/dalvikvm( 1322): GC_CONCURRENT freed 685K, 63% free 5187K/13736K, paused 2ms+1ms, total 12ms
+10-10 16:34:54.582 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 5ms
+10-10 16:34:54.612 D/dalvikvm( 1322): GC_CONCURRENT freed 661K, 63% free 5201K/13736K, paused 2ms+1ms, total 8ms
+10-10 16:34:54.632 D/dalvikvm( 1322): GC_CONCURRENT freed 703K, 63% free 5187K/13736K, paused 0ms+1ms, total 6ms
+10-10 16:34:54.632 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 1ms
+10-10 16:34:54.662 D/dalvikvm( 1322): GC_CONCURRENT freed 687K, 63% free 5187K/13736K, paused 0ms+0ms, total 8ms
+10-10 16:34:54.662 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 3ms
+10-10 16:34:54.692 D/dalvikvm( 1322): GC_CONCURRENT freed 559K, 63% free 5195K/13736K, paused 2ms+1ms, total 6ms
+10-10 16:34:54.722 D/dalvikvm( 1322): GC_CONCURRENT freed 660K, 63% free 5189K/13736K, paused 0ms+3ms, total 8ms
+10-10 16:34:54.752 D/dalvikvm( 1322): GC_CONCURRENT freed 689K, 63% free 5187K/13736K, paused 0ms+1ms, total 8ms
+10-10 16:34:54.752 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 3ms
+10-10 16:34:54.772 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5187K/13736K, paused 2ms+0ms, total 5ms
+10-10 16:34:54.802 D/dalvikvm( 1322): GC_CONCURRENT freed 686K, 63% free 5187K/13736K, paused 0ms+1ms, total 5ms
+10-10 16:34:54.802 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 4ms
+10-10 16:34:54.832 D/dalvikvm( 1322): GC_CONCURRENT freed 655K, 63% free 5188K/13736K, paused 1ms+3ms, total 10ms
+10-10 16:34:54.862 D/dalvikvm( 1322): GC_CONCURRENT freed 667K, 63% free 5187K/13736K, paused 0ms+0ms, total 4ms
+10-10 16:34:54.882 D/dalvikvm( 1322): GC_CONCURRENT freed 673K, 63% free 5187K/13736K, paused 3ms+1ms, total 9ms
+10-10 16:34:54.912 D/dalvikvm( 1322): GC_CONCURRENT freed 559K, 63% free 5187K/13736K, paused 2ms+0ms, total 5ms
+10-10 16:34:54.932 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5187K/13736K, paused 2ms+0ms, total 6ms
+10-10 16:34:54.962 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5190K/13736K, paused 2ms+1ms, total 6ms
+10-10 16:34:54.982 D/dalvikvm( 1322): GC_CONCURRENT freed 562K, 63% free 5187K/13736K, paused 3ms+1ms, total 7ms
+10-10 16:34:55.012 D/dalvikvm( 1322): GC_CONCURRENT freed 559K, 63% free 5187K/13736K, paused 2ms+1ms, total 7ms
+10-10 16:34:55.042 D/dalvikvm( 1322): GC_CONCURRENT freed 607K, 63% free 5187K/13736K, paused 1ms+2ms, total 6ms
+10-10 16:34:55.062 I/InputReader( 1322): Reconfiguring input devices.  changes=0x00000010
+10-10 16:34:55.072 I/InputReader( 1322): Reconfiguring input devices.  changes=0x00000010
+10-10 16:34:55.072 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.072 D/dalvikvm( 1322): GC_CONCURRENT freed 559K, 62% free 5289K/13736K, paused 1ms+1ms, total 10ms
+10-10 16:34:55.072 I/InputReader( 1322): Reconfiguring input devices.  changes=0x00000010
+10-10 16:34:55.082 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.082 I/InputReader( 1322): Reconfiguring input devices.  changes=0x00000010
+10-10 16:34:55.082 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.112 D/dalvikvm( 1322): GC_CONCURRENT freed 701K, 62% free 5242K/13736K, paused 2ms+0ms, total 10ms
+10-10 16:34:55.112 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.112 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.122 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.142 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.152 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.152 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.152 I/Launcher( 1696): Deferring update until onResume
+10-10 16:34:55.162 E/BluetoothAdapter( 1626): Bluetooth binder is null
+10-10 16:34:55.172 D/dalvikvm( 1322): GC_CONCURRENT freed 600K, 62% free 5221K/13736K, paused 2ms+1ms, total 13ms
+10-10 16:34:55.192 D/dalvikvm( 1322): GC_CONCURRENT freed 734K, 63% free 5182K/13736K, paused 0ms+1ms, total 6ms
+10-10 16:34:55.192 D/dalvikvm( 1322): WAIT_FOR_CONCURRENT_GC blocked 2ms
+10-10 16:34:55.222 D/dalvikvm( 1322): GC_CONCURRENT freed 558K, 63% free 5180K/13736K, paused 2ms+0ms, total 6ms
+10-10 16:34:55.252 D/dalvikvm( 1322): GC_CONCURRENT freed 573K, 63% free 5182K/13736K, paused 3ms+1ms, total 8ms
+10-10 16:34:55.282 D/dalvikvm( 1322): GC_CONCURRENT freed 635K, 63% free 5181K/13736K, paused 0ms+0ms, total 7ms
+10-10 16:34:55.302 D/dalvikvm( 1322): GC_CONCURRENT freed 622K, 63% free 5181K/13736K, paused 1ms+0ms, total 5ms
+10-10 16:34:55.332 D/dalvikvm( 1322): GC_CONCURRENT freed 634K, 63% free 5181K/13736K, paused 1ms+1ms, total 8ms
+10-10 16:34:55.352 D/ConnectivityService( 1322): [CheckMp] isMobileOk: X result=1
+10-10 16:34:55.352 D/ConnectivityService( 1322): [CheckMp] onPostExecute: result=1
+10-10 16:34:55.352 D/ConnectivityService( 1322): CheckMp.onComplete: result=1
+10-10 16:34:55.352 D/ConnectivityService( 1322): CheckMp.onComplete: ignore, connected or no connection
+10-10 16:34:56.082 D/dalvikvm( 1642): GC_CONCURRENT freed 379K, 14% free 2988K/3440K, paused 1ms+1ms, total 4ms
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:34:58.212 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:00.022 D/dalvikvm( 1322): GC_CONCURRENT freed 555K, 63% free 5182K/13736K, paused 1ms+1ms, total 5ms
+10-10 16:35:00.242 D/dalvikvm( 2034): GC_CONCURRENT freed 943K, 18% free 4840K/5872K, paused 0ms+0ms, total 4ms
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:35:03.752 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:04.632 D/SystemClock( 1322): Setting time of day to sec=1791650105
+10-10 16:35:05.463 V/AlarmClock( 1805): No next alarm
+10-10 16:35:05.463 V/AlarmClock( 1805): Setting next alarm string in system to null
+10-10 16:35:05.463 V/AlarmClock( 1805): AlarmInitReceiver finished
+10-10 16:35:06.002 D/dalvikvm( 1770): GC_CONCURRENT freed 271K, 12% free 2573K/2912K, paused 1ms+0ms, total 2ms
+10-10 16:35:06.002 V/AlarmClock( 1805): No next alarm
+10-10 16:35:06.002 V/AlarmClock( 1805): Setting next alarm string in system to null
+10-10 16:35:06.002 E/StrictMode( 1770): A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-10 16:35:06.002 E/StrictMode( 1770): java.lang.Throwable: Explicit termination method 'close' not called
+10-10 16:35:06.002 E/StrictMode( 1770): 	at dalvik.system.CloseGuard.open(CloseGuard.java:184)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.content.ContentResolver$CursorWrapperInner.<init>(ContentResolver.java:1903)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.content.ContentResolver.query(ContentResolver.java:438)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.content.CursorLoader.loadInBackground(CursorLoader.java:65)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.content.CursorLoader.loadInBackground(CursorLoader.java:43)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.content.AsyncTaskLoader.onLoadInBackground(AsyncTaskLoader.java:303)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.content.AsyncTaskLoader$LoadTask.doInBackground(AsyncTaskLoader.java:68)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.content.AsyncTaskLoader$LoadTask.doInBackground(AsyncTaskLoader.java:56)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at android.os.AsyncTask$2.call(AsyncTask.java:287)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at java.util.concurrent.FutureTask.run(FutureTask.java:234)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:35:06.002 E/StrictMode( 1770): 	at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:06.002 W/CursorWrapperInner( 1770): Cursor finalized without prior close()
+10-10 16:35:06.002 V/AlarmClock( 1805): AlarmInitReceiver finished
+10-10 16:35:06.403 D/AlarmManagerService( 1322): Kernel timezone updated to 0 minutes west of GMT
+10-10 16:35:06.403 D/SystemClock( 1612): Setting time of day to sec=1791650106
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:35:11.232 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:17.702 D/InitAlarmsService( 1770): Clearing and rescheduling alarms.
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034): Playback error
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):   com.google.android.exoplayer2.ExoPlaybackException: Source error
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleIoException(ExoPlayerImplInternal.java:644)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:616)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at android.os.Handler.dispatchMessage(Handler.java:95)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at android.os.Looper.loop(Looper.java:137)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at android.os.HandlerThread.run(HandlerThread.java:61)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):   Caused by: com.google.android.exoplayer2.upstream.HttpDataSource$InvalidResponseCodeException: Response code: 403
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DefaultHttpDataSource.open(DefaultHttpDataSource.java:413)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.StatsDataSource.open(StatsDataSource.java:84)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.checkOpened(DataSourceInputStream.java:99)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.DataSourceInputStream.open(DataSourceInputStream.java:62)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.ParsingLoadable.load(ParsingLoadable.java:174)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at com.google.android.exoplayer2.upstream.Loader$LoadTask.run(Loader.java:412)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1080)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:573)
+10-10 16:35:19.782 E/ExoPlayerImplInternal( 2034):       at java.lang.Thread.run(Thread.java:841)
+10-10 16:35:19.832 D/gralloc_ranchu( 1139): gralloc_alloc: Creating ashmem region of size 61440
+10-10 16:35:30.352 D/AndroidRuntime( 2096): 
+10-10 16:35:30.352 D/AndroidRuntime( 2096): >>>>>> AndroidRuntime START com.android.internal.os.RuntimeInit <<<<<<
+10-10 16:35:30.352 D/AndroidRuntime( 2096): CheckJNI is ON
+10-10 16:35:30.362 D/dalvikvm( 2096): Trying to load lib libjavacore.so 0x0
+10-10 16:35:30.362 D/dalvikvm( 2096): Added shared lib libjavacore.so 0x0
+10-10 16:35:30.362 D/dalvikvm( 2096): Trying to load lib libnativehelper.so 0x0
+10-10 16:35:30.362 D/dalvikvm( 2096): Added shared lib libnativehelper.so 0x0
+10-10 16:35:30.382 D/AndroidRuntime( 2096): Calling main entry com.android.commands.input.Input
+10-10 16:35:30.382 D/AndroidRuntime( 2096): Shutting down VM
+10-10 16:35:30.382 D/dalvikvm( 2096): GC_CONCURRENT freed 89K, 17% free 459K/552K, paused 1ms+0ms, total 1ms
+10-10 16:35:32.612 D/AndroidRuntime( 2106): 
+10-10 16:35:32.612 D/AndroidRuntime( 2106): >>>>>> AndroidRuntime START com.android.internal.os.RuntimeInit <<<<<<
+10-10 16:35:32.612 D/AndroidRuntime( 2106): CheckJNI is ON
+10-10 16:35:32.612 D/dalvikvm( 2106): Trying to load lib libjavacore.so 0x0
+10-10 16:35:32.612 D/dalvikvm( 2106): Added shared lib libjavacore.so 0x0
+10-10 16:35:32.612 D/dalvikvm( 2106): Trying to load lib libnativehelper.so 0x0
+10-10 16:35:32.612 D/dalvikvm( 2106): Added shared lib libnativehelper.so 0x0
+10-10 16:35:32.632 D/AndroidRuntime( 2106): Calling main entry com.android.commands.input.Input
+10-10 16:35:32.632 D/AndroidRuntime( 2106): Shutting down VM
+10-10 16:35:32.632 I/AndroidRuntime( 2106): NOTE: attach of thread 'Binder_1' failed
+10-10 16:35:32.632 D/dalvikvm( 2106): GC_CONCURRENT freed 88K, 17% free 459K/552K, paused 1ms+0ms, total 1ms
+10-10 16:35:45.922 I/AudioService( 1322):  AudioFocus  abandonAudioFocus() from android.media.AudioManager@afd56ab8com.android.music.MediaPlaybackService$3@afd55758

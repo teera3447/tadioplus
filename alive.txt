@@ -1,0 +1,1 @@
+u0_a46    2034  1140  317824 50076 ffffffff b76f389b S com.tadiotv.app
