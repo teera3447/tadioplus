@@ -16,6 +16,7 @@ import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  * Tadio TV - Application หลัก
@@ -41,13 +42,28 @@ public class App extends Application {
     }
 
     private void installTls() {
-        if (Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT < 21) {
+        int sdk = Build.VERSION.SDK_INT;
+        if (sdk >= 25) {
+            return;     // Android 7.1+ มีใบรับรองรากชุดใหม่ และเปิด TLS 1.2 ให้เองอยู่แล้ว
+        }
+        SSLSocketFactory factory = null;
+        try {
+            factory = LegacyTrust.build(this);          // เพิ่มใบรับรองราก (แก้ https ที่ Android เก่าไม่เชื่อถือ)
+        } catch (Throwable ignored) {
+        }
+        if (factory == null && sdk >= 16) {
             try {
                 SSLContext sc = SSLContext.getInstance("TLSv1.2");
                 sc.init(null, null, null);
-                HttpsURLConnection.setDefaultSSLSocketFactory(new Tls12SocketFactory(sc.getSocketFactory()));
+                factory = sc.getSocketFactory();
             } catch (Throwable ignored) {
             }
+        }
+        if (factory != null) {
+            if (sdk < 21) {
+                factory = new Tls12SocketFactory(factory);  // เปิด TLS 1.1/1.2 ที่ Android 4.x ปิดไว้
+            }
+            HttpsURLConnection.setDefaultSSLSocketFactory(factory);
         }
     }
 

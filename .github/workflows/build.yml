@@ -47,9 +47,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp PlayTV/app/build/outputs/apk/debug/app-debug.apk TadioTV-v2.3.apk
-          gh release create "apk-v2.3-run${{ github.run_number }}" TadioTV-v2.3.apk \
+          cp PlayTV/app/build/outputs/apk/debug/app-debug.apk TadioTV-v2.4.apk
+          gh release create "apk-v2.4-run${{ github.run_number }}" TadioTV-v2.4.apk \
             --repo "${{ github.repository }}" \
             --target "${{ github.sha }}" \
-            --title "TadioTV v2.3 (debug APK)" \
-            --notes "เสถียรขึ้นบน Android 4.2+ (แก้แรมเต็มเด้งออก, เปิด TLS 1.2)"
+            --title "TadioTV v2.4 (debug APK)" \
+            --notes "แก้ https บน Android เก่า: แนบใบรับรองรากเพิ่ม"
