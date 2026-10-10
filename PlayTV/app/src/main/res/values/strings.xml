@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tadio TV</string>
+
+    <string name="search_hint">ค้นหาช่อง / หมวด / เลขช่อง</string>
+    <string name="tab_all">ทั้งหมด</string>
+    <string name="all_section">ทั้งหมด</string>
+    <string name="favorites">ช่องโปรด</string>
+    <string name="all_channels">ช่องทั้งหมด</string>
+    <string name="section_count">%1$s (%2$s ช่อง)</string>
+    <string name="ch_no">ช่อง %1$s</string>
+
+    <string name="icon_fullscreen">⛶</string>
+    <string name="icon_exit_fullscreen">⤡</string>
+    <string name="quality_auto">อัตโนมัติ</string>
+    <string name="quality_title">เลือกคุณภาพสตรีม</string>
+    <string name="quality_item">%1$sp</string>
+    <string name="quality_no_tracks">ยังไม่มีข้อมูลคุณภาพของช่องนี้ ลองรอสักครู่แล้วกดใหม่</string>
+    <string name="cancel">ยกเลิก</string>
+
+    <string name="loading_data">กำลังโหลดรายการช่อง...</string>
+    <string name="loading_channels">กำลังอัปเดตข้อมูล...</string>
+    <string name="never_updated">ยังไม่เคยอัปเดต</string>
+    <string name="updated_at">ช่อง: %1$s\nผังรายการ: %2$s</string>
+    <string name="refresh_now">อัปเดตเลย</string>
+    <string name="refreshing">กำลังอัปเดตข้อมูลจากอินเทอร์เน็ต...</string>
+    <string name="refresh_done">อัปเดตข้อมูลเรียบร้อย</string>
+    <string name="refresh_failed">อัปเดตไม่สำเร็จ ใช้ข้อมูลเดิมในเครื่องแทน</string>
+
+    <string name="now_playing">ตอนนี้: %1$s (%2$s)</string>
+    <string name="next_program">ต่อไป: %1$s (%2$s)</string>
+    <string name="no_epg_for_channel">ไม่มีข้อมูลผังรายการของช่องนี้</string>
+    <string name="no_epg_short">ไม่มี</string>
+    <string name="no_channel_selected">ยังไม่ได้เลือกช่อง</string>
+
+    <string name="epg_title">ผังรายการ</string>
+    <string name="epg_loading">กำลังโหลดผังรายการ...</string>
+    <string name="epg_none">ไม่มีข้อมูลผังรายการของช่องนี้ (ผังรายการมีเฉพาะบางช่อง)</string>
+    <string name="epg_now_badge">กำลังออกอากาศ</string>
+
+    <string name="fav_added">เพิ่มเข้าช่องโปรดแล้ว</string>
+    <string name="fav_removed">นำออกจากช่องโปรดแล้ว</string>
+    <string name="no_result">ไม่พบช่องที่ตรงกับเงื่อนไข</string>
+    <string name="err_play">เล่นช่องนี้ไม่ได้ในขณะนี้ กรุณาเลือกช่องอื่น</string>
+    <string name="cannot_play">ช่องนี้เล่นไม่ได้\n\n%1$s</string>
+
+    <string name="share_title">แชร์ช่องนี้</string>
+    <string name="pick_channel">เลือกช่อง</string>
+    <string name="ok">ตกลง</string>
+
+    <string name="info_name">ช่อง:</string>
+    <string name="info_ch_no">เลขช่อง:</string>
+    <string name="info_group">หมวด:</string>
+    <string name="info_id">รหัสช่อง:</string>
+    <string name="info_epg">รหัสผังรายการ:</string>
+    <string name="info_source">แหล่งสตรีม:</string>
+    <string name="info_hint">แอปจะอัปเดตรายการช่องและผังรายการจากอินเทอร์เน็ตให้อัตโนมัติทุกวัน</string>
+
+    <string name="about_title">เกี่ยวกับแอป</string>
+    <string name="about_msg">Tadio TV เวอร์ชัน 2.0\nรองรับ Android 4.2 (API 17) ขึ้นไป\n\n• รายการช่องอัปเดตอัตโนมัติทุกวันจากเพลย์ลิสต์ M3U\n• ผังรายการ (EPG) อัปเดตทุกวัน\n• ค้นหาช่อง, ช่องโปรด\n• เต็มจอหมุนแนวนอน, เลือกคุณภาพสตรีม\n• เล่นวิดีโอด้วย ExoPlayer 2.18 รองรับสตรีม HLS\n\nหมายเหตุ: ช่องที่เล่นไม่ได้มักเกิดจากเจ้าของสตรีมปิดกั้นตามพื้นที่ ต้องมีลิงก์ที่ถูกต้อง หรือสตรีมมี DRM</string>
+</resources>

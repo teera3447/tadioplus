@@ -1,0 +1,23 @@
+{
+  "_comment": "แมป tvg-id ของเพลย์ลิสต์ -> channel id ของ EPG (iptv36.vercel.app/epg.xml)",
+  "map": {
+    "NBT.th": "iptv36.nbt",
+    "TPBS.th": "iptv36.thaipbs",
+    "5HD.th": "iptv36.tv5",
+    "TPTV.th": "iptv36.tptv",
+    "TNN.th": "iptv36.tnn16",
+    "Nation.th": "iptv36.nation",
+    "Workpoint.th": "iptv36.workpoint",
+    "True4u.th": "iptv36.true4u",
+    "GMM25.th": "iptv36.gmm25",
+    "ช่อง 8.th": "iptv36.ch8",
+    "MONOMAX Sports.th": "iptv36.mono29",
+    "MCOT.th": "iptv36.mcot",
+    "ONE.th": "iptv36.one",
+    "Thairath.th": "iptv36.thairath",
+    "3HD.th": "iptv36.ch3",
+    "Amarin.th": "iptv36.amarin",
+    "7HD.th": "iptv36.ch7",
+    "PPTV.th": "iptv36.pptv"
+  }
+}
