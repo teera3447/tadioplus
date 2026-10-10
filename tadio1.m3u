@@ -127,6 +127,6 @@ https://cdn-live.dltv.ac.th/dltv12.m3u8
 https://cdn-live.dltv.ac.th/dltv13.m3u8
 #EXTINF:-1 tvg-chno="214" ch-number="214" tvg-id="DLTV14.th" tvg-name="DLTV14" tvg-logo="https://dltv.ac.th/themes/default/assets/images/DLTV/logo-channel-14.png" group-title="Education", DLTV14
 https://cdn-live.dltv.ac.th/dltv14.m3u8
-#EXTINF:-1 tvg-chno="215" ch-number="215" tvg-id="DLTV15.th" tvg-name="DLTV15" tvg-logo="https://dltv.ac.th/themes/default/assets/images/DLTV/logo-channel-15.pngg" group-title="Education", DLTV15
+#EXTINF:-1 tvg-chno="215" ch-number="215" tvg-id="DLTV15.th" tvg-name="DLTV15" tvg-logo="https://dltv.ac.th/themes/default/assets/images/DLTV/logo-channel-15.png" group-title="Education", DLTV15
 https://cdn-live.dltv.ac.th/dltv15.m3u8
 
