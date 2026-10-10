@@ -259,10 +259,6 @@
                 style="@style/IconBtn"
                 android:text="i" />
 
-            <TextView
-                android:id="@+id/btnShare"
-                style="@style/IconBtn"
-                android:text="↗" />
 
             <TextView
                 android:id="@+id/btnFavIcon"

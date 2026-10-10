@@ -852,13 +852,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btnShare).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareChannel();
-            }
-        });
-
         findViewById(R.id.btnPrev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1003,24 +996,12 @@ public class MainActivity extends AppCompatActivity {
         sb.append(getString(R.string.info_epg)).append(' ')
                 .append(current.epgId == null || current.epgId.length() == 0
                         ? getString(R.string.no_epg_short) : current.epgId).append('\n');
-        sb.append(getString(R.string.info_source)).append('\n').append(current.url).append("\n\n");
         sb.append(getString(R.string.info_hint));
         new AlertDialog.Builder(this)
                 .setTitle(current.name)
                 .setMessage(sb.toString())
                 .setPositiveButton(R.string.ok, null)
                 .show();
-    }
-
-    private void shareChannel() {
-        if (current == null) {
-            return;
-        }
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, current.name);
-        intent.putExtra(Intent.EXTRA_TEXT, current.name + "\n" + current.url);
-        startActivity(Intent.createChooser(intent, getString(R.string.share_title)));
     }
 
     private void showChannelPicker() {

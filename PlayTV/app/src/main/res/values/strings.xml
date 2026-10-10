@@ -44,7 +44,6 @@
     <string name="err_play">เล่นช่องนี้ไม่ได้ในขณะนี้ กรุณาเลือกช่องอื่น</string>
     <string name="cannot_play">ช่องนี้เล่นไม่ได้\n\n%1$s</string>
 
-    <string name="share_title">แชร์ช่องนี้</string>
     <string name="pick_channel">เลือกช่อง</string>
     <string name="ok">ตกลง</string>
 
@@ -53,7 +52,6 @@
     <string name="info_group">หมวด:</string>
     <string name="info_id">รหัสช่อง:</string>
     <string name="info_epg">รหัสผังรายการ:</string>
-    <string name="info_source">แหล่งสตรีม:</string>
     <string name="info_hint">แอปจะอัปเดตรายการช่องและผังรายการจากอินเทอร์เน็ตให้อัตโนมัติทุกวัน</string>
 
     <string name="about_title">เกี่ยวกับแอป</string>

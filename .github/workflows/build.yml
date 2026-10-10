@@ -47,9 +47,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          cp PlayTV/app/build/outputs/apk/debug/app-debug.apk TadioTV-v2.1.apk
-          gh release create "apk-v2.1-run${{ github.run_number }}" TadioTV-v2.1.apk \
+          cp PlayTV/app/build/outputs/apk/debug/app-debug.apk TadioTV-v2.2.apk
+          gh release create "apk-v2.2-run${{ github.run_number }}" TadioTV-v2.2.apk \
             --repo "${{ github.repository }}" \
             --target "${{ github.sha }}" \
-            --title "TadioTV v2.1 (debug APK)" \
-            --notes "แก้เมนูช่องเลื่อนไม่ได้ และโหมดเต็มจอ"
+            --title "TadioTV v2.2 (debug APK)" \
+            --notes "ซ่อนลิงก์สตรีม: เอาปุ่มแชร์และการแสดงลิงก์ออก"
