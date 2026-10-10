@@ -43,6 +43,12 @@ jobs:
           path: PlayTV/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
 
+      - name: Lint (หาโค้ดที่ใช้ API สูงกว่า Android 4.2)
+        continue-on-error: true
+        run: |
+          gradle -p PlayTV lintDebug --no-daemon -q || true
+          python3 .github/scripts/lint_report.py PlayTV/app/build/reports/lint-results-debug.xml
+
       - name: Publish APK as a Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -53,3 +59,43 @@ jobs:
             --target "${{ github.sha }}" \
             --title "TadioTV v2.4 (debug APK)" \
             --notes "แก้ https บน Android เก่า: แนบใบรับรองรากเพิ่ม"
+
+  smoke:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [17, 18]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: TadioTV-apk
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Run on Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api }}
+          target: default
+          arch: x86
+          disable-animations: false
+          emulator-boot-timeout: 900
+          script: bash .github/scripts/smoke.sh ${{ matrix.api }}
+      - name: Publish smoke results to branch
+        if: always()
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          B="smoke-api${{ matrix.api }}"
+          mkdir -p /tmp/res && cp -r smoke-out/* /tmp/res/ 2>/dev/null || echo "no results" > /tmp/res/NO_RESULTS.txt
+          git checkout --orphan "$B"
+          git rm -rf . -q
+          cp -r /tmp/res/* .
+          git add -A
+          git commit -q -m "smoke results API ${{ matrix.api }}"
+          git push -f origin "$B"
