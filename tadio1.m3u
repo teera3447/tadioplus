@@ -93,8 +93,8 @@ https://lb1-live-mv.v2h-cdn.com/partner/mv_plus_part/mvmall_plus.m3u8
 https://cdn-edge.iiptvcdn.com/live_event/smil:d36f-93c1-9c58-fdcc-427f.smil/playlist.m3u8
 #EXTINF:-1 tvg-chno="128" ch-number="128" tvg-id="RAMA Channel.th" tvg-name="RAMA Channel" tvg-logo="https://www.rama.mahidol.ac.th/ramachannel/wp-content/uploads/2023/03/logo-rama-topA.png" group-title="Other", RAMA Channel
 https://ramach.ddns.net/live/ramalive/index.m3u8
-#EXTINF:-1 tvg-chno="129" ch-number="129" tvg-id="TEST.th" tvg-name="TEST" tvg-logo="" group-title="TEST", TEST1
-https://netcdn-tr.metfone.com.kh/netcdn-live-29/manifest/VTV4_HD/master.m3u8?timestamp=1785091302&wmkid=0&token=e0f9c8c60dd4cfecd858eb1112094a2f&uid=3925877
+#EXTINF:-1 tvg-chno="129" ch-number="129" tvg-id="TEST.th" tvg-name="TEST" tvg-logo="" group-title="TEST", Plook
+https://plook.tadioplus.workers.dev/plook.m3u8
 #EXTINF:-1 tvg-chno="130" ch-number="130" tvg-id="Tadio Empty" tvg-name="Tadio Empty" tvg-logo="" group-title="TEST", TADIO EMPTY
 https://
 #EXTINF:-1 tvg-chno="131" ch-number="131" tvg-id="NHK WORLD.jp" tvg-name="NHK WORLD" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPOhkWJfkm-FcT4agmxooYSDpQbvXjMkbygX7ELFiIag&s=10" group-title="News", NHK WORLD
