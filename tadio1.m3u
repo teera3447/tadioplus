@@ -44,7 +44,7 @@ https://live888.gstreamcdn.com/app/one_udp2/ts:master.m3u8
 #EXTINF:-1 tvg-chno="32" ch-number="32" tvg-id="Thairath.th" tvg-name="Thairath" tvg-logo="https://cms.dmpcdn.com/livetv/2024/07/18/848915e0-44e9-11ef-9e86-a13521bc09bd_webp_original.webp" group-title="Digital TV", Thairath
 https://rxth.tadioplus.workers.dev/thairath-proxy.m3u8
 #EXTINF:-1 tvg-chno="33" ch-number="33" tvg-id="3HD.th" tvg-name="3HD" tvg-logo="https://cms.dmpcdn.com/livetv/2023/07/24/5ff3e270-29cc-11ee-b2f4-e9de482d866e_webp_original.webp" group-title="Digital TV", 3HD
-https://live-us1.thaimomo.com/live-as/ch3hd-2/playlist.m3u8
+https://three.tadioplus.workers.dev/ch3.m3u8
 #EXTINF:-1 tvg-chno="34" ch-number="34" tvg-id="Amarin.th" tvg-name="Amarin" tvg-logo="https://media.licdn.com/dms/image/v2/C511BAQH3MPAeCMtKGA/company-background_10000/company-background_10000/0/1584487683648/amarin_television_co_ltd_cover?e=2147483647&v=beta&t=SvdwF8_ipFYDqyAY0MgRZSSGZJECl-BB7AQVOyXYkl0" group-title="Digital TV", Amarin
 https://live-us1.thaimomo.com/live-as/chamarin-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="35" ch-number="35" tvg-id="7HD.th" tvg-name="7HD" tvg-logo="https://media-mvtv.imgix.net/channel/134_y_YTkIZJDsbmX26owPRpAFSfW0eyz95vn4.png" group-title="Digital TV", 7HD
