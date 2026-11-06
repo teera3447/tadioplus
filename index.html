@@ -7,8 +7,12 @@
   
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f4f4f4">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- โหลด FontAwesome สำหรับไอคอน -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
     body {
       font-family: 'Kanit', sans-serif;
       margin: 0;
@@ -21,6 +25,7 @@
       color: #333;
       transition: background-color 0.3s, color 0.3s;
     }
+    
     .container {
       background-color: #fff;
       padding: 40px;
@@ -28,68 +33,147 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       text-align: center;
       transition: background-color 0.3s, color 0.3s;
+      width: 90%;
+      max-width: 400px;
+      margin-bottom: 20px;
     }
+    
     .logo-container { margin-bottom: 30px; }
     .logo { max-width: 150px; display: block; margin: 0 auto; }
-    h1 { margin-bottom: 25px; font-size: 2em; font-weight: 400; }
+    h1 { margin-bottom: 25px; font-size: 1.8em; font-weight: 500; }
+    
     .menu-button {
-      display: block; width: 180px; padding: 12px; margin: 8px auto;
-      text-align: center; text-decoration: none; color: #333;
-      background-color: #eee; border-radius: 8px; transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px; 
+      margin: 12px 0;
+      text-align: center; 
+      text-decoration: none; 
+      color: #333;
+      background-color: #eee; 
+      border-radius: 8px; 
+      transition: background-color 0.3s, transform 0.2s;
       border: 1px solid #ddd;
+      font-size: 1.1em;
     }
-    .menu-button:hover { background-color: #ddd; }
+    
+    .menu-button:hover { 
+        background-color: #ddd; 
+        transform: translateY(-2px);
+    }
+    
+    .menu-button i {
+        font-size: 1.2em;
+        color: #ff4757;
+    }
+    
     .theme-toggle {
-      position: absolute; top: 15px; right: 15px; border: none;
-      background: none; font-size: 26px; cursor: pointer; transition: transform 0.3s;
+      position: absolute; 
+      top: 15px; 
+      right: 15px; 
+      border: none;
+      background: #fff; 
+      font-size: 20px; 
+      cursor: pointer; 
+      transition: all 0.3s;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      color: #333;
     }
-    .theme-toggle:hover { transform: rotate(20deg); }
-    body.dark { background-color: #121212; color: #f4f4f4; }
-    body.dark .container { background-color: #1e1e1e; color: #f4f4f4; }
-    body.dark .menu-button { background-color: #333; color: #f4f4f4; border: 1px solid #555; }
-    body.dark .menu-button:hover { background-color: #444; }
+    
+    .theme-toggle:hover { 
+        transform: scale(1.1); 
+    }
+    
+    /* Dark Mode */
+    body.dark { 
+        background-color: #121212; 
+        color: #f4f4f4; 
+    }
+    
+    body.dark .container { 
+        background-color: #1e1e1e; 
+        color: #f4f4f4; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    body.dark .menu-button { 
+        background-color: #2d2d2d; 
+        color: #f4f4f4; 
+        border: 1px solid #444; 
+    }
+    
+    body.dark .menu-button:hover { 
+        background-color: #3d3d3d; 
+    }
+    
+    body.dark .theme-toggle {
+        background-color: #2d2d2d;
+        color: #fff;
+    }
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">🌞</button>
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="สลับธีม">
+      <i class="fa-solid fa-moon"></i>
+  </button>
 
   <div class="container">
     <div class="logo-container">
       <img src="https://img2.pic.in.th/pic/1000021059.png" alt="โลโก้ Tadio+" class="logo">
     </div>
     <h1>เลือกรับชม/รับฟัง</h1>
-    <a href="tvonline.html" class="menu-button">ทีวีออนไลน์</a>
-    <a href="radio.html" class="menu-button">วิทยุออนไลน์</a>
     
+    <a href="tvonline.html" class="menu-button">
+        <i class="fa-solid fa-tv"></i> ทีวีออนไลน์
+    </a>
+    <a href="radio.html" class="menu-button">
+        <i class="fa-solid fa-radio"></i> วิทยุออนไลน์
+    </a>
   </div>
-  </div>
-    <h1>เพิ่มเติม</h1>
-    <a href="https://tadioplus.vercel.app/oldver/index.html" class="menu-button" target="_blank" rel="noopener noreferrer">รันเบาว์เซอร์เก่า คลิกที่นี่</a>
-    <a href="https://www.appmarket24.com/app3514791-knvwz6" class="menu-button" target="_blank" rel="noopener noreferrer">โหลดแอป Tadio+ บน Android</a>
+
+  <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
+    <h1 style="font-size: 1.4em; margin-bottom: 15px;">เพิ่มเติม</h1>
     
+    <a href="https://tadioplusold.42web.io/index.html" class="menu-button" target="_blank" rel="noopener noreferrer" style="font-size: 1em; padding: 10px;">
+        <i class="fa-brands fa-chrome" style="color: #555;"></i> รันเบราว์เซอร์เก่า คลิกที่นี่
+    </a>
+    <a href="https://www.appmarket24.com/app3514791-knvwz6" class="menu-button" target="_blank" rel="noopener noreferrer" style="font-size: 1em; padding: 10px;">
+        <i class="fa-brands fa-android" style="color: #3ddc84;"></i> โหลดแอป Tadio+ บน Android
+    </a>
   </div>
 
   <script>
     const body = document.body;
-    const themeToggle = document.querySelector('.theme-toggle');
+    const themeBtn = document.getElementById('theme-btn');
 
-    function setTheme(theme){
-      if(theme==='dark'){
+    function setTheme(theme) {
+      if(theme === 'dark') {
         body.classList.add('dark');
-        themeToggle.textContent='🌙';
-      }else{
+        themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+      } else {
         body.classList.remove('dark');
-        themeToggle.textContent='🌞';
+        themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
       }
       localStorage.setItem('theme', theme);
     }
-    function toggleTheme(){
-      setTheme(body.classList.contains('dark')?'light':'dark');
+
+    function toggleTheme() {
+      setTheme(body.classList.contains('dark') ? 'light' : 'dark');
     }
+
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
 
-    if('serviceWorker' in navigator){
+    if('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
       .then(reg => console.log('Service Worker Registered'))
       .catch(err => console.log('Service Worker Failed', err));
