@@ -4,129 +4,340 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Tadio+ ฟังวิทยุออนไลน์</title>
+  
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <!-- โหลด FontAwesome สำหรับไอคอน -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    * { box-sizing: border-box; transition: background 0.3s, color 0.3s, transform 0.2s; }
+    /* ตั้งค่าเริ่มต้นพื้นฐาน */
+    * { 
+      box-sizing: border-box; 
+      transition: background-color 0.3s, color 0.3s, transform 0.2s; 
+    }
+
     body { 
       font-family: 'Kanit', sans-serif; 
-      margin: 0; padding: 20px; text-align: center; 
-      background-color: #f8f9fa; color: #333; 
+      margin: 0; 
+      padding: 20px; 
+      text-align: center; 
+      background-color: #f8f9fa; 
+      color: #333; 
     }
-    body.dark { background-color: #1a1a1a; color: #eee; }
 
-    #home-link, #toggle-theme { 
-      position: fixed; top: 15px; font-size: 14px; padding: 8px 15px; 
-      border-radius: 20px; text-decoration: none; cursor: pointer; z-index: 1000; 
-      border: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    body.dark-theme { 
+      background-color: #1a1a1a; 
+      color: #eee; 
     }
-    #home-link { left: 15px; color: #333; }
-    #toggle-theme { right: 15px; color: #333; }
-    body.dark #home-link, body.dark #toggle-theme { background: #333; color: #fff; }
 
-    h1 { margin-top: 70px; font-size: 28px; color: #ff4757; letter-spacing: 1px; }
+    /* ปุ่มเมนูด้านบน */
+    .top-button {
+      position: fixed; 
+      top: 15px; 
+      font-size: 14px; 
+      padding: 8px 15px; 
+      border-radius: 20px; 
+      text-decoration: none; 
+      cursor: pointer; 
+      z-index: 1000; 
+      border: none; 
+      background-color: #fff; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-button:hover {
+        background-color: #eee;
+    }
+
+    #btn-back-home { left: 15px; }
+    #btn-toggle-theme { right: 15px; }
+
+    body.dark-theme .top-button { 
+      background-color: #333; 
+      color: #fff; 
+    }
     
-    #search-input { 
-      padding: 12px 25px; font-size: 16px; width: 100%; max-width: 400px; 
-      margin-bottom: 25px; border-radius: 30px; border: 1px solid #ddd; outline: none; 
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      background-color: #fff; color: #333;
+    body.dark-theme .top-button:hover { 
+      background-color: #444; 
     }
-    body.dark #search-input { background-color: #2d2d2d; color: #eee; border-color: #444; }
-    #search-input:focus { border-color: #ff4757; box-shadow: 0 0 12px rgba(255, 71, 87, 0.2); }
 
-    #now-playing {
-      margin: 10px auto 30px; max-width: 450px; background: #fff; padding: 25px; 
-      border-radius: 25px; display: none; flex-direction: column; align-items: center; 
+    h1 { 
+      margin-top: 70px; 
+      font-size: 28px; 
+      color: #ff4757; 
+      letter-spacing: 1px; 
+    }
+    
+    /* กล่องค้นหา */
+    .search-wrapper {
+        position: relative;
+        max-width: 400px;
+        margin: 0 auto 25px;
+    }
+    
+    .search-wrapper i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+    }
+    
+    #input-search { 
+      padding: 12px 25px 12px 40px; 
+      font-size: 16px; 
+      width: 100%; 
+      border-radius: 30px; 
+      border: 1px solid #ddd; 
+      outline: none; 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      background-color: #fff; 
+      color: #333;
+    }
+
+    body.dark-theme #input-search { 
+      background-color: #2d2d2d; 
+      color: #eee; 
+      border-color: #444; 
+    }
+
+    #input-search:focus { 
+      border-color: #ff4757; 
+      box-shadow: 0 0 12px rgba(255, 71, 87, 0.2); 
+    }
+
+    /* ส่วนควบคุมการเล่นวิทยุ */
+    #player-card {
+      margin: 10px auto 30px; 
+      max-width: 450px; 
+      background-color: #fff; 
+      padding: 25px; 
+      border-radius: 25px; 
+      display: none; 
+      flex-direction: column; 
+      align-items: center; 
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     }
-    body.dark #now-playing { background: #2d2d2d; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
-    
-    #now-playing img { 
-      width: 140px; height: 140px; border-radius: 20px; object-fit: cover; 
-      margin-bottom: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+
+    body.dark-theme #player-card { 
+      background-color: #2d2d2d; 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
     }
     
-    #now-playing-text { font-size: 1.2em; font-weight: 600; margin-bottom: 5px; color: #ff4757; }
-    #now-playing-song { font-size: 0.9em; color: #666; margin-bottom: 10px; font-style: italic; }
-    body.dark #now-playing-song { color: #aaa; }
-    #loading-status { font-size: 0.85em; color: #747d8c; margin-bottom: 10px; min-height: 20px; }
+    #cover-image { 
+      width: 140px; 
+      height: 140px; 
+      border-radius: 20px; 
+      object-fit: cover; 
+      margin-bottom: 15px; 
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+    }
+    
+    #station-title { 
+      font-size: 1.2em; 
+      font-weight: 600; 
+      margin-bottom: 5px; 
+      color: #ff4757; 
+    }
 
-    .controls { display: flex; align-items: center; gap: 20px; width: 100%; justify-content: center; }
-    .play-btn { 
-      background: #ff4757; color: white; border: none; padding: 12px 35px; 
-      border-radius: 25px; cursor: pointer; font-size: 18px; font-weight: 600; 
+    #station-subtitle { 
+      font-size: 0.9em; 
+      color: #666; 
+      margin-bottom: 10px; 
+      font-style: italic; 
+    }
+
+    body.dark-theme #station-subtitle { color: #aaa; }
+
+    #status-indicator { 
+      font-size: 0.85em; 
+      color: #747d8c; 
+      margin-bottom: 10px; 
+      min-height: 20px; 
+    }
+
+    .playback-controls { 
+      display: flex; 
+      align-items: center; 
+      gap: 20px; 
+      width: 100%; 
+      justify-content: center; 
+    }
+
+    .btn-play-pause { 
+      background-color: #ff4757; 
+      color: white; 
+      border: none; 
+      padding: 12px 35px; 
+      border-radius: 25px; 
+      cursor: pointer; 
+      font-size: 18px; 
+      font-weight: 600; 
       box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 110px;
+      justify-content: center;
     }
-    .play-btn:hover { background: #ff6b81; transform: translateY(-2px); }
-    .volume-container { display: flex; align-items: center; gap: 10px; }
-    .volume-container span { color: #333; }
-    body.dark .volume-container span { color: #eee; }
-    input[type=range] { cursor: pointer; accent-color: #ff4757; width: 100px; }
 
-    ul.station-list { 
-      list-style: none; padding: 0; display: grid; 
+    .btn-play-pause:hover { 
+      background-color: #ff6b81; 
+      transform: translateY(-2px); 
+    }
+
+    .volume-wrap { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+    }
+
+    .volume-wrap i { color: #555; }
+    body.dark-theme .volume-wrap i { color: #ccc; }
+
+    input[type=range] { 
+      cursor: pointer; 
+      accent-color: #ff4757; 
+      width: 100px; 
+    }
+
+    /* รายการวิทยุ */
+    .radio-grid { 
+      list-style: none; 
+      padding: 0; 
+      display: grid; 
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-      gap: 20px; max-width: 950px; margin: 0 auto; 
+      gap: 20px; 
+      max-width: 950px; 
+      margin: 0 auto; 
     }
-    .station-list li { 
-      background: #fff; border-radius: 18px; padding: 15px; cursor: pointer; 
-      border: 1px solid transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    }
-    body.dark .station-list li { background: #2d2d2d; }
-    .station-list li:hover { 
-      transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #ff4757; 
-    }
-    .station-list img { width: 100px; height: 100px; border-radius: 12px; margin-bottom: 12px; object-fit: cover; }
-    .station-list span { display: block; font-size: 0.9em; font-weight: 500; height: 40px; overflow: hidden; color: #333; }
-    body.dark .station-list span { color: #eee; }
-    
-    #loading-stations { font-size: 1em; color: #747d8c; margin: 30px 0; }
 
-    /* Footer Styles */
-    footer {
-      margin-top: 50px; padding: 30px 20px; border-top: 1px solid #ddd;
-      font-size: 14px; color: #747d8c;
+    .radio-grid li { 
+      background-color: #fff; 
+      border-radius: 18px; 
+      padding: 15px; 
+      cursor: pointer; 
+      border: 1px solid transparent; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     }
-    body.dark footer { border-top-color: #333; color: #999; }
-    footer a { color: #ff4757; text-decoration: none; margin: 0 5px; }
-    footer a:hover { text-decoration: underline; }
-    .footer-links { margin-top: 10px; }
+
+    body.dark-theme .radio-grid li { 
+      background-color: #2d2d2d; 
+    }
+
+    .radio-grid li:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+      border-color: #ff4757; 
+    }
+
+    .radio-grid img { 
+      width: 100px; 
+      height: 100px; 
+      border-radius: 12px; 
+      margin-bottom: 12px; 
+      object-fit: cover; 
+    }
+
+    .radio-grid span { 
+      display: block; 
+      font-size: 0.9em; 
+      font-weight: 500; 
+      height: 40px; 
+      overflow: hidden; 
+      color: #333; 
+    }
+
+    body.dark-theme .radio-grid span { color: #eee; }
+    
+    #loading-message { 
+      font-size: 1em; 
+      color: #747d8c; 
+      margin: 30px 0; 
+    }
+
+    /* ส่วนท้ายเว็บ */
+    footer {
+      margin-top: 50px; 
+      padding: 30px 20px; 
+      border-top: 1px solid #ddd;
+      font-size: 14px; 
+      color: #747d8c;
+    }
+
+    body.dark-theme footer { 
+      border-top-color: #333; 
+      color: #999; 
+    }
+
+    footer a { 
+      color: #ff4757; 
+      text-decoration: none; 
+      margin: 0 5px; 
+    }
+
+    footer a:hover { 
+      text-decoration: underline; 
+    }
+
+    .footer-links { 
+      margin-top: 10px; 
+    }
 
     @media (max-width: 480px) {
-      ul.station-list { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .radio-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px; 
+      }
       h1 { font-size: 22px; }
     }
   </style>
 </head>
 <body>
 
-  <a href="https://tadioplus.vercel.app/" id="home-link">← กลับสู่หน้าหลัก</a>
-  <button id="toggle-theme">🌗 ธีม</button>
+  <a href="https://tadioplus.vercel.app/" id="btn-back-home" class="top-button">
+    <i class="fa-solid fa-arrow-left"></i> กลับสู่หน้าหลัก
+  </a>
+  <button id="btn-toggle-theme" class="top-button">
+    <i class="fa-solid fa-moon"></i> สลับธีม
+  </button>
 
-  <h1>Tadio+ วิทยุออนไลน์</h1>
-  <input type="text" id="search-input" placeholder="ค้นหาคลื่นวิทยุ..." />
+  <h1><i class="fa-solid fa-radio"></i> Tadio+ วิทยุออนไลน์</h1>
+  
+  <div class="search-wrapper">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" id="input-search" placeholder="ค้นหาคลื่นวิทยุ..." />
+  </div>
 
-  <audio id="radio-player" preload="none"></audio>
+  <!-- ตัวเล่นเสียงพื้นฐานซ่อนไว้ -->
+  <audio id="core-audio-player" preload="none"></audio>
 
-  <div id="now-playing">
-    <img id="now-playing-image" src="" alt="Station" />
-    <div id="now-playing-text">เลือกสถานี</div>
-    <div id="now-playing-song">🎵 พร้อมรับฟังความสนุก</div>
-    <div id="loading-status"></div>
-    <div class="controls">
-      <button id="play-pause-btn" class="play-btn">Play</button>
-      <div class="volume-container">
-        <span>🔈</span>
+  <!-- หน้าต่างควบคุมเครื่องเล่น -->
+  <div id="player-card">
+    <img id="cover-image" src="" alt="Station Cover" />
+    <div id="station-title">เลือกสถานี</div>
+    <div id="station-subtitle"><i class="fa-solid fa-music"></i> พร้อมรับฟังความสนุก</div>
+    <div id="status-indicator"></div>
+    
+    <div class="playback-controls">
+      <button id="btn-play-pause" class="btn-play-pause">
+        <i class="fa-solid fa-play"></i> Play
+      </button>
+      <div class="volume-wrap">
+        <i class="fa-solid fa-volume-low"></i>
         <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="1">
-        <span>🔊</span>
+        <i class="fa-solid fa-volume-high"></i>
       </div>
     </div>
   </div>
 
-  <div id="loading-stations">⏳ กำลังโหลดรายชื่อสถานี...</div>
-  <ul class="station-list" id="station-list"></ul>
+  <div id="loading-message"><i class="fa-solid fa-spinner fa-spin"></i> กำลังโหลดรายชื่อสถานีวิทยุ...</div>
+  <ul class="radio-grid" id="radio-list-container"></ul>
 
   <footer>
     <p>© 2026 Tadio+ | ดูทีวีและฟังวิทยุออนไลน์ฟรี 24 ชั่วโมง</p>
@@ -137,135 +348,239 @@
   </footer>
 
   <script>
-    const audioEl = document.getElementById('radio-player');
-    const btnPlayPause = document.getElementById('play-pause-btn');
-    const volumeSlider = document.getElementById('volume-slider');
-    const nowPlaying = document.getElementById('now-playing');
-    const nowPlayingText = document.getElementById('now-playing-text');
-    const nowPlayingImage = document.getElementById('now-playing-image');
-    const nowPlayingSong = document.getElementById('now-playing-song');
-    const loadingStatus = document.getElementById('loading-status');
-    const stationListContainer = document.getElementById('station-list');
-    const loadingStations = document.getElementById('loading-stations');
-    const searchInput = document.getElementById('search-input');
-    const themeBtn = document.getElementById('toggle-theme');
+    // อ้างอิง DOM Elements ต่างๆ
+    const audioElement = document.getElementById('core-audio-player');
+    const playPauseButton = document.getElementById('btn-play-pause');
+    const volumeControl = document.getElementById('volume-slider');
+    
+    const playerCard = document.getElementById('player-card');
+    const uiTitle = document.getElementById('station-title');
+    const uiCover = document.getElementById('cover-image');
+    const uiSubtitle = document.getElementById('station-subtitle');
+    const uiStatus = document.getElementById('status-indicator');
+    
+    const radioContainer = document.getElementById('radio-list-container');
+    const textLoading = document.getElementById('loading-message');
+    const searchInput = document.getElementById('input-search');
+    const themeButton = document.getElementById('btn-toggle-theme');
 
-    let hls = null;
-    let currentVol = 1;
-    let stationElements = [];
+    let hlsInstance = null;
+    let savedVolume = 1;
+    let radioDataList = []; 
+    let searchDebounceTimer;
 
-    // ตรวจสอบธีมที่บันทึกไว้ใน LocalStorage ตอนโหลดหน้าเว็บ
-    const savedTheme = localStorage.getItem('tadio-theme');
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark');
-    }
-
-    // ฟังก์ชันกดสลับธีม
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      localStorage.setItem('tadio-theme', isDark ? 'dark' : 'light');
-    });
-
-    // ดึงข้อมูลไฟล์ M3U จาก GitHub
-    async function loadStationsFromM3U() {
-      const m3uUrl = 'https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio_radio1.m3u';
-      try {
-        const response = await fetch(m3uUrl);
-        const text = await response.text();
-        parseM3U(text);
-        loadingStations.style.display = 'none';
-      } catch (error) {
-        console.error('Error loading M3U:', error);
-        loadingStations.textContent = '❌ ไม่สามารถโหลดรายชื่อสถานีได้ กรุณาลองใหม่อีกครั้ง';
-      }
-    }
-
-    // แปลงไฟล์ M3U เป็นรายการสถานีบนหน้าเว็บ
-    function parseM3U(data) {
-      const lines = data.split(/\r?\n/);
-      let currentLogo = '';
-      let currentName = '';
-
-      for (let i = 0; i < lines.length; i++) {
-        let line = lines[i].trim();
-        if (line.startsWith('#EXTINF:')) {
-          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
-          currentLogo = logoMatch ? logoMatch[1] : 'https://via.placeholder.com/100';
-
-          const parts = line.split(',');
-          currentName = parts.length > 1 ? parts.slice(1).join(',').trim() : 'Unknown Station';
-        } else if (line && !line.startsWith('#')) {
-          let streamUrl = line;
-          if (currentName) {
-            createStationElement(currentName, streamUrl, currentLogo);
-            currentName = '';
-            currentLogo = '';
-          }
+    // จัดการธีมเบื้องต้น
+    function initializeTheme() {
+        const theme = localStorage.getItem('tadio-theme');
+        const themeIcon = themeButton.querySelector('i');
+        
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.className = 'fa-solid fa-sun';
+        } else {
+            themeIcon.className = 'fa-solid fa-moon';
         }
-      }
     }
 
-    function createStationElement(name, url, img) {
-      const li = document.createElement('li');
-      li.setAttribute('data-stream-url', url);
-      li.setAttribute('data-station-name', name);
-      li.setAttribute('data-image', img);
+    themeButton.addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+        const isDarkNow = document.body.classList.contains('dark-theme');
+        localStorage.setItem('tadio-theme', isDarkNow ? 'dark' : 'light');
+        
+        const themeIcon = themeButton.querySelector('i');
+        if (isDarkNow) {
+            themeIcon.className = 'fa-solid fa-sun';
+        } else {
+            themeIcon.className = 'fa-solid fa-moon';
+        }
+    });
 
-      li.innerHTML = `
-        <img src="${img}" alt="${name}" onerror="this.src='https://via.placeholder.com/100'">
-        <span>${name}</span>
-      `;
+    initializeTheme();
 
-      li.addEventListener('click', () => {
-        playStation(url, name, img);
-      });
-
-      stationListContainer.appendChild(li);
-      stationElements.push({ name, element: li });
+    // ดึงไฟล์ M3U 
+    async function loadRadioStations() {
+        const playlistUrl = 'https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio_radio1.m3u';
+        
+        try {
+            const res = await fetch(playlistUrl);
+            const m3uContent = await res.text();
+            
+            parseM3UContent(m3uContent);
+            textLoading.style.display = 'none';
+        } catch (error) {
+            console.error("โหลดรายการวิทยุไม่สำเร็จ:", error);
+            textLoading.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ไม่สามารถโหลดรายชื่อสถานีได้ กรุณาลองใหม่อีกครั้ง';
+        }
     }
 
-    function playStation(url, name, img) {
-      nowPlayingText.textContent = name;
-      nowPlayingImage.src = img;
-      nowPlaying.style.display = 'flex';
-      loadingStatus.textContent = "⏳ กำลังเชื่อมต่อสัญญาณ...";
-      nowPlayingSong.textContent = "🎵 Live Stream: " + name;
-      btnPlayPause.textContent = "Pause";
-      audioEl.volume = currentVol;
-      if (hls) { hls.destroy(); hls = null; }
-      if (url.includes('.m3u8') && Hls.isSupported()) {
-        hls = new Hls(); hls.loadSource(url); hls.attachMedia(audioEl);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => audioEl.play());
-      } else {
-        audioEl.src = url;
-        audioEl.play().catch(e => console.log(e));
-      }
+    // ฟังก์ชันแปลไฟล์ m3u ให้อ่านง่าย
+    function parseM3UContent(data) {
+        const lines = data.split(/\r?\n/);
+        let tempLogo = '';
+        let tempName = '';
+
+        radioDataList = [];
+
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i].trim();
+            
+            if (line.startsWith('#EXTINF:')) {
+                // หาโลโก้
+                const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+                tempLogo = logoMatch ? logoMatch[1] : 'https://via.placeholder.com/100';
+                
+                // หาชื่อสถานี
+                const parts = line.split(',');
+                tempName = parts.length > 1 ? parts.slice(1).join(',').trim() : 'สถานีไม่มีชื่อ';
+                
+            } else if (line && !line.startsWith('#')) {
+                // บรรทัดที่เป็น URL
+                if (tempName !== '') {
+                    radioDataList.push({ 
+                        name: tempName, 
+                        streamUrl: line, 
+                        image: tempLogo 
+                    });
+                    
+                    // เคลียร์ค่าตัวแปรเตรียมรับสถานีถัดไป
+                    tempName = ''; 
+                    tempLogo = '';
+                }
+            }
+        }
+        
+        renderRadioGrid(radioDataList);
     }
 
-    btnPlayPause.addEventListener('click', () => {
-      if (audioEl.paused) { audioEl.play(); btnPlayPause.textContent = "Pause"; }
-      else { audioEl.pause(); btnPlayPause.textContent = "Play"; loadingStatus.textContent = "⏸️ หยุดชั่วคราว"; }
+    // นำข้อมูลสถานีมาสร้างเป็นแท็ก HTML
+    function renderRadioGrid(stations) {
+        radioContainer.innerHTML = '';
+        
+        // ใช้ fragment ช่วยลดภาระการโหลดหน้าเว็บ
+        const fragment = document.createDocumentFragment();
+
+        stations.forEach(function(station) {
+            const listItem = document.createElement('li');
+            
+            listItem.innerHTML = `
+                <img src="${station.image}" loading="lazy" alt="${station.name}" onerror="this.src='https://via.placeholder.com/100'">
+                <span>${station.name}</span>
+            `;
+            
+            listItem.addEventListener('click', function() {
+                startRadio(station.streamUrl, station.name, station.image);
+            });
+            
+            fragment.appendChild(listItem);
+        });
+        
+        radioContainer.appendChild(fragment);
+    }
+
+    // เริ่มเล่นวิทยุ
+    function startRadio(url, name, img) {
+        // อัปเดต UI หน้าเครื่องเล่น
+        uiTitle.textContent = name;
+        uiCover.src = img;
+        playerCard.style.display = 'flex';
+        uiStatus.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังเชื่อมต่อสัญญาณ...';
+        uiSubtitle.innerHTML = '<i class="fa-solid fa-podcast" style="color: var(--primary-color);"></i> สด: ' + name;
+        
+        playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+        audioElement.volume = savedVolume;
+        
+        // ล้าง hls ตัวเก่าออกก่อนถ้ามี
+        if (hlsInstance) { 
+            hlsInstance.destroy(); 
+            hlsInstance = null; 
+        }
+        
+        // ตรวจสอบว่าเป็น m3u8 และเบราว์เซอร์รองรับหรือไม่
+        if (url.includes('.m3u8') && Hls.isSupported()) {
+            hlsInstance = new Hls({
+                maxBufferLength: 30, // กันกินแรม
+                liveSyncDuration: 3  
+            }); 
+            
+            hlsInstance.loadSource(url); 
+            hlsInstance.attachMedia(audioElement);
+            
+            hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
+                audioElement.play().catch(e => console.log("Play blocked by browser", e));
+            });
+            
+            // ดักจับ Error เน็ตหลุด ให้พยายามต่อใหม่
+            hlsInstance.on(Hls.Events.ERROR, function (event, data) {
+                if (data.fatal) {
+                    if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+                        uiStatus.innerHTML = '<i class="fa-solid fa-wifi" style="color: #f39c12;"></i> สัญญาณขัดข้อง กำลังพยายามเชื่อมต่อใหม่...';
+                        hlsInstance.startLoad();
+                    } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+                        hlsInstance.recoverMediaError();
+                    } else {
+                        hlsInstance.destroy();
+                    }
+                }
+            });
+        } else {
+            // เล่นตรงๆ (เช่นไฟล์ mp3, aac ธรรมดา)
+            audioElement.src = url;
+            audioElement.play().catch(e => console.log(e));
+        }
+        
+        // เลื่อนจอกลับไปด้านบนสุด
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ปุ่มควบคุม Play / Pause
+    playPauseButton.addEventListener('click', function() {
+        if (audioElement.paused) { 
+            audioElement.play(); 
+            playPauseButton.innerHTML = '<i class="fa-solid fa-pause"></i> Pause'; 
+        } else { 
+            audioElement.pause(); 
+            playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i> Play'; 
+            uiStatus.innerHTML = '<i class="fa-solid fa-pause" style="color: #f39c12;"></i> หยุดชั่วคราว'; 
+        }
     });
 
-    volumeSlider.addEventListener('input', (e) => {
-      currentVol = e.target.value; audioEl.volume = currentVol;
+    // ปรับระดับเสียง
+    volumeControl.addEventListener('input', function(e) { 
+        savedVolume = e.target.value; 
+        audioElement.volume = savedVolume; 
     });
 
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase();
-      stationElements.forEach(item => {
-        const nameMatch = item.name.toLowerCase().includes(query);
-        item.element.style.display = nameMatch ? 'block' : 'none';
-      });
+    // ค้นหาสถานีพร้อมหน่วงเวลา (Debounce)
+    searchInput.addEventListener('input', function(e) {
+        clearTimeout(searchDebounceTimer);
+        
+        searchDebounceTimer = setTimeout(function() {
+            const keyword = e.target.value.toLowerCase();
+            
+            const searchResults = radioDataList.filter(function(station) {
+                return station.name.toLowerCase().includes(keyword);
+            });
+            
+            renderRadioGrid(searchResults);
+        }, 300);
     });
 
-    audioEl.addEventListener('playing', () => loadingStatus.textContent = "✅ กำลังออกอากาศ");
-    audioEl.addEventListener('waiting', () => loadingStatus.textContent = "⏳ กำลังโหลดข้อมูล...");
-    audioEl.addEventListener('error', () => { loadingStatus.textContent = "❌ ลิงก์เสียหรือสัญญาณขาดหาย"; btnPlayPause.textContent = "Play"; });
+    // อัปเดตสถานะของ Audio tag
+    audioElement.addEventListener('playing', function() {
+        uiStatus.innerHTML = '<i class="fa-solid fa-tower-broadcast" style="color: #2ecc71;"></i> กำลังออกอากาศ';
+    });
+    
+    audioElement.addEventListener('waiting', function() {
+        uiStatus.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังโหลดข้อมูล...';
+    });
+    
+    audioElement.addEventListener('error', function() { 
+        uiStatus.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color: #e74c3c;"></i> ลิงก์เสียหรือสัญญาณขาดหาย'; 
+        playPauseButton.innerHTML = '<i class="fa-solid fa-play"></i> Play'; 
+    });
 
-    // เริ่มต้นทำงานโดยดึงไฟล์ M3U มาประมวลผล
-    loadStationsFromM3U();
+    // เริ่มโหลดตอนเปิดหน้าเว็บ
+    loadRadioStations();
   </script>
 </body>
 </html>
