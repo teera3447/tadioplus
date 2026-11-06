@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <title>Tadio+ TV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://vjs.zencdn.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- โหลด Font Kanit และ CSS ของ Video.js -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <link href="https://unpkg.com/@videojs/themes@1.0.1/dist/fantasy/index.css" rel="stylesheet">
-    <!-- โหลด FontAwesome สำหรับไอคอน -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ตั้งค่าสีตัวแปร สำหรับทำระบบสลับธีม */
         :root { 
             --bg-color: #f8f9fa; 
             --panel-bg: #ffffff; 
@@ -21,261 +22,110 @@
             --text-color: #333; 
             --border-color: #eee; 
             --icon-color: #555;
+            --hover-bg: #f1f3f5;
         }
-
         body.dark-mode { 
             --bg-color: #121212; 
             --panel-bg: #1e1e1e; 
             --text-color: #eee; 
             --border-color: #333; 
             --icon-color: #aaa;
+            --hover-bg: #2a2a2a;
         }
-        
-        * { 
-            box-sizing: border-box; 
-            transition: background-color 0.3s ease, color 0.3s ease; 
-        }
-
+        * { box-sizing: border-box; transition: background-color 0.2s ease, color 0.2s ease; }
         body { 
-            margin: 0; 
-            font-family: 'Kanit', sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
+            margin: 0; font-family: 'Kanit', sans-serif; 
+            background-color: var(--bg-color); color: var(--text-color); 
+            height: 100vh; display: flex; flex-direction: column; overflow: hidden; 
         }
-
-        /* ส่วนหัวเว็บ */
         header { 
-            padding: 0 20px; 
-            background-color: var(--panel-bg); 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            border-bottom: 1px solid var(--border-color); 
-            height: 60px; 
-            flex-shrink: 0; 
+            padding: 0 20px; background-color: var(--panel-bg); 
+            display: flex; align-items: center; justify-content: space-between; 
+            border-bottom: 1px solid var(--border-color); height: 60px; flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 10;
         }
-
-        .logo { 
-            font-weight: 600; 
-            font-size: 20px; 
-            color: var(--primary-color); 
+        .logo { font-weight: 600; font-size: 22px; color: var(--primary-color); display: flex; align-items: center; gap: 10px; }
+        .btn-theme, .btn-back {
+            cursor: pointer; border: 1px solid var(--border-color); background-color: var(--panel-bg); 
+            color: var(--text-color); border-radius: 20px; padding: 8px 16px; font-family: 'Kanit', sans-serif;
+            display: flex; align-items: center; gap: 8px; font-size: 14px; text-decoration: none;
         }
-        
-        .logo i {
-            margin-right: 8px;
-        }
-
-        .btn-theme {
-            cursor: pointer; 
-            border: 1px solid var(--border-color); 
-            background-color: var(--panel-bg); 
-            color: var(--text-color); 
-            border-radius: 15px; 
-            padding: 6px 16px; 
-            font-family: 'Kanit', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn-theme:hover {
-            background-color: var(--border-color);
-        }
-
-        #app-container { 
-            display: flex; 
-            flex: 1; 
-            overflow: hidden; 
-        }
-
-        /* ส่วนแสดงวิดีโอ */
-        #player-wrapper { 
-            flex: 1; 
-            background-color: #000; 
-            display: flex; 
-            flex-direction: column; 
-            position: relative; 
-        }
-        
-        /* บังคับให้วิดีโอแสดงผลเต็มกรอบ */
-        .video-js video { 
-            object-fit: fill !important; 
-        }
-        .video-js { 
-            width: 100% !important; 
-            height: 100% !important; 
-        }
-
+        .btn-theme:hover, .btn-back:hover { background-color: var(--hover-bg); }
+        #app-container { display: flex; flex: 1; overflow: hidden; }
+        #player-wrapper { flex: 1; background-color: #000; display: flex; flex-direction: column; position: relative; }
+        .video-js video { object-fit: fill !important; }
+        .video-js { width: 100% !important; height: 100% !important; }
         .status-bar { 
-            padding: 12px 20px; 
-            background-color: var(--panel-bg); 
-            font-size: 14px; 
-            border-bottom: 1px solid var(--border-color); 
-            flex-shrink: 0; 
-            color: var(--text-color); 
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 12px 20px; background-color: var(--panel-bg); font-size: 14px; 
+            border-bottom: 1px solid var(--border-color); flex-shrink: 0; color: var(--text-color); 
+            display: flex; align-items: center; gap: 10px; 
         }
-
-        /* แถบเมนูด้านข้าง (รายชื่อช่อง) */
-        #sidebar { 
-            width: 350px; 
-            background-color: var(--panel-bg); 
-            display: flex; 
-            flex-direction: column; 
-            border-left: 1px solid var(--border-color); 
+        #sidebar { width: 350px; background-color: var(--panel-bg); display: flex; flex-direction: column; border-left: 1px solid var(--border-color); z-index: 5; }
+        .search-container { padding: 20px 15px; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 15px; }
+        .input-group { position: relative; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--icon-color); }
+        .input-group input { padding-left: 45px !important; }
+        .search-container input, .search-container select { 
+            width: 100%; padding: 12px 15px; border-radius: 25px; border: 1px solid var(--border-color); 
+            background-color: var(--bg-color); color: var(--text-color); outline: none; font-family: 'Kanit', sans-serif; font-size: 14px;
         }
-
-        .search-container { 
-            padding: 15px; 
-            border-bottom: 1px solid var(--border-color); 
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
-        }
-        
-        .input-group {
-            position: relative;
-        }
-        
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--icon-color);
-        }
-        
-        .input-group input {
-            padding-left: 40px !important;
-        }
-
-        .search-container input, 
-        .search-container select { 
-            width: 100%; 
-            padding: 10px 15px; 
-            border-radius: 20px; 
-            border: 1px solid var(--border-color); 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            outline: none; 
-            font-family: 'Kanit', sans-serif;
-        }
-
-        #channel-list { 
-            flex: 1; 
-            overflow-y: auto; 
-            padding: 10px; 
-        }
-        
+        #channel-list { flex: 1; overflow-y: auto; padding: 15px; }
         .channel-item { 
-            padding: 10px; 
-            margin-bottom: 8px; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            border: 2px solid transparent; 
-            background-color: var(--bg-color); 
+            padding: 10px 15px; margin-bottom: 10px; border-radius: 15px; cursor: pointer; 
+            display: flex; align-items: center; gap: 15px; border: 1px solid var(--border-color); 
+            background-color: var(--panel-bg); box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-        
-        .channel-item:hover { 
-            border-color: var(--primary-color); 
-            transform: translateY(-2px); 
-        }
-
-        .channel-item.is-active { 
-            background-color: var(--primary-color); 
-            color: #fff !important; 
-            border-color: var(--primary-color); 
-        }
-
-        .channel-item img { 
-            width: 45px; 
-            height: 45px; 
-            object-fit: contain; 
-            background-color: #fff; 
-            border-radius: 8px; 
-            padding: 4px; 
-        }
-
-        /* สำหรับหน้าจอมือถือ */
+        .channel-item:hover { border-color: var(--primary-color); transform: translateY(-2px); }
+        .channel-item.is-active { background-color: var(--primary-color); color: #fff !important; border-color: var(--primary-color); }
+        .channel-item img { width: 50px; height: 50px; object-fit: contain; background-color: #fff; border-radius: 10px; padding: 5px; }
+        .channel-info { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+        .channel-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .channel-category { font-size: 11px; color: var(--icon-color); margin-top: 2px; }
+        .channel-item.is-active .channel-category { color: rgba(255,255,255,0.8); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+        body.dark-mode ::-webkit-scrollbar-thumb { background: #555; }
         @media(max-width: 850px) { 
-            body { 
-                overflow-y: auto; 
-                height: auto; 
-            }
-            #app-container { 
-                flex-direction: column; 
-            }
-            #player-wrapper { 
-                height: 56.25vw; 
-                min-height: 230px; 
-                flex: none; 
-                position: sticky; 
-                top: 0; 
-                z-index: 100; 
-            }
-            #sidebar { 
-                width: 100%; 
-                border: none; 
-                height: auto; 
-            }
+            body { overflow-y: auto; height: auto; }
+            #app-container { flex-direction: column; }
+            #player-wrapper { height: 56.25vw; min-height: 230px; flex: none; position: sticky; top: 60px; z-index: 100; }
+            #sidebar { width: 100%; border: none; height: auto; }
         }
     </style>
 </head>
 <body>
-
 <header>
-    <a href="https://tadioplus.vercel.app/" style="text-decoration:none; color:var(--text-color); font-size:14px;">
-        <i class="fa-solid fa-arrow-left"></i> หน้าหลัก
-    </a>
+    <a href="https://tadioplus.vercel.app/" class="btn-back"><i class="fa-solid fa-arrow-left"></i> <span>หน้าหลัก</span></a>
     <div class="logo"><i class="fa-solid fa-tv"></i> Tadio+ TV</div>
-    <button class="btn-theme" onclick="toggleTheme()" id="theme-btn">
-        <i class="fa-solid fa-moon"></i> สลับธีม
-    </button>
+    <button class="btn-theme" onclick="toggleTheme()" id="theme-btn"><i class="fa-solid fa-moon"></i> <span>สลับธีม</span></button>
 </header>
-
 <div id="app-container">
     <div id="player-wrapper">
         <video id="tv-player" class="video-js vjs-theme-fantasy" controls preload="auto" playsinline></video>
-        <div class="status-bar" id="status-text">
+    </div>
+    <div id="sidebar">
+        <div class="status-bar" id="status-text" style="border-top: none; border-bottom: 1px solid var(--border-color); background: var(--bg-color);">
             <i class="fa-solid fa-spinner fa-spin"></i> กำลังเตรียมความพร้อม...
         </div>
-    </div>
-    
-    <div id="sidebar">
         <div class="search-container">
             <div class="input-group">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="search-input" placeholder="ค้นหาชื่อช่องรายการ...">
             </div>
-            <select id="category-select">
-                <option value="all">ทุกหมวดหมู่</option>
-            </select>
+            <select id="category-select"><option value="all">ทุกหมวดหมู่</option></select>
         </div>
         <div id="channel-list"></div>
     </div>
 </div>
-
 <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 <script src="https://unpkg.com/videojs-contrib-quality-levels@4.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
 <script src="https://unpkg.com/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
-
 <script>
     const WORKER_API_URL = "https://iptv.tadioplus.workers.dev"; 
-    
     let allChannelsData = [];
     let uniqueCategories = new Set();
     let typingTimer;
 
-    // เช็คและตั้งค่าธีมตอนโหลดหน้าเว็บ
     function initTheme() {
         const savedTheme = localStorage.getItem('tadioplus_theme');
         const themeBtnIcon = document.querySelector('#theme-btn i');
@@ -286,8 +136,6 @@
             themeBtnIcon.className = 'fa-solid fa-moon';
         }
     }
-
-    // ฟังก์ชันสำหรับกดปุ่มสลับธีม
     function toggleTheme() {
         const isDark = document.body.classList.toggle('dark-mode');
         const themeBtnIcon = document.querySelector('#theme-btn i');
@@ -299,192 +147,162 @@
             themeBtnIcon.className = 'fa-solid fa-moon';
         }
     }
-
-    // เรียกใช้งานตอนเริ่ม
     initTheme();
 
-    // ตั้งค่า Video.js
     const tvPlayer = videojs('tv-player', {
-        fluid: true, 
-        aspectRatio: '16:9', 
-        fill: true, 
-        autoplay: false, 
-        liveui: true,
+        fluid: true, aspectRatio: '16:9', fill: true, autoplay: false, liveui: true,
         html5: { 
-            vhs: { overrideNative: true } 
+            vhs: { 
+                overrideNative: true,
+                smoothQualityChange: true,
+                bandwidth: 5000000,
+                experimentalBufferBasedABR: true
+            } 
         }
     });
-    
-    // เปิดให้ผู้ใช้เลือกความละเอียดภาพได้
     tvPlayer.hlsQualitySelector({ displayCurrentQuality: true });
 
-    // ดึงไฟล์ M3U จากเซิร์ฟเวอร์
-    async function fetchPlaylist() {
+    // ระบบโหลดแบบสลับทันที (Stale-While-Revalidate)
+    function fetchPlaylist() {
         const statusEl = document.getElementById('status-text');
-        try {
+        const cachedData = localStorage.getItem('tadioplus_tv_cache');
+
+        // หากมีแคชเดิม แสดงผลทันทีใน 0 วินาที เพื่อความรวดเร็วสูงสุด
+        if (cachedData) {
+            processM3UData(cachedData);
+            // ดึงข้อมูลใหม่เงียบๆ ในเบื้องหลัง (Background Sync)
+            backgroundFetch();
+        } else {
+            // หากไม่มีแคชเลย โหลดปกติ
             statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังดึงข้อมูลช่องรายการ...';
-            
-            const response = await fetch(`${WORKER_API_URL}/list`); 
-            const m3uText = await response.text();
-            
-            processM3UData(m3uText);
-            
-        } catch (error) {
-            console.error("Error fetching playlist:", error);
-            statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> เกิดข้อผิดพลาดในการโหลดข้อมูล กรุณาลองใหม่';
+            backgroundFetch(true);
         }
     }
 
-    // แปลงข้อความ M3U เป็น Array ของ Object
+    async function backgroundFetch(isFirstLoad = false) {
+        const statusEl = document.getElementById('status-text');
+        try {
+            const response = await fetch(`${WORKER_API_URL}/list`); 
+            const m3uText = await response.text();
+            
+            // ตรวจสอบว่าข้อมูลเปลี่ยนแปลงไหม ค่อยอัปเดตแคชและหน้าจอ
+            const cachedData = localStorage.getItem('tadioplus_tv_cache');
+            if (m3uText !== cachedData) {
+                localStorage.setItem('tadioplus_tv_cache', m3uText);
+                processM3UData(m3uText);
+            } else if (isFirstLoad) {
+                processM3UData(m3uText);
+            }
+        } catch (error) {
+            console.error("Background fetch error:", error);
+            if (isFirstLoad) {
+                statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:#e74c3c;"></i> เกิดข้อผิดพลาดในการโหลดข้อมูล';
+            }
+        }
+    }
+
     function processM3UData(m3uText) {
-        const lines = m3uText.split('\n');
-        
-        // ล้างข้อมูลเก่าก่อน
+        const lines = m3uText.split(/\r?\n/);
         allChannelsData = [];
         uniqueCategories.clear();
 
         for (let i = 0; i < lines.length; i++) {
             let line = lines[i].trim();
-            
             if (line.startsWith('#EXTINF:')) {
-                // ดึงชื่อช่อง
                 const parts = line.split(',');
                 const channelName = parts.length > 1 ? parts[1].trim() : "ไม่ทราบชื่อช่อง";
-                
-                // ใช้ Regex หาโลโก้และหมวดหมู่
                 const logoMatch = line.match(/tvg-logo="([^"]+)"/);
                 const groupMatch = line.match(/group-title="([^"]+)"/);
-                
-                // บรรทัดถัดไปคือ URL ของวิดีโอ
                 const streamUrl = lines[i + 1] ? lines[i + 1].trim() : "";
                 
-                // จัดการหมวดหมู่ (ถ้าไม่มีให้ใส่เป็น Other)
                 let categoryName = "Other";
                 if (groupMatch) {
                     categoryName = groupMatch[1].split(',')[0].trim();
                 }
                 
-                // เก็บเฉพาะอันที่มีลิงก์สตรีม
                 if (streamUrl && streamUrl.startsWith('http')) {
                     const channelLogo = logoMatch ? logoMatch[1] : "";
-                    
-                    allChannelsData.push({ 
-                        name: channelName, 
-                        url: streamUrl, 
-                        logo: channelLogo, 
-                        group: categoryName 
-                    });
-                    
+                    allChannelsData.push({ name: channelName, url: streamUrl, logo: channelLogo, group: categoryName });
                     uniqueCategories.add(categoryName);
                 }
             }
         }
-        
         buildCategoryDropdown();
         renderChannelList(allChannelsData);
-        
         document.getElementById('status-text').innerHTML = `<i class="fa-solid fa-circle-check" style="color: #2ecc71;"></i> พร้อมรับชมทั้งหมด ${allChannelsData.length} ช่อง`;
     }
 
-    // สร้างตัวเลือกหมวดหมู่ใน Dropdown
     function buildCategoryDropdown() {
         const selectBox = document.getElementById('category-select');
-        
+        const currentVal = selectBox.value;
+        selectBox.innerHTML = '<option value="all">ทุกหมวดหมู่</option>';
         uniqueCategories.forEach(function(category) {
             const option = document.createElement('option');
-            option.value = category; 
-            option.textContent = category;
+            option.value = category; option.textContent = category;
             selectBox.appendChild(option);
         });
+        selectBox.value = currentVal;
     }
 
-    // วาดรายการช่องลงบนหน้าเว็บ
     function renderChannelList(channelsToRender) {
         const listContainer = document.getElementById('channel-list');
         listContainer.innerHTML = ""; 
-        
-        // ใช้ DocumentFragment เพื่อให้เรนเดอร์ได้ไวขึ้น (ไม่กระตุก)
         const fragment = document.createDocumentFragment();
 
         channelsToRender.forEach(function(channel) {
             const channelDiv = document.createElement('div');
             channelDiv.className = 'channel-item';
-            
-            // ใส่รูปภาพและชื่อช่อง (ใช้ lazy load เพื่อไม่ให้โหลดรูปพร้อมกันทีเดียว)
             channelDiv.innerHTML = `
-                <img src="${channel.logo}" loading="lazy" onerror="this.src='https://via.placeholder.com/45?text=TV'"> 
-                <span>${channel.name}</span>
+                <img src="${channel.logo}" loading="lazy" onerror="this.src='https://via.placeholder.com/50?text=TV'"> 
+                <div class="channel-info">
+                    <span class="channel-name">${channel.name}</span>
+                    <span class="channel-category"><i class="fa-solid fa-tag" style="font-size:10px;"></i> ${channel.group}</span>
+                </div>
             `;
-            
-            // เมื่อคลิกที่ช่อง ให้เริ่มเล่น
-            channelDiv.onclick = function() {
-                playChannel(channel, channelDiv);
-            };
-            
+            channelDiv.onclick = function() { playChannel(channel, channelDiv); };
             fragment.appendChild(channelDiv);
         });
-        
         listContainer.appendChild(fragment);
     }
 
-    // ฟังก์ชันสำหรับเล่นวิดีโอ
     function playChannel(channelData, clickedElement) {
-        // ถ้ายิงตรงไม่ได้ ให้ผ่าน Proxy Worker
         let finalPlayUrl = channelData.url;
         if (channelData.url.startsWith('http://')) {
             finalPlayUrl = `${WORKER_API_URL}/?url=` + encodeURIComponent(channelData.url);
         }
         
-        // ล้างคลาส active ออกจากช่องอื่นๆ ก่อน
         const allItems = document.querySelectorAll('.channel-item');
-        allItems.forEach(function(item) {
-            item.classList.remove('is-active');
-        });
-        
-        // ไฮไลต์ช่องที่กำลังเลือก
+        allItems.forEach(item => item.classList.remove('is-active'));
         clickedElement.classList.add('is-active');
         
         document.getElementById('status-text').innerHTML = `<i class="fa-solid fa-satellite-dish" style="color: var(--primary-color);"></i> กำลังเล่น: <b>${channelData.name}</b>`;
         
-        // สั่งให้ Video.js เล่นสตรีม
         tvPlayer.src({ src: finalPlayUrl, type: 'application/x-mpegURL' });
         tvPlayer.load();
+        tvPlayer.play().catch(err => console.log("Play blocked:", err));
         
-        tvPlayer.play().catch(function(err) {
-            console.log("เล่นอัตโนมัติไม่สำเร็จ (อาจติด Policy ของเบราว์เซอร์):", err);
-        });
-        
-        // ถ้าเป็นมือถือ ให้เลื่อนจอขึ้นไปบนสุดตรงตัวเล่นวิดีโอ
         if (window.innerWidth < 850) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
-    // ค้นหาและกรองช่องรายการ
     function handleSearchAndFilter() {
         const searchKeyword = document.getElementById('search-input').value.toLowerCase();
         const selectedCategory = document.getElementById('category-select').value;
-        
-        const filteredResult = allChannelsData.filter(function(channel) {
+        const filteredResult = allChannelsData.filter(channel => {
             const isNameMatched = channel.name.toLowerCase().includes(searchKeyword);
             const isCategoryMatched = (selectedCategory === 'all') || (channel.group === selectedCategory);
-            
             return isNameMatched && isCategoryMatched;
         });
-        
         renderChannelList(filteredResult);
     }
 
-    // หน่วงเวลาพิมพ์ค้นหา (Debounce) จะได้ไม่ทำงานหนักตอนพิมพ์รัวๆ
     document.getElementById('search-input').addEventListener('input', function() {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(handleSearchAndFilter, 300);
     });
-
-    // เมื่อเปลี่ยนหมวดหมู่ ให้ค้นหาใหม่ทันที
     document.getElementById('category-select').addEventListener('change', handleSearchAndFilter);
 
-    // เริ่มทำงานเมื่อเปิดเว็บ
     fetchPlaylist();
 </script>
 </body>
