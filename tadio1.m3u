@@ -38,7 +38,7 @@ https://live888.gstreamcdn.com/app/mono29_bk/ts:master.m3u8
 #EXTINF:-1 tvg-chno="29" ch-number="29" tvg-id="MONOMAX Sports.th" tvg-name="MONOMAX Sports" tvg-logo="https://img2.pic.in.th/monosp29.jpg" group-title="Digital TV", MONOMAX Sports ST
 https://live888.gstreamcdn.com/app/monoe/ts:master.m3u8
 #EXTINF:-1 tvg-chno="30" ch-number="30" tvg-id="MCOT.th" tvg-name="MCOT" tvg-logo="https://cms.dmpcdn.com/livetv/2023/09/09/9cc40970-4ebe-11ee-9801-97f95b5eed9a_webp_original.webp" group-title="Digital TV", MCOT
-https://live-us1.thaimomo.com/live-as/chmcothd-3/playlist.m3u8
+https://live-us1.thaimomo.com/live-as/chmcothd-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="31" ch-number="31" tvg-id="ONE.th" tvg-name="ONE" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3AE77Xd-Ezp3Pcju4GgBU1AD2YHaBEnMPW_rZ3DD6cNtO79PbkwqPGMw&s=10" group-title="Digital TV", ONE
 https://live888.gstreamcdn.com/app/one_udp2/ts:master.m3u8
 #EXTINF:-1 tvg-chno="32" ch-number="32" tvg-id="Thairath.th" tvg-name="Thairath" tvg-logo="https://cms.dmpcdn.com/livetv/2024/07/18/848915e0-44e9-11ef-9e86-a13521bc09bd_webp_original.webp" group-title="Digital TV", Thairath
