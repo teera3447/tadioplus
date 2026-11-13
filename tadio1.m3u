@@ -26,7 +26,7 @@ https://lb1-live-mv.v2h-cdn.com/partner/thaibaan_part/thaibaan.m3u8
 #EXTINF:-1 tvg-chno="22" ch-number="22" tvg-id="Nation.th" tvg-name="Nation" tvg-logo="https://img1.pic.in.th/images/nation22.webp" group-title="Digital TV", Nation
 https://live-us1.thaimomo.com/live-as/chNation-3/playlist.m3u8
 #EXTINF:-1 tvg-chno="23" ch-number="23" tvg-id="Workpoint.th" tvg-name="Workpoint" tvg-logo="https://img1.pic.in.th/images/workpoint.png" group-title="Digital TV", Workpoint
-https://live-us1.thaimomo.com/live-as/chworkpointt-3/playlist.m3u8
+https://rumble.com/live-hls-dvr/PCaSuIUqFOQ/playlist.m3u8
 #EXTINF:-1 tvg-chno="24" ch-number="24" tvg-id="True4u.th" tvg-name="True4U" tvg-logo="https://img2.pic.in.th/true4u.jpeg" group-title="Digital TV", True4U
 https://trxx.tadioplus.workers.dev/true24.m3u8
 #EXTINF:-1 tvg-chno="25" ch-number="25" tvg-id="GMM25.th" tvg-name="GMM25" tvg-logo="https://img1.pic.in.th/images/gmm25.jpeg" group-title="Digital TV", GMM25
