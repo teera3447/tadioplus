@@ -21,12 +21,12 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # setup-android@v3 defaults to the obsolete `tools` package, which fails.
+          packages: ''
 
       - name: Install Android SDK components
-        shell: bash
-        run: |
-          yes | sdkmanager --licenses >/dev/null
-          sdkmanager --install "cmdline-tools;latest" "platform-tools" "platforms;android-33" "build-tools;33.0.3"
+        run: sdkmanager --install "platform-tools" "platforms;android-33" "build-tools;33.0.3"
 
       - uses: gradle/actions/setup-gradle@v4
         with:
