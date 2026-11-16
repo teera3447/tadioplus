@@ -58,4 +58,20 @@
 
     <string name="about_title">เกี่ยวกับแอป</string>
     <string name="about_msg">Tadio TV เวอร์ชัน 2.0\nรองรับ Android 4.2 (API 17) ขึ้นไป\n\n• รายการช่องอัปเดตอัตโนมัติทุกวันจากเพลย์ลิสต์ M3U\n• ผังรายการ (EPG) อัปเดตทุกวัน\n• ค้นหาช่อง, ช่องโปรด\n• เต็มจอหมุนแนวนอน, เลือกคุณภาพสตรีม\n• เล่นวิดีโอด้วย ExoPlayer 2.18 รองรับสตรีม HLS\n\nหมายเหตุ: ช่องที่เล่นไม่ได้มักเกิดจากเจ้าของสตรีมปิดกั้นตามพื้นที่ ต้องมีลิงก์ที่ถูกต้อง หรือสตรีมมี DRM</string>
+
+    <string name="radio_btn">วิทยุ</string>
+    <string name="radio_title">วิทยุออนไลน์</string>
+    <string name="radio_search_hint">ค้นหาสถานีวิทยุ</string>
+    <string name="radio_refresh">อัปเดต</string>
+    <string name="radio_pick">เลือกสถานี</string>
+    <string name="radio_ready">พร้อมเล่น</string>
+    <string name="radio_connecting">กำลังเชื่อมต่อ...</string>
+    <string name="radio_buffering">กำลังบัฟเฟอร์...</string>
+    <string name="radio_playing">กำลังเล่น</string>
+    <string name="radio_paused">หยุดชั่วคราว</string>
+    <string name="radio_relinking">กำลังดึงลิงก์สถานีใหม่...</string>
+    <string name="radio_error">เล่นสถานีนี้ไม่ได้ ลองสถานีอื่น</string>
+    <string name="radio_onair">ON AIR</string>
+    <string name="radio_all_stations">‹ สถานีทั้งหมด</string>
+    <string name="radio_vol">VOL</string>
 </resources>

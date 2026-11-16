@@ -69,6 +69,18 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/btnRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@+id/btnList"
+                android:gravity="center"
+                android:text="@string/radio_btn"
+                android:textColor="#F26F21"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/btnList"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

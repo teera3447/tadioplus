@@ -891,6 +891,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btnRadio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RadioActivity.class));
+            }
+        });
+
         findViewById(R.id.btnEpg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
