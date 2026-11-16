@@ -25,6 +25,8 @@ public class ChannelStore {
 
     public static final String PLAYLIST_URL =
             "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio1.m3u";
+    public static final String RADIO_URL =
+            "https://raw.githubusercontent.com/teera3447/tadioplus/refs/heads/main/tadio_radio1.m3u";
     public static final String EPG_URL = "https://iptv36.vercel.app/epg.xml";
 
     private static final String PREF = "tadio_store";
@@ -33,6 +35,10 @@ public class ChannelStore {
 
     public static File playlistFile(Context c) {
         return new File(c.getFilesDir(), "tadio1.m3u");
+    }
+
+    public static File radioFile(Context c) {
+        return new File(c.getFilesDir(), "tadio_radio1.m3u");
     }
 
     public static File epgFile(Context c) {
@@ -155,6 +161,30 @@ public class ChannelStore {
         }
     }
 
+    /** ดึงรายการสถานีวิทยุใหม่จาก GitHub ลงแคช คืนค่า true เมื่อดึงสำเร็จ */
+    public static boolean refreshRadio(Context c) {
+        return downloadTo(RADIO_URL, radioFile(c));
+    }
+
+    /** โหลดรายการสถานีวิทยุ (แคชในเครื่อง ถ้าไม่มีเน็ตใช้ไฟล์ที่แนบมากับแอป) */
+    public static List<Channel> loadRadio(Context c, boolean force) {
+        File f = radioFile(c);
+        if (force || !f.exists()) {
+            downloadTo(RADIO_URL, f);
+        }
+        if (!f.exists()) {
+            copyAsset(c, "tadio_radio1.m3u", f);
+        }
+        try {
+            InputStream in = new FileInputStream(f);
+            List<Channel> list = M3uParser.parse(in);
+            in.close();
+            return list;
+        } catch (Throwable t) {
+            return new ArrayList<Channel>();
+        }
+    }
+
     public static Map<String, List<EpgProgram>> loadEpg(Context c, boolean force) {
         File f = epgFile(c);
         if (force || !f.exists()) {
@@ -186,6 +216,7 @@ public class ChannelStore {
         if (ok2) {
             prefs(c).edit().putLong(KEY_EPG_TIME, System.currentTimeMillis()).apply();
         }
-        return ok || ok2;
+        boolean ok3 = downloadTo(RADIO_URL, radioFile(c));
+        return ok || ok2 || ok3;
     }
 }

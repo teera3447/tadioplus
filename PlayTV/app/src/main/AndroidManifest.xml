@@ -33,6 +33,13 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false"
             android:label="@string/epg_title" />
+
+        <activity
+            android:name=".RadioActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/radio_title" />
     </application>
 
 </manifest>
