@@ -3,10 +3,13 @@
 https://lb1-live-mv.v2h-cdn.com/partner/mvtv_part/mvtv.m3u8
 #EXTINF:-1 tvg-chno="2" ch-number="2" tvg-id="NBT.th" tvg-name="NBT" tvg-logo="https://img1.pic.in.th/images/nbt2.png" group-title="Digital TV", NBT
 https://cdn-edge.iiptvcdn.com/live_event/smil:1180-0c9c-ad1f-4e5d-aa48.smil/playlist.m3u8?null
+https://live-us1.thaimomo.com/live-as/chNBT-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="3" ch-number="3" tvg-id="TPBS.th" tvg-name="TPBS" tvg-logo="https://s3.dooflixlive.com/assets/images/tv/digital/thaipbs.png" group-title="Digital TV", TPBS
 https://thaipbs-ophctt.cdn.byteark.com/live/playlist_480p/index.m3u8
+https://live-us1.thaimomo.com/live-as/chThaipbshd-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="5" ch-number="5" tvg-id="5HD.th" tvg-name="5HD" tvg-logo="https://img1.pic.in.th/images/Logo_tv5.png" group-title="Digital TV", 5HD
 https://nodelive.thaitv5hd.com/hls/tv5hdlive-for-thaitv5hdcom/master.m3u8
+https://live-us1.thaimomo.com/live-as/ch5hd-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="7" ch-number="7" tvg-id="T SPORT.th" tvg-name="T SPORT" tvg-logo="https://img1.pic.in.th/images/tsp7.jpg" group-title="Digital TV", T SPORT
 https://live-us1.thaimomo.com/live-as/chtsport-2/playlist.m3u8
 #EXTINF:-1 tvg-chno="10" ch-number="10" tvg-id="TPTV.th" tvg-name="TPTV" tvg-logo="https://img2.pic.in.th/TPTV_logo_2014.png" group-title="Digital TV", TPTV
