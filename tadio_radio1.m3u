@@ -43,5 +43,5 @@ https://cdn-th2.livestreaming.in.th/shoutcast/8030
 https://radio.vpsthai.net/proxy/fqzpihwq/stream
 #EXTINF:-1 tvg-logo="https://img2.pic.in.th/yesterday1065phuket.jpg" group-title="Tadio+",Yesterday 106.5 FM Phuket
 https://4122.radio4.thzhost.com/;stream
-#EXTINF:-1,Test Radio m3u8
-https://ymqaf8yp.mcot.net/FM1005/fm1005.stream_aac/playlist.m3u8
+#EXTINF:-1,วิทยุศึกษา FM 92
+https://stream.moeradiothai.net/live/moe32.sdp/playlist.m3u8
